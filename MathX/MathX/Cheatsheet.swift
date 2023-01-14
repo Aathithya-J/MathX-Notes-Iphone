@@ -1,24 +1,23 @@
 import SwiftUI
 
 struct Cheatsheet: View {
-    
+    @State var sections = ["Sec 1", "Sec 2", "Sec 3", "Sec 4"]
     var body: some View {
-        VStack {
-            Text("Cheatsheets")
-                .font(.title2)
-                .fontWeight(.bold)
+        NavigationView {
             List {
-                Section(header: Text("Levels")) {
-                    Text("Secondary 1").padding([.top,.bottom],10)
-                    Text("Secondary 2").padding([.top,.bottom],10)
-                    Text("Secondary 3").padding([.top,.bottom],10)
-                    Text("Secondary 4").padding([.top,.bottom],10)
+                Section {
+                    ForEach(sections, id:\.self) {section in
+                        NavigationLink(destination: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Destination@*/Text("Destination")/*@END_MENU_TOKEN@*/) {
+                            Text(section)
+                        }
+                    }
                 }
             }
+            .navigationBarTitle(Text("Tools").font(.title), displayMode: .inline)
         }
     }
 }
-    
+
 
 
 struct Cheatsheet_Previews: PreviewProvider {
