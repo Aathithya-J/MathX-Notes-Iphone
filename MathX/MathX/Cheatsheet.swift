@@ -13,7 +13,7 @@ struct Cheatsheet: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Tools").font(.title), displayMode: .inline)
+            .navigationBarTitle(Text("Tools").font(.title), displayMode: .automatic)
         }
     }
 }
