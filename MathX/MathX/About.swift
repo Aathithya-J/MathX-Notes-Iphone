@@ -8,7 +8,7 @@ struct About: View {
             Text("About")
                 .font(.title)
                 .fontWeight(.bold).padding([.bottom],100)
-            Text("This app was brought to you by Aathithya Jegatheesan and Kavin Jayakumar from SST Inc.").padding(30)
+            Text("This app was brought to you by Aathithya Jegatheesan, Kavin Jayakumar, Sairam Suresh from SST Inc and Tristan Chay.").padding(30)
         }
     }
     
