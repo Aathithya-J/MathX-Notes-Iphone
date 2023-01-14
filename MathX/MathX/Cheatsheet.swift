@@ -25,3 +25,4 @@ struct Cheatsheet_Previews: PreviewProvider {
         Cheatsheet()
     }
 }
+
