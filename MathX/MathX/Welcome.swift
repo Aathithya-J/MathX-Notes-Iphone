@@ -8,7 +8,7 @@ struct Welcome: View {
             Text("Welcome to Math X")
                 .font(.title)
                 .fontWeight(.bold).padding([.bottom],100)
-            Text("Pls ensure to use the app at the appropriately and when only necessary.").padding(30)
+            Text("Pls ensure that you use the app at the appropriate times and only when necessary.").padding(30)
         }
     }
     
