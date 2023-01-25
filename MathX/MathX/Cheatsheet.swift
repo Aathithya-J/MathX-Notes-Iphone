@@ -1,5 +1,11 @@
 import SwiftUI
 
+struct Topic {
+    let name: String
+    let subject: String
+}
+
+
 struct Cheatsheet: View {
     var S1 = "Sec 1"
     var S2 = "Sec 2"
