@@ -6,6 +6,8 @@ struct Cheatsheet: View {
     var S3 = "Sec 3"
     var S4 = "Sec 4"
     let names = ["Numbers & their Operation", "Percentage", "Rate Ratio Speed", "Basic Algebra and Algebraic manipulation","Linear Equations and Inequalities","Data Analysis","Linear Functions and Graphs","Mensuration"]
+    
+    
     @State var searchText = ""
     
     var body: some View {
