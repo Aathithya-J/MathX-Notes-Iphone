@@ -47,7 +47,6 @@
 		5D8ADF7E296DBD6200AA7151 = {
 			isa = PBXGroup;
 			children = (
-				5DE3847F2980DB0E0097054E /* data.swift */,
 				5D8ADF89296DBD6200AA7151 /* MathX */,
 				5D8ADF88296DBD6200AA7151 /* Products */,
 			);
@@ -64,6 +63,7 @@
 		5D8ADF89296DBD6200AA7151 /* MathX */ = {
 			isa = PBXGroup;
 			children = (
+				5DE3847F2980DB0E0097054E /* data.swift */,
 				5D8ADF8A296DBD6200AA7151 /* MathXApp.swift */,
 				5D8ADF8C296DBD6200AA7151 /* ContentView.swift */,
 				5D8ADF9E296DC27400AA7151 /* Welcome.swift */,
