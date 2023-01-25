@@ -5,15 +5,26 @@ struct Cheatsheet: View {
     var S2 = "Sec 2"
     var S3 = "Sec 3"
     var S4 = "Sec 4"
-    let names = ["Numbers & their Operation", "Percentage", "Rate Ratio Speed", "Basic Algebra and Algebraic manipulation","Linear Equations and Inequalities","Data Analysis","Linear Functions and Graphs","Mensuration"]
-    
+    let allNames = Sec1Chap + Sec2Chap
+    let names1: [String] = Sec1Chap
+    let names2: [String] = Sec1Chap
     
     @State var searchText = ""
     
     var body: some View {
         NavigationStack {
             List {
-                Section ("S1"){
+                Section ("Secondary 1") {
+                    ForEach(searchResults, id: \.self) { names in
+                        NavigationLink {
+                            Notes()
+                        } label: {
+                            Text(names)
+                        }
+                    }
+                }
+                
+                Section ("Secondary 2") {
                     ForEach(searchResults, id: \.self) { names in
                         NavigationLink {
                             Notes()
@@ -25,15 +36,16 @@ struct Cheatsheet: View {
                 .navigationTitle("Cheatsheets")
                 .listStyle(.sidebar)
             }
+            
             .searchable(text: $searchText)
         }
     }
         
         var searchResults: [String] {
             if searchText.isEmpty {
-                return names
+                return allNames
             } else {
-                return names.filter { $0.contains(searchText) }
+                return allNames.filter { $0.contains(searchText) }
             }
         }
     }
