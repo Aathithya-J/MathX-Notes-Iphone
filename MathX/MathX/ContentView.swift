@@ -5,7 +5,7 @@ struct ContentView: View {
         TabView {
             Welcome()
                 .tabItem {
-                    Label("Home", systemImage: "homekit")
+                    Label("Home", systemImage: "house")
                 }
             Cheatsheet()
                 .tabItem {
@@ -15,9 +15,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("Tools", systemImage: "wrench.and.screwdriver")
                 }
-            About()
+            Notes()
                 .tabItem {
-                    Label("About", systemImage: "person.fill.questionmark")
+                    Label("Notes", systemImage: "doc.text")
                 }
         }
     }

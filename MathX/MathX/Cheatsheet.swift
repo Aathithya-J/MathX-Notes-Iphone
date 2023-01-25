@@ -1,28 +1,46 @@
 import SwiftUI
 
 struct Cheatsheet: View {
-    @State var sections = ["Sec 1", "Sec 2", "Sec 3", "Sec 4"]
+    var S1 = "Sec 1"
+    var S2 = "Sec 2"
+    var S3 = "Sec 3"
+    var S4 = "Sec 4"
+    let names = ["Numbers & their Operation", "Percentage", "Rate Ratio Speed", "Basic Algebra and Algebraic manipulation","Linear Equations and Inequalities","Data Analysis","Linear Functions and Graphs","Mensuration"]
+    @State var searchText = ""
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                Section {
-                    ForEach(sections, id:\.self) {section in
-                        NavigationLink(destination: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Destination@*/Text("Destination")/*@END_MENU_TOKEN@*/) {
-                            Text(section)
+                Section ("S1"){
+                    ForEach(searchResults, id: \.self) { names in
+                        NavigationLink {
+                            Notes()
+                        } label: {
+                            Text(names)
                         }
                     }
                 }
+                .navigationTitle("Cheatsheets")
+                .listStyle(.sidebar)
             }
-            .navigationBarTitle(Text("Tools").font(.title), displayMode: .automatic)
+            .searchable(text: $searchText)
         }
     }
-}
-
-
-
-struct Cheatsheet_Previews: PreviewProvider {
-    static var previews: some View {
-        Cheatsheet()
+        
+        var searchResults: [String] {
+            if searchText.isEmpty {
+                return names
+            } else {
+                return names.filter { $0.contains(searchText) }
+            }
+        }
     }
-}
-
+    
+    
+    
+    struct Cheatsheet_Previews: PreviewProvider {
+        static var previews: some View {
+            Cheatsheet()
+        }
+    }
+    

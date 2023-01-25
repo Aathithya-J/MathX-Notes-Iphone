@@ -5,9 +5,9 @@ struct Welcome: View {
     
     var body: some View {
         VStack {
-            Text("Welcome to Math X")
+            Text("MathX")
                 .font(.title)
-                .fontWeight(.bold).padding([.bottom],100)
+                .fontWeight(.bold).padding([.bottom],250)
             Text("Pls ensure that you use the app at the appropriate times and only when necessary.").padding(30)
         }
     }

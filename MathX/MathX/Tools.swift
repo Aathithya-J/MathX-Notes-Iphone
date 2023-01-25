@@ -2,23 +2,44 @@
 import SwiftUI
 
 struct Tools: View {
-    @State var sections = ["Emergency Contact for Exams", "Calculator", "HCF and LCM", "Algebra Calculator", "Formulas"]
+    var EC = "Emergency Contact"
+    var Ins = "Instruments"
+    let tools = ["Emergency Contact", "HCF & LCM", "Algebra", "Instruments"]
+    @State var searchText = ""
     
     var body: some View {
-        NavigationView {
-                List {
-                    Section {
-                        ForEach(sections, id:\.self) {section in
-                            NavigationLink(destination: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Destination@*/Text("Destination")/*@END_MENU_TOKEN@*/) {
-                                Text(section)
+        NavigationStack {
+            List {
+                ForEach(searchResults, id: \.self) { tools in
+                    NavigationLink {
+                        if tools == EC {
+                            Emergency()
+                        }
+                        else if tools == Ins {
+                            List{
+                                NavigationLink("Protractor", destination: EmptyView())
+                                NavigationLink("Ruler", destination: EmptyView())
                             }
                         }
+                    } label: {
+                        Text(tools)
                     }
                 }
-                .navigationBarTitle(Text("Tools").font(.title), displayMode: .inline)
+            }
+            .navigationTitle("Cheatsheets")
+        }
+        .searchable(text: $searchText)
+    }
+    
+    var searchResults: [String] {
+        if searchText.isEmpty {
+            return tools
+        } else {
+            return tools.filter { $0.contains(searchText) }
         }
     }
 }
+
 
 
 
@@ -28,3 +49,4 @@ struct Tools_Previews: PreviewProvider {
         Tools()
     }
 }
+

@@ -7,26 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D0701E4297D895C00B03FC1 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0701E2297D895C00B03FC1 /* Tools.swift */; };
+		5D0701E5297D895C00B03FC1 /* Emergency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0701E3297D895C00B03FC1 /* Emergency.swift */; };
+		5D674C10297AE028000FF217 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D674C0F297AE028000FF217 /* Notes.swift */; };
 		5D8ADF8B296DBD6200AA7151 /* MathXApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8ADF8A296DBD6200AA7151 /* MathXApp.swift */; };
 		5D8ADF8D296DBD6200AA7151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8ADF8C296DBD6200AA7151 /* ContentView.swift */; };
 		5D8ADF8F296DBD6300AA7151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8ADF8E296DBD6300AA7151 /* Assets.xcassets */; };
 		5D8ADF92296DBD6300AA7151 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D8ADF91296DBD6300AA7151 /* Preview Assets.xcassets */; };
 		5D8ADF99296DBDF300AA7151 /* Cheatsheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8ADF98296DBDF300AA7151 /* Cheatsheet.swift */; };
-		5D8ADF9B296DBFC600AA7151 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8ADF9A296DBFC600AA7151 /* Tools.swift */; };
-		5D8ADF9D296DC0C200AA7151 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8ADF9C296DC0C200AA7151 /* About.swift */; };
 		5D8ADF9F296DC27400AA7151 /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8ADF9E296DC27400AA7151 /* Welcome.swift */; };
+		5DE384802980DB0E0097054E /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DE3847F2980DB0E0097054E /* data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D0701E2297D895C00B03FC1 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		5D0701E3297D895C00B03FC1 /* Emergency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emergency.swift; sourceTree = "<group>"; };
+		5D674C0F297AE028000FF217 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		5D8ADF87296DBD6200AA7151 /* MathX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D8ADF8A296DBD6200AA7151 /* MathXApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathXApp.swift; sourceTree = "<group>"; };
 		5D8ADF8C296DBD6200AA7151 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5D8ADF8E296DBD6300AA7151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D8ADF91296DBD6300AA7151 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5D8ADF98296DBDF300AA7151 /* Cheatsheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cheatsheet.swift; sourceTree = "<group>"; };
-		5D8ADF9A296DBFC600AA7151 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
-		5D8ADF9C296DC0C200AA7151 /* About.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		5D8ADF9E296DC27400AA7151 /* Welcome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
+		5DE3847F2980DB0E0097054E /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +47,7 @@
 		5D8ADF7E296DBD6200AA7151 = {
 			isa = PBXGroup;
 			children = (
+				5DE3847F2980DB0E0097054E /* data.swift */,
 				5D8ADF89296DBD6200AA7151 /* MathX */,
 				5D8ADF88296DBD6200AA7151 /* Products */,
 			);
@@ -63,8 +68,9 @@
 				5D8ADF8C296DBD6200AA7151 /* ContentView.swift */,
 				5D8ADF9E296DC27400AA7151 /* Welcome.swift */,
 				5D8ADF98296DBDF300AA7151 /* Cheatsheet.swift */,
-				5D8ADF9A296DBFC600AA7151 /* Tools.swift */,
-				5D8ADF9C296DC0C200AA7151 /* About.swift */,
+				5D674C0F297AE028000FF217 /* Notes.swift */,
+				5D0701E2297D895C00B03FC1 /* Tools.swift */,
+				5D0701E3297D895C00B03FC1 /* Emergency.swift */,
 				5D8ADF8E296DBD6300AA7151 /* Assets.xcassets */,
 				5D8ADF90296DBD6300AA7151 /* Preview Content */,
 			);
@@ -149,12 +155,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D8ADF9D296DC0C200AA7151 /* About.swift in Sources */,
+				5D674C10297AE028000FF217 /* Notes.swift in Sources */,
 				5D8ADF99296DBDF300AA7151 /* Cheatsheet.swift in Sources */,
 				5D8ADF8D296DBD6200AA7151 /* ContentView.swift in Sources */,
+				5DE384802980DB0E0097054E /* data.swift in Sources */,
+				5D0701E4297D895C00B03FC1 /* Tools.swift in Sources */,
+				5D0701E5297D895C00B03FC1 /* Emergency.swift in Sources */,
 				5D8ADF8B296DBD6200AA7151 /* MathXApp.swift in Sources */,
 				5D8ADF9F296DC27400AA7151 /* Welcome.swift in Sources */,
-				5D8ADF9B296DBFC600AA7151 /* Tools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MathX/Preview Content\"";
+				DEVELOPMENT_TEAM = 67PAUT5FCD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -311,6 +320,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MathX/Preview Content\"";
+				DEVELOPMENT_TEAM = 67PAUT5FCD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
