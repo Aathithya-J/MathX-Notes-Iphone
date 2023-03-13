@@ -15,47 +15,52 @@ struct HCF_LCM_CalculatorView: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
             .padding(.top, 20)
-            
-            TextField("Enter the first number", text: $number1)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            TextField("Enter the second number", text: $number2)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            Button(action: {
+            .onChange(of: isHCFSelected) { _ in
                 self.calculate()
-            }) {
-                Text("Calculate")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(10)
             }
-            .padding(.bottom, 10)
+            
+            HStack {
+                TextField("Enter the first number", text: $number1)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                    .padding()
+                
+                TextField("Enter the second number", text: $number2)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                    .padding()
+            }
             
             Text("Result: \(result)")
                 .padding()
             
             Spacer()
         }
+        .onChange(of: number1) { _ in
+            self.calculate()
+        }
+        .onChange(of: number2) { _ in
+            self.calculate()
+        }
         .navigationTitle("HCF & LCM Calculator")
+        .onAppear {
+            self.calculate()
+        }
     }
     
     func calculate() {
-        guard let num1 = Int(number1), let num2 = Int(number2) else {
+        guard let num1 = Double(number1), let num2 = Double(number2) else {
             self.result = "Please enter valid numbers"
             return
         }
         
-        let gcd = findGCD(num1, num2)
-        let lcm = num1 * num2 / gcd
+        let gcd = findGCD(Int(num1 * 100), Int(num2 * 100))
+        let lcm = Int(num1 * 100 * num2 * 100) / gcd
         
         if isHCFSelected {
-            self.result = String(gcd)
+            self.result = String(Double(gcd) / 100)
         } else {
-            self.result = String(lcm)
+            self.result = String(Double(lcm) / 100)
         }
     }
     

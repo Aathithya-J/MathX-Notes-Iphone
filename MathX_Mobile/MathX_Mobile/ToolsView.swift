@@ -4,6 +4,7 @@ struct ToolsView: View {
     var EC = "Emergency Contact"
     var Ins = "Instruments"
     var HCFLCM = "HCF & LCM"
+    var algebra = "Algebra"
     let tools = ["Emergency Contact", "HCF & LCM", "Algebra", "Instruments"]
     @State var searchText = ""
 
@@ -45,6 +46,8 @@ struct ToolsView: View {
             return AnyView(EmergencyView())
         case HCFLCM:
             return AnyView(HCF_LCM_CalculatorView())
+        case algebra:
+            return AnyView(OCRView())
         case Ins:
             return AnyView(
                 List {
