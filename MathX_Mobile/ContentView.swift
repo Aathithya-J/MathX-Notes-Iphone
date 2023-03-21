@@ -2,17 +2,23 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
+    
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-
-                }
-            ToolsView()
-                .tabItem {
-                    Label("Tools", systemImage: "wrench.and.screwdriver")
-                }
+        if !isShowingWelcomeScreen {
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                        
+                    }
+                ToolsView()
+                    .tabItem {
+                        Label("Tools", systemImage: "wrench.and.screwdriver")
+                    }
+            }
+        } else {
+            WelcomeView()
         }
     }
         
