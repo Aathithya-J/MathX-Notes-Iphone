@@ -12,24 +12,39 @@ struct OCRView: View {
                 Image(uiImage: inputImage!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
+                Spacer()
                 Text("Select an image to recognize text.")
+                    .foregroundColor(.gray)
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .frame(maxWidth: .infinity)
             }
             
-            Button("Select Image") {
-                showingImagePicker = true
-            }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
-            .padding()
-            .sheet(isPresented: $showingImagePicker, onDismiss: recognizeText) {
-                ImagePicker(image: $inputImage)
-            }
+            Spacer()
             
-            Text(recognizedText)
+            VStack(spacing: 20) {
+                Button(action: {
+                    showingImagePicker = true
+                }) {
+                    Text("Select Image")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                }
                 .padding()
+                .background(Color.blue)
+                .cornerRadius(10)
+                .padding(.horizontal, 20)
+                .sheet(isPresented: $showingImagePicker, onDismiss: recognizeText) {
+                    ImagePicker(image: $inputImage)
+                }
+                
+                Text(recognizedText)
+                    .foregroundColor(.black)
+            }
+            .navigationBarTitle("OCR Scanner")
         }
     }
     
@@ -54,7 +69,10 @@ struct OCRView: View {
                 guard let topCandidate = observation.topCandidates(1).first else { continue }
                 recognizedText += topCandidate.string + "\n"
             }
-            
+            if recognizedText.count > 100000000 {
+                recognizedText = String(recognizedText.prefix(100000000))
+            }
+
             // Update the UI on the main thread
             DispatchQueue.main.async {
                 self.recognizedText = recognizedText
