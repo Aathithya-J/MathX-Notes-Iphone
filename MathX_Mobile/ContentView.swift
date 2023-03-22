@@ -17,11 +17,11 @@ struct ContentView: View {
                         Label("Tools", systemImage: "wrench.and.screwdriver")
                     }
             }
+            .accentColor(.purple)
         } else {
             WelcomeView()
         }
     }
-        
 }
 
 struct ContentView_Previews: PreviewProvider {

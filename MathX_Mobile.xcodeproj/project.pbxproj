@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4942F0AD29CAA41B00F85389 /* Cheatsheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */; };
+		4942F0AF29CAA49E00F85389 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F0AE29CAA49E00F85389 /* Calculator.swift */; };
 		495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495674C029BD5EEB00EB37DA /* HCFLCM.swift */; };
 		498C0FD429BEF7E50079503C /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498C0FD329BEF7E50079503C /* OCRView.swift */; };
 		49E6CA9929BC845400DD2E02 /* MathX_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CA9829BC845400DD2E02 /* MathX_MobileApp.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cheatsheets.swift; sourceTree = "<group>"; };
+		4942F0AE29CAA49E00F85389 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		495674C029BD5EEB00EB37DA /* HCFLCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFLCM.swift; sourceTree = "<group>"; };
 		498C0FD329BEF7E50079503C /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
 		49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathX_Mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +106,8 @@
 				6A89A13629C996F90007D0C1 /* WelcomeView.swift */,
 				49E6CA9A29BC845400DD2E02 /* ContentView.swift */,
 				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
+				4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */,
+				4942F0AE29CAA49E00F85389 /* Calculator.swift */,
 				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
 				49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */,
 				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
@@ -253,7 +259,9 @@
 				49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */,
 				49E6CA9B29BC845400DD2E02 /* ContentView.swift in Sources */,
 				49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */,
+				4942F0AF29CAA49E00F85389 /* Calculator.swift in Sources */,
 				6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */,
+				4942F0AD29CAA41B00F85389 /* Cheatsheets.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
 				49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,

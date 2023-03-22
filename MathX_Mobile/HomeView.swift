@@ -4,15 +4,18 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.purple, .white]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+            LinearGradient(colors: [.purple, .indigo], startPoint: .top, endPoint: .bottom).ignoresSafeArea()
             
             VStack {
+                Image(systemName: "doc.on.doc")
+                    .font(.system(size: 80))
+                    .foregroundColor(.white)
+                    .padding(.top, 150)
+                
                 Text("MathX")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                    .padding(.top, 150)
                 
                 Spacer()
                 
@@ -40,6 +43,7 @@ struct HomeView: View {
                 .padding(.bottom, 100)
             }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

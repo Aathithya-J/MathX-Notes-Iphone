@@ -2,10 +2,11 @@ import SwiftUI
 
 struct ToolsView: View {
     var EC = "Emergency Contact"
-    var Ins = "Instruments"
     var HCFLCM = "HCF & LCM"
     var algebra = "Algebra"
-    let tools = ["Emergency Contact", "HCF & LCM", "Algebra", "Instruments"]
+    var cal = "Calculator"
+    var Ins = "Instruments"
+    let tools = ["Emergency Contact","Instruments", "HCF & LCM", "Algebra","Calculator" ]
     @State var searchText = ""
 
     var body: some View {
@@ -48,6 +49,8 @@ struct ToolsView: View {
             return AnyView(HCF_LCM_CalculatorView())
         case algebra:
             return AnyView(OCRView())
+        case algebra:
+            return AnyView(EmptyView())
         case Ins:
             return AnyView(
                 List {
@@ -66,10 +69,12 @@ struct ToolsView: View {
             return Color(.red)
         case HCFLCM:
             return Color(.blue)
-        case "Algebra":
+        case algebra:
             return Color(.green)
         case Ins:
             return Color(.purple)
+        case cal:
+            return Color(.orange)
         default:
             return Color("CardBackground")
         }
