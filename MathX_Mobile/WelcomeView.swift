@@ -94,6 +94,7 @@ struct animatingWelcomeTextPage: View {
                     
                     if titleExpandAnimation { /// To be shown when text has expanded from "MathX" to "Welcome to MathX"
                         Text("Welcome to MathX!")
+                            .minimumScaleFactor(0.7)
                             .foregroundColor(.white)
                             .fontWeight(.black)
                             .font(.title)
@@ -114,6 +115,7 @@ struct animatingWelcomeTextPage: View {
                 
                 if !titleExpandAnimation { /// Starting "MathX" text
                     Text("MathX")
+                        .minimumScaleFactor(0.7)
                         .foregroundColor(.white)
                         .fontWeight(.black)
                         .font(.title)
@@ -195,6 +197,7 @@ struct finalPage: View {
             Text("Ready to use MathX? Press the button below to continue!")
                 .fontWeight(.black)
                 .font(.title2)
+                .padding(.top)
             
             Button {
                 isShowingWelcomeScreen = false // turns welcomeview off (in ContentView), shows normal mathx view
