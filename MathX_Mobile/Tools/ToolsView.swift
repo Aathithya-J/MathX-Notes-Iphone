@@ -49,8 +49,8 @@ struct ToolsView: View {
             return AnyView(HCF_LCM_CalculatorView())
         case algebra:
             return AnyView(OCRView())
-        case algebra:
-            return AnyView(EmptyView())
+        case cal:
+            return AnyView(CalculatorView())
         case Ins:
             return AnyView(
                 List {
