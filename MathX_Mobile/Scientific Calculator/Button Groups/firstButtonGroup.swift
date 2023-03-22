@@ -20,7 +20,7 @@ struct firstButtonGroup: View {
     @Environment(\.dismiss) var dismissView
     
     var body: some View {
-        HStack {
+        HStack(spacing: 15) {
             shiftButton
             alphaButton
             
