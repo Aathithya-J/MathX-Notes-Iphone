@@ -10,10 +10,18 @@ struct CalculatorView: View {
     @State var equationText = "Math Calculation Equation goes here. Super long scroll wheeeeee."
     @State var resultsText = "Math Calculation Result goes here. This is scrollable too!"
     
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         ZStack(alignment: .top) {
-            Color.black.opacity(0.8)
-                .ignoresSafeArea()
+            if colorScheme == .light {
+                Color.black.opacity(0.8)
+                    .ignoresSafeArea()
+            } else {
+                Color.gray.opacity(0.35)
+                    .ignoresSafeArea()
+            }
+            
             VStack {
                 modeIndicators(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator)
                 
