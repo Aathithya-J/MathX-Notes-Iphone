@@ -91,6 +91,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49DD1A4329CB41E10040BA0D /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
+				49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */,
+				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
+				498C0FD329BEF7E50079503C /* OCRView.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		49E6CA8C29BC845400DD2E02 = {
 			isa = PBXGroup;
 			children = (
@@ -118,11 +129,7 @@
 				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
 				4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */,
 				6A60E55B29CAEFE000F9C038 /* Scientific Calculator */,
-				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
-				49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */,
-				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
-				498C0FD329BEF7E50079503C /* OCRView.swift */,
-				49E6CA9C29BC845700DD2E02 /* Assets.xcassets */,
+				49DD1A4329CB41E10040BA0D /* Tools */,
 				49E6CA9E29BC845700DD2E02 /* Preview Content */,
 			);
 			path = MathX_Mobile;
@@ -132,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */,
+				49E6CA9C29BC845700DD2E02 /* Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
