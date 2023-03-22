@@ -17,6 +17,8 @@ struct firstButtonGroup: View {
     @Binding var equationText: String
     @Binding var resultsText: String
     
+    @Environment(\.dismiss) var dismissView
+    
     var body: some View {
         HStack {
             shiftButton
@@ -168,10 +170,12 @@ struct firstButtonGroup: View {
                 } else { // sets equation and results texts to nothing when calculator is turned off
                     equationText = ""
                     resultsText = ""
+                    
+                    dismissView.callAsFunction() // uses @Environment to dismiss calculator view/go back
                 }
             } label: {
                 Image(systemName: "power")
-                    .foregroundColor(.white)
+                    .foregroundColor(calculatorOn ? .green : .red)
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding()

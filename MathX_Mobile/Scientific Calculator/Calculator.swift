@@ -9,7 +9,7 @@ struct CalculatorView: View {
     
     @State var equationText = "Math Calculation Equation goes here. Super long scroll wheeeeee."
     @State var resultsText = "Math Calculation Result goes here. This is scrollable too!"
-
+    
     var body: some View {
         ZStack(alignment: .top) {
             Color.black.opacity(0.8)
@@ -22,12 +22,10 @@ struct CalculatorView: View {
                 firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText)
             }
             .padding(.horizontal)
+            .padding(.top)
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Text("fx-97SG X")
-            }
-        }
+        .toolbar(.hidden, for: .navigationBar)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
@@ -78,11 +76,19 @@ struct modeIndicators: View {
     @Binding var alphaIndicator: Bool
 
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                indicator(indicatorName: "Shift", indicatorColor: .orange, isIndicatorOn: shiftIndicator)
-                indicator(indicatorName: "Alpha", indicatorColor: .red, isIndicatorOn: alphaIndicator)
+        HStack {
+            ScrollView(.horizontal) {
+                HStack {
+                    indicator(indicatorName: "Shift", indicatorColor: .orange, isIndicatorOn: shiftIndicator)
+                    indicator(indicatorName: "Alpha", indicatorColor: .red, isIndicatorOn: alphaIndicator)
+                }
             }
+            
+            Text("MathX-97SG X")
+                .foregroundColor(.white)
+                .font(.headline)
+                .fontWeight(.bold)
+            
         }
     }
     
