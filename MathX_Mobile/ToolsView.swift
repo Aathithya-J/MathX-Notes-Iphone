@@ -6,7 +6,7 @@ struct ToolsView: View {
     var algebra = "Algebra"
     var cal = "Calculator"
     var Ins = "Instruments"
-    let tools = ["Emergency Contact","Instruments", "HCF & LCM", "Algebra","Calculator" ]
+    let tools = ["Emergency Contact","Instruments", "HCF & LCM", "Algebra", "Calculator"]
     @State var searchText = ""
 
     var body: some View {
@@ -58,6 +58,8 @@ struct ToolsView: View {
                     NavigationLink("Ruler", destination: EmptyView())
                 }
             )
+        case cal:
+            return AnyView(CalculatorView())
         default:
             return AnyView(EmptyView())
         }

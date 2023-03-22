@@ -18,6 +18,7 @@
 		49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC229BC84BC00DD2E02 /* HomeView.swift */; };
 		49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */; };
 		49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */; };
+		6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */; };
 		6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89A13629C996F90007D0C1 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		49E6CAC229BC84BC00DD2E02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
+		6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstButtonGroup.swift; sourceTree = "<group>"; };
 		6A89A13629C996F90007D0C1 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,7 +109,7 @@
 				49E6CA9A29BC845400DD2E02 /* ContentView.swift */,
 				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
 				4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */,
-				4942F0AE29CAA49E00F85389 /* Calculator.swift */,
+				6A60E55B29CAEFE000F9C038 /* Scientific Calculator */,
 				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
 				49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */,
 				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
@@ -124,6 +126,23 @@
 				49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A60E55B29CAEFE000F9C038 /* Scientific Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				4942F0AE29CAA49E00F85389 /* Calculator.swift */,
+				6A60E55C29CAEFF200F9C038 /* Button Groups */,
+			);
+			path = "Scientific Calculator";
+			sourceTree = "<group>";
+		};
+		6A60E55C29CAEFF200F9C038 /* Button Groups */ = {
+			isa = PBXGroup;
+			children = (
+				6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */,
+			);
+			path = "Button Groups";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +281,7 @@
 				4942F0AF29CAA49E00F85389 /* Calculator.swift in Sources */,
 				6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */,
 				4942F0AD29CAA41B00F85389 /* Cheatsheets.swift in Sources */,
+				6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
 				49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,
