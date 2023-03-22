@@ -73,7 +73,7 @@ struct screenView: View {
                 .cornerRadius(16)
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 30, height: 140)
+        .frame(width: UIScreen.main.bounds.width - 30, height: 150)
         .cornerRadius(16)
     }
 }
