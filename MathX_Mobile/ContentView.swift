@@ -4,6 +4,10 @@ struct ContentView: View {
     
     @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
     
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.systemBackground
+    }
+    
     var body: some View {
         if !isShowingWelcomeScreen {
             TabView {
