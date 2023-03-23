@@ -18,7 +18,7 @@ struct thirdButtonGroup: View {
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
 
     var body: some View {
-        VStack(spacing: 15) {
+        VStack(spacing: 10) {
             HStack(spacing: 12) {
                 Button {
                     if equationText != "" && resultsText != "" {
@@ -110,7 +110,7 @@ struct thirdButtonGroup: View {
                 .buttonStyle(.plain)
                 
             }
-            .padding(.top)
+            .padding(.top, UIScreen.main.bounds.height / 50)
             
             HStack(spacing: 12) {
                 Button {
@@ -397,7 +397,7 @@ struct thirdButtonGroup: View {
                 .foregroundColor(text == "DEL" || text == "AC" ? .black : .white)
                 .buttonStyle(.plain)
                 .frame(width: UIScreen.main.bounds.width / 6)
-                .frame(height: 50)
+                .frame(height: UIScreen.main.bounds.height / 16)
                 .background(isOrange ? .orange : .black)
                 .cornerRadius(8)
         }

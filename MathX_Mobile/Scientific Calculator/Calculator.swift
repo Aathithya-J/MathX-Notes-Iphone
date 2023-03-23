@@ -30,7 +30,13 @@ struct CalculatorView: View {
                     .ignoresSafeArea()
             }
             
-            VStack {
+            VStack(alignment: .center) {
+                
+                Spacer()
+                Spacer()
+                Spacer()
+
+
                 modeIndicators(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator)
                     .padding(.horizontal, 5)
                 
@@ -38,27 +44,54 @@ struct CalculatorView: View {
                 
                 firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText)
                 
-                secondButtonGroup()
+                secondButtonGroup(equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
                 
                 thirdButtonGroup(equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
+                    .padding(.bottom, 5)
+                
+                Spacer()
+                Spacer()
+
+                
             }
             .padding(.horizontal)
-            .padding(.top)
             .onChange(of: equalsPressed) { value in
                 lastEquation = equationText
-                if calculate(equation: equationText).contains("ERROR:") {
+                let returnValue = calculate(equation: equationText)
+                
+                if returnValue.contains("ERROR:") {
                     errorOccurred = true
                     
-                    equationText = calculate(equation: equationText)
+                    equationText = returnValue
                     resultsText = ""
                 } else {
-                    resultsText = calculate(equation: equationText)
-                    lastAns = resultsText
+                    if !returnValue.contains("e") && returnValue.count > 5 {
+                        let returnValueBeforeCommasArray = Array(returnValue)
+                        var returnValueArray = [Character]()
+                        
+                        returnValueBeforeCommasArray.indices.forEach { i in
+                            returnValueArray.append(returnValueBeforeCommasArray[i])
+                            
+                            if i + 1 < returnValue.count {
+                                if (i + 1) % 3 == 0 {
+                                    returnValueArray.append(contentsOf: " ")
+                                }
+                            }
+                        }
+                        
+                        resultsText = String(returnValueArray)
+                        
+                    } else {
+                        resultsText = returnValue
+                    }
+                    
+                    lastAns = returnValue
                 }
             }
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
+        .statusBar(hidden: true)
     }
     
     func calculate(equation: String) -> String {
@@ -72,8 +105,32 @@ struct CalculatorView: View {
             
             equationConverted = equation.replacingOccurrences(of: "÷", with: "/")
             equationConverted = equationConverted.replacingOccurrences(of: "×", with: "*")
-            equationConverted = equationConverted.replacingOccurrences(of: "Ans", with: "\(lastAns)")
-
+            equationConverted = equationConverted.replacingOccurrences(of: "Ans", with: "(\(lastAns))")
+            
+            var equationConvertedArray = Array(equationConverted)
+            
+            equationConvertedArray.indices.forEach { i in
+                if equationConvertedArray[i] == "(" {
+                    if i > 0 {
+                        if equationConvertedArray[i - 1] == ")" {
+                            equationConvertedArray.insert("*", at: i)
+                        } else if equationConvertedArray[i - 1].isNumber {
+                            equationConvertedArray.insert("*", at: i)
+                        }
+                    }
+                }
+                
+                if equationConvertedArray[i] == ")" {
+                    if i < (equationConvertedArray.count - 1) {
+                        if equationConvertedArray[i + 1].isNumber {
+                            equationConvertedArray.insert("*", at: i + 1)
+                        }
+                    }
+                }
+            }
+            
+            equationConverted = String(equationConvertedArray)
+            
             do {
                 let expression = try MathExpression(equationConverted)
                 value = expression.evaluate()
@@ -168,7 +225,7 @@ struct screenView: View {
                     .cornerRadius(16)
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 30, height: 150)
+        .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 6)
         .cornerRadius(16)
     }
 }
@@ -216,5 +273,13 @@ struct modeIndicators: View {
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
         CalculatorView()
+    }
+}
+
+extension Int {
+    func withCommas() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value:self))!
     }
 }

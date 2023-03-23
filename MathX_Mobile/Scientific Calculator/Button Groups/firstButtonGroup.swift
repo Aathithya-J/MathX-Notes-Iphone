@@ -20,7 +20,7 @@ struct firstButtonGroup: View {
     @Environment(\.dismiss) var dismissView
     
     var body: some View {
-        HStack(spacing: 15) {
+        HStack(spacing: UIScreen.main.bounds.width / 40) {
             shiftButton
             alphaButton
             
@@ -29,7 +29,7 @@ struct firstButtonGroup: View {
             menuButton
             powerButton
         }
-        .padding(.top)
+        .padding(.top, 5)
     }
     
     
@@ -51,7 +51,7 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: 48, height: 48)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
             .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
@@ -77,8 +77,7 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: 48, height: 48)
-            .buttonStyle(.plain)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)            .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
         }
@@ -97,7 +96,7 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
             }
             .buttonStyle(.plain)
-            .padding(.leading)
+            .padding(.leading, 5)
             .padding(.trailing, 5)
             
             VStack {
@@ -110,6 +109,7 @@ struct firstButtonGroup: View {
                         .fontWeight(.bold)
                 }
                 .buttonStyle(.plain)
+                .padding(.bottom, UIScreen.main.bounds.height / 50)
                 
                 Button { // bottom arrow
                     
@@ -120,7 +120,7 @@ struct firstButtonGroup: View {
                         .fontWeight(.bold)
                 }
                 .buttonStyle(.plain)
-                .padding(.top, 50)
+                .padding(.top, UIScreen.main.bounds.height / 50)
             }
             
             Button { // right arrow
@@ -132,7 +132,7 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
             }
             .buttonStyle(.plain)
-            .padding(.trailing)
+            .padding(.trailing, 5)
             .padding(.leading, 5)
         }
     }
@@ -150,8 +150,7 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: 48, height: 48)
-            .buttonStyle(.plain)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)            .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
         }
@@ -165,8 +164,8 @@ struct firstButtonGroup: View {
                 calculatorOn.toggle() // turns calculator on/off
                 
                 if calculatorOn { // sets equation and results texts to something when calculator is turned on
-                    equationText = "Math Calculation Equation goes here. Super long scroll wheeeeee."
-                    resultsText = "Math Calculation Result goes here. This is scrollable too!"
+                    equationText = ""
+                    resultsText = ""
                 } else { // sets equation and results texts to nothing when calculator is turned off
                     equationText = ""
                     resultsText = ""
@@ -180,8 +179,7 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: 48, height: 48)
-            .buttonStyle(.plain)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)            .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
         }
