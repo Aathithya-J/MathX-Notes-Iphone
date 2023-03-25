@@ -39,6 +39,8 @@ struct firstButtonGroup: View {
     var shiftButton: some View {
         VStack {
             Button {
+                generator.impactOccurred(intensity: 0.7)
+                
                 if calculatorOn {
                     shiftIndicator.toggle() // turns shift indicator on/off
                 }
@@ -48,14 +50,14 @@ struct firstButtonGroup: View {
                 }
             } label: {
                 Text("S")
-                    .foregroundColor(.orange)
+                    .foregroundColor(.yellow)
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding()
+                    .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+                    .background(.black)
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
             .buttonStyle(.plain)
-            .background(.black)
             .clipShape(Circle())
         }
     }
@@ -65,6 +67,8 @@ struct firstButtonGroup: View {
     var alphaButton: some View {
         VStack {
             Button {
+                generator.impactOccurred(intensity: 0.7)
+
                 if calculatorOn {
                     alphaIndicator.toggle() // turns alpha indicator on/off
                 }
@@ -78,10 +82,10 @@ struct firstButtonGroup: View {
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding()
+                    .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+                    .background(.black)
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
             .buttonStyle(.plain)
-            .background(.black)
             .clipShape(Circle())
         }
     }
@@ -91,6 +95,7 @@ struct firstButtonGroup: View {
     var centerArrows: some View {
         HStack {
             Button { // left arrow
+                generator.impactOccurred(intensity: 0.7)
                 
             } label: {
                 Image(systemName: "chevron.left")
@@ -104,6 +109,7 @@ struct firstButtonGroup: View {
             
             VStack {
                 Button { // up arrow
+                    generator.impactOccurred(intensity: 0.7)
                     
                 } label: {
                     Image(systemName: "chevron.up")
@@ -115,6 +121,8 @@ struct firstButtonGroup: View {
                 .padding(.bottom, UIScreen.main.bounds.height / 50)
                 
                 Button { // bottom arrow
+                    generator.impactOccurred(intensity: 0.7)
+                    
                 } label: {
                     Image(systemName: "chevron.down")
                         .foregroundColor(.black)
@@ -126,6 +134,7 @@ struct firstButtonGroup: View {
             }
             
             Button { // right arrow
+                generator.impactOccurred(intensity: 0.7)
                 
             } label: {
                 Image(systemName: "chevron.right")
@@ -144,18 +153,20 @@ struct firstButtonGroup: View {
     var menuButton: some View {
         VStack {
             Button {
+                generator.impactOccurred(intensity: 0.7)
                 
             } label: {
-                Image(systemName: "list.dash")
-                    .foregroundColor(.white)
+                Text(shiftIndicator ? "SETUP" : "MENU")
+                    .foregroundColor(shiftIndicator ? .yellow : .white)
                     .font(.title3)
                     .fontWeight(.bold)
-                    .padding()
+                    .padding(6)
+                    .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+                    .background(.black)
+                    .clipShape(Circle())
+                    .minimumScaleFactor(0.1)
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
             .buttonStyle(.plain)
-            .background(.black)
-            .clipShape(Circle())
         }
     }
     
@@ -164,6 +175,8 @@ struct firstButtonGroup: View {
     var powerButton: some View {
         VStack {
             Button {
+                generator.impactOccurred(intensity: 0.7)
+                
                 calculatorOn.toggle() // turns calculator on/off
                 
                 if calculatorOn { // sets equation and results texts to something when calculator is turned on
@@ -181,10 +194,10 @@ struct firstButtonGroup: View {
                     .font(.title3)
                     .fontWeight(.bold)
                     .padding()
+                    .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+                    .background(.black)
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
             .buttonStyle(.plain)
-            .background(.black)
             .clipShape(Circle())
         }
     }

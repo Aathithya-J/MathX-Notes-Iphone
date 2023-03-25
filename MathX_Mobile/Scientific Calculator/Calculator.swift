@@ -45,9 +45,9 @@ struct CalculatorView: View {
                 
                 firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText)
                 
-                secondButtonGroup(equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
+                secondButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
                 
-                thirdButtonGroup(equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
+                thirdButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
                     .padding(.bottom, 5)
                 
                 Spacer()
@@ -97,8 +97,6 @@ struct CalculatorView: View {
                             resultsText = returnValue
                         }
                     }
-                    print("returnValue: \(returnValue)")
-                    lastAns = returnValue
                 }
             }
         }
@@ -153,8 +151,8 @@ struct CalculatorView: View {
                 errorType = error.localizedDescription
             }
             
-            returnValue = String(value)
-
+            returnValue = String(value.formatted())
+            
             if returnValue.count > 15 {
                 let val = value
                 let formatter = NumberFormatter()
@@ -166,6 +164,9 @@ struct CalculatorView: View {
                     returnValue = scientificFormatted
                 }
             }
+            
+            lastAns = String(value)
+
         }
         
         return thereWasAnError ? "ERROR: \(errorType)" : returnValue
@@ -259,7 +260,7 @@ struct modeIndicators: View {
         HStack {
             ScrollView(.horizontal) {
                 HStack {
-                    indicator(indicatorName: "Shift", indicatorColor: .orange, isIndicatorOn: shiftIndicator)
+                    indicator(indicatorName: "Shift", indicatorColor: .yellow, isIndicatorOn: shiftIndicator)
                     indicator(indicatorName: "Alpha", indicatorColor: .red, isIndicatorOn: alphaIndicator)
                 }
             }
@@ -293,48 +294,5 @@ struct modeIndicators: View {
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
         CalculatorView()
-    }
-}
-
-extension Int {
-    func withCommas() -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(from: NSNumber(value:self))!
-    }
-}
-
-extension Collection {
-
-    func unfoldSubSequences(limitedTo maxLength: Int) -> UnfoldSequence<SubSequence,Index> {
-        sequence(state: startIndex) { start in
-            guard start < endIndex else { return nil }
-            let end = index(start, offsetBy: maxLength, limitedBy: endIndex) ?? endIndex
-            defer { start = end }
-            return self[start..<end]
-        }
-    }
-
-    func every(n: Int) -> UnfoldSequence<Element,Index> {
-        sequence(state: startIndex) { index in
-            guard index < endIndex else { return nil }
-            defer { let _ = formIndex(&index, offsetBy: n, limitedBy: endIndex) }
-            return self[index]
-        }
-    }
-
-    var pairs: [SubSequence] { .init(unfoldSubSequences(limitedTo: 2)) }
-}
-
-extension StringProtocol where Self: RangeReplaceableCollection {
-
-    mutating func insert<S: StringProtocol>(separator: S, every n: Int) {
-        for index in indices.every(n: n).dropFirst().reversed() {
-            insert(contentsOf: separator, at: index)
-        }
-    }
-
-    func inserting<S: StringProtocol>(separator: S, every n: Int) -> Self {
-        .init(unfoldSubSequences(limitedTo: n).joined(separator: separator))
     }
 }
