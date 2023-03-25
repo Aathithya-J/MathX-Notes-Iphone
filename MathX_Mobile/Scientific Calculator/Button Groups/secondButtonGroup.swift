@@ -14,6 +14,8 @@ struct secondButtonGroup: View {
     
     @Binding var equalsPressed: Bool
     @Binding var errorOccurred: Bool
+    
+    let generator = UIImpactFeedbackGenerator()
         
     var body: some View {
         VStack {
@@ -72,6 +74,8 @@ struct secondButtonGroup: View {
     func button(buttonSymbol: String, inputWhenPressed: String) -> some View {
         VStack {
             Button {
+                generator.impactOccurred(intensity: 0.7)
+                
                 if equationText != "" && resultsText != "" {
                     equationText = "Ans" + "\(inputWhenPressed)"
                     resultsText = ""

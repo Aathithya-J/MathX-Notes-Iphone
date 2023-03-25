@@ -1,4 +1,5 @@
 import SwiftUI
+import LaTeXSwiftUI
 import MathExpression
 
 struct CalculatorView: View {
@@ -57,7 +58,7 @@ struct CalculatorView: View {
             .padding(.horizontal)
             .onChange(of: equalsPressed) { value in
                 lastEquation = equationText
-                let returnValue = calculate(equation: equationText)
+                var returnValue: String = calculate(equation: equationText)
                 
                 if returnValue.contains("ERROR:") {
                     errorOccurred = true
@@ -65,26 +66,39 @@ struct CalculatorView: View {
                     equationText = returnValue
                     resultsText = ""
                 } else {
-                    if !returnValue.contains("e") && returnValue.count > 5 {
-                        let returnValueBeforeCommasArray = Array(returnValue)
-                        var returnValueArray = [Character]()
+                    if !returnValue.contains("×10") && returnValue.count > 5 {
+//                        resultsText = returnValue.inserting(separator: " ", every: 3) // adds space after every 3 characters
+                        resultsText = returnValue
+                    } else {
+                        var numberOfDigitsInPower = Int()
+                        var positionOfStartingOfPower = Int()
                         
-                        returnValueBeforeCommasArray.indices.forEach { i in
-                            returnValueArray.append(returnValueBeforeCommasArray[i])
-                            
-                            if i + 1 < returnValue.count {
-                                if (i + 1) % 3 == 0 {
-                                    returnValueArray.append(contentsOf: " ")
+                        var resultsTextArray = Array(returnValue)
+                        resultsTextArray.indices.forEach { indices in
+                            if resultsTextArray[indices] == "×" {
+                                if resultsTextArray[indices + 1] == "1" {
+                                    if resultsTextArray[indices + 2] == "0" {
+                                        numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
+                                        positionOfStartingOfPower = indices + 2
+                                    }
                                 }
                             }
                         }
                         
-                        resultsText = String(returnValueArray)
-                        
-                    } else {
-                        resultsText = returnValue
+                        if numberOfDigitsInPower > 0 {
+                            resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
+                            resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
+                            
+//                            resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower) + 1)
+//                            resultsTextArray.insert(contentsOf: "_{", at: (positionOfStartingOfPower - 3) + 1)
+                                                        
+                            resultsText = String(resultsTextArray)
+
+                        } else {
+                            resultsText = returnValue
+                        }
                     }
-                    
+                    print("returnValue: \(returnValue)")
                     lastAns = returnValue
                 }
             }
@@ -140,15 +154,16 @@ struct CalculatorView: View {
                 errorType = error.localizedDescription
             }
             
-            returnValue = String(format: "%.0f", value)
-            
-            
+//            returnValue = String(format: "%.0f", value) // round to nearest whole
+            returnValue = String(value)
+
             if returnValue.count > 15 {
                 let val = value
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .scientific
-                formatter.positiveFormat = "0.###E+0"
-                formatter.exponentSymbol = "e"
+                formatter.usesSignificantDigits = true
+                formatter.positiveFormat = "0.###########E1"
+                formatter.exponentSymbol = "×10"
                 if let scientificFormatted = formatter.string(for: val) {
                     returnValue = scientificFormatted
                 }
@@ -173,7 +188,11 @@ struct screenView: View {
                 ScrollViewReader { proxy in
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            Text(equationText)
+                            LaTeX("\(equationText)")
+                                .parsingMode(.all)
+                                .imageRenderingMode(.template)
+                                .errorMode(.original)
+                                .blockMode(.alwaysInline)
                                 .lineLimit(1)
                                 .font(.title3)
                                 .fontWeight(.bold)
@@ -214,7 +233,10 @@ struct screenView: View {
                 
                 Spacer()
                 
-                Text(resultsText)
+                SubSuperScriptText(inputString: resultsText, bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)                    .parsingMode(.all)
+                    .imageRenderingMode(.template)
+                    .errorMode(.original)
+                    .blockMode(.alwaysInline)
                     .lineLimit(1)
                     .font(.title3)
                     .fontWeight(.bold)
@@ -281,5 +303,40 @@ extension Int {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         return numberFormatter.string(from: NSNumber(value:self))!
+    }
+}
+
+extension Collection {
+
+    func unfoldSubSequences(limitedTo maxLength: Int) -> UnfoldSequence<SubSequence,Index> {
+        sequence(state: startIndex) { start in
+            guard start < endIndex else { return nil }
+            let end = index(start, offsetBy: maxLength, limitedBy: endIndex) ?? endIndex
+            defer { start = end }
+            return self[start..<end]
+        }
+    }
+
+    func every(n: Int) -> UnfoldSequence<Element,Index> {
+        sequence(state: startIndex) { index in
+            guard index < endIndex else { return nil }
+            defer { let _ = formIndex(&index, offsetBy: n, limitedBy: endIndex) }
+            return self[index]
+        }
+    }
+
+    var pairs: [SubSequence] { .init(unfoldSubSequences(limitedTo: 2)) }
+}
+
+extension StringProtocol where Self: RangeReplaceableCollection {
+
+    mutating func insert<S: StringProtocol>(separator: S, every n: Int) {
+        for index in indices.every(n: n).dropFirst().reversed() {
+            insert(contentsOf: separator, at: index)
+        }
+    }
+
+    func inserting<S: StringProtocol>(separator: S, every n: Int) -> Self {
+        .init(unfoldSubSequences(limitedTo: n).joined(separator: separator))
     }
 }

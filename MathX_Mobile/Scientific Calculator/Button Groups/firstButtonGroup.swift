@@ -17,6 +17,8 @@ struct firstButtonGroup: View {
     @Binding var equationText: String
     @Binding var resultsText: String
     
+    let generator = UIImpactFeedbackGenerator()
+    
     @Environment(\.dismiss) var dismissView
     
     var body: some View {
@@ -77,7 +79,8 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)            .buttonStyle(.plain)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+            .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
         }
@@ -112,7 +115,6 @@ struct firstButtonGroup: View {
                 .padding(.bottom, UIScreen.main.bounds.height / 50)
                 
                 Button { // bottom arrow
-                    
                 } label: {
                     Image(systemName: "chevron.down")
                         .foregroundColor(.black)
@@ -150,7 +152,8 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)            .buttonStyle(.plain)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+            .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
         }
@@ -179,7 +182,8 @@ struct firstButtonGroup: View {
                     .fontWeight(.bold)
                     .padding()
             }
-            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)            .buttonStyle(.plain)
+            .frame(width: UIScreen.main.bounds.width / 8, height: UIScreen.main.bounds.width / 8)
+            .buttonStyle(.plain)
             .background(.black)
             .clipShape(Circle())
         }

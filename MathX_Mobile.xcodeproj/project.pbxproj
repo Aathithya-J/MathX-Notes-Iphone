@@ -18,6 +18,7 @@
 		49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC229BC84BC00DD2E02 /* HomeView.swift */; };
 		49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */; };
 		49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */; };
+		6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A54B94729CF150D0083909A /* LaTeXSwiftUI */; };
 		6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */; };
 		6A60E55E29CB17B700F9C038 /* secondButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */; };
 		6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55F29CB1B5600F9C038 /* thirdButtonGroup.swift */; };
@@ -71,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A60E56829CB2E6B00F9C038 /* MathExpression in Frameworks */,
+				6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +192,7 @@
 			name = MathX_Mobile;
 			packageProductDependencies = (
 				6A60E56729CB2E6B00F9C038 /* MathExpression */,
+				6A54B94729CF150D0083909A /* LaTeXSwiftUI */,
 			);
 			productName = MathX_Mobile;
 			productReference = 49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */;
@@ -265,6 +268,7 @@
 			mainGroup = 49E6CA8C29BC845400DD2E02;
 			packageReferences = (
 				6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */,
+				6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
 			);
 			productRefGroup = 49E6CA9629BC845400DD2E02 /* Products */;
 			projectDirPath = "";
@@ -647,6 +651,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/colinc86/LaTeXSwiftUI";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.4;
+			};
+		};
 		6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/peredaniel/MathExpression";
@@ -658,6 +670,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6A54B94729CF150D0083909A /* LaTeXSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */;
+			productName = LaTeXSwiftUI;
+		};
 		6A60E56729CB2E6B00F9C038 /* MathExpression */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */;
