@@ -67,7 +67,6 @@ struct CalculatorView: View {
                     resultsText = ""
                 } else {
                     if !returnValue.contains("×10") && returnValue.count > 5 {
-//                        resultsText = returnValue.inserting(separator: " ", every: 3) // adds space after every 3 characters
                         resultsText = returnValue
                     } else {
                         var numberOfDigitsInPower = Int()
@@ -154,7 +153,6 @@ struct CalculatorView: View {
                 errorType = error.localizedDescription
             }
             
-//            returnValue = String(format: "%.0f", value) // round to nearest whole
             returnValue = String(value)
 
             if returnValue.count > 15 {
