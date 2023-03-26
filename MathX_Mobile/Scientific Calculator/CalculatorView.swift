@@ -3,7 +3,7 @@ import LaTeXSwiftUI
 import MathExpression
 
 struct CalculatorView: View {
-    
+        
     @State var shiftIndicator = false
     @State var alphaIndicator = false
     
@@ -15,6 +15,12 @@ struct CalculatorView: View {
     
     @State var equationText = ""
     @State var resultsText = ""
+    
+    @State var showingQRScreen = false
+    @State var qrCodeImage = UIImage()
+    
+    @State var encodedDeepLink = String()
+    @Binding var deepLinkSource: String
     
     @AppStorage("lastAns", store: .standard) var lastAns = ""
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
@@ -41,13 +47,17 @@ struct CalculatorView: View {
                 modeIndicators(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator)
                     .padding(.horizontal, 5)
                 
-                screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
+                if !showingQRScreen {
+                    screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
+                } else {
+                    qrScreenView(equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen, qrCodeImage: $qrCodeImage)
+                }
                 
-                firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText)
+                firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen)
                 
-                secondButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
+                secondButtonGroup(qrCodeImage: $qrCodeImage, shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred, encodedDeepLink: $encodedDeepLink, showingQRScreen: $showingQRScreen)
                 
-                thirdButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred)
+                thirdButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred, showingQRScreen: $showingQRScreen, encodedDeepLink: $encodedDeepLink)
                     .padding(.bottom, 5)
                 
                 Spacer()
@@ -57,53 +67,43 @@ struct CalculatorView: View {
             }
             .padding(.horizontal)
             .onChange(of: equalsPressed) { value in
-                lastEquation = equationText
-                var returnValue: String = calculate(equation: equationText)
-                
-                if returnValue.contains("ERROR:") {
-                    errorOccurred = true
-                    
-                    equationText = returnValue
-                    resultsText = ""
-                } else {
-                    if !returnValue.contains("×10") && returnValue.count > 5 {
-                        resultsText = returnValue
-                    } else {
-                        var numberOfDigitsInPower = Int()
-                        var positionOfStartingOfPower = Int()
-                        
-                        var resultsTextArray = Array(returnValue)
-                        resultsTextArray.indices.forEach { indices in
-                            if resultsTextArray[indices] == "×" {
-                                if resultsTextArray[indices + 1] == "1" {
-                                    if resultsTextArray[indices + 2] == "0" {
-                                        numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
-                                        positionOfStartingOfPower = indices + 2
-                                    }
-                                }
-                            }
-                        }
-                        
-                        if numberOfDigitsInPower > 0 {
-                            resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
-                            resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
-                            
-//                            resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower) + 1)
-//                            resultsTextArray.insert(contentsOf: "_{", at: (positionOfStartingOfPower - 3) + 1)
-                                                        
-                            resultsText = String(resultsTextArray)
-
-                        } else {
-                            resultsText = returnValue
-                        }
-                    }
-                }
+                equalsButtonPressed()
+            }
+            .onAppear {
+                receivedDeepLinkSource()
+            }
+            .onChange(of: deepLinkSource) { newValue in
+                receivedDeepLinkSource()
             }
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.hidden, for: .tabBar)
         .statusBar(hidden: true)
     }
+    
+    func receivedDeepLinkSource() {
+        if !deepLinkSource.isEmpty {
+            showingQRScreen = false
+
+            var sourceConvertedArray = [String]()
+            
+            guard let sourceConverted = deepLinkSource.fromBase64() else { return }
+            deepLinkSource = ""
+                        
+            sourceConvertedArray = sourceConverted.components(separatedBy: " -,- ")
+            
+            var ET = sourceConvertedArray[0]
+            var RT = sourceConvertedArray[1]
+            
+            ET = ET.replacingOccurrences(of: "ET:", with: "")
+            RT = RT.replacingOccurrences(of: "RT:", with: "")
+            
+            equationText = ET
+            resultsText = RT
+
+        }
+    }
+    
     
     func calculate(equation: String) -> String {
         var returnValue = ""
@@ -171,6 +171,47 @@ struct CalculatorView: View {
         
         return thereWasAnError ? "ERROR: \(errorType)" : returnValue
     }
+    
+    func equalsButtonPressed() {
+        lastEquation = equationText
+        let returnValue: String = calculate(equation: equationText)
+        
+        if returnValue.contains("ERROR:") {
+            errorOccurred = true
+            
+            equationText = returnValue
+            resultsText = ""
+        } else {
+            if !returnValue.contains("×10") && returnValue.count > 5 {
+                resultsText = returnValue
+            } else {
+                var numberOfDigitsInPower = Int()
+                var positionOfStartingOfPower = Int()
+                
+                var resultsTextArray = Array(returnValue)
+                resultsTextArray.indices.forEach { indices in
+                    if resultsTextArray[indices] == "×" {
+                        if resultsTextArray[indices + 1] == "1" {
+                            if resultsTextArray[indices + 2] == "0" {
+                                numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
+                                positionOfStartingOfPower = indices + 2
+                            }
+                        }
+                    }
+                }
+                
+                if numberOfDigitsInPower > 0 {
+                    resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
+                    resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
+                    
+                    resultsText = String(resultsTextArray)
+                    
+                } else {
+                    resultsText = returnValue
+                }
+            }
+        }
+    }
 }
 
 struct screenView: View {
@@ -187,15 +228,23 @@ struct screenView: View {
                 ScrollViewReader { proxy in
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            LaTeX("\(equationText)")
-                                .parsingMode(.all)
-                                .imageRenderingMode(.template)
-                                .errorMode(.original)
-                                .blockMode(.alwaysInline)
-                                .lineLimit(1)
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
+                            if equationText.contains("ERROR:") {
+                                Text("\(equationText)")
+                                    .lineLimit(1)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            } else {
+                                LaTeX("\(equationText)")
+                                    .parsingMode(.all)
+                                    .imageRenderingMode(.template)
+                                    .errorMode(.original)
+                                    .blockMode(.alwaysInline)
+                                    .lineLimit(1)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
                             
                             HStack {Spacer()}
                                 .id(1)
@@ -251,6 +300,50 @@ struct screenView: View {
     }
 }
 
+struct qrScreenView: View {
+    
+    @Binding var equationText: String
+    @Binding var resultsText: String
+    
+    @Binding var showingQRScreen: Bool
+    @Binding var qrCodeImage: UIImage
+    
+    var body: some View {
+        ZStack(alignment: .center) {
+            Color.green.opacity(0.4)
+            
+            VStack(alignment: .center) {
+                GeometryReader { geometry in
+                    HStack(alignment: .center) {
+                        VStack {
+                            Spacer()
+                            Image(uiImage: qrCodeImage)
+                                .interpolation(.none)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: geometry.size.height - 30, height: geometry.size.height - 30, alignment: .center)
+                            Spacer()
+                        }
+                        .padding(.leading)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Press [AC] to go back")
+                            Text("Press [DEL] to copy link to clipboard")
+                                .padding(.top, 2)
+                        }
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.leading)
+                    }
+                }
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 6)
+        .cornerRadius(16)
+    }
+}
+
 struct modeIndicators: View {
     
     @Binding var shiftIndicator: Bool
@@ -293,6 +386,6 @@ struct modeIndicators: View {
 
 struct CalculatorView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorView()
+        Text("CalculatorView()")
     }
 }

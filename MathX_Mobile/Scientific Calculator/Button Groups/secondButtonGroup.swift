@@ -6,8 +6,13 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 struct secondButtonGroup: View {
+    
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
+    @Binding var qrCodeImage: UIImage
     
     @Binding var shiftIndicator: Bool
     @Binding var alphaIndicator: Bool
@@ -18,12 +23,15 @@ struct secondButtonGroup: View {
     @Binding var equalsPressed: Bool
     @Binding var errorOccurred: Bool
     
+    @Binding var encodedDeepLink: String
+    @Binding var showingQRScreen: Bool
+    
     let generator = UIImpactFeedbackGenerator()
         
     var body: some View {
         VStack {
             HStack {
-                button(buttonSymbol: "OPTIONS", inputWhenPressed: "", shiftButtonSymbol: "QR", shiftInputWhenPressed: "", alphaButtonSymbol: "", alphaInputWhenPressed: "")
+                button(buttonSymbol: "OPTIONS", inputWhenPressed: "", shiftButtonSymbol: "SHARE", shiftInputWhenPressed: "", alphaButtonSymbol: "", alphaInputWhenPressed: "")
                 button(buttonSymbol: "\u{1D465}^{3}", inputWhenPressed: "", shiftButtonSymbol: "", shiftInputWhenPressed: "", alphaButtonSymbol: ":", alphaInputWhenPressed: "")
                 
                 ForEach(1...2, id: \.self) { _ in
@@ -78,21 +86,28 @@ struct secondButtonGroup: View {
         VStack {
             Button {
                 generator.impactOccurred(intensity: 0.7)
-                                
-                if equationText != "" && resultsText != "" {
-                    if inputWhenPressed == "+" || inputWhenPressed == "-" || inputWhenPressed == "×" || inputWhenPressed == "÷" {
-                        equationText = "Ans" + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
-                    } else {
+                
+                if !showingQRScreen {
+                    if equationText != "" && resultsText != "" {
+                        if shiftIndicator && shiftButtonSymbol == "SHARE" {
+                            generateEquationQRandLink()
+                            showingQRScreen = true
+                        } else {
+                            if inputWhenPressed == "+" || inputWhenPressed == "-" || inputWhenPressed == "×" || inputWhenPressed == "÷" {
+                                equationText = "Ans" + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                            } else {
+                                equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                            }
+                            resultsText = ""
+                        }
+                    } else if equationText.contains("ERROR:") {
+                        errorOccurred = false
+                        
                         equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                        resultsText = ""
+                    } else {
+                        equationText = equationText + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
                     }
-                    resultsText = ""
-                } else if equationText.contains("ERROR:") {
-                    errorOccurred = false
-                    
-                    equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
-                    resultsText = ""
-                } else {
-                    equationText = equationText + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
                 }
                 
                 shiftIndicator = false
@@ -111,12 +126,33 @@ struct secondButtonGroup: View {
             .buttonStyle(.plain)
         }
     }
+    
+    func generateEquationQRandLink() {
+        let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
+        
+        let textEncoded = textToBeEncoded.toBase64()
+        let encodedDeepLink = "mathx://calculator?source=\(textEncoded)"
+        self.encodedDeepLink = encodedDeepLink
+        qrCodeImage = generateQRCode(from: encodedDeepLink)
+    }
+    
+    func generateQRCode(from string: String) -> UIImage {
+        filter.message = Data(string.utf8)
+
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
+    }
 }
 
 
 
 struct secondButtonGroup_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorView()
+        Text("CalculatorView()")
     }
 }

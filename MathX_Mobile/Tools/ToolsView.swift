@@ -6,8 +6,17 @@ struct ToolsView: View {
     var algebra = "Algebra"
     var cal = "Calculator"
     var Ins = "Instruments"
-    let tools = ["Emergency Contact","Instruments", "HCF & LCM", "Algebra", "Calculator"]
+    let tools = ["Emergency Contact", "Instruments", "HCF & LCM", "Algebra", "Calculator"]
     @State var searchText = ""
+    
+    @State var defaultReturn = false
+    @State var isECShowing = false
+    @State var isInsShowing = false
+    @State var isHCFLCMShowing = false
+    @State var isAlgebraShowing = false
+    @Binding var isCalShowing: Bool
+    
+    @Binding var deepLinkSource: String
 
     var body: some View {
         NavigationStack {
@@ -15,7 +24,7 @@ struct ToolsView: View {
                 VStack {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), spacing: 30) {
                         ForEach(searchResults, id: \.self) { tools in
-                            NavigationLink(destination: getDestination(tools: tools)) {
+                            NavigationLink(destination: getDestination(tools: tools), isActive: getIsActiveBool(tools: tools)) {
                                 VStack {
                                     Text(tools)
                                         .font(.title2)
@@ -50,7 +59,7 @@ struct ToolsView: View {
         case algebra:
             return AnyView(OCRView())
         case cal:
-            return AnyView(CalculatorView())
+            return AnyView(CalculatorView(deepLinkSource: $deepLinkSource))
         case Ins:
             return AnyView(
                 List {
@@ -58,8 +67,6 @@ struct ToolsView: View {
                     NavigationLink("Ruler", destination: EmptyView())
                 }
             )
-        case cal:
-            return AnyView(CalculatorView())
         default:
             return AnyView(EmptyView())
         }
@@ -81,6 +88,23 @@ struct ToolsView: View {
             return Color("CardBackground")
         }
     }
+    
+    func getIsActiveBool(tools: String) -> Binding<Bool> {
+        switch tools {
+        case EC:
+            return $isECShowing
+        case HCFLCM:
+            return $isHCFLCMShowing
+        case algebra:
+            return $isAlgebraShowing
+        case Ins:
+            return $isInsShowing
+        case cal:
+            return $isCalShowing
+        default:
+            return $defaultReturn
+        }
+    }
 
     var searchResults: [String] {
         if searchText.isEmpty {
@@ -93,6 +117,6 @@ struct ToolsView: View {
 
 struct ToolsView_Previews: PreviewProvider {
     static var previews: some View {
-        ToolsView()
+        Text("ToolsView()")
     }
 }

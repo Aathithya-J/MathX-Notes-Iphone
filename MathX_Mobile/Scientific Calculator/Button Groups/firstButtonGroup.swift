@@ -17,6 +17,8 @@ struct firstButtonGroup: View {
     @Binding var equationText: String
     @Binding var resultsText: String
     
+    @Binding var showingQRScreen: Bool
+    
     let generator = UIImpactFeedbackGenerator()
     
     @Environment(\.dismiss) var dismissView
@@ -42,11 +44,15 @@ struct firstButtonGroup: View {
                 generator.impactOccurred(intensity: 0.7)
                 
                 if calculatorOn {
-                    shiftIndicator.toggle() // turns shift indicator on/off
+                    withAnimation(.spring(response: 0.3)) {
+                        shiftIndicator.toggle() // turns shift indicator on/off
+                    }
                 }
                 
                 if alphaIndicator {
-                    alphaIndicator = false // turns alpha indicator off if it is on
+                    withAnimation(.spring(response: 0.3)) {
+                        alphaIndicator = false // turns alpha indicator off if it is on
+                    }
                 }
             } label: {
                 Text("S")
@@ -70,11 +76,15 @@ struct firstButtonGroup: View {
                 generator.impactOccurred(intensity: 0.7)
 
                 if calculatorOn {
-                    alphaIndicator.toggle() // turns alpha indicator on/off
+                    withAnimation(.spring(response: 0.3)) {
+                        alphaIndicator.toggle() // turns alpha indicator on/off
+                    }
                 }
                 
                 if shiftIndicator {
-                    shiftIndicator = false // turns shift indicator off if it is on
+                    withAnimation(.spring(response: 0.3)) {
+                        shiftIndicator = false // turns shift indicator off if it is on
+                    }
                 }
             } label: {
                 Text("A")
@@ -155,6 +165,12 @@ struct firstButtonGroup: View {
             Button {
                 generator.impactOccurred(intensity: 0.7)
                 
+                if !showingQRScreen {
+                    // code here
+                }
+                
+                shiftIndicator = false
+                alphaIndicator = false
             } label: {
                 Text(shiftIndicator ? "SETUP" : "MENU")
                     .foregroundColor(shiftIndicator ? .yellow : .white)
@@ -205,6 +221,6 @@ struct firstButtonGroup: View {
 
 struct firstButton_Group_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorView()
+        Text("CalculatorView()")
     }
 }

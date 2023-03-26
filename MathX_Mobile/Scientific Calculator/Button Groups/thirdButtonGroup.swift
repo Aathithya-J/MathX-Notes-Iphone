@@ -18,6 +18,9 @@ struct thirdButtonGroup: View {
     @Binding var equalsPressed: Bool
     @Binding var errorOccurred: Bool
     
+    @Binding var showingQRScreen: Bool
+    @Binding var encodedDeepLink: String
+    
     let generator = UIImpactFeedbackGenerator()
     
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
@@ -65,21 +68,23 @@ struct thirdButtonGroup: View {
     func button(buttonSymbol: String, inputWhenPressed: String, shiftButtonSymbol: String, shiftInputWhenPressed: String, alphaButtonSymbol: String, alphaInputWhenPressed: String) -> some View {
         Button {
             generator.impactOccurred(intensity: 0.7)
-                        
-            if equationText != "" && resultsText != "" {
-                if inputWhenPressed == "+" || inputWhenPressed == "-" || inputWhenPressed == "×" || inputWhenPressed == "÷" {
-                    equationText = "Ans" + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
-                } else {
+               
+            if !showingQRScreen {
+                if equationText != "" && resultsText != "" {
+                    if inputWhenPressed == "+" || inputWhenPressed == "-" || inputWhenPressed == "×" || inputWhenPressed == "÷" {
+                        equationText = "Ans" + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                    } else {
+                        equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                    }
+                    resultsText = ""
+                } else if equationText.contains("ERROR:") {
+                    errorOccurred = false
+                    
                     equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                    resultsText = ""
+                } else {
+                    equationText = equationText + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
                 }
-                resultsText = ""
-            } else if equationText.contains("ERROR:") {
-                errorOccurred = false
-                
-                equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
-                resultsText = ""
-            } else {
-                equationText = equationText + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
             }
             
             shiftIndicator = false
@@ -106,13 +111,17 @@ struct thirdButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
             
-            if errorOccurred {
-                errorOccurred = false
-                equationText = lastEquation
-                resultsText = ""
+            if showingQRScreen {
+                showingQRScreen = false
             } else {
-                equationText = ""
-                resultsText = ""
+                if errorOccurred {
+                    errorOccurred = false
+                    equationText = lastEquation
+                    resultsText = ""
+                } else {
+                    equationText = ""
+                    resultsText = ""
+                }
             }
             
             shiftIndicator = false
@@ -138,18 +147,22 @@ struct thirdButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
             
-            if equationText.contains("ERROR:") {
-                errorOccurred = false
-                
-                equationText = ""
-                resultsText = ""
+            if showingQRScreen {
+                UIPasteboard.general.string = encodedDeepLink
             } else {
-                if equationText.suffix(3) == "Ans" {
-                    equationText = String(equationText.dropLast(3))
+                if equationText.contains("ERROR:") {
+                    errorOccurred = false
+                    
+                    equationText = ""
                     resultsText = ""
                 } else {
-                    equationText = String(equationText.dropLast())
-                    resultsText = ""
+                    if equationText.suffix(3) == "Ans" {
+                        equationText = String(equationText.dropLast(3))
+                        resultsText = ""
+                    } else {
+                        equationText = String(equationText.dropLast())
+                        resultsText = ""
+                    }
                 }
             }
             
@@ -176,13 +189,15 @@ struct thirdButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
             
-            if equationText.contains("ERROR:") {
-                errorOccurred = false
-                
-                equationText = ""
-                resultsText = ""
-            } else {
-                equalsPressed.toggle()
+            if !showingQRScreen {
+                if equationText.contains("ERROR:") {
+                    errorOccurred = false
+                    
+                    equationText = ""
+                    resultsText = ""
+                } else {
+                    equalsPressed.toggle()
+                }
             }
             
             shiftIndicator = false
@@ -207,6 +222,6 @@ struct thirdButtonGroup: View {
 
 struct thirdButtonGroup_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorView()
+        Text("CalculatorView()")
     }
 }
