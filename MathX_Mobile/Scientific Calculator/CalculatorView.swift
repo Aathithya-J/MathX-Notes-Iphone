@@ -8,6 +8,7 @@ struct CalculatorView: View {
     @State var alphaIndicator = false
     
     @State var equalsPressed = false
+    @State var sqrtPressed = false
 
     @State var errorOccurred = false
 
@@ -30,41 +31,53 @@ struct CalculatorView: View {
     var body: some View {
         
         if true {
-            VStack {
-                HStack {
-                    Button {
-                        
-                    } label: {
-                        Text("among")
-                            .frame(width: (UIScreen.main.bounds.width - 30) / 4, height: (UIScreen.main.bounds.width - 30) / 4)
-                            .foregroundColor(.orange)
-                            .mask(Circle())
-                    }
-                    .buttonStyle(.plain)
+            // simplified calculator
+            ZStack {
+                if colorScheme == .light {
+                    Color.black.opacity(0.8)
+                        .ignoresSafeArea()
+                } else {
+                    Color.gray.opacity(0.35)
+                        .ignoresSafeArea()
+                }
+                
+                VStack {
                     
-                    Button {
-                        
-                    } label: {
-                        Text("among")
-                            .frame(width: (UIScreen.main.bounds.width - 30) / 4, height: (UIScreen.main.bounds.width - 30) / 4)
-                            .foregroundColor(.orange)
-                            .mask(Circle())
+                    if !showingQRScreen {
+                        screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
+                            .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 5)
+                            .padding(.top, 30)
+                    } else {
+                        qrScreenView(equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen, qrCodeImage: $qrCodeImage)
+                            .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 5)
+                            .padding(.top, 30)
                     }
-                    .buttonStyle(.plain)
                     
-                    Button {
-                        
-                    } label: {
-                        Text("among")
-                            .frame(width: (UIScreen.main.bounds.width - 30) / 4, height: (UIScreen.main.bounds.width - 30) / 4)
-                            .foregroundColor(.orange)
-                            .mask(Circle())
+                    Spacer()
+                    
+                    thirdButtonGroupModified(qrCodeImage: $qrCodeImage, shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, sqrtPressed: $sqrtPressed, errorOccurred: $errorOccurred, showingQRScreen: $showingQRScreen, encodedDeepLink: $encodedDeepLink)
+                        .padding(.bottom, 30)
+                }
+                .padding(.horizontal)
+                .onChange(of: equalsPressed) { value in
+                    equalsButtonPressed()
+                }
+                .onChange(of: sqrtPressed) { value in
+                    if !equationText.contains("sqrt(") {
+                        sqrtButtonPressed()
                     }
-                    .buttonStyle(.plain)
+                }
+                .onAppear {
+                    receivedDeepLinkSource()
+                }
+                .onChange(of: deepLinkSource) { newValue in
+                    receivedDeepLinkSource()
                 }
             }
-            .padding(.horizontal)
+            .toolbar(.hidden, for: .tabBar)
+            .navigationBarTitleDisplayMode(.inline)
         } else {
+            // advance scientific calculator - WIP - will be an update
             ZStack(alignment: .top) {
                 if colorScheme == .light {
                     Color.black.opacity(0.8)
@@ -86,8 +99,10 @@ struct CalculatorView: View {
                     
                     if !showingQRScreen {
                         screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
+                            .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 6)
                     } else {
                         qrScreenView(equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen, qrCodeImage: $qrCodeImage)
+                            .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 6)
                     }
                     
                     firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen)
@@ -141,7 +156,6 @@ struct CalculatorView: View {
 
         }
     }
-    
     
     func calculate(equation: String) -> String {
         var returnValue = ""
@@ -210,6 +224,60 @@ struct CalculatorView: View {
         return thereWasAnError ? "ERROR: \(errorType)" : returnValue
     }
     
+    func sqrtcalculate(equation: String) -> String {
+        var returnValue = ""
+        var thereWasAnError = false
+        var errorType = ""
+
+        if !equation.isEmpty {
+            var value = Double()
+            var equationConverted = ""
+            
+            equationConverted = equation.replacingOccurrences(of: "÷", with: "/")
+            equationConverted = equationConverted.replacingOccurrences(of: "×", with: "*")
+            equationConverted = equationConverted.replacingOccurrences(of: "Ans", with: "(\(lastAns))")
+            
+            var equationConvertedArray = Array(equationConverted)
+            
+            equationConvertedArray.indices.forEach { i in
+                if equationConvertedArray[i] == "(" {
+                    if i > 0 {
+                        if equationConvertedArray[i - 1] == ")" {
+                            equationConvertedArray.insert("*", at: i)
+                        } else if equationConvertedArray[i - 1].isNumber {
+                            equationConvertedArray.insert("*", at: i)
+                        }
+                    }
+                }
+                
+                if equationConvertedArray[i] == ")" {
+                    if i < (equationConvertedArray.count - 1) {
+                        if equationConvertedArray[i + 1].isNumber {
+                            equationConvertedArray.insert("*", at: i + 1)
+                        }
+                    }
+                }
+            }
+            
+            equationConverted = String(equationConvertedArray)
+            
+            do {
+                let expression = try MathExpression(equationConverted)
+                value = expression.evaluate()
+            } catch {
+                print(error)
+                thereWasAnError = true
+                errorType = error.localizedDescription
+            }
+            
+            returnValue = String(value.formatted())
+            
+            lastAns = String(value)
+        }
+        
+        return thereWasAnError ? "ERROR: \(errorType)" : returnValue
+    }
+    
     func equalsButtonPressed() {
         lastEquation = equationText
         let returnValue: String = calculate(equation: equationText)
@@ -249,6 +317,12 @@ struct CalculatorView: View {
                 }
             }
         }
+    }
+    
+    func sqrtButtonPressed() {
+        guard let sqrted = Double(sqrtcalculate(equation: equationText)) else { return }
+        equationText = "sqrt(\(equationText))"
+        resultsText = String(sqrt(sqrted).formatted())
     }
 }
 
@@ -299,14 +373,16 @@ struct screenView: View {
                 }
                 
                 if errorOccurred {
-                    Text("Press [AC key] to restore equation")
-                        .lineLimit(1)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.top, 5)
-                        .padding(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    if !equationText.contains("SQRT") {
+                        Text("Press [AC key] to restore equation")
+                            .lineLimit(1)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.top, 5)
+                            .padding(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                     
                     Text("Press [any key] to remove equation")
                         .lineLimit(1)
@@ -333,7 +409,6 @@ struct screenView: View {
                     .cornerRadius(16)
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 6)
         .cornerRadius(16)
     }
 }
@@ -377,7 +452,6 @@ struct qrScreenView: View {
                 }
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 6)
         .cornerRadius(16)
     }
 }
