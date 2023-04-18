@@ -28,57 +28,95 @@ struct CalculatorView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        ZStack(alignment: .top) {
-            if colorScheme == .light {
-                Color.black.opacity(0.8)
-                    .ignoresSafeArea()
-            } else {
-                Color.gray.opacity(0.35)
-                    .ignoresSafeArea()
-            }
-            
-            VStack(alignment: .center) {
-                
-                Spacer()
-                Spacer()
-                Spacer()
-
-
-                modeIndicators(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator)
-                    .padding(.horizontal, 5)
-                
-                if !showingQRScreen {
-                    screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
-                } else {
-                    qrScreenView(equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen, qrCodeImage: $qrCodeImage)
+        
+        if true {
+            VStack {
+                HStack {
+                    Button {
+                        
+                    } label: {
+                        Text("among")
+                            .frame(width: (UIScreen.main.bounds.width - 30) / 4, height: (UIScreen.main.bounds.width - 30) / 4)
+                            .foregroundColor(.orange)
+                            .mask(Circle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("among")
+                            .frame(width: (UIScreen.main.bounds.width - 30) / 4, height: (UIScreen.main.bounds.width - 30) / 4)
+                            .foregroundColor(.orange)
+                            .mask(Circle())
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("among")
+                            .frame(width: (UIScreen.main.bounds.width - 30) / 4, height: (UIScreen.main.bounds.width - 30) / 4)
+                            .foregroundColor(.orange)
+                            .mask(Circle())
+                    }
+                    .buttonStyle(.plain)
                 }
-                
-                firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen)
-                
-                secondButtonGroup(qrCodeImage: $qrCodeImage, shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred, encodedDeepLink: $encodedDeepLink, showingQRScreen: $showingQRScreen)
-                
-                thirdButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred, showingQRScreen: $showingQRScreen, encodedDeepLink: $encodedDeepLink)
-                    .padding(.bottom, 5)
-                
-                Spacer()
-                Spacer()
-
-                
             }
             .padding(.horizontal)
-            .onChange(of: equalsPressed) { value in
-                equalsButtonPressed()
+        } else {
+            ZStack(alignment: .top) {
+                if colorScheme == .light {
+                    Color.black.opacity(0.8)
+                        .ignoresSafeArea()
+                } else {
+                    Color.gray.opacity(0.35)
+                        .ignoresSafeArea()
+                }
+                
+                VStack(alignment: .center) {
+                    
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    
+                    
+                    modeIndicators(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator)
+                        .padding(.horizontal, 5)
+                    
+                    if !showingQRScreen {
+                        screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
+                    } else {
+                        qrScreenView(equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen, qrCodeImage: $qrCodeImage)
+                    }
+                    
+                    firstButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, calculatorOn: $calculatorOn, equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen)
+                    
+                    secondButtonGroup(qrCodeImage: $qrCodeImage, shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred, encodedDeepLink: $encodedDeepLink, showingQRScreen: $showingQRScreen)
+                    
+                    thirdButtonGroup(shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, errorOccurred: $errorOccurred, showingQRScreen: $showingQRScreen, encodedDeepLink: $encodedDeepLink)
+                        .padding(.bottom, 5)
+                    
+                    Spacer()
+                    Spacer()
+                    
+                    
+                }
+                .padding(.horizontal)
+                .onChange(of: equalsPressed) { value in
+                    equalsButtonPressed()
+                }
+                .onAppear {
+                    receivedDeepLinkSource()
+                }
+                .onChange(of: deepLinkSource) { newValue in
+                    receivedDeepLinkSource()
+                }
             }
-            .onAppear {
-                receivedDeepLinkSource()
-            }
-            .onChange(of: deepLinkSource) { newValue in
-                receivedDeepLinkSource()
-            }
+            .toolbar(.hidden, for: .navigationBar)
+            .toolbar(.hidden, for: .tabBar)
+            .statusBar(hidden: true)
         }
-        .toolbar(.hidden, for: .navigationBar)
-        .toolbar(.hidden, for: .tabBar)
-        .statusBar(hidden: true)
     }
     
     func receivedDeepLinkSource() {

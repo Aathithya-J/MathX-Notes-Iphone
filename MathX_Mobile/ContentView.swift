@@ -5,16 +5,20 @@ struct ContentView: View {
     @Binding var tabSelection: Int
     @Binding var isCalShowing: Bool
     @Binding var deepLinkSource: String
-        
+            
     @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
         
     var body: some View {
         if !isShowingWelcomeScreen {
             TabView(selection: $tabSelection) {
-                HomeView()
+                FavouritesView()
                     .tabItem {
-                        Label("Home", systemImage: "house")
-                        
+                        Label("Favourites", systemImage: "star.fill")
+                    }
+                    .tag(0)
+                NotesView()
+                    .tabItem {
+                        Label("Notes", systemImage: "list.bullet.clipboard")
                     }
                     .tag(0)
                 ToolsView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource)

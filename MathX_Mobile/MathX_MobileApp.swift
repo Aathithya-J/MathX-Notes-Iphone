@@ -11,7 +11,7 @@ import Foundation
 @main
 struct MathX_MobileApp: App {
     
-    @State var tabSelection = 0
+    @State var tabSelection = 1
     @State var isCalShowing = false
     
     @State var deepLinkSource = String()
