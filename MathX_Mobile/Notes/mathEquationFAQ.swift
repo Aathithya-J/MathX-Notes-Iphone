@@ -90,6 +90,13 @@ struct mathEquationFAQ: View {
                     } label: {
                         Text("Why can't I edit my notes when Math Rendering is enabled?")
                     }
+                    
+                    DisclosureGroup {
+                        Text("To leave a line when Math Rendering is enabled, ensure that you put a space if your line ends with a LaTeX equation. Example: \"\(latexstart)x=\\sqrt[4]{b^2-4ac}\(latexend) \"")
+                            .padding(.vertical, 5)
+                    } label: {
+                        Text("Why wont my texts leave a line when Math Rendering is enabled?")
+                    }
                 }
             }
             .navigationTitle("Math Rendering FAQ")
