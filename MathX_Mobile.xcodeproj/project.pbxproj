@@ -16,7 +16,6 @@
 		49E6CAA029BC845700DD2E02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */; };
 		49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC229BC84BC00DD2E02 /* HomeView.swift */; };
 		49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */; };
-		49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */; };
 		6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A54B94729CF150D0083909A /* LaTeXSwiftUI */; };
 		6A54B94A29CF42510083909A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A54B94929CF42510083909A /* extensions.swift */; };
 		6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */; };
@@ -35,6 +34,9 @@
 		6A6D3F2429EF94F700265124 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2329EF94F700265124 /* PDFView.swift */; };
 		6A6D3F2629EF957E00265124 /* Electronic Textbook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */; };
 		6A6D3F2B29EFC9BB00265124 /* mathEquationFAQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2A29EFC9BB00265124 /* mathEquationFAQ.swift */; };
+		6A6D3F2F29F017AE00265124 /* PythagorasCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2E29F017AE00265124 /* PythagorasCalc.swift */; };
+		6A6D3F3129F025E300265124 /* LinearQuadEquationCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F3029F025E300265124 /* LinearQuadEquationCalc.swift */; };
+		6A6D3F3329F0388300265124 /* GrapherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F3229F0388300265124 /* GrapherView.swift */; };
 		6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89A13629C996F90007D0C1 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +70,6 @@
 		49E6CAAF29BC845700DD2E02 /* MathX_MobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathX_MobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E6CAC229BC84BC00DD2E02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
-		49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyView.swift; sourceTree = "<group>"; };
 		6A54B94929CF42510083909A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstButtonGroup.swift; sourceTree = "<group>"; };
 		6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondButtonGroup.swift; sourceTree = "<group>"; };
@@ -85,6 +86,9 @@
 		6A6D3F2329EF94F700265124 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Electronic Textbook.pdf"; sourceTree = "<group>"; };
 		6A6D3F2A29EFC9BB00265124 /* mathEquationFAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mathEquationFAQ.swift; sourceTree = "<group>"; };
+		6A6D3F2E29F017AE00265124 /* PythagorasCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythagorasCalc.swift; sourceTree = "<group>"; };
+		6A6D3F3029F025E300265124 /* LinearQuadEquationCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearQuadEquationCalc.swift; sourceTree = "<group>"; };
+		6A6D3F3229F0388300265124 /* GrapherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrapherView.swift; sourceTree = "<group>"; };
 		6A89A13629C996F90007D0C1 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -120,7 +124,9 @@
 			isa = PBXGroup;
 			children = (
 				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
-				49E6CAC629BC84DA00DD2E02 /* EmergencyView.swift */,
+				6A6D3F2E29F017AE00265124 /* PythagorasCalc.swift */,
+				6A6D3F3229F0388300265124 /* GrapherView.swift */,
+				6A6D3F3029F025E300265124 /* LinearQuadEquationCalc.swift */,
 				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
 				498C0FD329BEF7E50079503C /* OCRView.swift */,
 			);
@@ -378,11 +384,13 @@
 				6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */,
 				6A6D3F2429EF94F700265124 /* PDFView.swift in Sources */,
 				6A60E56229CB1EF700F9C038 /* subSuperScriptText.swift in Sources */,
+				6A6D3F3329F0388300265124 /* GrapherView.swift in Sources */,
 				6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
 				6A6D3F2B29EFC9BB00265124 /* mathEquationFAQ.swift in Sources */,
 				6A6D3F1B29EECA4500265124 /* thirdButtonGroupModified.swift in Sources */,
-				49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */,
+				6A6D3F2F29F017AE00265124 /* PythagorasCalc.swift in Sources */,
+				6A6D3F3129F025E300265124 /* LinearQuadEquationCalc.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,
 				6A6D3F2029EF75B300265124 /* addNewNoteView.swift in Sources */,
 				6A6D3F1929EEBA4500265124 /* FavouritesView.swift in Sources */,

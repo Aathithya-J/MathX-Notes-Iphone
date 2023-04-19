@@ -43,25 +43,26 @@ struct CalculatorView: View {
                 }
                 
                 VStack {
-                    HStack {
-                        Button {
-                            dismiss.callAsFunction()
-                        } label: {
-                            HStack {
-                                Image(systemName: "chevron.left")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                Text("Tools")
-                                    .foregroundColor(.purple)
-                                    .offset(x: -3)
-                            }
-                            .accentColor(.purple)
-                        }
-                        
-                        Spacer()
-                    }
-                    .padding(.top)
-                    .padding(.leading, 5)
+//                    HStack {
+//                        Button {
+//                            dismiss.callAsFunction()
+//                        } label: {
+//                            HStack {
+//                                Image(systemName: "chevron.left")
+//                                    .font(.title)
+//                                    .fontWeight(.semibold)
+//                                Text("Tools")
+//                                    .font(.title2)
+//                                    .foregroundColor(.purple)
+//                                    .offset(x: -4)
+//                            }
+//                            .accentColor(.purple)
+//                        }
+//
+//                        Spacer()
+//                    }
+//                    .padding(.top)
+//                    .padding(.leading, 5)
                     
                     HStack {
                         Spacer()
@@ -71,7 +72,7 @@ struct CalculatorView: View {
                             .fontWeight(.bold)
                             .padding(.trailing)
                     }
-                    .padding(.top)
+//                    .padding(.top)
                     if !showingQRScreen {
                         screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
                             .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 5)
@@ -102,7 +103,7 @@ struct CalculatorView: View {
                 }
             }
             .statusBar(hidden: true)
-            .toolbar(.hidden, for: .navigationBar)
+//            .toolbar(.hididen, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
         } else {
             // advance scientific calculator - WIP - will be an update

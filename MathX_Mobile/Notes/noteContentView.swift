@@ -110,7 +110,7 @@ struct noteContentView: View {
                         HStack {
                             LaTeX(noteContent)
                                 .parsingMode(.onlyEquations)
-                                .imageRenderingMode(.original)
+                                .imageRenderingMode(.template)
                                 .errorMode(.rendered)
                                 .blockMode(.alwaysInline)
                             Spacer()

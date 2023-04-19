@@ -21,8 +21,10 @@ struct mathEquationFAQ: View {
                         LaTeX("Math Rendering allows you to input mathematical equations using LaTeX. Example: \\[x=\\frac{1}{2}\\]")
                             .parsingMode(.onlyEquations)
                             .blockMode(.alwaysInline)
+                            .padding(.vertical, 7.5)
                     } label: {
                         Text("What is Math Rendering?")
+                            .padding(.vertical, 7.5)
                     }
                     
                     DisclosureGroup {
@@ -34,8 +36,10 @@ struct mathEquationFAQ: View {
                                 LaTeX("\\[\\frac{1}{2}\\]")
                             }
                         }
+                        .padding(.vertical, 7.5)
                     } label: {
                         Text("How do you type LaTeX equations?")
+                            .padding(.vertical, 7.5)
                     }
                     
                     DisclosureGroup {
@@ -75,27 +79,31 @@ struct mathEquationFAQ: View {
                         }
                     } label: {
                         Text("What are some examples of LaTeX?")
+                            .padding(.vertical, 7.5)
                     }
                     
                     DisclosureGroup {
                         Text("Your texts will be rendered in plain text, and appear as normal characters. You can always choose to enable/disable Math Rendering later on.")
-                            .padding(.vertical, 5)
+                            .padding(.vertical, 7.5)
                     } label: {
                         Text("What if I don't want to use Math Rendering?")
+                            .padding(.vertical, 7.5)
                     }
                     
                     DisclosureGroup {
                         Text("To edit your notes when Math Rendering is enabled, press the \"Edit\" button in the top right hand corner of your note. Non-Math Rendering notes can be edited without needing to click on the \"Edit\" button.")
-                            .padding(.vertical, 5)
+                            .padding(.vertical, 7.5)
                     } label: {
                         Text("Why can't I edit my notes when Math Rendering is enabled?")
+                            .padding(.vertical, 7.5)
                     }
                     
                     DisclosureGroup {
-                        Text("To leave a line when Math Rendering is enabled, ensure that you put a space if your line ends with a LaTeX equation. Example: \"\(latexstart)x=\\sqrt[4]{b^2-4ac}\(latexend) \"")
-                            .padding(.vertical, 5)
+                        Text("To leave a line when Math Rendering is enabled, ensure that you put a space if your line ends with a LaTeX equation. Example: \"\(latexstart)x=\\frac{2}{5}\(latexend) \"")
+                            .padding(.vertical, 7.5)
                     } label: {
                         Text("Why wont my texts leave a line when Math Rendering is enabled?")
+                            .padding(.vertical, 7.5)
                     }
                 }
             }

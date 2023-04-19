@@ -12,7 +12,8 @@ import Foundation
 struct MathX_MobileApp: App {
     
     @State var isCalShowing = false
-    
+    @State var isCalListShowing = false
+
     @State var deepLinkSource = String()
     
     @AppStorage("tabSelection", store: .standard) var tabSelection = 1
@@ -24,7 +25,7 @@ struct MathX_MobileApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(tabSelection: $tabSelection, isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource)
+            ContentView(tabSelection: $tabSelection, isCalShowing: $isCalShowing, isCalListShowing: $isCalListShowing, deepLinkSource: $deepLinkSource)
                 .onOpenURL { url in
                     if !isShowingWelcomeScreen {
                         handleCalculatorDeepLink(url: url)
@@ -51,13 +52,17 @@ struct MathX_MobileApp: App {
         print(sourceConverted)
         self.deepLinkSource = source
         
-        tabSelection = 1
+        tabSelection = 2
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             isCalShowing = false
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                isCalShowing = true
+                isCalListShowing = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600)) {
+                    isCalShowing = true
+                }
             }
         }
     }

@@ -19,20 +19,28 @@ struct HCF_LCM_CalculatorView: View {
                 self.calculate()
             }
             
-            HStack {
+            VStack {
                 TextField("Enter the first number", text: $number1)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(.plain)
                     .keyboardType(.decimalPad)
                     .padding()
+                    .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
                 
                 TextField("Enter the second number", text: $number2)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .textFieldStyle(.plain)
                     .keyboardType(.decimalPad)
                     .padding()
+                    .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
             }
             
-            Text("Result: \(result)")
-                .padding()
+            if !number1.isEmpty && !number2.isEmpty {
+                Text("Result: \(result)")
+                    .padding()
+            }
             
             Spacer()
         }
@@ -58,9 +66,9 @@ struct HCF_LCM_CalculatorView: View {
         let lcm = Int(num1 * 100 * num2 * 100) / gcd
         
         if isHCFSelected {
-            self.result = String(Double(gcd) / 100)
+            self.result = String((Double(gcd) / 100).formatted())
         } else {
-            self.result = String(Double(lcm) / 100)
+            self.result = String((Double(lcm) / 100).formatted())
         }
     }
     

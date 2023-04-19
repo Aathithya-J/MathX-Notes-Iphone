@@ -4,6 +4,7 @@ struct ContentView: View {
     
     @Binding var tabSelection: Int
     @Binding var isCalShowing: Bool
+    @Binding var isCalListShowing: Bool
     @Binding var deepLinkSource: String
             
     @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
@@ -21,7 +22,7 @@ struct ContentView: View {
                         Label("Cheatsheets", systemImage: "list.bullet.clipboard")
                     }
                     .tag(1)
-                ToolsView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource)
+                ToolsView(isCalListShowing: $isCalListShowing, isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource)
                     .tabItem {
                         Label("Tools", systemImage: "wrench.and.screwdriver")
                     }

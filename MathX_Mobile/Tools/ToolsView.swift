@@ -1,21 +1,20 @@
 import SwiftUI
 
 struct ToolsView: View {
-    var EC = "Emergency Contact"
-    var HCFLCM = "HCF & LCM"
     var algebra = "Algebra"
-    var cal = "Calculator"
-    var Ins = "Instruments"
-    let tools = ["Emergency Contact", "Instruments", "HCF & LCM", "Algebra", "Calculator"]
+    var cal = "Calculators"
+    var measure = "Measurements"
+    var grapher = "Grapher (Desmos)"
+    let tools = ["Measurements", "Algebra", "Calculators", "Grapher (Desmos)"]
     @State var searchText = ""
     
     @State var defaultReturn = false
-    @State var isECShowing = false
     @State var isInsShowing = false
-    @State var isHCFLCMShowing = false
     @State var isAlgebraShowing = false
+    @State var isGrapherShowing = false
+    @Binding var isCalListShowing: Bool
     @Binding var isCalShowing: Bool
-    
+
     @Binding var deepLinkSource: String
 
     var body: some View {
@@ -52,20 +51,27 @@ struct ToolsView: View {
 
     func getDestination(tools: String) -> AnyView {
         switch tools {
-        case EC:
-            return AnyView(EmergencyView())
-        case HCFLCM:
-            return AnyView(HCF_LCM_CalculatorView())
+        case grapher:
+            return AnyView(GrapherView())
         case algebra:
             return AnyView(OCRView())
         case cal:
-            return AnyView(CalculatorView(deepLinkSource: $deepLinkSource))
-        case Ins:
+            return AnyView(
+                List {
+                    NavigationLink("Calculator", destination: CalculatorView(deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
+                    NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView())
+                    NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
+                    NavigationLink("Quadratic Equation Calculator", destination: LinearQuadEquationCalc())
+                }
+                .navigationTitle("Calculators")
+            )
+        case measure:
             return AnyView(
                 List {
                     NavigationLink("Protractor", destination: EmptyView())
                     NavigationLink("Ruler", destination: EmptyView())
                 }
+                    .navigationTitle("Measurements")
             )
         default:
             return AnyView(EmptyView())
@@ -74,13 +80,11 @@ struct ToolsView: View {
 
     func getCardColor(for tools: String) -> Color {
         switch tools {
-        case EC:
-            return Color.red
-        case HCFLCM:
-            return Color.blue
-        case algebra:
+        case grapher:
             return Color.green
-        case Ins:
+        case algebra:
+            return Color.blue
+        case measure:
             return Color.purple
         case cal:
             return Color.orange
@@ -91,16 +95,14 @@ struct ToolsView: View {
     
     func getIsActiveBool(tools: String) -> Binding<Bool> {
         switch tools {
-        case EC:
-            return $isECShowing
-        case HCFLCM:
-            return $isHCFLCMShowing
+        case grapher:
+            return $isGrapherShowing
         case algebra:
             return $isAlgebraShowing
-        case Ins:
+        case measure:
             return $isInsShowing
         case cal:
-            return $isCalShowing
+            return $isCalListShowing
         default:
             return $defaultReturn
         }
@@ -110,7 +112,7 @@ struct ToolsView: View {
         if searchText.isEmpty {
             return tools
         } else {
-            return tools.filter { $0.contains(searchText) }
+            return tools.filter { $0.lowercased().contains(searchText.lowercased()) }
         }
     }
 }
