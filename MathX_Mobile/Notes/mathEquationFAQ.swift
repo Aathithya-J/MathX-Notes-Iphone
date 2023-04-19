@@ -99,7 +99,7 @@ struct mathEquationFAQ: View {
                     }
                     
                     DisclosureGroup {
-                        Text("To leave a line when Math Rendering is enabled, ensure that you put a space if your line ends with a LaTeX equation. Example: \"\(latexstart)x=\\frac{2}{5}\(latexend) \"")
+                        Text("Leave a line when Math Rendering is enabled:\n\nIf your line ends with a LaTeX equation, add a space at the end of your line. Example: \"\(latexstart)x=\\frac{2}{5}\(latexend) \"\n\nIf your line starts with a LaTeX equation, add a space at the start of your line. Example: \" \(latexstart)x=\\frac{2}{5}\(latexend)\"")
                             .padding(.vertical, 7.5)
                     } label: {
                         Text("Why wont my texts leave a line when Math Rendering is enabled?")
