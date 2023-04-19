@@ -12,11 +12,11 @@ struct WelcomeView: View {
 
                 aboutPage(sfSymbol: "square.on.square.dashed", title: "New UI", description: "MathX has been completely redesigned by a team of developers from SST Inc!\n\nDevelopers: Aathithya Jegatheesan, Kavin Jayakumar, Sairam Suresh, and Tristan Chay (SST Batch 12)")
                 
-                aboutPage(sfSymbol: "list.clipboard", title: "Notes and Cheatsheets", description: "Notes and Cheatsheets allows you to refer to revision materials for your own reference.")
+                aboutPage(sfSymbol: "list.clipboard", title: "Notes and Cheatsheets", description: "Notes and Cheatsheets allows you to take down and refer to revision materials later on.")
 
-                aboutPage(sfSymbol: "wrench.and.screwdriver", title: "Useful Tools", description: "MathX's tools lets you calculate things like HCF and LCM right in the app!")
+                aboutPage(sfSymbol: "wrench.and.screwdriver", title: "Useful Tools", description: "MathX's tools lets you calculate things like HCF, LCM, and Quadratic Equations right in the app!")
 
-                aboutPage(sfSymbol: "plusminus.circle", title: "Scientific Calculator", description: "The built in scientific calculator allows you to calculate mathematical equations right on your phone!")
+                aboutPage(sfSymbol: "plusminus.circle", title: "Calculator", description: "The built in calculator allows you to calculate mathematical equations right on your phone!")
                 
                 finalPage() // last page with button to continue on to mathx
             }
@@ -37,10 +37,12 @@ struct welcomeTextPage: View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+//                    Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+                    Image(systemName: "x.squareroot")
                         .resizable()
+                        .scaledToFit()
                         .frame(width: 64)
-                        .frame(height: 64)
+//                        .frame(height: 64)
                 }
                 Text("Welcome to MathX!")
                     .foregroundColor(.white)
@@ -86,10 +88,12 @@ struct animatingWelcomeTextPage: View {
                 HStack {
                     VStack(alignment: .leading) {
                         /// App Icon
-                        Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+//                        Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+                        Image(systemName: "x.squareroot")
                             .resizable()
+                            .scaledToFit()
                             .frame(width: titleExpandAnimation ? 64 : 256)
-                            .frame(height: titleExpandAnimation ? 64 : 256)
+//                            .frame(height: titleExpandAnimation ? 64 : 256)
                     }
                     
                     if titleExpandAnimation { /// To be shown when text has expanded from "MathX" to "Welcome to MathX"
@@ -190,9 +194,12 @@ struct finalPage: View {
     var body: some View {
         VStack {
             
-            Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+//            Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
+            Image(systemName: "x.squareroot")
                 .resizable()
-                .frame(width: 128, height: 128)
+                .scaledToFit()
+                .frame(width: 128)
+//                .frame(height: 128)
             
             Text("Ready to use MathX? Press the button below to continue!")
                 .fontWeight(.black)
