@@ -41,6 +41,28 @@ struct NotesView: View {
                                     }
                                     .padding(.vertical, 5)
                                 }
+                                .contextMenu {
+                                    Menu {
+                                        Button(role: .destructive) {
+                                            withAnimation {
+                                                removeNote(note: note)
+                                            }
+                                        } label: {
+                                            Label("Confirm Delete", systemImage: "trash")
+                                        }
+                                    } label: {
+                                        Button(role: .destructive) {
+                                            
+                                        } label: {
+                                            Label("Delete", systemImage: "trash")
+                                        }
+                                    }
+                                } preview: {
+                                    NavigationStack {
+                                        noteContentView(note: note)
+                                            .accentColor(.purple)
+                                    }
+                                }
                             }
                             .onDelete { indexOffset in
                                 withAnimation {

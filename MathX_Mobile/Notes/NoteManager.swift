@@ -12,6 +12,7 @@ struct Note: Codable, Identifiable {
     var id = UUID()
     var title: String
     var content: String?
+    var latexRendering: Bool
     var dateLastModified: Date
 }
 

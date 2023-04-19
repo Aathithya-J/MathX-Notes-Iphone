@@ -34,6 +34,7 @@
 		6A6D3F2229EF75E200265124 /* noteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2129EF75E200265124 /* noteContentView.swift */; };
 		6A6D3F2429EF94F700265124 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2329EF94F700265124 /* PDFView.swift */; };
 		6A6D3F2629EF957E00265124 /* Electronic Textbook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */; };
+		6A6D3F2B29EFC9BB00265124 /* mathEquationFAQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2A29EFC9BB00265124 /* mathEquationFAQ.swift */; };
 		6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89A13629C996F90007D0C1 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		6A6D3F2129EF75E200265124 /* noteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteContentView.swift; sourceTree = "<group>"; };
 		6A6D3F2329EF94F700265124 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Electronic Textbook.pdf"; sourceTree = "<group>"; };
+		6A6D3F2A29EFC9BB00265124 /* mathEquationFAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mathEquationFAQ.swift; sourceTree = "<group>"; };
 		6A89A13629C996F90007D0C1 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -207,6 +209,7 @@
 				6A6D3F1D29EF748D00265124 /* NotesView.swift */,
 				6A6D3F1F29EF75B300265124 /* addNewNoteView.swift */,
 				6A6D3F2129EF75E200265124 /* noteContentView.swift */,
+				6A6D3F2A29EFC9BB00265124 /* mathEquationFAQ.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				6A60E56229CB1EF700F9C038 /* subSuperScriptText.swift in Sources */,
 				6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
+				6A6D3F2B29EFC9BB00265124 /* mathEquationFAQ.swift in Sources */,
 				6A6D3F1B29EECA4500265124 /* thirdButtonGroupModified.swift in Sources */,
 				49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,

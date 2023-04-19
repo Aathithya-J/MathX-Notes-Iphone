@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+import LaTeXSwiftUI
 
 struct noteContentView: View {
     
     @State var note: Note
     @State var noteTitle = String()
     @State var noteContent = String()
+    @State var noteLatexRendering = Bool()
     
     @State var showingSubjectSeletionView = false
+    
+    @State var showingEquationsFAQ = false
     
     @FocusState var titleFocused
     
@@ -27,7 +31,7 @@ struct noteContentView: View {
             if editMode?.wrappedValue.isEditing == true {
                 VStack {
                     HStack {
-                        TextField("\(noteTitle)", text: $noteTitle)
+                        TextField("\(note.title)", text: $noteTitle)
                             .font(.largeTitle)
                             .fontWeight(.heavy)
                             .focused($titleFocused)
@@ -54,6 +58,31 @@ struct noteContentView: View {
                     }
                     
                     HStack {
+                        Image(systemName: "sum")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 3)
+                        
+                        Text("**Math Rendering**")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .foregroundColor(.gray)
+                        
+                        Button {
+                            showingEquationsFAQ.toggle()
+                        } label: {
+                            Image(systemName: "questionmark.circle.fill")
+                                .foregroundColor(.blue)
+                                .font(.title3)
+                        }
+                        .buttonStyle(.plain)
+                        .sheet(isPresented: $showingEquationsFAQ) {
+                            mathEquationFAQ()
+                        }
+                        
+                        Toggle("", isOn: $noteLatexRendering)
+                    }
+                    
+                    HStack {
                         Image(systemName: "text.append")
                             .foregroundColor(.gray)
                         Text("**Last Modified**")
@@ -72,10 +101,27 @@ struct noteContentView: View {
                         .padding(.vertical, 7.5)
                 }
                 .padding(.horizontal)
+                
+                TextEditor(text: $noteContent)
+                    .padding(.vertical)
+            } else {
+                if noteLatexRendering {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        HStack {
+                            LaTeX(noteContent)
+                                .parsingMode(.onlyEquations)
+                                .imageRenderingMode(.original)
+                                .errorMode(.rendered)
+                                .blockMode(.alwaysInline)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                } else {
+                    TextEditor(text: $noteContent)
+                        .padding(.vertical)
+                }
             }
-            
-            TextEditor(text: $noteContent)
-                .padding(.vertical)
             
         }
         .toolbar {
@@ -83,11 +129,19 @@ struct noteContentView: View {
                 EditButton()
             }
         }
+        .onChange(of: editMode?.wrappedValue.isEditing) { value in
+            if editMode?.wrappedValue.isEditing == false {
+                if noteTitle.isEmpty {
+                    noteTitle = note.title
+                }
+            }
+        }
         .onDisappear {
             updateNote()
         }
         .onAppear {
             noteTitle = note.title
+            noteLatexRendering = note.latexRendering
             
             guard let notesContent = note.content else { return }
             noteContent = notesContent
@@ -111,10 +165,10 @@ struct noteContentView: View {
         
         if noteManager.notes.count > 0 {
             if noteManager.notes[i].id == note.id {
-                if noteManager.notes[i].title == noteTitle && noteManager.notes[i].content == noteContent {
+                if noteManager.notes[i].title == noteTitle && noteManager.notes[i].content == noteContent && note.latexRendering == noteLatexRendering {
                     
                 } else {
-                    noteManager.notes[i] = Note(title: noteTitle, content: noteContent, dateLastModified: Date())
+                    noteManager.notes[i] = Note(title: noteTitle.isEmpty ? note.title : noteTitle, content: noteContent, latexRendering: noteLatexRendering, dateLastModified: Date())
                     
                     let currentNotesList = noteManager.notes
                     

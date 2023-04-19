@@ -10,6 +10,9 @@ import SwiftUI
 struct addNewNoteView: View {
     
     @State var noteTitle = String()
+    @State var noteLatexRendering = false
+    
+    @State var showingEquationsFAQ = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -25,6 +28,32 @@ struct addNewNoteView: View {
                         .font(.largeTitle)
                         .fontWeight(.heavy)
                     
+                    HStack {
+                        Image(systemName: "sum")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal, 3)
+                        
+                        Text("Math Rendering")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .foregroundColor(.gray)
+                            .fontWeight(.bold)
+                        
+                        Button {
+                            showingEquationsFAQ.toggle()
+                        } label: {
+                            Image(systemName: "questionmark.circle.fill")
+                                .foregroundColor(.blue)
+                                .font(.headline)
+                        }
+                        .buttonStyle(.plain)
+                        .sheet(isPresented: $showingEquationsFAQ) {
+                            mathEquationFAQ()
+                        }
+                        
+                        Toggle("", isOn: $noteLatexRendering)
+                    }
+                    
                     Divider()
                         .padding(.vertical)
                     
@@ -35,7 +64,7 @@ struct addNewNoteView: View {
                             if !noteTitle.isEmpty {
                                 var currentNotesList = noteManager.notes
                                 
-                                currentNotesList.insert(Note(title: noteTitle, dateLastModified: Date()), at: 0)
+                                currentNotesList.insert(Note(title: noteTitle, latexRendering: noteLatexRendering, dateLastModified: Date()), at: 0)
                                 
                                 let sortedNewNotesList = currentNotesList.sorted(by: { $0.dateLastModified.compare($1.dateLastModified) == .orderedDescending })
                                 
