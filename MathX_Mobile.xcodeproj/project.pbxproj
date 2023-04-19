@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4942F0AD29CAA41B00F85389 /* Cheatsheets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */; };
 		4942F0AF29CAA49E00F85389 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F0AE29CAA49E00F85389 /* CalculatorView.swift */; };
 		495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495674C029BD5EEB00EB37DA /* HCFLCM.swift */; };
 		498C0FD429BEF7E50079503C /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498C0FD329BEF7E50079503C /* OCRView.swift */; };
@@ -25,11 +24,16 @@
 		6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55F29CB1B5600F9C038 /* thirdButtonGroup.swift */; };
 		6A60E56229CB1EF700F9C038 /* subSuperScriptText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E56129CB1EF700F9C038 /* subSuperScriptText.swift */; };
 		6A60E56829CB2E6B00F9C038 /* MathExpression in Frameworks */ = {isa = PBXBuildFile; productRef = 6A60E56729CB2E6B00F9C038 /* MathExpression */; };
-		6A6D3F1329EEA87200265124 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1229EEA87200265124 /* NotesView.swift */; };
-		6A6D3F1529EEAE2A00265124 /* notesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1429EEAE2A00265124 /* notesData.swift */; };
+		6A6D3F1329EEA87200265124 /* CheatsheetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1229EEA87200265124 /* CheatsheetsView.swift */; };
+		6A6D3F1529EEAE2A00265124 /* NoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1429EEAE2A00265124 /* NoteManager.swift */; };
 		6A6D3F1729EEB5BB00265124 /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1629EEB5BA00265124 /* FavouritesManager.swift */; };
 		6A6D3F1929EEBA4500265124 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1829EEBA4500265124 /* FavouritesView.swift */; };
 		6A6D3F1B29EECA4500265124 /* thirdButtonGroupModified.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1A29EECA4500265124 /* thirdButtonGroupModified.swift */; };
+		6A6D3F1E29EF748D00265124 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1D29EF748D00265124 /* NotesView.swift */; };
+		6A6D3F2029EF75B300265124 /* addNewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F1F29EF75B300265124 /* addNewNoteView.swift */; };
+		6A6D3F2229EF75E200265124 /* noteContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2129EF75E200265124 /* noteContentView.swift */; };
+		6A6D3F2429EF94F700265124 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2329EF94F700265124 /* PDFView.swift */; };
+		6A6D3F2629EF957E00265124 /* Electronic Textbook.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */; };
 		6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A89A13629C996F90007D0C1 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cheatsheets.swift; sourceTree = "<group>"; };
 		4942F0AE29CAA49E00F85389 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		495674C029BD5EEB00EB37DA /* HCFLCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFLCM.swift; sourceTree = "<group>"; };
 		498C0FD329BEF7E50079503C /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
@@ -70,11 +73,16 @@
 		6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondButtonGroup.swift; sourceTree = "<group>"; };
 		6A60E55F29CB1B5600F9C038 /* thirdButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thirdButtonGroup.swift; sourceTree = "<group>"; };
 		6A60E56129CB1EF700F9C038 /* subSuperScriptText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = subSuperScriptText.swift; sourceTree = "<group>"; };
-		6A6D3F1229EEA87200265124 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
-		6A6D3F1429EEAE2A00265124 /* notesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notesData.swift; sourceTree = "<group>"; };
+		6A6D3F1229EEA87200265124 /* CheatsheetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheatsheetsView.swift; sourceTree = "<group>"; };
+		6A6D3F1429EEAE2A00265124 /* NoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManager.swift; sourceTree = "<group>"; };
 		6A6D3F1629EEB5BA00265124 /* FavouritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesManager.swift; sourceTree = "<group>"; };
 		6A6D3F1829EEBA4500265124 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		6A6D3F1A29EECA4500265124 /* thirdButtonGroupModified.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thirdButtonGroupModified.swift; sourceTree = "<group>"; };
+		6A6D3F1D29EF748D00265124 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		6A6D3F1F29EF75B300265124 /* addNewNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewNoteView.swift; sourceTree = "<group>"; };
+		6A6D3F2129EF75E200265124 /* noteContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteContentView.swift; sourceTree = "<group>"; };
+		6A6D3F2329EF94F700265124 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
+		6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Electronic Textbook.pdf"; sourceTree = "<group>"; };
 		6A89A13629C996F90007D0C1 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -142,8 +150,8 @@
 				6A89A13629C996F90007D0C1 /* WelcomeView.swift */,
 				49E6CA9A29BC845400DD2E02 /* ContentView.swift */,
 				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
-				4942F0AC29CAA41B00F85389 /* Cheatsheets.swift */,
 				6A60E55B29CAEFE000F9C038 /* Scientific Calculator */,
+				6A6D3F1C29EF741600265124 /* Cheatsheets */,
 				6A6D3F1129EEA86200265124 /* Notes */,
 				49DD1A4329CB41E10040BA0D /* Tools */,
 				49E6CA9E29BC845700DD2E02 /* Preview Content */,
@@ -155,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */,
+				6A6D3F2529EF957E00265124 /* Electronic Textbook.pdf */,
 				49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */,
 				49E6CA9C29BC845700DD2E02 /* Assets.xcassets */,
 			);
@@ -194,12 +203,23 @@
 		6A6D3F1129EEA86200265124 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				6A6D3F1429EEAE2A00265124 /* notesData.swift */,
-				6A6D3F1229EEA87200265124 /* NotesView.swift */,
-				6A6D3F1829EEBA4500265124 /* FavouritesView.swift */,
-				6A6D3F1629EEB5BA00265124 /* FavouritesManager.swift */,
+				6A6D3F1429EEAE2A00265124 /* NoteManager.swift */,
+				6A6D3F1D29EF748D00265124 /* NotesView.swift */,
+				6A6D3F1F29EF75B300265124 /* addNewNoteView.swift */,
+				6A6D3F2129EF75E200265124 /* noteContentView.swift */,
 			);
 			path = Notes;
+			sourceTree = "<group>";
+		};
+		6A6D3F1C29EF741600265124 /* Cheatsheets */ = {
+			isa = PBXGroup;
+			children = (
+				6A6D3F1629EEB5BA00265124 /* FavouritesManager.swift */,
+				6A6D3F1229EEA87200265124 /* CheatsheetsView.swift */,
+				6A6D3F1829EEBA4500265124 /* FavouritesView.swift */,
+				6A6D3F2329EF94F700265124 /* PDFView.swift */,
+			);
+			path = Cheatsheets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6D3F2629EF957E00265124 /* Electronic Textbook.pdf in Resources */,
 				49E6CAA029BC845700DD2E02 /* Preview Assets.xcassets in Resources */,
 				49E6CA9D29BC845700DD2E02 /* Assets.xcassets in Resources */,
 			);
@@ -340,25 +361,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6D3F2229EF75E200265124 /* noteContentView.swift in Sources */,
 				49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */,
-				6A6D3F1529EEAE2A00265124 /* notesData.swift in Sources */,
+				6A6D3F1529EEAE2A00265124 /* NoteManager.swift in Sources */,
+				6A6D3F1E29EF748D00265124 /* NotesView.swift in Sources */,
 				49E6CA9B29BC845400DD2E02 /* ContentView.swift in Sources */,
 				49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */,
 				6A60E55E29CB17B700F9C038 /* secondButtonGroup.swift in Sources */,
 				4942F0AF29CAA49E00F85389 /* CalculatorView.swift in Sources */,
 				6A54B94A29CF42510083909A /* extensions.swift in Sources */,
 				6A89A13729C996F90007D0C1 /* WelcomeView.swift in Sources */,
-				4942F0AD29CAA41B00F85389 /* Cheatsheets.swift in Sources */,
 				6A6D3F1729EEB5BB00265124 /* FavouritesManager.swift in Sources */,
 				6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */,
+				6A6D3F2429EF94F700265124 /* PDFView.swift in Sources */,
 				6A60E56229CB1EF700F9C038 /* subSuperScriptText.swift in Sources */,
 				6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
 				6A6D3F1B29EECA4500265124 /* thirdButtonGroupModified.swift in Sources */,
 				49E6CAC729BC84DA00DD2E02 /* EmergencyView.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,
+				6A6D3F2029EF75B300265124 /* addNewNoteView.swift in Sources */,
 				6A6D3F1929EEBA4500265124 /* FavouritesView.swift in Sources */,
-				6A6D3F1329EEA87200265124 /* NotesView.swift in Sources */,
+				6A6D3F1329EEA87200265124 /* CheatsheetsView.swift in Sources */,
 				49E6CA9929BC845400DD2E02 /* MathX_MobileApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,8 +547,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -554,8 +578,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

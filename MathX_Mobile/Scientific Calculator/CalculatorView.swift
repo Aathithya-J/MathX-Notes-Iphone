@@ -27,7 +27,8 @@ struct CalculatorView: View {
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
 
     @Environment(\.colorScheme) var colorScheme
-    
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         
         if true {
@@ -42,15 +43,41 @@ struct CalculatorView: View {
                 }
                 
                 VStack {
+                    HStack {
+                        Button {
+                            dismiss.callAsFunction()
+                        } label: {
+                            HStack {
+                                Image(systemName: "chevron.left")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                Text("Tools")
+                                    .foregroundColor(.purple)
+                                    .offset(x: -3)
+                            }
+                            .accentColor(.purple)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.top)
+                    .padding(.leading, 5)
                     
+                    HStack {
+                        Spacer()
+                        Text("MathX-97SG XS")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .padding(.trailing)
+                    }
+                    .padding(.top)
                     if !showingQRScreen {
                         screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
                             .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 5)
-                            .padding(.top, 30)
                     } else {
                         qrScreenView(equationText: $equationText, resultsText: $resultsText, showingQRScreen: $showingQRScreen, qrCodeImage: $qrCodeImage)
                             .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 5)
-                            .padding(.top, 30)
                     }
                     
                     Spacer()
@@ -74,8 +101,9 @@ struct CalculatorView: View {
                     receivedDeepLinkSource()
                 }
             }
+            .statusBar(hidden: true)
+            .toolbar(.hidden, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
-            .navigationBarTitleDisplayMode(.inline)
         } else {
             // advance scientific calculator - WIP - will be an update
             ZStack(alignment: .top) {

@@ -29,12 +29,12 @@ struct ToolsView: View {
                                     Text(tools)
                                         .font(.title2)
                                         .fontWeight(.bold)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(.primary)
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                                         .padding()
-                                        .background(getCardColor(for: tools))
-                                        .cornerRadius(10)
-                                        .shadow(radius: 5)
+                                        .background(getCardColor(for: tools).opacity(0.7))
+                                        .cornerRadius(16)
+//                                        .shadow(radius: 5)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
@@ -75,15 +75,15 @@ struct ToolsView: View {
     func getCardColor(for tools: String) -> Color {
         switch tools {
         case EC:
-            return Color(.red)
+            return Color.red
         case HCFLCM:
-            return Color(.blue)
+            return Color.blue
         case algebra:
-            return Color(.green)
+            return Color.green
         case Ins:
-            return Color(.purple)
+            return Color.purple
         case cal:
-            return Color(.orange)
+            return Color.orange
         default:
             return Color("CardBackground")
         }

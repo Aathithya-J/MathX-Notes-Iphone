@@ -11,16 +11,16 @@ import Foundation
 @main
 struct MathX_MobileApp: App {
     
-    @State var tabSelection = 1
     @State var isCalShowing = false
     
     @State var deepLinkSource = String()
-        
+    
+    @AppStorage("tabSelection", store: .standard) var tabSelection = 1
     @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
     
-    init() {
-        UITabBar.appearance().backgroundColor = UIColor.systemBackground
-    }
+//    init() {
+//        UITabBar.appearance().backgroundColor = UIColor.systemBackground
+//    }
 
     var body: some Scene {
         WindowGroup {

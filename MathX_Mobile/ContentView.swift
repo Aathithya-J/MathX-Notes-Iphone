@@ -11,23 +11,22 @@ struct ContentView: View {
     var body: some View {
         if !isShowingWelcomeScreen {
             TabView(selection: $tabSelection) {
-                FavouritesView()
-                    .tabItem {
-                        Label("Favourites", systemImage: "star.fill")
-                    }
-                    .tag(0)
                 NotesView()
                     .tabItem {
-                        Label("Notes", systemImage: "list.bullet.clipboard")
+                        Label("Notes", systemImage: "doc.text")
                     }
                     .tag(0)
+                CheatsheetsView()
+                    .tabItem {
+                        Label("Cheatsheets", systemImage: "list.bullet.clipboard")
+                    }
+                    .tag(1)
                 ToolsView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource)
                     .tabItem {
                         Label("Tools", systemImage: "wrench.and.screwdriver")
                     }
-                    .tag(1)
+                    .tag(2)
             }
-            
             .accentColor(.purple)
         } else {
             WelcomeView()

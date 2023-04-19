@@ -1,97 +1,111 @@
 //
-//  NotesView.swift
-//  MathX_Mobile
+//  NotesGridView.swift
 //
-//  Created by Tristan on 18/04/2023.
+//
+//  Created by Tristan on 06/04/2023.
 //
 
 import SwiftUI
 
-
+enum Focusable: Hashable {
+    case none
+    case identifier(id: UUID)
+}
 
 struct NotesView: View {
     
     @State var searchText = String()
     
-    @ObservedObject var favouritesManager: FavouritesManager = .shared
+    @State var showingAddNewNoteView = false
+    @ObservedObject var noteManager: NoteManager = .shared
+    
+    @FocusState var focused: Focusable?
     
     var body: some View {
         NavigationStack {
             VStack {
-                List {
-                    ForEach(1...4, id: \.self) { level in
-                        if !searchResults(for: level).isEmpty {
-                            Section(header: Text("Secondary \(level)")) {
-                                ForEach(searchResults(for: level), id: \.self) { topic in
-                                    HStack {
-                                        Text(topic)
+                if noteManager.notes.count > 0 {
+                    GeometryReader { geometry in
+                        List {
+                            ForEach(searchResults, id: \.id) { note in
+                                NavigationLink(destination: noteContentView(note: note)) {
+                                    VStack(alignment: .leading) {
+                                        Text(note.title)
+                                            .font(.title3)
+                                            .fontWeight(.bold)
                                         
-                                        Spacer()
-                                        
-                                        Button {
-                                            if favouritesManager.favourites.description.contains(topic) {
-                                                removeFavourite(topicName: topic)
-                                            } else {
-                                                favouritesManager.favourites.insert(Favourite(topicName: topic), at: 0)
-                                            }
-                                        } label: {
-                                            if favouritesManager.favourites.description.contains(topic) {
-                                                Image(systemName: "star.fill")
-                                            } else {
-                                                Image(systemName: "star")
-                                            }
-                                        }
+                                        Text(note.dateLastModified, format: .dateTime.day().month().year().hour().minute().second())
+                                            .font(.caption)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.gray)
                                     }
+                                    .padding(.vertical, 5)
+                                }
+                            }
+                            .onDelete { indexOffset in
+                                withAnimation {
+                                    noteManager.notes.remove(atOffsets: indexOffset)
                                 }
                             }
                         }
                     }
+                    .searchable(text: $searchText)
+                } else {
+                    VStack {
+                        Image(systemName: "square.and.pencil")
+                            .resizable()
+                            .frame(width: UIScreen.main.bounds.width / 5, height: UIScreen.main.bounds.width / 5)
+                        
+                        Text("You have no Notes. Create one by tapping the + icon in the top right hand corner!")
+                            .padding(.top)
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                    }
+                    .padding(.horizontal)
                 }
-                .searchable(text: $searchText)
             }
             .navigationTitle("Notes")
-        }
-    }
-    
-    func searchResults(for level: Int) -> [String] {
-        if searchText.isEmpty {
-            return getLevelNotes(for: level)
-        } else {
-            return getLevelNotes(for: level).filter { $0.lowercased().contains(searchText.lowercased()) }
-        }
-    }
-    
-    func getLevelNotes(for level: Int) -> [String] {
-        switch level {
-        case 1:
-            return sec1Notes
-        case 2:
-            return sec2Notes
-        case 3:
-            return sec3Notes
-        case 4:
-            return sec4Notes
-        default:
-            return [String]()
-        }
-    }
-    
-    func removeFavourite(topicName topic: String) {
-        if favouritesManager.favourites.description.contains(topic) {
-            var index = 0
-            var i = Int()
-            
-            favouritesManager.favourites.forEach { favouritesIteration in
-                if favouritesIteration.topicName == topic {
-                    i = index
-                } else {
-                    index += 1
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                        .disabled(noteManager.notes.count < 1)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddNewNoteView.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .sheet(isPresented: $showingAddNewNoteView) {
+                        addNewNoteView()
+                    }
                 }
             }
-            
-            favouritesManager.favourites.remove(at: i)
+        }
+    }
+    
+    func removeNote(note: Note) {
+        var index = 0
+        var i = Int()
+        
+        noteManager.notes.forEach { noteIteration in
+            if noteIteration.id == note.id {
+                i = index
+            } else {
+                index += 1
+            }
+        }
+        
+        noteManager.notes.remove(at: i)
+    }
+    
+    var searchResults: [Note] {
+        if searchText.isEmpty {
+            return noteManager.notes
         } else {
-            favouritesManager.favourites.insert(Favourite(topicName: topic), at: 0)
+            return noteManager.notes.filter { $0.title.lowercased().contains(searchText.lowercased()) }
         }
     }
 }
