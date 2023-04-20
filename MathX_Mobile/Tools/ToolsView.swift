@@ -15,6 +15,7 @@ struct ToolsView: View {
     @State var isAlgebraShowing = false
     @State var isGrapherShowing = false
     @State var isRandShowing = false
+    @State var isUnitShowing = false
     @Binding var isCalListShowing: Bool
     @Binding var isCalShowing: Bool
 
@@ -53,6 +54,8 @@ struct ToolsView: View {
 
     func getDestination(tools: String) -> AnyView {
         switch tools {
+        case unit:
+            return AnyView(UnitConverterView())
         case rand:
             return AnyView(RandView())
         case grapher:
@@ -68,7 +71,6 @@ struct ToolsView: View {
                     NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
                     NavigationLink("Set Calculator", destination: SetsCalc())
                     NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
-                    NavigationLink("Unit Converter", destination: UnitConverterView())
                 }
                 .navigationTitle("Calculators")
             )
@@ -98,7 +100,7 @@ struct ToolsView: View {
         case cal:
             return Color.orange
         case unit:
-            return Color.orange
+            return Color.blue
         default:
             return Color("CardBackground")
         }
@@ -114,6 +116,8 @@ struct ToolsView: View {
             return $isAlgebraShowing
         case measure:
             return $isInsShowing
+        case unit:
+            return $isUnitShowing
         case cal:
             return $isCalListShowing
         default:

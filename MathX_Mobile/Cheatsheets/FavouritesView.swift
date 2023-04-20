@@ -26,7 +26,7 @@ struct FavouritesView: View {
                 } else {
                     List {
                         ForEach(favouritesManager.favourites, id: \.id) { favourite in
-                            NavigationLink(destination: PDFViewer(topicName: favourite.topicName, pdfName: "Electronic Textbook")) { // use a func with switch and case to return pdf name based on topic name
+                            NavigationLink(destination: PDFViewer(topicName: favourite.topicName, pdfName: favourite.topicName)) {
                                 Text(favourite.topicName)
                                     .padding(.vertical, 5)
                             }

@@ -41,7 +41,7 @@ struct welcomeTextPage: View {
                     Image(systemName: "x.squareroot")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 64)
+                        .frame(width: 32)
 //                        .frame(height: 64)
                 }
                 Text("Welcome to MathX!")
@@ -49,6 +49,7 @@ struct welcomeTextPage: View {
                     .fontWeight(.black)
                     .font(.title)
             }
+            .padding(.top)
             Spacer()
             
             Image(systemName: "hand.draw")
@@ -92,7 +93,7 @@ struct animatingWelcomeTextPage: View {
                         Image(systemName: "x.squareroot")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: titleExpandAnimation ? 64 : 256)
+                            .frame(width: titleExpandAnimation ? 32 : 64)
 //                            .frame(height: titleExpandAnimation ? 64 : 256)
                     }
                     
@@ -116,13 +117,15 @@ struct animatingWelcomeTextPage: View {
                             }
                     }
                 }
+                .padding(.top)
                 
                 if !titleExpandAnimation { /// Starting "MathX" text
                     Text("MathX")
+                        .padding(.top, 5)
                         .minimumScaleFactor(0.7)
                         .foregroundColor(.white)
                         .fontWeight(.black)
-                        .font(.title)
+                        .font(.largeTitle)
                         .matchedGeometryEffect(id: "welcomeText", in: animation)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { // executes code after a second
@@ -198,7 +201,7 @@ struct finalPage: View {
             Image(systemName: "x.squareroot")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 128)
+                .frame(width: 64)
 //                .frame(height: 128)
             
             Text("Ready to use MathX? Press the button below to continue!")

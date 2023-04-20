@@ -17,13 +17,19 @@ struct RandView: View {
     
     @State var dataSummarySelection = 0
     
+    @FocusState var textfieldFocused: Bool
+    
     var body: some View {
         VStack {
             VStack {
                 Spacer()
                 Text("\(generatedNumber)")
                     .font(.system(size: 64))
+                    .fontWeight(.bold)
+                
                 TextField("Max Number (Inclusive)", text: $ceilingNumber)
+                    .focused($textfieldFocused)
+                    .keyboardType(.numberPad)
                     .padding()
                     .background(.ultraThickMaterial)
                     .cornerRadius(16)
@@ -32,13 +38,15 @@ struct RandView: View {
             }
             .padding(.horizontal)
             .onTapGesture {
+                textfieldFocused = false
                 generateNumber()
             }
-            .frame(height: (UIScreen.main.bounds.height - 120) / 2)
+            .frame(height: (UIScreen.main.bounds.height - 120) * 3/5)
             
             Spacer()
             
             Divider()
+                .padding(.bottom, 7.5)
             
             VStack {
                 Picker("", selection: $dataSummarySelection) {
@@ -57,6 +65,7 @@ struct RandView: View {
                             .font(.subheadline)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                         Spacer()
                     } else {
                         List {
@@ -72,6 +81,7 @@ struct RandView: View {
                             .font(.subheadline)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
+                            .padding(.horizontal)
                         Spacer()
                     } else {
                         List {
@@ -86,7 +96,7 @@ struct RandView: View {
                     }
                 }
             }
-            .frame(height: (UIScreen.main.bounds.height - 120) / 2)
+            .frame(height: (UIScreen.main.bounds.height - 120) * 2/5)
         }
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle("Randomise")
