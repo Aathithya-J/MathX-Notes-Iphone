@@ -19,29 +19,54 @@ struct CalculationHistoryView: View {
         NavigationStack {
             VStack {
                 List {
-                    ForEach(calculationManager.calculations, id: \.id) { calculation in
-                        NavigationLink(destination: shareCalculationSubview(calculation: calculation)) {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(calculation.equationText)
-                                        .font(.title2)
-                                        .lineLimit(1)
-                                    SubSuperScriptText(inputString: calculation.resultsText, bodyFont: .headline, subScriptFont: .caption, baseLine: 6.0)
-                                        .font(.headline)
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
+                    Section(header:
+                                HStack {
+                        Label("History", systemImage: "clock.arrow.2.circlepath")
+                        
+                        Spacer()
+                        
+                       
+                            Menu {
+                                Button(role: .destructive) {
+                                    calculationManager.calculations = []
+                                } label: {
+                                    Label("Confirm Delete", systemImage: "trash")
+                                        .foregroundColor(.red)
                                 }
+                            } label: {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
                             }
-                            .fontWeight(.bold)
-                            .padding(.vertical, 7.5)
-                        }
+
+                        .textCase(nil)
                     }
-                    .onDelete { indexOffset in
-                        calculationManager.calculations.remove(atOffsets: indexOffset)
+                    
+                    ) {
+                        ForEach(calculationManager.calculations, id: \.id) { calculation in
+                            NavigationLink(destination: shareCalculationSubview(calculation: calculation)) {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(calculation.equationText)
+                                            .font(.title2)
+                                            .lineLimit(1)
+                                        SubSuperScriptText(inputString: calculation.resultsText, bodyFont: .headline, subScriptFont: .caption, baseLine: 6.0)
+                                            .font(.headline)
+                                            .foregroundColor(.gray)
+                                            .lineLimit(1)
+                                    }
+                                }
+                                .fontWeight(.bold)
+                                .padding(.vertical, 7.5)
+                            }
+                        }
+                        .onDelete { indexOffset in
+                            calculationManager.calculations.remove(atOffsets: indexOffset)
+                        }
                     }
                 }
             }
             .navigationTitle("History")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     EditButton()
