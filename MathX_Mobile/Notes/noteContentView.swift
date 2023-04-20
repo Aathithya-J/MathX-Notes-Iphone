@@ -30,80 +30,97 @@ struct noteContentView: View {
         VStack {
             if editMode?.wrappedValue.isEditing == true {
                 VStack {
-                    HStack {
-                        TextField("\(note.title)", text: $noteTitle)
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
-                            .focused($titleFocused)
-                            .disabled(editMode?.wrappedValue.isEditing == false)
-                        
-                        Spacer()
-                        
-                        Menu {
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    removeNote(note: note)
+                    VStack {
+                        HStack {
+                            TextField("\(note.title)", text: $noteTitle)
+                                .font(.largeTitle)
+                                .fontWeight(.heavy)
+                                .focused($titleFocused)
+                                .disabled(editMode?.wrappedValue.isEditing == false)
+                            
+                            Spacer()
+                            
+                            Menu {
+                                Button(role: .destructive) {
+                                    withAnimation {
+                                        removeNote(note: note)
+                                    }
+                                } label: {
+                                    Label("Confirm Delete", systemImage: "trash")
                                 }
                             } label: {
-                                Label("Confirm Delete", systemImage: "trash")
+                                Button(role: .destructive) {
+                                    
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .font(.title2)
+                                }
                             }
-                        } label: {
-                            Button(role: .destructive) {
-                                
+                        }
+                        
+                        HStack {
+                            Image(systemName: "sum")
+                                .foregroundColor(.gray)
+                                .padding(.horizontal, 3)
+                            
+                            Text("**Math Rendering**")
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                                .foregroundColor(.gray)
+                            
+                            Button {
+                                showingEquationsFAQ.toggle()
                             } label: {
-                                Image(systemName: "trash")
-                                    .font(.title2)
+                                Image(systemName: "questionmark.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .font(.title3)
+                            }
+                            .buttonStyle(.plain)
+                            .sheet(isPresented: $showingEquationsFAQ) {
+                                mathEquationFAQ()
+                            }
+                            
+                            Toggle("", isOn: $noteLatexRendering)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "text.append")
+                                .foregroundColor(.gray)
+                            Text("**Last Modified**")
+                                .foregroundColor(.gray)
+                            
+                            Spacer()
+                            
+                            Text(note.dateLastModified, format: .dateTime.day().month().year().hour().minute().second())
+                                .font(.headline)
+                                .foregroundColor(.gray)
+                                .multilineTextAlignment(.trailing)
+                        }
+                        .padding(.vertical, 7.5)
+                        
+                        Divider()
+                            .padding(.vertical, 7.5)
+                    }
+                    .padding(.horizontal)
+                    
+                    TextEditor(text: $noteContent)
+                        .padding(.vertical)
+                }
+                .toolbar {
+                    ToolbarItem(placement: .keyboard) {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(1...7, id: \.self) { i in
+                                    Button {
+                                        
+                                    } label: {
+                                        Text("Button \(i)")
+                                    }
+                                }
                             }
                         }
                     }
-                    
-                    HStack {
-                        Image(systemName: "sum")
-                            .foregroundColor(.gray)
-                            .padding(.horizontal, 3)
-                        
-                        Text("**Math Rendering**")
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.1)
-                            .foregroundColor(.gray)
-                        
-                        Button {
-                            showingEquationsFAQ.toggle()
-                        } label: {
-                            Image(systemName: "questionmark.circle.fill")
-                                .foregroundColor(.blue)
-                                .font(.title3)
-                        }
-                        .buttonStyle(.plain)
-                        .sheet(isPresented: $showingEquationsFAQ) {
-                            mathEquationFAQ()
-                        }
-                        
-                        Toggle("", isOn: $noteLatexRendering)
-                    }
-                    
-                    HStack {
-                        Image(systemName: "text.append")
-                            .foregroundColor(.gray)
-                        Text("**Last Modified**")
-                            .foregroundColor(.gray)
-                        
-                        Spacer()
-                        
-                        Text(note.dateLastModified, format: .dateTime.day().month().year().hour().minute().second())
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.trailing)
-                    }
-                    .padding(.vertical, 7.5)
-                    
-                    Divider()
-                        .padding(.vertical, 7.5)
                 }
-                .padding(.horizontal)
-                
-                TextEditor(text: $noteContent)
-                    .padding(.vertical)
             } else {
                 if noteLatexRendering {
                     ScrollView(.vertical, showsIndicators: false) {
