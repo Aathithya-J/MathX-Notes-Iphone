@@ -63,7 +63,7 @@ struct mathEquationFAQ: View {
                             .padding(.vertical, 7.5)
 
                             HStack {
-                                Text("Square root -\n\(latexstart)x=\\sqrt[4]{b^2-4ac}\(latexend)")
+                                Text("Square root -\n\(latexstart)x=\\pm\\sqrt[4]{b^2-4ac}\(latexend)")
                                 Spacer()
                                 LaTeX("\\sqrt[4]{b^2-4ac}")
                                     .parsingMode(.all)

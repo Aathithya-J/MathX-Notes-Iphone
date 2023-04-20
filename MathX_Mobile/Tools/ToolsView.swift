@@ -3,17 +3,17 @@ import SwiftUI
 struct ToolsView: View {
     var algebra = "Algebra"
     var cal = "Calculators"
-    var sets = "Set Notations"
     var measure = "Measurements"
     var grapher = "Grapher (Desmos)"
-    let tools = ["Calculators", "Grapher (Desmos)", "Measurements", "Set Notations"]
+    var rand = "Randomise"
+    let tools = ["Calculators", "Grapher (Desmos)", "Measurements", "Randomise"]
     @State var searchText = ""
     
     @State var defaultReturn = false
     @State var isInsShowing = false
     @State var isAlgebraShowing = false
     @State var isGrapherShowing = false
-    @State var isSetsShowing = false
+    @State var isRandShowing = false
     @Binding var isCalListShowing: Bool
     @Binding var isCalShowing: Bool
 
@@ -52,8 +52,8 @@ struct ToolsView: View {
 
     func getDestination(tools: String) -> AnyView {
         switch tools {
-        case sets:
-            return AnyView(EmptyView())
+        case rand:
+            return AnyView(RandView())
         case grapher:
             return AnyView(GrapherView())
         case algebra:
@@ -64,7 +64,9 @@ struct ToolsView: View {
                     NavigationLink("Calculator", destination: CalculatorView(deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
                     NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView())
                     NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
-                    NavigationLink("Quadratic Equation Calculator", destination: LinearQuadEquationCalc())
+                    NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
+                    NavigationLink("Set Calculator", destination: SetsCalc())
+                    NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
                 }
                 .navigationTitle("Calculators")
             )
@@ -83,7 +85,7 @@ struct ToolsView: View {
 
     func getCardColor(for tools: String) -> Color {
         switch tools {
-        case sets:
+        case rand:
             return Color.red
         case grapher:
             return Color.green
@@ -100,8 +102,8 @@ struct ToolsView: View {
     
     func getIsActiveBool(tools: String) -> Binding<Bool> {
         switch tools {
-        case sets:
-            return $isSetsShowing
+        case rand:
+            return $isRandShowing
         case grapher:
             return $isGrapherShowing
         case algebra:

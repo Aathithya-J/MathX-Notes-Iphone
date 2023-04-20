@@ -65,6 +65,9 @@ struct LinearQuadEquationCalc: View {
                         Text("line of symmetry: \(lineofsymmetry)")
                         Text("turning point: \(turningpoint)")
                     }
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
                     .padding(.bottom)
                 }
                 
@@ -114,8 +117,7 @@ struct LinearQuadEquationCalc: View {
             Spacer()
         }
         .padding(.horizontal)
-        .navigationTitle("Quadratic Equation Calculator")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Quadratic Calculator")
     }
     
     func calculateQuadEquation(a: Double, b: Double, c: Double) {

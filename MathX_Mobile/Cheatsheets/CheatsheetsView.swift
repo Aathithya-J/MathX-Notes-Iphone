@@ -24,7 +24,7 @@ struct CheatsheetsView: View {
                         if !searchResults(for: level).isEmpty {
                             Section(header: Text("Secondary \(level)")) {
                                 ForEach(searchResults(for: level), id: \.self) { topic in
-                                    NavigationLink(destination: PDFViewer(topicName: topic, pdfName: "Electronic Textbook")) { // use a func with switch and case to return pdf name based on topic name
+                                    NavigationLink(destination: PDFViewer(topicName: topic, pdfName: topic)) { // use a func with switch and case to return pdf name based on topic name
                                         Text(topic)
                                             .padding(.vertical, 5)
                                     }
@@ -74,23 +74,40 @@ struct CheatsheetsView: View {
         switch level {
         case 1:
             return [
-                "sec 1 topic 1",
-                "sec 1 topic 2",
+                "Numbers and Their Operations Part 1",
+                "Numbers and Their Operations Part 2",
+                "Percentages",
+                "Basic Algebra and Algebraic Manipulation",
+                "Linear Equations and Inequalities",
+                "Functions and Linear Graphs",
+                "Basic Geometry",
+                "Polygons",
+                "Geometrical Construction",
+                "Number Sequences",
             ]
         case 2:
             return [
-                "sec 2 topic 1",
-                "sec 2 topic 2",
+                "Similarity and Congruence Part 1",
+                "Similarity and Congruence Part 2",
+                "Ratio and Prorortion",
+                "Direct and Inverse Proportions",
+                "Pythagoras Theorem",
+                "Trigonometric Ratios",
             ]
         case 3:
             return [
-                "sec 3 topic 1",
-                "sec 3 topic 2",
+                "Indices",
+                "Surds",
+                "Functions and Graphs",
+                "Quadratic Funcations, Equations, and Inequalities",
+                "Coordinate Geometry",
+                "Exponentials and Logarithms",
+                "Futher Coordinate Geometry",
+                "Linear Law",
             ]
         case 4:
             return [
-                "sec 4 topic 1",
-                "sec 4 topic 2",
+                "Coming Soon...",
             ]
         default:
             return [String]()

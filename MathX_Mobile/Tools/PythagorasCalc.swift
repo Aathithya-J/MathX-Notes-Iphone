@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LaTeXSwiftUI
 
 struct PythagorasCalc: View {
     
@@ -16,6 +17,27 @@ struct PythagorasCalc: View {
     var body: some View {
         VStack {
             Spacer()
+            
+            Triangle()
+                .foregroundColor(.blue.opacity(0.7))
+                .frame(width: 128, height: 128)
+                .overlay(
+                    Text("A")
+                        .offset(y: 80)
+                )
+                .overlay(
+                    Text("B")
+                        .offset(x: 80)
+                )
+                .overlay(
+                    Text("C")
+                        .offset(x: -18, y: -15)
+                )
+            
+            LaTeX("\(pythagorasNumber1.isEmpty ? "a" : pythagorasNumber1)^2 \(pythagorasNumber2.isEmpty ? "+" : Double(pythagorasNumber2) ?? 0 < 0 ? "-": "+") \(pythagorasNumber2.isEmpty ? "b" : String(abs(Double(pythagorasNumber2) ?? 0).formatted()))^2 = \(pythagorasNumber3.isEmpty ? "c" : String(abs(Double(pythagorasNumber3) ?? 0).formatted()))^2")
+                .parsingMode(.all)
+                .blockMode(.alwaysInline)
+                .padding(.top, 45)
             
             TextField("Side A", text: $pythagorasNumber1)
                 .keyboardType(.decimalPad)
@@ -40,24 +62,6 @@ struct PythagorasCalc: View {
                 .padding()
                 .background(.ultraThickMaterial)
                 .cornerRadius(16)
-            
-            Spacer()
-
-            Triangle()
-                .foregroundColor(.blue.opacity(0.7))
-                .frame(width: 128, height: 128)
-                .overlay(
-                    Text("A")
-                        .offset(y: 80)
-                )
-                .overlay(
-                    Text("B")
-                        .offset(x: 80)
-                )
-                .overlay(
-                    Text("C")
-                        .offset(x: -18, y: -15)
-                )
             
             Spacer()
         }
