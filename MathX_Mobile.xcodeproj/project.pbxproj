@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4942F0AF29CAA49E00F85389 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F0AE29CAA49E00F85389 /* CalculatorView.swift */; };
 		495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495674C029BD5EEB00EB37DA /* HCFLCM.swift */; };
+		496462C629F14B1700FAB096 /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496462C529F14B1700FAB096 /* UnitConverter.swift */; };
 		498C0FD429BEF7E50079503C /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498C0FD329BEF7E50079503C /* OCRView.swift */; };
 		49E6CA9929BC845400DD2E02 /* MathX_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CA9829BC845400DD2E02 /* MathX_MobileApp.swift */; };
 		49E6CA9B29BC845400DD2E02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CA9A29BC845400DD2E02 /* ContentView.swift */; };
@@ -86,6 +87,7 @@
 /* Begin PBXFileReference section */
 		4942F0AE29CAA49E00F85389 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		495674C029BD5EEB00EB37DA /* HCFLCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFLCM.swift; sourceTree = "<group>"; };
+		496462C529F14B1700FAB096 /* UnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
 		498C0FD329BEF7E50079503C /* OCRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
 		49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MathX_Mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E6CA9829BC845400DD2E02 /* MathX_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathX_MobileApp.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				6A6D3F3029F025E300265124 /* LinearQuadEquationCalc.swift */,
 				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
 				498C0FD329BEF7E50079503C /* OCRView.swift */,
+				496462C529F14B1700FAB096 /* UnitConverter.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				6A6D3F3329F0388300265124 /* GrapherView.swift in Sources */,
 				6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
+				496462C629F14B1700FAB096 /* UnitConverter.swift in Sources */,
 				6ABC063D29F1166300FE97A3 /* TrigoCalc.swift in Sources */,
 				6A6D3F2B29EFC9BB00265124 /* mathEquationFAQ.swift in Sources */,
 				6A6D3F1B29EECA4500265124 /* thirdButtonGroupModified.swift in Sources */,

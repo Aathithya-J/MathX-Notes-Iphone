@@ -6,7 +6,8 @@ struct ToolsView: View {
     var measure = "Measurements"
     var grapher = "Grapher (Desmos)"
     var rand = "Randomise"
-    let tools = ["Calculators", "Grapher (Desmos)", "Measurements", "Randomise"]
+    var unit = "Unit Converter"
+    let tools = ["Calculators", "Grapher (Desmos)", "Measurements", "Randomise","Unit Converter"]
     @State var searchText = ""
     
     @State var defaultReturn = false
@@ -67,6 +68,7 @@ struct ToolsView: View {
                     NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
                     NavigationLink("Set Calculator", destination: SetsCalc())
                     NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
+                    NavigationLink("Unit Converter", destination: UnitConverterView())
                 }
                 .navigationTitle("Calculators")
             )
@@ -94,6 +96,8 @@ struct ToolsView: View {
         case measure:
             return Color.purple
         case cal:
+            return Color.orange
+        case unit:
             return Color.orange
         default:
             return Color("CardBackground")
