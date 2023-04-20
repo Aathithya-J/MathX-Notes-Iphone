@@ -7,7 +7,13 @@ struct ToolsView: View {
     var grapher = "Grapher (Desmos)"
     var rand = "Randomise"
     var unit = "Unit Converter"
-    let tools = ["Calculators", "Grapher (Desmos)", "Measurements", "Randomise","Unit Converter"]
+    let tools = [
+        "Calculators",
+        "Grapher (Desmos)",
+//        "Measurements", // likely to come as a future update as ruler and protractor still dont work
+        "Randomise",
+        "Unit Converter"
+    ]
     @State var searchText = ""
     
     @State var defaultReturn = false
