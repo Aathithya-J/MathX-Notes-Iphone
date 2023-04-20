@@ -1,9 +1,13 @@
 import SwiftUI
 import LaTeXSwiftUI
 import MathExpression
+import CoreImage.CIFilterBuiltins
 
 struct CalculatorView: View {
-        
+    
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
+    
     @State var shiftIndicator = false
     @State var alphaIndicator = false
     
@@ -25,6 +29,8 @@ struct CalculatorView: View {
     
     @AppStorage("lastAns", store: .standard) var lastAns = ""
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
+    
+    @ObservedObject var calculationManager: CalculationManager = .shared
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
@@ -319,6 +325,7 @@ struct CalculatorView: View {
         } else {
             if !returnValue.contains("×10") && returnValue.count > 5 {
                 resultsText = returnValue
+                saveToHistory(equationText: equationText, resultsText: returnValue)
             } else {
                 var numberOfDigitsInPower = Int()
                 var positionOfStartingOfPower = Int()
@@ -340,9 +347,11 @@ struct CalculatorView: View {
                     resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
                     
                     resultsText = String(resultsTextArray)
+                    saveToHistory(equationText: equationText, resultsText: String(resultsTextArray))
                     
                 } else {
                     resultsText = returnValue
+                    saveToHistory(equationText: equationText, resultsText: returnValue)
                 }
             }
         }
@@ -352,6 +361,31 @@ struct CalculatorView: View {
         guard let sqrted = Double(sqrtcalculate(equation: equationText)) else { return }
         equationText = "sqrt(\(equationText))"
         resultsText = String(sqrt(sqrted).formatted())
+    }
+    
+    func generateEquationQRandLink() -> String {
+        let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
+        
+        let textEncoded = textToBeEncoded.toBase64()
+        let encodedDeepLink = "mathx://calculator?source=\(textEncoded)"
+        return encodedDeepLink
+//        qrCodeImage = generateQRCode(from: encodedDeepLink)
+    }
+    
+    func generateQRCode(from string: String) -> UIImage {
+        filter.message = Data(string.utf8)
+
+        if let outputImage = filter.outputImage {
+            if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+                return UIImage(cgImage: cgimg)
+            }
+        }
+
+        return UIImage(systemName: "xmark.circle") ?? UIImage()
+    }
+    
+    func saveToHistory(equationText et: String, resultsText rt: String) {
+        calculationManager.calculations.insert(Calculation(equationText: et, resultsText: rt, base64encoded: generateEquationQRandLink()), at: 0)
     }
 }
 
@@ -424,7 +458,8 @@ struct screenView: View {
                 
                 Spacer()
                 
-                SubSuperScriptText(inputString: resultsText, bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)                    .parsingMode(.all)
+                SubSuperScriptText(inputString: resultsText, bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
+                    .parsingMode(.all)
                     .imageRenderingMode(.template)
                     .errorMode(.original)
                     .blockMode(.alwaysInline)
@@ -471,6 +506,8 @@ struct qrScreenView: View {
                         VStack(alignment: .leading) {
                             Text("Press [AC] to go back")
                             Text("Press [DEL] to copy link to clipboard")
+                                .padding(.top, 2)
+                            Text("Press [\(Image(systemName: "square.and.arrow.up"))] to open share sheet")
                                 .padding(.top, 2)
                         }
                         .font(.headline)

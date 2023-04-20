@@ -14,6 +14,8 @@ struct thirdButtonGroupModified: View {
     let filter = CIFilter.qrCodeGenerator()
     @Binding var qrCodeImage: UIImage
     
+    @State var showingHistoryView = false
+    
     @Binding var shiftIndicator: Bool
     @Binding var alphaIndicator: Bool
     
@@ -34,10 +36,11 @@ struct thirdButtonGroupModified: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 12) {
+                historyButton(buttonSymbol: "HIST", inputWhenPressed: "", shiftButtonSymbol: "HIST", shiftInputWhenPressed: "", alphaButtonSymbol: "", alphaInputWhenPressed: "")
                 shareButton(buttonSymbol: "SHARE", inputWhenPressed: "", shiftButtonSymbol: "SHARE", shiftInputWhenPressed: "", alphaButtonSymbol: "", alphaInputWhenPressed: "")
                 squarerootbutton(buttonSymbol: "√", inputWhenPressed: "", shiftButtonSymbol: "^{3}√", shiftInputWhenPressed: "", alphaButtonSymbol: "", alphaInputWhenPressed: "")
-                acButton()
                 delButton()
+                acButton()
             }
             .padding(.top, UIScreen.main.bounds.height / 50)
             
@@ -156,14 +159,73 @@ struct thirdButtonGroupModified: View {
     @ViewBuilder
     func shareButton(buttonSymbol: String, inputWhenPressed: String, shiftButtonSymbol: String, shiftInputWhenPressed: String, alphaButtonSymbol: String, alphaInputWhenPressed: String) -> some View {
         VStack {
+            if !showingQRScreen {
+                Button {
+                    generator.impactOccurred(intensity: 0.7)
+                    
+                    if !showingQRScreen {
+                        if equationText != "" && resultsText != "" {
+                            if buttonSymbol == "SHARE" {
+                                generateEquationQRandLink()
+                                showingQRScreen = true
+                            }
+                        } else if equationText.contains("ERROR:") {
+                            errorOccurred = false
+                            
+                            equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                            resultsText = ""
+                        } else {
+                            equationText = equationText + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                        }
+                    }
+                    
+                    shiftIndicator = false
+                    alphaIndicator = false
+                } label: {
+                    ZStack {
+                        SubSuperScriptText(inputString: "", bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .minimumScaleFactor(0.1)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(shiftIndicator ? .yellow : alphaIndicator ? .red : .white)
+                    .frame(width: UIScreen.main.bounds.width / 6)
+                    .frame(height: UIScreen.main.bounds.height / 10)
+                    .background(.black)
+                    .cornerRadius(8)
+                }
+                .buttonStyle(.plain)
+            } else {
+                ShareLink(item: encodedDeepLink) {
+                    ZStack {
+                        SubSuperScriptText(inputString: "", bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .minimumScaleFactor(0.1)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(shiftIndicator ? .yellow : alphaIndicator ? .red : .white)
+                    .frame(width: UIScreen.main.bounds.width / 6)
+                    .frame(height: UIScreen.main.bounds.height / 10)
+                    .background(.black)
+                    .cornerRadius(8)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func historyButton(buttonSymbol: String, inputWhenPressed: String, shiftButtonSymbol: String, shiftInputWhenPressed: String, alphaButtonSymbol: String, alphaInputWhenPressed: String) -> some View {
+        VStack {
             Button {
                 generator.impactOccurred(intensity: 0.7)
                 
                 if !showingQRScreen {
                     if equationText != "" && resultsText != "" {
-                        if buttonSymbol == "SHARE" {
-                            generateEquationQRandLink()
-                            showingQRScreen = true
+                        if buttonSymbol == "HIST" {
+                            showingHistoryView = true
                         }
                     } else if equationText.contains("ERROR:") {
                         errorOccurred = false
@@ -171,7 +233,7 @@ struct thirdButtonGroupModified: View {
                         equationText = "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
                         resultsText = ""
                     } else {
-                        equationText = equationText + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
+                        showingHistoryView = true
                     }
                 }
                 
@@ -180,7 +242,7 @@ struct thirdButtonGroupModified: View {
             } label: {
                 ZStack {
                     SubSuperScriptText(inputString: "", bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
-                    Image(systemName: "square.and.arrow.up")
+                    Image(systemName: "clock.arrow.2.circlepath")
                 }
                 .minimumScaleFactor(0.1)
                 .font(.title2)
@@ -192,6 +254,9 @@ struct thirdButtonGroupModified: View {
                 .cornerRadius(8)
             }
             .buttonStyle(.plain)
+            .sheet(isPresented: $showingHistoryView) {
+                CalculationHistoryView()
+            }
         }
     }
     
@@ -273,7 +338,7 @@ struct thirdButtonGroupModified: View {
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                     .buttonStyle(.plain)
-                    .frame(width: UIScreen.main.bounds.width / 3 + 12)
+                    .frame(width: UIScreen.main.bounds.width / 6)
                     .frame(height: UIScreen.main.bounds.height / 10)
                     .background(.orange)
                     .cornerRadius(8)
