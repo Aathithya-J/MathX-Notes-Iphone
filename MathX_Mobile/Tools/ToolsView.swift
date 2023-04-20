@@ -3,15 +3,17 @@ import SwiftUI
 struct ToolsView: View {
     var algebra = "Algebra"
     var cal = "Calculators"
+    var sets = "Set Notations"
     var measure = "Measurements"
     var grapher = "Grapher (Desmos)"
-    let tools = ["Measurements", "Algebra", "Calculators", "Grapher (Desmos)"]
+    let tools = ["Calculators", "Grapher (Desmos)", "Measurements", "Set Notations"]
     @State var searchText = ""
     
     @State var defaultReturn = false
     @State var isInsShowing = false
     @State var isAlgebraShowing = false
     @State var isGrapherShowing = false
+    @State var isSetsShowing = false
     @Binding var isCalListShowing: Bool
     @Binding var isCalShowing: Bool
 
@@ -33,7 +35,6 @@ struct ToolsView: View {
                                         .padding()
                                         .background(getCardColor(for: tools).opacity(0.7))
                                         .cornerRadius(16)
-//                                        .shadow(radius: 5)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
@@ -51,6 +52,8 @@ struct ToolsView: View {
 
     func getDestination(tools: String) -> AnyView {
         switch tools {
+        case sets:
+            return AnyView(EmptyView())
         case grapher:
             return AnyView(GrapherView())
         case algebra:
@@ -80,6 +83,8 @@ struct ToolsView: View {
 
     func getCardColor(for tools: String) -> Color {
         switch tools {
+        case sets:
+            return Color.red
         case grapher:
             return Color.green
         case algebra:
@@ -95,6 +100,8 @@ struct ToolsView: View {
     
     func getIsActiveBool(tools: String) -> Binding<Bool> {
         switch tools {
+        case sets:
+            return $isSetsShowing
         case grapher:
             return $isGrapherShowing
         case algebra:
