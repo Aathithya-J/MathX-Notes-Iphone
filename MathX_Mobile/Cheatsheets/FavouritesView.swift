@@ -23,6 +23,7 @@ struct FavouritesView: View {
                         .font(.headline)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
+                        .padding(.top, 5)
                 } else {
                     List {
                         ForEach(favouritesManager.favourites, id: \.id) { favourite in
