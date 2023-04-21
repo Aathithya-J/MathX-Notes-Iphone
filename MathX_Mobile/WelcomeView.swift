@@ -14,9 +14,9 @@ struct WelcomeView: View {
                 
                 aboutPage(sfSymbol: "list.clipboard", title: "Notes and Cheatsheets", description: "Notes and Cheatsheets allows you to take down and refer to revision materials later on.")
 
-                aboutPage(sfSymbol: "wrench.and.screwdriver", title: "Useful Tools", description: "MathX's tools lets you calculate things like HCF, LCM, and Quadratic Equations right in the app!")
+                aboutPage(sfSymbol: "wrench.and.screwdriver", title: "Useful Tools", description: "MathX's tools lets you do things like generate randomised numerical data, convert units, and plot graphs through Desmos right in the app!")
 
-                aboutPage(sfSymbol: "plusminus.circle", title: "Calculator", description: "The built in calculator allows you to calculate mathematical equations right on your phone!")
+                aboutPage(sfSymbol: "plusminus.circle", title: "Calculators", description: "The built in calculators allows you to calculate mathematical equations like HCF, LCM, and Quadratic Equations on your phone!")
                 
                 finalPage() // last page with button to continue on to mathx
             }
@@ -43,6 +43,7 @@ struct welcomeTextPage: View {
                         .scaledToFit()
                         .frame(width: 32)
                         .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.4), radius: 3, x: 1, y: 3)
 //                        .frame(height: 64)
                 }
                 Text("Welcome to MathX!")
@@ -57,6 +58,7 @@ struct welcomeTextPage: View {
                 .resizable()
                 .frame(width: 128, height: 128)
                 .foregroundColor(.white)
+                .shadow(color: .black.opacity(0.4), radius: 3, x: 1, y: 3)
             
             HStack {
                 Text("To get started, swipe over to the next page!")
@@ -96,6 +98,7 @@ struct animatingWelcomeTextPage: View {
                             .scaledToFit()
                             .frame(width: titleExpandAnimation ? 32 : 64)
                             .foregroundColor(.white)
+                            .shadow(color: .black.opacity(0.4), radius: 3, x: 1, y: 3)
 //                            .frame(height: titleExpandAnimation ? 64 : 256)
                     }
                     
@@ -145,7 +148,8 @@ struct animatingWelcomeTextPage: View {
                         .resizable()
                         .frame(width: 128, height: 128)
                         .foregroundColor(.white)
-                    
+                        .shadow(color: .black.opacity(0.4), radius: 3, x: 1, y: 3)
+
                     HStack {
                         Text("To get started, swipe over to the next page!")
                         Image(systemName: "arrow.right")
@@ -174,7 +178,8 @@ struct aboutPage: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 128, height: 128)
-            
+                .shadow(color: .black.opacity(0.4), radius: 3, x: 1, y: 3)
+
             Text(title)
                 .font(.title)
                 .fontWeight(.bold)
@@ -205,6 +210,7 @@ struct finalPage: View {
                 .scaledToFit()
                 .frame(width: 64)
                 .foregroundColor(.white)
+                .shadow(color: .black.opacity(0.4), radius: 3, x: 1, y: 3)
 //                .frame(height: 128)
             
             Text("Ready to use MathX? Press the button below to continue!")
@@ -227,6 +233,7 @@ struct finalPage: View {
                 .fontWeight(.bold)
                 .font(.headline)
                 .clipShape(Capsule())
+                .shadow(color: .black.opacity(0.25), radius: 3, x: 1, y: 3)
             }
             .padding(.top)
         }

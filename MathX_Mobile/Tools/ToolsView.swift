@@ -44,7 +44,7 @@ struct ToolsView: View {
                                         .background(getCardColor(for: tools).opacity(0.7))
                                         .cornerRadius(16)
                                 }
-                                .buttonStyle(PlainButtonStyle())
+                                .shadow(color: .black.opacity(0.4), radius: 2, x: 3, y: 3)
                             }
                             .frame(height: 150)
                         }
