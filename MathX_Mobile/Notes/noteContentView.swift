@@ -106,21 +106,6 @@ struct noteContentView: View {
                     TextEditor(text: $noteContent)
                         .padding(.vertical)
                 }
-                .toolbar {
-                    ToolbarItem(placement: .keyboard) {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(1...7, id: \.self) { i in
-                                    Button {
-                                        
-                                    } label: {
-                                        Text("Button \(i)")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             } else {
                 if noteLatexRendering {
                     ScrollView(.vertical, showsIndicators: false) {
