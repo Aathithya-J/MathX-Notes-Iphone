@@ -72,7 +72,7 @@ struct ToolsView: View {
             return AnyView(
                 List {
                     NavigationLink("Calculator", destination: CalculatorView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
-                    NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView())
+                    NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView(lhsNumber: 0, rhsNumber: 0))
                     NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
                     NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
                     NavigationLink("Set Calculator", destination: SetsCalc())

@@ -46,19 +46,19 @@ struct TrigoCalc: View {
                 .parsingMode(.all)
                 .blockMode(.alwaysInline)
             
-            TextField("Side A", text: $sideA)
+            TextField("Side A (Opposite)", text: $sideA)
                 .keyboardType(.decimalPad)
                 .padding()
                 .background(.ultraThickMaterial)
                 .cornerRadius(16)
             
-            TextField("Side B", text: $sideB)
+            TextField("Side B (Adjacent)", text: $sideB)
                 .keyboardType(.decimalPad)
                 .padding()
                 .background(.ultraThickMaterial)
                 .cornerRadius(16)
             
-            TextField("Side C", text: $sideC)
+            TextField("Side C (Hypotenuse)", text: $sideC)
                 .keyboardType(.decimalPad)
                 .padding()
                 .background(.ultraThickMaterial)
