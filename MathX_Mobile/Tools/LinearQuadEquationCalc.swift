@@ -30,94 +30,113 @@ struct LinearQuadEquationCalc: View {
     
     @State private var equationSelected = 1
     
+    @FocusState var quadraticaTextFocused: Bool
+    @FocusState var quadraticbTextFocused: Bool
+    @FocusState var quadraticcTextFocused: Bool
+
     var body: some View {
-        VStack {
-//            Picker("", selection: $equationSelected) {
-//                Text("Linear Equation")
-//                    .tag(0)
-//                Text("Quadratic Equation")
-//                    .tag(1)
-//            }
-//            .pickerStyle(.segmented)
-            
-            Spacer()
-            
-            if equationSelected == 0 {
-                // linear
-                
-                TextField("linear", text: $linearText)
-            } else {
-                if quadcalculated {
-                    VStack(alignment: .leading) {
-                        Text("y-intercept: (0, \(yintercept))")
-                        Text("discriminant: \(discriminant)")
-                        Text("number of roots: \(roots)")
-                        
-                        if Double(discriminant) ?? 0 < 0 {
-                            Text("x-intercept: NaN")
-                        } else if Double(discriminant) ?? 0 == 0 {
-                            Text("x-intercept: (\(quadxintercept1), 0)")
-                        } else {
-                            Text("x-intercept 1: (\(quadxintercept1), 0)")
-                            Text("x-intercept 2: (\(quadxintercept2), 0)")
-                        }
-                        
-                        Text("line of symmetry: \(lineofsymmetry)")
-                        Text("turning point: \(turningpoint)")
-                    }
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .padding(.bottom)
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(uiColor: .systemBackground))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    quadraticaTextFocused = false
+                    quadraticbTextFocused = false
+                    quadraticcTextFocused = false
                 }
+            VStack {
+                //            Picker("", selection: $equationSelected) {
+                //                Text("Linear Equation")
+                //                    .tag(0)
+                //                Text("Quadratic Equation")
+                //                    .tag(1)
+                //            }
+                //            .pickerStyle(.segmented)
                 
-                LaTeX("\(quadraticaText.isEmpty ? "a" : quadraticaText)x^2 \(quadraticbText.isEmpty ? "+" : Double(quadraticbText) ?? 0 < 0 ? "-": "+") \(quadraticbText.isEmpty ? "b" : String(abs(Double(quadraticbText) ?? 0).formatted()))x \(quadraticcText.isEmpty ? "+" : Double(quadraticcText) ?? 0 < 0 ? "-": "+") \(quadraticcText.isEmpty ? "c" : String(abs(Double(quadraticcText) ?? 0).formatted())) = 0")
-                    .parsingMode(.all)
-                    .blockMode(.alwaysInline)
+                Spacer()
                 
-                VStack {
-                    TextField("a", text: $quadraticaText)
-                        .keyboardType(.numbersAndPunctuation)
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                    TextField("b", text: $quadraticbText)
-                        .keyboardType(.numbersAndPunctuation)
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                    TextField("c", text: $quadraticcText)
-                        .keyboardType(.numbersAndPunctuation)
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
+                if equationSelected == 0 {
+                    // linear
                     
-                    Button {
-                        calculateQuadEquation(
-                            a: Double(quadraticaText) ?? 0,
-                            b: Double(quadraticbText) ?? 0,
-                            c: Double(quadraticcText) ?? 0
-                        )
-                    } label: {
-                        Text("Calculate")
-                            .padding()
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                            .background(.blue)
-                            .cornerRadius(16)
+                    TextField("linear", text: $linearText)
+                } else {
+                    if quadcalculated {
+                        VStack(alignment: .leading) {
+                            Text("y-intercept: (0, \(yintercept))")
+                            Text("discriminant: \(discriminant)")
+                            Text("number of roots: \(roots)")
+                            
+                            if Double(discriminant) ?? 0 < 0 {
+                                Text("x-intercept: NaN")
+                            } else if Double(discriminant) ?? 0 == 0 {
+                                Text("x-intercept: (\(quadxintercept1), 0)")
+                            } else {
+                                Text("x-intercept 1: (\(quadxintercept1), 0)")
+                                Text("x-intercept 2: (\(quadxintercept2), 0)")
+                            }
+                            
+                            Text("line of symmetry: \(lineofsymmetry)")
+                            Text("turning point: \(turningpoint)")
+                        }
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                        .padding(.bottom)
                     }
-                    .buttonStyle(.plain)
-                    .disabled(quadraticaText.isEmpty || quadraticbText.isEmpty || quadraticcText.isEmpty)
+                    
+                    LaTeX("\(quadraticaText.isEmpty ? "a" : quadraticaText)x^2 \(quadraticbText.isEmpty ? "+" : Double(quadraticbText) ?? 0 < 0 ? "-": "+") \(quadraticbText.isEmpty ? "b" : String(abs(Double(quadraticbText) ?? 0).formatted()))x \(quadraticcText.isEmpty ? "+" : Double(quadraticcText) ?? 0 < 0 ? "-": "+") \(quadraticcText.isEmpty ? "c" : String(abs(Double(quadraticcText) ?? 0).formatted())) = 0")
+                        .parsingMode(.all)
+                        .blockMode(.alwaysInline)
+                    
+                    VStack {
+                        TextField("a", text: $quadraticaText)
+                            .keyboardType(.numbersAndPunctuation)
+                            .padding()
+                            .background(.ultraThickMaterial)
+                            .cornerRadius(16)
+                            .focused($quadraticaTextFocused)
+
+                        TextField("b", text: $quadraticbText)
+                            .keyboardType(.numbersAndPunctuation)
+                            .padding()
+                            .background(.ultraThickMaterial)
+                            .cornerRadius(16)
+                            .focused($quadraticbTextFocused)
+                        
+                        TextField("c", text: $quadraticcText)
+                            .keyboardType(.numbersAndPunctuation)
+                            .padding()
+                            .background(.ultraThickMaterial)
+                            .cornerRadius(16)
+                            .focused($quadraticcTextFocused)
+                        
+                        Button {
+                            calculateQuadEquation(
+                                a: Double(quadraticaText) ?? 0,
+                                b: Double(quadraticbText) ?? 0,
+                                c: Double(quadraticcText) ?? 0
+                            )
+                        } label: {
+                            Text("Calculate")
+                                .padding()
+                                .font(.headline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                                .background(.blue)
+                                .cornerRadius(16)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(quadraticaText.isEmpty || quadraticbText.isEmpty || quadraticcText.isEmpty)
+                    }
+                    .padding(.top)
                 }
-                .padding(.top)
+                
+                Spacer()
             }
-            
-            Spacer()
+            .padding(.horizontal)
+            .navigationTitle("Quadratic Calculator")
         }
-        .padding(.horizontal)
-        .navigationTitle("Quadratic Calculator")
     }
     
     func calculateQuadEquation(a: Double, b: Double, c: Double) {

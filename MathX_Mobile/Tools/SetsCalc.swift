@@ -15,62 +15,77 @@ struct SetsCalc: View {
     @State var result = ""
     @State var setCalculationSelected = 0
     
+    @FocusState var set1Focused: Bool
+    @FocusState var set2Focused: Bool
+    
     var body: some View {
-        VStack {
-            Picker("", selection: $setCalculationSelected) {
-                Text("Union")
-                    .tag(0)
-                Text("Intersection")
-                    .tag(1)
-            }
-            .pickerStyle(.segmented)
-            
-            Spacer()
-            Text("Do not leave a space between commas and elements.")
-                .font(.subheadline)
-                .fontWeight(.bold)
-                .multilineTextAlignment(.leading)
-            
-            TextField("First Set (separate elements with \",\")", text: $set1)
-                .keyboardType(.numbersAndPunctuation)
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            TextField("Second Set (separate elements with \",\")", text: $set2)
-                .keyboardType(.numbersAndPunctuation)
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            
-            Text("{\(result)}")
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            
-            Button {
-                if setCalculationSelected == 0 {
-                    result = calculateUnion(setString1: set1, setString2: set2)
-                } else if setCalculationSelected == 1 {
-                    result = calculateIntersection(setString1: set1, setString2: set2)
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(uiColor: .systemBackground))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    set1Focused = false
+                    set2Focused = false
                 }
-            } label: {
-                Text("Calculate")
-                    .padding()
-                    .font(.headline)
+            VStack {
+                Picker("", selection: $setCalculationSelected) {
+                    Text("Union")
+                        .tag(0)
+                    Text("Intersection")
+                        .tag(1)
+                }
+                .pickerStyle(.segmented)
+                
+                Spacer()
+                Text("Do not leave a space between commas and elements.")
+                    .font(.subheadline)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                    .background(.blue)
+                    .multilineTextAlignment(.leading)
+                
+                TextField("First Set (separate elements with \",\")", text: $set1)
+                    .keyboardType(.numbersAndPunctuation)
+                    .padding()
+                    .background(.ultraThickMaterial)
                     .cornerRadius(16)
+                    .focused($set1Focused)
+                
+                TextField("Second Set (separate elements with \",\")", text: $set2)
+                    .keyboardType(.numbersAndPunctuation)
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
+                    .focused($set2Focused)
+                
+                Text("{\(result)}")
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
+                
+                Button {
+                    if setCalculationSelected == 0 {
+                        result = calculateUnion(setString1: set1, setString2: set2)
+                    } else if setCalculationSelected == 1 {
+                        result = calculateIntersection(setString1: set1, setString2: set2)
+                    }
+                } label: {
+                    Text("Calculate")
+                        .padding()
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                        .background(.blue)
+                        .cornerRadius(16)
+                }
+                .buttonStyle(.plain)
+                .disabled(set1.isEmpty || set2.isEmpty)
+                .padding(.top)
+                
+                Spacer()
             }
-            .buttonStyle(.plain)
-            .disabled(set1.isEmpty || set2.isEmpty)
-            .padding(.top)
-            
-            Spacer()
+            .padding(.horizontal)
+            .navigationTitle("Set Calculator")
         }
-        .padding(.horizontal)
-        .navigationTitle("Set Calculator")
     }
     
     func calculateUnion(setString1: String, setString2: String) -> String {

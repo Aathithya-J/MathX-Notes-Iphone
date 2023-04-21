@@ -69,8 +69,10 @@ struct HCF_LCM_CalculatorView: View  {
                     Section {
                         TextField("First Number", text: .init(get: { lhsNumber.description },
                                                               set: { lhsNumber = Int($0) ?? 0 }))
+                        .keyboardType(.numberPad)
                         TextField("Second Number", text: .init(get: { rhsNumber.description },
                                                                set: { rhsNumber = Int($0) ?? 0 }))
+                        .keyboardType(.numberPad)
                         Toggle("Only show prime numbers", isOn: .init(get: {
                             showOnlyPrime
                         }, set: { newValue in
@@ -97,6 +99,7 @@ struct HCF_LCM_CalculatorView: View  {
                         }
                     }
                 }
+                .scrollDismissesKeyboard(.immediately)
                 .coordinateSpace(name: "listCoordinate")
             } else {
                 OldHCF_LCM_CalculatorView(isHCFSelected: $HCFLCMSelection)
@@ -250,57 +253,71 @@ struct OldHCF_LCM_CalculatorView: View {
     @State private var number2 = ""
     @State private var result = ""
     @Binding var isHCFSelected: Int
+    
+    @FocusState var number1Focused: Bool
+    @FocusState var number2Focused: Bool
 
     var body: some View {
-        VStack {
-//            Picker("", selection: $isHCFSelected) {
-//                Text("HCF").tag(0)
-//                Text("LCM").tag(1)
-//            }
-//            .pickerStyle(SegmentedPickerStyle())
-//            .padding()
-//            .padding(.top, 20)
-//            .onChange(of: isHCFSelected) { _ in
-//                self.calculate()
-//            }
-
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(uiColor: .systemBackground))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    number1Focused = false
+                    number2Focused = false
+                }
             VStack {
-                TextField("First number", text: $number1)
-                    .textFieldStyle(.plain)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-
-                TextField("Second number", text: $number2)
-                    .textFieldStyle(.plain)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
+                //            Picker("", selection: $isHCFSelected) {
+                //                Text("HCF").tag(0)
+                //                Text("LCM").tag(1)
+                //            }
+                //            .pickerStyle(SegmentedPickerStyle())
+                //            .padding()
+                //            .padding(.top, 20)
+                //            .onChange(of: isHCFSelected) { _ in
+                //                self.calculate()
+                //            }
+                
+                VStack {
+                    TextField("First number", text: $number1)
+                        .textFieldStyle(.plain)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                        .focused($number1Focused)
+                    
+                    TextField("Second number", text: $number2)
+                        .textFieldStyle(.plain)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                        .focused($number2Focused)
+                }
+                .padding(.top, 30)
+                
+                if !number1.isEmpty && !number2.isEmpty {
+                    Text("LCM: \(result)")
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                }
+                
+                Spacer()
             }
-            .padding(.top, 30)
-
-            if !number1.isEmpty && !number2.isEmpty {
-                Text("LCM: \(result)")
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
+            .onChange(of: number1) { _ in
+                self.calculate()
             }
-
-            Spacer()
-        }
-        .onChange(of: number1) { _ in
-            self.calculate()
-        }
-        .onChange(of: number2) { _ in
-            self.calculate()
-        }
-//        .navigationTitle("HCF & LCM Calculator")
-        .onAppear {
-            self.calculate()
+            .onChange(of: number2) { _ in
+                self.calculate()
+            }
+            //        .navigationTitle("HCF & LCM Calculator")
+            .onAppear {
+                self.calculate()
+            }
         }
     }
 

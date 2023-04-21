@@ -16,73 +16,108 @@ struct TrigoCalc: View {
 
     @State var results = ""
     @State var equation = ""
+    
+    @FocusState var sideAFocused: Bool
+    @FocusState var sideBFocused: Bool
+    @FocusState var sideCFocused: Bool
 
     var body: some View {
-        VStack {
-            Spacer()
-            
-            Triangle()
-                .foregroundColor(.blue.opacity(0.7))
-                .frame(width: 128, height: 128)
-                .overlay(
-                    Text("A (O)")
-                        .offset(y: 80)
-                )
-                .overlay(
-                    Text("B (A)")
-                        .offset(x: 90)
-                )
-                .overlay(
-                    Text("C (H)")
-                        .offset(x: -18, y: -15)
-                )
-                .overlay(
-                    Text("x")
-                        .offset(x: 50, y: -30)
-                )
-                .padding(.bottom, 45)
-            
-            LaTeX(equation)
-                .parsingMode(.all)
-                .blockMode(.alwaysInline)
-            
-            TextField("Side A (Opposite)", text: $sideA)
-                .keyboardType(.decimalPad)
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            
-            TextField("Side B (Adjacent)", text: $sideB)
-                .keyboardType(.decimalPad)
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            
-            TextField("Side C (Hypotenuse)", text: $sideC)
-                .keyboardType(.decimalPad)
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-                .padding(.bottom)
-            
-            Text("\(results)")
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            
-            Spacer()
-        }
-        .padding(.horizontal)
-        .navigationTitle("Trigonometry Calculator")
-        .onChange(of: sideA) { _ in
-            results = findAngleX()
-        }
-        .onChange(of: sideB) { _ in
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(uiColor: .systemBackground))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    sideAFocused = false
+                    sideBFocused = false
+                    sideCFocused = false
+                }
+            VStack {
+                Spacer()
+                
+                Triangle()
+                    .foregroundColor(.blue.opacity(0.7))
+                    .frame(width: 128, height: 128)
+                    .overlay(
+                        Text("A (O)")
+                            .offset(y: 80)
+                    )
+                    .overlay(
+                        Text("B (A)")
+                            .offset(x: 90)
+                    )
+                    .overlay(
+                        Text("C (H)")
+                            .offset(x: -18, y: -15)
+                    )
+                    .overlay(
+                        Text("x")
+                            .offset(x: 50, y: -30)
+                    )
+                    .padding(.bottom, 45)
+                
+                LaTeX(equation)
+                    .parsingMode(.all)
+                    .blockMode(.alwaysInline)
+                
+                TextField("Side A (Opposite)", text: $sideA)
+                    .keyboardType(.decimalPad)
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
+                    .focused($sideAFocused)
+                
+                TextField("Side B (Adjacent)", text: $sideB)
+                    .keyboardType(.decimalPad)
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
+                    .focused($sideBFocused)
+                
+                TextField("Side C (Hypotenuse)", text: $sideC)
+                    .keyboardType(.decimalPad)
+                    .padding()
+                    .background(.ultraThickMaterial)
+                    .cornerRadius(16)
+                    .padding(.bottom)
+                    .focused($sideCFocused)
+                
+                if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
+                    Text("\(results)")
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal)
+            .navigationTitle("Trigonometry Calculator")
+            .onChange(of: sideA) { _ in
                 results = findAngleX()
+            }
+            .onChange(of: sideB) { _ in
+                results = findAngleX()
+            }
+            .onChange(of: sideC) { _ in
+                results = findAngleX()
+            }
         }
-        .onChange(of: sideC) { _ in
-            results = findAngleX()
+    }
+    
+    func fillCount(num1: Double, num2: Double, num3: Double) -> Int {
+        var fillCount = 0
+      
+        if num1 > 0 {
+            fillCount += 1
         }
+        if num2 > 0 {
+            fillCount += 1
+        }
+        if num3 > 0 {
+            fillCount += 1
+        }
+        
+        return fillCount
     }
     
     func findAngleX() -> String {
