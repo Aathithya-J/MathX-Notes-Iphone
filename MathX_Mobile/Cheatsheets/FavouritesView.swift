@@ -19,7 +19,7 @@ struct FavouritesView: View {
                 if favouritesManager.favourites.isEmpty {
                     Image(systemName: "star.slash")
                         .font(.title3)
-                    Text("You currently have no favourites.")
+                    Text("You currently have no favourites.\nSwipe left on a topic to favourite it!")
                         .font(.headline)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
