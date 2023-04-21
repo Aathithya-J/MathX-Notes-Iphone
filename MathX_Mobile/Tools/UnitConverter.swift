@@ -2,42 +2,262 @@ import SwiftUI
 
 struct UnitConverterView: View {
     
-    @State private var lengthInput = ""
-    @State private var selectedUnit = 0
+    @State var selection = "Length"
+    @State var unitSelection = "Metres"
+    @State var unitConvertedToSelection = "Metres"
     
-    let units = ["Metres", "Feet"]
+    @State private var input = ""
+        
+    let units = ["Length", "Area", "Volume", "Mass", "Speed", "Temperature"]
+    let length = ["Metres", "Kilometres", "Inches", "Feet", "Yards", "Miles"]
+    let area = ["Acres", "Hectares", "Square Metres", "Square Kilometres", "Square Inches", "Square Feet"]
+    let volume = ["Cubic Centimetres", "Cubic Metres", "Cubic Inches", "Cubic Feet", "Cups", "Fluid Ounces", "Gallons", "Millilitres", "Litres", "Teaspoons", "Tablespoons", "Pints"]
+    let mass = ["Grams", "Kilograms", "Ounces", "Pounds", "Metric Tons", "Carats"]
+    let speed = ["m/s", "km/h", "mi/h", "knots"]
+    let temperature = ["Celsius", "Fahrenheit", "Kelvin"]
+
+    @FocusState var textfieldFocused: Bool
     
-    var body: some View {
-        VStack {
-            Spacer()
-            TextField("Enter length", text: $lengthInput)
-                .keyboardType(.decimalPad)
-                .padding()
-                .background(.ultraThickMaterial)
-                .cornerRadius(16)
-            
-            Picker("", selection: $selectedUnit) {
-                ForEach(0..<units.count) {
-                    Text(units[$0])
-                }
-            }
-            .pickerStyle(SegmentedPickerStyle())
-            .padding()
-            
-            Text("\(convertedLength, specifier: "%.2f") \(units[selectedUnit == 0 ? 1 : 0])")
-                .padding()
-            Spacer()
+    var unitConverter: String {
+        var returnValue = ""
+        
+        if length.contains(unitSelection) {
+            let measurement = Measurement(value: Double(input) ?? 0, unit: getUnitLengthType(for: unitSelection))
+            returnValue = "\(measurement.converted(to: getUnitLengthType(for: unitConvertedToSelection)))"
+        } else if area.contains(unitSelection) {
+            let measurement = Measurement(value: Double(input) ?? 0, unit: getUnitAreaType(for: unitSelection))
+            returnValue = "\(measurement.converted(to: getUnitAreaType(for: unitConvertedToSelection)))"
+        } else if volume.contains(unitSelection) {
+            let measurement = Measurement(value: Double(input) ?? 0, unit: getUnitVolumeType(for: unitSelection))
+            returnValue = "\(measurement.converted(to: getUnitVolumeType(for: unitConvertedToSelection)))"
+        } else if mass.contains(unitSelection) {
+            let measurement = Measurement(value: Double(input) ?? 0, unit: getUnitMassType(for: unitSelection))
+            returnValue = "\(measurement.converted(to: getUnitMassType(for: unitConvertedToSelection)))"
+        } else if speed.contains(unitSelection) {
+            let measurement = Measurement(value: Double(input) ?? 0, unit: getUnitSpeedType(for: unitSelection))
+            returnValue = "\(measurement.converted(to: getUnitSpeedType(for: unitConvertedToSelection)))"
+        } else if temperature.contains(unitSelection) {
+            let measurement = Measurement(value: Double(input) ?? 0, unit: getUnitTemperatureType(for: unitSelection))
+            returnValue = "\(measurement.converted(to: getUnitTemperatureType(for: unitConvertedToSelection)))"
         }
-        .padding(.horizontal)
-        .navigationTitle("Unit Converter")
+        
+        return returnValue
     }
     
-    var convertedLength: Double {
-        let inputLength = Double(lengthInput) ?? 0
-        if selectedUnit == 0 {
-            return inputLength * 3.28084
-        } else {
-            return inputLength / 3.28084
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color(uiColor: .systemBackground))
+                .ignoresSafeArea()
+                .onTapGesture {
+                    textfieldFocused = false
+                }
+            
+            VStack {
+                Spacer()
+                
+                Picker("", selection: $selection) {
+                    ForEach(units, id: \.self) { unit in
+                        Text(unit)
+                            .tag(unit)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.bottom)
+                
+                HStack {
+                    TextField("Enter value", text: $input)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                        .focused($textfieldFocused)
+                    
+                    Picker("", selection: $unitSelection) {
+                        ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                            Text(unit)
+                                .tag(unit)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                
+                HStack {
+                    Text(unitConverter)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                    
+                    Picker("", selection: $unitConvertedToSelection) {
+                        ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                            Text(unit)
+                                .tag(unit)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal)
+            .navigationTitle("Unit Converter")
+            .onChange(of: selection) { _ in
+                if selection == "Length" {
+                    unitSelection = "Metres"
+                    unitConvertedToSelection = "Metres"
+                } else if selection == "Area" {
+                    unitSelection = "Acres"
+                    unitConvertedToSelection = "Acres"
+                } else if selection == "Volume" {
+                    unitSelection = "Cubic Centimetres"
+                    unitConvertedToSelection = "Cubic Centimetres"
+                } else if selection == "Mass" {
+                    unitSelection = "Grams"
+                    unitConvertedToSelection = "Grams"
+                } else if selection == "Speed" {
+                    unitSelection = "m/s"
+                    unitConvertedToSelection = "m/s"
+                } else if selection == "Temperature" {
+                    unitSelection = "Celsius"
+                    unitConvertedToSelection = "Celsius"
+                }
+            }
+        }
+    }
+    
+    func getUnitSubUnits(unit: String) -> [String] {
+        switch unit {
+        case "Length":
+            return length
+        case "Area":
+            return area
+        case "Mass":
+            return mass
+        case "Speed":
+            return speed
+        case "Volume":
+            return volume
+        case "Temperature":
+            return temperature
+        default:
+            return []
+        }
+    }
+    
+    func getUnitLengthType(for unit: String) -> UnitLength {
+        switch unit {
+        case "Metres":
+            return UnitLength.meters
+        case "Kilometres":
+            return UnitLength.kilometers
+        case "Inches":
+            return UnitLength.inches
+        case "Feet":
+            return UnitLength.feet
+        case "Yards":
+            return UnitLength.yards
+        case "Miles":
+            return UnitLength.miles
+        default:
+            return UnitLength.baseUnit()
+        }
+    }
+    
+    func getUnitAreaType(for unit: String) -> UnitArea {
+        switch unit {
+        case "Acres":
+            return UnitArea.acres
+        case "Hectares":
+            return UnitArea.hectares
+        case "Square Metres":
+            return UnitArea.squareMeters
+        case "Square Kilometres":
+            return UnitArea.squareKilometers
+        case "Square Inches":
+            return UnitArea.squareInches
+        case "Square Feet":
+            return UnitArea.squareFeet
+        default:
+            return UnitArea.baseUnit()
+        }
+    }
+    
+    func getUnitVolumeType(for unit: String) -> UnitVolume {
+        switch unit {
+        case "Cubic Centimetres":
+            return UnitVolume.cubicCentimeters
+        case "Cubic Metres":
+            return UnitVolume.cubicMeters
+        case "Cubic Inches":
+            return UnitVolume.cubicInches
+        case "Cubic Feet":
+            return UnitVolume.cubicFeet
+        case "Cups":
+            return UnitVolume.cups
+        case "Fluid Ounces":
+            return UnitVolume.fluidOunces
+        case "Gallons":
+            return UnitVolume.gallons
+        case "Millilitres":
+            return UnitVolume.milliliters
+        case "Litres":
+            return UnitVolume.liters
+        case "Teaspoons":
+            return UnitVolume.teaspoons
+        case "Tablespoons":
+            return UnitVolume.tablespoons
+        case "Pints":
+            return UnitVolume.pints
+        default:
+            return UnitVolume.baseUnit()
+        }
+    }
+    
+    func getUnitMassType(for unit: String) -> UnitMass {
+        switch unit {
+        case "Grams":
+            return UnitMass.grams
+        case "Kilograms":
+            return UnitMass.kilograms
+        case "Ounces":
+            return UnitMass.ounces
+        case "Pounds":
+            return UnitMass.pounds
+        case "Metric Tons":
+            return UnitMass.metricTons
+        case "Carats":
+            return UnitMass.carats
+        default:
+            return UnitMass.baseUnit()
+        }
+    }
+    
+    func getUnitSpeedType(for unit: String) -> UnitSpeed {
+        switch unit {
+        case "m/s":
+            return UnitSpeed.metersPerSecond
+        case "km/h":
+            return UnitSpeed.kilometersPerHour
+        case "mi/h":
+            return UnitSpeed.milesPerHour
+        case "knots":
+            return UnitSpeed.knots
+        default:
+            return UnitSpeed.baseUnit()
+        }
+    }
+    
+    func getUnitTemperatureType(for unit: String) -> UnitTemperature {
+        switch unit {
+        case "Celsius":
+            return UnitTemperature.celsius
+        case "Fahrenheit":
+            return UnitTemperature.fahrenheit
+        case "Kelvin":
+            return UnitTemperature.kelvin
+        default:
+            return UnitTemperature.baseUnit()
         }
     }
 }

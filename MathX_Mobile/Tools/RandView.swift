@@ -21,27 +21,37 @@ struct RandView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                Spacer()
-                Text("\(generatedNumber)")
-                    .font(.system(size: 64))
-                    .fontWeight(.bold)
+            ZStack {
+                Rectangle()
+                    .foregroundColor(Color(uiColor: .systemBackground))
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        textfieldFocused = false
+                        generateNumber()
+                    }
                 
-                TextField("Max Number (Inclusive)", text: $ceilingNumber)
-                    .focused($textfieldFocused)
-                    .keyboardType(.numberPad)
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .frame(width: UIScreen.main.bounds.width / 2)
-                Spacer()
+                VStack {
+                    Spacer()
+                    Text("\(generatedNumber)")
+                        .font(.system(size: 64))
+                        .fontWeight(.bold)
+                    
+                    TextField("Max Number (Inclusive)", text: $ceilingNumber)
+                        .focused($textfieldFocused)
+                        .keyboardType(.numberPad)
+                        .padding()
+                        .background(.ultraThickMaterial)
+                        .cornerRadius(16)
+                        .frame(width: UIScreen.main.bounds.width / 2)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .onTapGesture {
+                    textfieldFocused = false
+                    generateNumber()
+                }
+                .frame(height: (UIScreen.main.bounds.height - 120) * 3/5)
             }
-            .padding(.horizontal)
-            .onTapGesture {
-                textfieldFocused = false
-                generateNumber()
-            }
-            .frame(height: (UIScreen.main.bounds.height - 120) * 3/5)
             
             Spacer()
             
@@ -61,7 +71,7 @@ struct RandView: View {
                 if dataSummarySelection == 0 {
                     if numGenerated.isEmpty {
                         Spacer()
-                        Text("No data yet, try tapping the number to generate a random number!")
+                        Text("No data yet, try tapping anywhere in the top half to generate a random number!")
                             .font(.subheadline)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
@@ -77,7 +87,7 @@ struct RandView: View {
                 } else {
                     if numGenerated.isEmpty {
                         Spacer()
-                        Text("No data yet, try tapping the number to generate a random number!")
+                        Text("No data yet, try tapping anywhere in the top half to generate a random number!")
                             .font(.subheadline)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
