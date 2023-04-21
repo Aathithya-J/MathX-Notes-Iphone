@@ -42,6 +42,7 @@ struct welcomeTextPage: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32)
+                        .foregroundColor(.white)
 //                        .frame(height: 64)
                 }
                 Text("Welcome to MathX!")
@@ -94,6 +95,7 @@ struct animatingWelcomeTextPage: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: titleExpandAnimation ? 32 : 64)
+                            .foregroundColor(.white)
 //                            .frame(height: titleExpandAnimation ? 64 : 256)
                     }
                     
@@ -191,8 +193,8 @@ struct aboutPage: View {
 
 struct finalPage: View {
     
+    @ObservedObject var noteManager: NoteManager = .shared
     @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
-
     
     var body: some View {
         VStack {
@@ -202,6 +204,7 @@ struct finalPage: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 64)
+                .foregroundColor(.white)
 //                .frame(height: 128)
             
             Text("Ready to use MathX? Press the button below to continue!")
@@ -211,6 +214,8 @@ struct finalPage: View {
             
             Button {
                 isShowingWelcomeScreen = false // turns welcomeview off (in ContentView), shows normal mathx view
+                let content = "Welcome to MathX. This note is an example of how you can integrate LaTeX into your math notes :) \n\nFor example, here's the quadratic equation: \n \\[x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}\\] \n\nLaTeX allows us to do all sorts of cool things with math, ranging from simple things like \\[x^2\\] to more advanced mathematical formulas.\n\nFeel free to click the \"Edit\" button in the top right hand corner to look at the LaTeX code, or you could click on the blue \"?\" button to learn more about LaTeX."
+                noteManager.notes.insert(Note(title: "LaTeX Example Note", content: content, latexRendering: true, dateLastModified: Date()), at: 0)
             } label: {
                 HStack {
                     Text("Proceed to MathX")

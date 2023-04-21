@@ -76,11 +76,11 @@ struct NotesView: View {
                     VStack {
                         Image(systemName: "square.and.pencil")
                             .resizable()
-                            .frame(width: UIScreen.main.bounds.width / 5, height: UIScreen.main.bounds.width / 5)
+                            .frame(width: 128, height: 128)
                         
                         Text("You have no Notes. Create one by tapping the + icon in the top right hand corner!")
                             .padding(.top)
-                            .font(.subheadline)
+                            .font(.headline)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
                     }

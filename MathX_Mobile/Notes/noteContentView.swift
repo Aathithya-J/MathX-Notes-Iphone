@@ -113,7 +113,7 @@ struct noteContentView: View {
                             LaTeX(noteContent)
                                 .parsingMode(.onlyEquations)
                                 .imageRenderingMode(.template)
-                                .errorMode(.rendered)
+                                .errorMode(.original)
                                 .blockMode(.alwaysInline)
                             Spacer()
                         }
