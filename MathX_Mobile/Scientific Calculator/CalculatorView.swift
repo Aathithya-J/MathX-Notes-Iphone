@@ -94,11 +94,13 @@ struct CalculatorView: View {
             //            .toolbar(.hididen, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
             .onRotate { newOrientation in
-                orientation = newOrientation
-                dismiss.callAsFunction()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                    isCalShowing = true
+                if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
+                    orientation = newOrientation
+                    dismiss.callAsFunction()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                        isCalShowing = true
+                    }
                 }
             }
         } else {
