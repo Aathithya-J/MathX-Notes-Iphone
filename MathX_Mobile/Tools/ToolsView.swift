@@ -26,7 +26,7 @@ struct ToolsView: View {
     @Binding var isCalShowing: Bool
 
     @Binding var deepLinkSource: String
-
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -71,7 +71,7 @@ struct ToolsView: View {
         case cal:
             return AnyView(
                 List {
-                    NavigationLink("Calculator", destination: CalculatorView(deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
+                    NavigationLink("Calculator", destination: CalculatorView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
                     NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView())
                     NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
                     NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())

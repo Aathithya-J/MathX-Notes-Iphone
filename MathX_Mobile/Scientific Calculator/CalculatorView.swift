@@ -5,6 +5,9 @@ import CoreImage.CIFilterBuiltins
 
 struct CalculatorView: View {
     
+    @State private var orientation = UIDeviceOrientation.unknown
+    @Binding var isCalShowing: Bool
+    
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
@@ -13,9 +16,9 @@ struct CalculatorView: View {
     
     @State var equalsPressed = false
     @State var sqrtPressed = false
-
+    
     @State var errorOccurred = false
-
+    
     @State var calculatorOn = true
     
     @State var equationText = ""
@@ -31,10 +34,10 @@ struct CalculatorView: View {
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
     
     @ObservedObject var calculationManager: CalculationManager = .shared
-
+    
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
-
+    
     var body: some View {
         
         if true {
@@ -49,27 +52,6 @@ struct CalculatorView: View {
                 }
                 
                 VStack {
-//                    HStack {
-//                        Button {
-//                            dismiss.callAsFunction()
-//                        } label: {
-//                            HStack {
-//                                Image(systemName: "chevron.left")
-//                                    .font(.title)
-//                                    .fontWeight(.semibold)
-//                                Text("Tools")
-//                                    .font(.title2)
-//                                    .foregroundColor(.purple)
-//                                    .offset(x: -4)
-//                            }
-//                            .accentColor(.purple)
-//                        }
-//
-//                        Spacer()
-//                    }
-//                    .padding(.top)
-//                    .padding(.leading, 5)
-                    
                     HStack {
                         Spacer()
                         Text("MathX-97SG XS")
@@ -78,7 +60,7 @@ struct CalculatorView: View {
                             .fontWeight(.bold)
                             .padding(.trailing)
                     }
-//                    .padding(.top)
+                    //                    .padding(.top)
                     if !showingQRScreen {
                         screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
                             .frame(width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height / 5)
@@ -109,8 +91,16 @@ struct CalculatorView: View {
                 }
             }
             .statusBar(hidden: true)
-//            .toolbar(.hididen, for: .navigationBar)
+            //            .toolbar(.hididen, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
+            .onRotate { newOrientation in
+                orientation = newOrientation
+                dismiss.callAsFunction()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                    isCalShowing = true
+                }
+            }
         } else {
             // advance scientific calculator - WIP - will be an update
             ZStack(alignment: .top) {
@@ -166,18 +156,23 @@ struct CalculatorView: View {
             .toolbar(.hidden, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
             .statusBar(hidden: true)
+            .onRotate { newOrientation in
+                orientation = newOrientation
+                dismiss.callAsFunction()
+                isCalShowing = true
+            }
         }
     }
     
     func receivedDeepLinkSource() {
         if !deepLinkSource.isEmpty {
             showingQRScreen = false
-
+            
             var sourceConvertedArray = [String]()
             
             guard let sourceConverted = deepLinkSource.fromBase64() else { return }
             deepLinkSource = ""
-                        
+            
             sourceConvertedArray = sourceConverted.components(separatedBy: " -,- ")
             
             var ET = sourceConvertedArray[0]
@@ -188,7 +183,7 @@ struct CalculatorView: View {
             
             equationText = ET
             resultsText = RT
-
+            
         }
     }
     
@@ -196,7 +191,7 @@ struct CalculatorView: View {
         var returnValue = ""
         var thereWasAnError = false
         var errorType = ""
-
+        
         if !equation.isEmpty {
             var value = Double()
             var equationConverted = ""
@@ -253,7 +248,7 @@ struct CalculatorView: View {
             }
             
             lastAns = String(value)
-
+            
         }
         
         return thereWasAnError ? "ERROR: \(errorType)" : returnValue
@@ -263,7 +258,7 @@ struct CalculatorView: View {
         var returnValue = ""
         var thereWasAnError = false
         var errorType = ""
-
+        
         if !equation.isEmpty {
             var value = Double()
             var equationConverted = ""
@@ -369,18 +364,18 @@ struct CalculatorView: View {
         let textEncoded = textToBeEncoded.toBase64()
         let encodedDeepLink = "mathx://calculator?source=\(textEncoded)"
         return encodedDeepLink
-//        qrCodeImage = generateQRCode(from: encodedDeepLink)
+        //        qrCodeImage = generateQRCode(from: encodedDeepLink)
     }
     
     func generateQRCode(from string: String) -> UIImage {
         filter.message = Data(string.utf8)
-
+        
         if let outputImage = filter.outputImage {
             if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
                 return UIImage(cgImage: cgimg)
             }
         }
-
+        
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
@@ -404,21 +399,41 @@ struct screenView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             if equationText.contains("ERROR:") {
-                                Text("\(equationText)")
-                                    .lineLimit(1)
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
+                                    Text("\(equationText)")
+                                        .lineLimit(1)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                } else {
+                                    Text("\(equationText)")
+                                        .lineLimit(1)
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
                             } else {
-                                LaTeX("\(equationText)")
-                                    .parsingMode(.all)
-                                    .imageRenderingMode(.template)
-                                    .errorMode(.original)
-                                    .blockMode(.alwaysInline)
-                                    .lineLimit(1)
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
+                                    LaTeX("\(equationText)")
+                                        .parsingMode(.all)
+                                        .imageRenderingMode(.template)
+                                        .errorMode(.original)
+                                        .blockMode(.alwaysInline)
+                                        .lineLimit(1)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                } else {
+                                    LaTeX("\(equationText)")
+                                        .parsingMode(.all)
+                                        .imageRenderingMode(.template)
+                                        .errorMode(.original)
+                                        .blockMode(.alwaysInline)
+                                        .lineLimit(1)
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
                             }
                             
                             HStack {Spacer()}
@@ -457,20 +472,35 @@ struct screenView: View {
                 }
                 
                 Spacer()
-                
-                SubSuperScriptText(inputString: resultsText, bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
-                    .parsingMode(.all)
-                    .imageRenderingMode(.template)
-                    .errorMode(.original)
-                    .blockMode(.alwaysInline)
-                    .lineLimit(1)
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.bottom)
-                    .padding(.horizontal)
-                    .frame(maxWidth: UIScreen.main.bounds.width / 2, alignment: .trailing)
-                    .cornerRadius(16)
+                if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
+                    SubSuperScriptText(inputString: resultsText, bodyFont: .title, subScriptFont: .callout, baseLine: 10.0)
+                        .parsingMode(.all)
+                        .imageRenderingMode(.template)
+                        .errorMode(.original)
+                        .blockMode(.alwaysInline)
+                        .lineLimit(1)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.bottom)
+                        .padding(.horizontal)
+                        .frame(maxWidth: UIScreen.main.bounds.width / 2, alignment: .trailing)
+                        .cornerRadius(16)
+                } else {
+                    SubSuperScriptText(inputString: resultsText, bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
+                        .parsingMode(.all)
+                        .imageRenderingMode(.template)
+                        .errorMode(.original)
+                        .blockMode(.alwaysInline)
+                        .lineLimit(1)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .padding(.bottom)
+                        .padding(.horizontal)
+                        .frame(maxWidth: UIScreen.main.bounds.width / 2, alignment: .trailing)
+                        .cornerRadius(16)
+                }
             }
         }
         .cornerRadius(16)
@@ -492,6 +522,7 @@ struct qrScreenView: View {
             VStack(alignment: .center) {
                 GeometryReader { geometry in
                     HStack(alignment: .center) {
+                        Spacer()
                         VStack {
                             Spacer()
                             Image(uiImage: qrCodeImage)
@@ -514,6 +545,7 @@ struct qrScreenView: View {
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .padding(.leading)
+                        Spacer()
                     }
                 }
             }
@@ -559,6 +591,24 @@ struct modeIndicators: View {
         .background(isIndicatorOn ? indicatorColor.opacity(0.5) : .gray.opacity(0.5))
         .cornerRadius(6)
         
+    }
+}
+
+struct DeviceRotationViewModifier: ViewModifier {
+    let action: (UIDeviceOrientation) -> Void
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+extension View {
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
     }
 }
 

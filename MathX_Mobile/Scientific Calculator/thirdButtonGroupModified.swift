@@ -235,6 +235,8 @@ struct thirdButtonGroupModified: View {
                     } else {
                         showingHistoryView = true
                     }
+                } else {
+                    showingHistoryView = true
                 }
                 
                 shiftIndicator = false
