@@ -32,65 +32,92 @@ struct TrigoCalc: View {
                     sideCFocused = false
                 }
             VStack {
-                Spacer()
-                
-                Triangle()
-                    .foregroundColor(.blue.opacity(0.7))
-                    .frame(width: 128, height: 128)
-                    .overlay(
-                        Text("A (O)")
-                            .offset(y: 80)
-                    )
-                    .overlay(
-                        Text("B (A)")
-                            .offset(x: 90)
-                    )
-                    .overlay(
-                        Text("C (H)")
-                            .offset(x: -18, y: -15)
-                    )
-                    .overlay(
-                        Text("x")
-                            .offset(x: 50, y: -30)
-                    )
-                    .padding(.bottom, 45)
-                
-                LaTeX(equation)
-                    .parsingMode(.all)
-                    .blockMode(.alwaysInline)
-                
-                TextField("Side A (Opposite)", text: $sideA)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .focused($sideAFocused)
-                
-                TextField("Side B (Adjacent)", text: $sideB)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .focused($sideBFocused)
-                
-                TextField("Side C (Hypotenuse)", text: $sideC)
-                    .keyboardType(.decimalPad)
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .padding(.bottom)
-                    .focused($sideCFocused)
-                
-                if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
-                    Text("\(results)")
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
+                Form {
+                    Section {
+                        HStack {
+                            Spacer()
+                            Triangle()
+                                .foregroundColor(.blue.opacity(0.7))
+                                .frame(width: 128, height: 128)
+                                .overlay(
+                                    Text("A (O)")
+                                        .offset(y: 80)
+                                )
+                                .overlay(
+                                    Text("B (A)")
+                                        .offset(x: 90)
+                                )
+                                .overlay(
+                                    Text("C (H)")
+                                        .offset(x: -18, y: -15)
+                                )
+                                .overlay(
+                                    LaTeX("\\[x\\]°")
+                                        .offset(x: 50, y: -30)
+                                        .parsingMode(.onlyEquations)
+                                        .blockMode(.alwaysInline)
+                                )
+                                .padding()
+                                .padding(.bottom)
+                            Spacer()
+                        }
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
+                                if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) < 3 {
+                                    LaTeX("\\[x\\]° = \\[\(equation)\\]")
+                                        .parsingMode(.onlyEquations)
+                                        .blockMode(.alwaysInline)
+                                } else {
+                                    LaTeX("\\[x\\]° =")
+                                        .parsingMode(.onlyEquations)
+                                        .blockMode(.alwaysInline)
+                                }
+                            } else {
+                                LaTeX("\\[x\\]° =")
+                                    .parsingMode(.onlyEquations)
+                                    .blockMode(.alwaysInline)
+                            }
+                        }
+                    }
+                    
+                    Section {
+                        TextField("Side A (Opposite)", text: $sideA)
+                            .keyboardType(.decimalPad)
+                            .focused($sideAFocused)
+                        
+                        TextField("Side B (Adjacent)", text: $sideB)
+                            .keyboardType(.decimalPad)
+                            .focused($sideBFocused)
+                        
+                        TextField("Side C (Hypotenuse)", text: $sideC)
+                            .keyboardType(.decimalPad)
+                            .focused($sideCFocused)
+                    }
+                    
+                    Section {
+                        HStack {
+                            if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) < 3 {
+                                LaTeX("\\[x\\]° =")
+                                    .parsingMode(.onlyEquations)
+                                    .blockMode(.alwaysInline)
+                                Spacer()
+                                
+                                if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
+                                    if results != "NaN" {
+                                        Text("\(results)°")
+                                    } else {
+                                        Text("-")
+                                    }
+                                }
+                            } else {
+                                Text("\(results)")
+                            }
+                        }
+                    }
                 }
-                
-                Spacer()
+                .scrollDismissesKeyboard(.interactively)
             }
-            .padding(.horizontal)
             .navigationTitle("Trigonometry Calculator")
             .onChange(of: sideA) { _ in
                 results = findAngleX()
@@ -153,15 +180,15 @@ struct TrigoCalc: View {
             if sideC.isEmpty {
                 // TOA
                 equation = "tan^-1\\frac{\(o.formatted())}{\(a.formatted())}"
-                returnValue = "x = \(String(atan(o/a).formatted()))"
+                returnValue = "\(String(atan(o/a).formatted()))"
             } else if sideB.isEmpty {
                 // SOH
                 equation = "sin^-1\\frac{\(o.formatted())}{\(h.formatted())}"
-                returnValue = "x = \(String(asin(o/h).formatted()))"
+                returnValue = "\(String(asin(o/h).formatted()))"
             } else {
                 // CAH
                 equation = "cos^-1\\frac{\(a.formatted())}{\(h.formatted())}"
-                returnValue = "x = \(String(acos(a/h).formatted()))"
+                returnValue = "\(String(acos(a/h).formatted()))"
             }
         }
         
