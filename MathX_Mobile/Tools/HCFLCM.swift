@@ -73,6 +73,7 @@ struct HCF_LCM_CalculatorView: View  {
                         TextField("Second Number", text: .init(get: { rhsNumber.description },
                                                                set: { rhsNumber = Int($0) ?? 0 }))
                         .keyboardType(.numberPad)
+                        
                         Toggle("Only show prime numbers", isOn: .init(get: {
                             showOnlyPrime
                         }, set: { newValue in
@@ -80,6 +81,17 @@ struct HCF_LCM_CalculatorView: View  {
                                 showOnlyPrime = newValue
                             }
                         }))
+                        .disabled(lhsNumber <= 0 && rhsNumber <= 0)
+                        .onChange(of: lhsNumber) { _ in
+                            if lhsNumber <= 0 && rhsNumber <= 0 {
+                                showOnlyPrime = false
+                            }
+                        }
+                        .onChange(of: rhsNumber) { _ in
+                            if lhsNumber <= 0 && rhsNumber <= 0 {
+                                showOnlyPrime = false
+                            }
+                        }
                     }
                     
                     if lhsNumber > 0 || rhsNumber > 0 {
@@ -96,6 +108,23 @@ struct HCF_LCM_CalculatorView: View  {
                                         .onChange(of: geom.frame(in: .named("listCoordinate"))) { newValue in
                                             position = newValue
                                         }
+                                }
+                            }
+                        }
+                    } else {
+                        Section {
+                            HStack(alignment: .top) {
+                                VStack {
+                                    Text("0")
+                                        .frame(height: 30)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, -4)
+                                }
+                                VStack {
+                                    Text("0")
+                                        .frame(height: 30)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, -4)
                                 }
                             }
                         }
