@@ -79,7 +79,11 @@ struct CalculatorView: View {
                     equalsButtonPressed()
                 }
                 .onChange(of: sqrtPressed) { value in
-                    if !equationText.contains("sqrt(") && equationText != "" && !equationText.contains("Ans") {
+                    if !equationText.contains("sqrt(") && equationText != "" {
+                        if equationText.contains("Ans") && !resultsText.isEmpty {
+                            equationText = "Ans"
+                        }
+                        
                         sqrtButtonPressed()
                     }
                 }
@@ -141,8 +145,6 @@ struct CalculatorView: View {
                     
                     Spacer()
                     Spacer()
-                    
-                    
                 }
                 .padding(.horizontal)
                 .onChange(of: equalsPressed) { value in
@@ -166,29 +168,44 @@ struct CalculatorView: View {
         }
     }
     
-    func receivedDeepLinkSource() {
-        if !deepLinkSource.isEmpty {
-            showingQRScreen = false
-            
-            var sourceConvertedArray = [String]()
-            
-            guard let sourceConverted = deepLinkSource.fromBase64() else { return }
-            deepLinkSource = ""
-            
-            sourceConvertedArray = sourceConverted.components(separatedBy: " -,- ")
-            
-            var ET = sourceConvertedArray[0]
-            var RT = sourceConvertedArray[1]
-            
-            ET = ET.replacingOccurrences(of: "ET:", with: "")
-            RT = RT.replacingOccurrences(of: "RT:", with: "")
-            
-            equationText = ET
-            resultsText = RT
-            
+    // MARK: - On button changes
+    func equalsButtonPressed() {
+        lastEquation = equationText // sets lastequation to equationtext in case of error
+        let returnValue: String = calculate(equation: equationText) // gets calculated value, could be error or value
+        
+        if returnValue.contains("ERROR:") { // if error occurred
+            errorOccurred(errorMessage: returnValue)
+        } else { // if no error
+            if !returnValue.contains("×10") && returnValue.count > 5 { // value is in standard form
+                resultsText = returnValue
+                saveToHistory(equationText: equationText, resultsText: returnValue)
+            } else {  // value isnt in standard form
+                resultsText = formatValueToBeDisplayed(returnValue: returnValue)
+                saveToHistory(equationText: equationText, resultsText: returnValue)
+            }
         }
     }
     
+    func sqrtButtonPressed() {
+        lastEquation = equationText // sets lastequation to equationtext in case of error
+        let returnValue: String = sqrtcalculate(equation: equationText) // gets calculated value, could be error or value
+        
+        if returnValue.contains("ERROR:") { // if error occurred
+            errorOccurred(errorMessage: returnValue)
+        } else { // if no error
+            if !returnValue.contains("×10") { // value is in standard form
+                resultsText = returnValue
+                equationText = "sqrt(\(equationText))"
+                saveToHistory(equationText: equationText, resultsText: returnValue)
+            } else {
+                resultsText = formatValueToBeDisplayed(returnValue: returnValue)
+                equationText = "sqrt(\(equationText))"
+                saveToHistory(equationText: equationText, resultsText: returnValue)
+            }
+        }
+    }
+    
+    // MARK: - Mathematical Calculations
     func calculate(equation: String) -> String {
         var returnValue = ""
         var thereWasAnError = false
@@ -198,62 +215,24 @@ struct CalculatorView: View {
             var value = Double()
             var equationConverted = ""
             
-            equationConverted = equation.replacingOccurrences(of: "÷", with: "/")
-            equationConverted = equationConverted.replacingOccurrences(of: "×", with: "*")
-            equationConverted = equationConverted.replacingOccurrences(of: "Ans", with: "(\(lastAns))")
+            equationConverted = formatEquationForCalculation(equation: equation) // formats equation, replaces Ans with lastans and () with * etc
             
-            var equationConvertedArray = Array(equationConverted)
-            
-            equationConvertedArray.indices.forEach { i in
-                if equationConvertedArray[i] == "(" {
-                    if i > 0 {
-                        if equationConvertedArray[i - 1] == ")" {
-                            equationConvertedArray.insert("*", at: i)
-                        } else if equationConvertedArray[i - 1].isNumber {
-                            equationConvertedArray.insert("*", at: i)
-                        }
-                    }
-                }
-                
-                if equationConvertedArray[i] == ")" {
-                    if i < (equationConvertedArray.count - 1) {
-                        if equationConvertedArray[i + 1].isNumber {
-                            equationConvertedArray.insert("*", at: i + 1)
-                        }
-                    }
-                }
-            }
-            
-            equationConverted = String(equationConvertedArray)
-            
+            // evaluates equation and returns either a value or an error
             do {
                 let expression = try MathExpression(equationConverted)
                 value = expression.evaluate()
+                lastAns = String(value) // sets Ans to String of calculated value
             } catch {
                 print(error)
                 thereWasAnError = true
                 errorType = error.localizedDescription
             }
+            returnValue = String(value.formatted()) // formats value to look like int if its .0
             
-            returnValue = String(value.formatted())
-            
-            if returnValue.count > 15 {
-                let val = value
-                let formatter = NumberFormatter()
-                formatter.numberStyle = .scientific
-                formatter.usesSignificantDigits = true
-                formatter.positiveFormat = "0.###########E1"
-                formatter.exponentSymbol = "×10"
-                if let scientificFormatted = formatter.string(for: val) {
-                    returnValue = scientificFormatted
-                }
-            }
-            
-            lastAns = String(value)
-            
+            returnValue = convertToStandardForm(returnValue: returnValue, value: value)
         }
         
-        return thereWasAnError ? "ERROR: \(errorType)" : returnValue
+        return thereWasAnError ? "ERROR: \(errorType)" : returnValue // returns value, else returns error
     }
     
     func sqrtcalculate(equation: String) -> String {
@@ -265,152 +244,122 @@ struct CalculatorView: View {
             var value = Double()
             var equationConverted = ""
             
-            equationConverted = equation.replacingOccurrences(of: "÷", with: "/")
-            equationConverted = equationConverted.replacingOccurrences(of: "×", with: "*")
-            equationConverted = equationConverted.replacingOccurrences(of: "Ans", with: "(\(lastAns))")
+            equationConverted = formatEquationForCalculation(equation: equation) // formats equation, replaces Ans with lastans and () with * etc
             
-            var equationConvertedArray = Array(equationConverted)
-            
-            equationConvertedArray.indices.forEach { i in
-                if equationConvertedArray[i] == "(" {
-                    if i > 0 {
-                        if equationConvertedArray[i - 1] == ")" {
-                            equationConvertedArray.insert("*", at: i)
-                        } else if equationConvertedArray[i - 1].isNumber {
-                            equationConvertedArray.insert("*", at: i)
-                        }
-                    }
-                }
-                
-                if equationConvertedArray[i] == ")" {
-                    if i < (equationConvertedArray.count - 1) {
-                        if equationConvertedArray[i + 1].isNumber {
-                            equationConvertedArray.insert("*", at: i + 1)
-                        }
-                    }
-                }
-            }
-            
-            equationConverted = String(equationConvertedArray)
-            
+            // evaluates equation and returns either a value or an error
             do {
                 let expression = try MathExpression(equationConverted)
                 value = expression.evaluate()
+                lastAns = String(sqrt(value))
             } catch {
                 print(error)
                 thereWasAnError = true
                 errorType = error.localizedDescription
             }
             
-            returnValue = String(sqrt(value).formatted())
-            lastAns = String(sqrt(value))
-                        
-            if returnValue.count > 15 {
-                let val = sqrt(value)
-                let formatter = NumberFormatter()
-                formatter.numberStyle = .scientific
-                formatter.usesSignificantDigits = true
-                formatter.positiveFormat = "0.###########E1"
-                formatter.exponentSymbol = "×10"
-                if let scientificFormatted = formatter.string(for: val) {
-                    returnValue = scientificFormatted
-                }
-            }
-            
+            returnValue = String(sqrt(value).formatted()) // square root function happens here
+            returnValue = convertToStandardForm(returnValue: returnValue, value: sqrt(value))
         }
         
         return thereWasAnError ? "ERROR: \(errorType)" : returnValue
     }
     
-    func equalsButtonPressed() {
-        lastEquation = equationText
-        let returnValue: String = calculate(equation: equationText)
+    
+    // MARK: - Mathematical Subfunctions
+    func saveToHistory(equationText et: String, resultsText rt: String) {
+        calculationManager.calculations.insert(Calculation(equationText: et, resultsText: rt, base64encoded: generateEquationQRandLink()), at: 0)
+    }
+    
+    func formatEquationForCalculation(equation: String) -> String {
+        var equationConverted = ""
         
-        if returnValue.contains("ERROR:") {
-            errorOccurred = true
-            
-            equationText = returnValue
-            resultsText = ""
-        } else {
-            if !returnValue.contains("×10") && returnValue.count > 5 {
-                resultsText = returnValue
-                saveToHistory(equationText: equationText, resultsText: returnValue)
-            } else {
-                var numberOfDigitsInPower = Int()
-                var positionOfStartingOfPower = Int()
-                
-                var resultsTextArray = Array(returnValue)
-                resultsTextArray.indices.forEach { indices in
-                    if resultsTextArray[indices] == "×" {
-                        if resultsTextArray[indices + 1] == "1" {
-                            if resultsTextArray[indices + 2] == "0" {
-                                numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
-                                positionOfStartingOfPower = indices + 2
-                            }
-                        }
+        equationConverted = equation.replacingOccurrences(of: "÷", with: "/")
+        equationConverted = equationConverted.replacingOccurrences(of: "×", with: "*")
+        equationConverted = equationConverted.replacingOccurrences(of: "Ans", with: "(\(lastAns))")
+        
+        var equationConvertedArray = Array(equationConverted)
+        
+        equationConvertedArray.indices.forEach { i in
+            if equationConvertedArray[i] == "(" {
+                if i > 0 {
+                    if equationConvertedArray[i - 1] == ")" {
+                        equationConvertedArray.insert("*", at: i)
+                    } else if equationConvertedArray[i - 1].isNumber {
+                        equationConvertedArray.insert("*", at: i)
                     }
                 }
-                
-                if numberOfDigitsInPower > 0 {
-                    resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
-                    resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
-                    
-                    resultsText = String(resultsTextArray)
-                    saveToHistory(equationText: equationText, resultsText: String(resultsTextArray))
-                    
-                } else {
-                    resultsText = returnValue
-                    saveToHistory(equationText: equationText, resultsText: returnValue)
+            }
+            
+            if equationConvertedArray[i] == ")" {
+                if i < (equationConvertedArray.count - 1) {
+                    if equationConvertedArray[i + 1].isNumber {
+                        equationConvertedArray.insert("*", at: i + 1)
+                    }
                 }
             }
         }
+        
+        return String(equationConvertedArray)
     }
     
-    func sqrtButtonPressed() {
-        lastEquation = equationText
-        let returnValue: String = sqrtcalculate(equation: equationText)
-        equationText = "sqrt(\(equationText))"
+    func convertToStandardForm(returnValue: String, value: Double) -> String {
+        var formattedReturn = ""
         
-        if returnValue.contains("ERROR:") {
-            errorOccurred = true
-            
-            equationText = returnValue
-            resultsText = ""
+        if returnValue.count > 15 {
+            let val = value
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .scientific
+            formatter.usesSignificantDigits = true
+            formatter.positiveFormat = "0.###########E1"
+            formatter.exponentSymbol = "×10"
+            if let scientificFormatted = formatter.string(for: val) {
+                formattedReturn = scientificFormatted
+            }
         } else {
-            if !returnValue.contains("×10") && returnValue.count > 5 {
-                resultsText = returnValue
-                saveToHistory(equationText: equationText, resultsText: returnValue)
-            } else {
-                var numberOfDigitsInPower = Int()
-                var positionOfStartingOfPower = Int()
-                
-                var resultsTextArray = Array(returnValue)
-                resultsTextArray.indices.forEach { indices in
-                    if resultsTextArray[indices] == "×" {
-                        if resultsTextArray[indices + 1] == "1" {
-                            if resultsTextArray[indices + 2] == "0" {
-                                numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
-                                positionOfStartingOfPower = indices + 2
-                            }
-                        }
+            formattedReturn = returnValue
+        }
+        
+        return formattedReturn
+    }
+    
+    func errorOccurred(errorMessage: String) {
+        errorOccurred = true
+        
+        equationText = errorMessage
+        resultsText = ""
+    }
+    
+    func formatValueToBeDisplayed(returnValue: String) -> String {
+        var stringToBeDisplayed = ""
+        
+        var numberOfDigitsInPower = Int()
+        var positionOfStartingOfPower = Int()
+        
+        var resultsTextArray = Array(returnValue)
+        resultsTextArray.indices.forEach { indices in
+            if resultsTextArray[indices] == "×" {
+                if resultsTextArray[indices + 1] == "1" {
+                    if resultsTextArray[indices + 2] == "0" {
+                        numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
+                        positionOfStartingOfPower = indices + 2
                     }
-                }
-                
-                if numberOfDigitsInPower > 0 {
-                    resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
-                    resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
-                    
-                    resultsText = String(resultsTextArray)
-                    saveToHistory(equationText: equationText, resultsText: String(resultsTextArray))
-                    
-                } else {
-                    resultsText = returnValue
-                    saveToHistory(equationText: equationText, resultsText: returnValue)
                 }
             }
         }
+        
+        if numberOfDigitsInPower > 0 {
+            resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
+            resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
+            
+            stringToBeDisplayed = String(resultsTextArray)
+        } else {
+            stringToBeDisplayed = returnValue
+        }
+        
+        return stringToBeDisplayed
     }
     
+    // MARK: - QR and DeepLinks Generation
     func generateEquationQRandLink() -> String {
         let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
         
@@ -432,8 +381,27 @@ struct CalculatorView: View {
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
-    func saveToHistory(equationText et: String, resultsText rt: String) {
-        calculationManager.calculations.insert(Calculation(equationText: et, resultsText: rt, base64encoded: generateEquationQRandLink()), at: 0)
+    func receivedDeepLinkSource() {
+        if !deepLinkSource.isEmpty {
+            showingQRScreen = false
+            
+            var sourceConvertedArray = [String]()
+            
+            guard let sourceConverted = deepLinkSource.fromBase64() else { return }
+            deepLinkSource = ""
+            
+            sourceConvertedArray = sourceConverted.components(separatedBy: " -,- ")
+            
+            var ET = sourceConvertedArray[0]
+            var RT = sourceConvertedArray[1]
+            
+            ET = ET.replacingOccurrences(of: "ET:", with: "")
+            RT = RT.replacingOccurrences(of: "RT:", with: "")
+            
+            equationText = ET
+            resultsText = RT
+            
+        }
     }
 }
 
