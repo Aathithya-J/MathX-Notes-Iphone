@@ -83,8 +83,13 @@ struct PythagorasCalc: View {
                                 Text("Unknown side:")
                                 Spacer()
                                 if fillCount(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0) > 1 {
-                                    Text("\(calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0))")
-                                        .multilineTextAlignment(.trailing)
+                                    if calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0) != "NaN" {
+                                        Text("\(calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0))")
+                                            .multilineTextAlignment(.trailing)
+                                    } else {
+                                        Text("-")
+                                            .multilineTextAlignment(.trailing)
+                                    }
                                 }
                             }
                         }

@@ -106,12 +106,15 @@ struct TrigoCalc: View {
                                 if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
                                     if results != "NaN" {
                                         Text("\(results)°")
+                                            .multilineTextAlignment(.trailing)
                                     } else {
                                         Text("-")
+                                            .multilineTextAlignment(.trailing)
                                     }
                                 }
                             } else {
                                 Text("\(results)")
+                                    .multilineTextAlignment(.trailing)
                             }
                         }
                     }
