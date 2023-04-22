@@ -28,62 +28,60 @@ struct SetsCalc: View {
                     set2Focused = false
                 }
             VStack {
-                Picker("", selection: $setCalculationSelected) {
-                    Text("Union")
-                        .tag(0)
-                    Text("Intersection")
-                        .tag(1)
-                }
-                .pickerStyle(.segmented)
-                
-                Spacer()
-                Text("Do not leave a space between commas and elements.")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
-                
-                TextField("First Set (separate elements with \",\")", text: $set1)
-                    .keyboardType(.numbersAndPunctuation)
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .focused($set1Focused)
-                
-                TextField("Second Set (separate elements with \",\")", text: $set2)
-                    .keyboardType(.numbersAndPunctuation)
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                    .focused($set2Focused)
-                
-                Text("{\(result)}")
-                    .padding()
-                    .background(.ultraThickMaterial)
-                    .cornerRadius(16)
-                
-                Button {
-                    if setCalculationSelected == 0 {
-                        result = calculateUnion(setString1: set1, setString2: set2)
-                    } else if setCalculationSelected == 1 {
-                        result = calculateIntersection(setString1: set1, setString2: set2)
+                Form {
+                    Section {
+                        Picker("", selection: $setCalculationSelected) {
+                            Text("Union")
+                                .tag(0)
+                            Text("Intersection")
+                                .tag(1)
+                        }
+                        .pickerStyle(.segmented)
                     }
-                } label: {
-                    Text("Calculate")
-                        .padding()
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                        .background(.blue)
-                        .cornerRadius(16)
+                    
+                    Section(footer: Text("Do not leave a space between commas and elements.")) {
+                        TextField("First Set (separate elements with \",\")", text: $set1)
+                            .keyboardType(.numbersAndPunctuation)
+                            .focused($set1Focused)
+                        
+                        TextField("Second Set (separate elements with \",\")", text: $set2)
+                            .keyboardType(.numbersAndPunctuation)
+                            .focused($set2Focused)
+                    }
+                    
+                    Section {
+                        Text("{\(result)}")
+                    }
                 }
-                .buttonStyle(.plain)
-                .disabled(set1.isEmpty || set2.isEmpty)
-                .padding(.top)
-                
-                Spacer()
+                .scrollDismissesKeyboard(.interactively)
+                .onChange(of: set1) { _ in
+                    if !set1.isEmpty && !set2.isEmpty {
+                        if setCalculationSelected == 0 {
+                            result = calculateUnion(setString1: set1, setString2: set2)
+                        } else if setCalculationSelected == 1 {
+                            result = calculateIntersection(setString1: set1, setString2: set2)
+                        }
+                    }
+                }
+                .onChange(of: set2) { _ in
+                    if !set1.isEmpty && !set2.isEmpty {
+                        if setCalculationSelected == 0 {
+                            result = calculateUnion(setString1: set1, setString2: set2)
+                        } else if setCalculationSelected == 1 {
+                            result = calculateIntersection(setString1: set1, setString2: set2)
+                        }
+                    }
+                }
+                .onChange(of: setCalculationSelected) { _ in
+                    if !set1.isEmpty && !set2.isEmpty {
+                        if setCalculationSelected == 0 {
+                            result = calculateUnion(setString1: set1, setString2: set2)
+                        } else if setCalculationSelected == 1 {
+                            result = calculateIntersection(setString1: set1, setString2: set2)
+                        }
+                    }
+                }
             }
-            .padding(.horizontal)
             .navigationTitle("Set Calculator")
         }
     }
@@ -97,8 +95,29 @@ struct SetsCalc: View {
         
         if !set1.contains("") && !set2.contains("") {
             let unionUnsortedSet = set1 + set2
-            var unionSortedSet = unionUnsortedSet.sorted()
+            var unionSortedSet: [String] = []
             
+            var tempDoubleArray: [Double] = []
+            var tempOthersArray: [String] = []
+
+            unionUnsortedSet.forEach { element in
+                guard let elementNumber = Double(element) else {
+                    //isnt double
+                    tempOthersArray.append(element)
+                    tempOthersArray.sort()
+                    return
+                }
+                // is double
+                tempDoubleArray.append(elementNumber)
+                tempDoubleArray.sort()
+            }
+            
+            tempDoubleArray.forEach { double in
+                unionSortedSet.append(double.formatted())
+            }
+            
+            unionSortedSet += tempOthersArray
+                                    
             unionSortedSet.indices.forEach { i in
                 if i > 0 {
                     if unionSortedSet[i] == unionSortedSet[i - 1] {
@@ -113,7 +132,7 @@ struct SetsCalc: View {
                 }
             }
             
-            returnValue = unionSortedSet.joined(separator: ",")
+            returnValue = unionSortedSet.joined(separator: ", ")
         }
         
         return returnValue
@@ -133,7 +152,7 @@ struct SetsCalc: View {
                 }
             }
             
-            returnValue = intersectedElements.joined(separator: ",")
+            returnValue = intersectedElements.joined(separator: ", ")
         }
         
         return returnValue

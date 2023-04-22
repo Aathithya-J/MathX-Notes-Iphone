@@ -30,7 +30,6 @@ struct PythagorasCalc: View {
                 }
             
             VStack {
-                
                 Form {
                     Section {
                         HStack {
@@ -91,6 +90,7 @@ struct PythagorasCalc: View {
                         }
                     }
                 }
+                .scrollDismissesKeyboard(.interactively)
             }
         }
         .navigationTitle("Pythagoras Calculator")
