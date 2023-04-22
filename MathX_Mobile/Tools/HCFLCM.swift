@@ -57,7 +57,7 @@ struct HCF_LCM_CalculatorView: View  {
             .padding(.horizontal)
             
             if HCFLCMSelection == 0 {
-                List {
+                Form {
                     //            Text("""
                     //                minX: \(position.minX)
                     //                maxX: \(position.maxX)
@@ -99,7 +99,7 @@ struct HCF_LCM_CalculatorView: View  {
                         }
                     }
                 }
-                .scrollDismissesKeyboard(.immediately)
+                .scrollDismissesKeyboard(.interactively)
                 .coordinateSpace(name: "listCoordinate")
             } else {
                 OldHCF_LCM_CalculatorView(isHCFSelected: $HCFLCMSelection)

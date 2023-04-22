@@ -33,6 +33,7 @@ struct LinearQuadEquationCalc: View {
     @FocusState var quadraticaTextFocused: Bool
     @FocusState var quadraticbTextFocused: Bool
     @FocusState var quadraticcTextFocused: Bool
+    
 
     var body: some View {
         ZStack {
@@ -52,90 +53,157 @@ struct LinearQuadEquationCalc: View {
                 //                    .tag(1)
                 //            }
                 //            .pickerStyle(.segmented)
-                
-                Spacer()
-                
+                                
                 if equationSelected == 0 {
                     // linear
-                    
                     TextField("linear", text: $linearText)
                 } else {
-                    if quadcalculated {
-                        VStack(alignment: .leading) {
-                            Text("y-intercept: (0, \(yintercept))")
-                            Text("discriminant: \(discriminant)")
-                            Text("number of roots: \(roots)")
+                    Form {
+                        Section {
+                            LaTeX("\(quadraticaText.isEmpty ? "a" : quadraticaText)x^2 \(quadraticbText.isEmpty ? "+" : Double(quadraticbText) ?? 0 < 0 ? "-": "+") \(quadraticbText.isEmpty ? "b" : String(abs(Double(quadraticbText) ?? 0).formatted()))x \(quadraticcText.isEmpty ? "+" : Double(quadraticcText) ?? 0 < 0 ? "-": "+") \(quadraticcText.isEmpty ? "c" : String(abs(Double(quadraticcText) ?? 0).formatted())) = 0")
+                                .parsingMode(.all)
+                                .blockMode(.alwaysInline)
+                        }
+                        
+                        Section {
+                            TextField("a", text: $quadraticaText)
+                                .keyboardType(.decimalPad)
+                                .focused($quadraticaTextFocused)
                             
-                            if Double(discriminant) ?? 0 < 0 {
-                                Text("x-intercept: NaN")
-                            } else if Double(discriminant) ?? 0 == 0 {
-                                Text("x-intercept: (\(quadxintercept1), 0)")
-                            } else {
-                                Text("x-intercept 1: (\(quadxintercept1), 0)")
-                                Text("x-intercept 2: (\(quadxintercept2), 0)")
+                            TextField("b", text: $quadraticbText)
+                                .keyboardType(.decimalPad)
+                                .focused($quadraticbTextFocused)
+                            
+                            TextField("c", text: $quadraticcText)
+                                .keyboardType(.decimalPad)
+                                .focused($quadraticcTextFocused)
+                        }
+                        
+                        Section {
+                            HStack {
+                                Text("y-intercept:")
+                                Spacer()
+                                if quadcalculated {
+                                    Text("(0, \(yintercept))")
+                                }
                             }
                             
-                            Text("line of symmetry: \(lineofsymmetry)")
-                            Text("turning point: \(turningpoint)")
+                            if Double(discriminant.replacingOccurrences(of: ",", with: "")) ?? 0 < 0 {
+                                HStack {
+                                    Text("x-intercept:")
+                                    Spacer()
+                                    Text(quadcalculated ? "-" : "")
+                                }
+                            } else if Double(discriminant.replacingOccurrences(of: ",", with: "")) ?? 0 == 0 {
+                                HStack {
+                                    Text("x-intercept:")
+                                    Spacer()
+                                    if quadcalculated {
+                                        Text("(\(quadxintercept1), 0)")
+                                    }
+                                }
+                            } else {
+                                HStack {
+                                    Text("x-intercept 1:")
+                                    Spacer()
+                                    if quadcalculated {
+                                        Text("(\(quadxintercept1), 0)")
+                                    }
+                                }
+                                
+                                HStack {
+                                    Text("x-intercept 2:")
+                                    Spacer()
+                                    if quadcalculated {
+                                        Text("(\(quadxintercept2), 0)")
+                                    }
+                                }
+                            }
+                            
+                            HStack {
+                                Text("Line of symmetry:")
+                                Spacer()
+                                Text("\(quadcalculated ? lineofsymmetry : "")")
+                            }
+                            
+                            HStack {
+                                Text("Turning point:")
+                                Spacer()
+                                Text("\(quadcalculated ? turningpoint : "")")
+                            }
+                            
+                            HStack {
+                                Text("Discriminant:")
+                                Spacer()
+                                Text("\(quadcalculated ? discriminant : "")")
+                            }
+                            
+                            HStack {
+                                Text("Number of roots:")
+                                Spacer()
+                                Text("\(quadcalculated ? roots : "")")
+                            }
                         }
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                        .padding(.bottom)
                     }
-                    
-                    LaTeX("\(quadraticaText.isEmpty ? "a" : quadraticaText)x^2 \(quadraticbText.isEmpty ? "+" : Double(quadraticbText) ?? 0 < 0 ? "-": "+") \(quadraticbText.isEmpty ? "b" : String(abs(Double(quadraticbText) ?? 0).formatted()))x \(quadraticcText.isEmpty ? "+" : Double(quadraticcText) ?? 0 < 0 ? "-": "+") \(quadraticcText.isEmpty ? "c" : String(abs(Double(quadraticcText) ?? 0).formatted())) = 0")
-                        .parsingMode(.all)
-                        .blockMode(.alwaysInline)
-                    
-                    VStack {
-                        TextField("a", text: $quadraticaText)
-                            .keyboardType(.numbersAndPunctuation)
-                            .padding()
-                            .background(.ultraThickMaterial)
-                            .cornerRadius(16)
-                            .focused($quadraticaTextFocused)
-
-                        TextField("b", text: $quadraticbText)
-                            .keyboardType(.numbersAndPunctuation)
-                            .padding()
-                            .background(.ultraThickMaterial)
-                            .cornerRadius(16)
-                            .focused($quadraticbTextFocused)
-                        
-                        TextField("c", text: $quadraticcText)
-                            .keyboardType(.numbersAndPunctuation)
-                            .padding()
-                            .background(.ultraThickMaterial)
-                            .cornerRadius(16)
-                            .focused($quadraticcTextFocused)
-                        
-                        Button {
+                    .scrollDismissesKeyboard(.interactively)
+                    .onChange(of: quadraticaText) { _ in
+                        if !quadraticaText.isEmpty && !quadraticbText.isEmpty && !quadraticcText.isEmpty {
                             calculateQuadEquation(
                                 a: Double(quadraticaText) ?? 0,
                                 b: Double(quadraticbText) ?? 0,
                                 c: Double(quadraticcText) ?? 0
                             )
-                        } label: {
-                            Text("Calculate")
-                                .padding()
-                                .font(.headline)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                                .background(.blue)
-                                .cornerRadius(16)
+                            
                         }
-                        .buttonStyle(.plain)
-                        .disabled(quadraticaText.isEmpty || quadraticbText.isEmpty || quadraticcText.isEmpty)
                     }
-                    .padding(.top)
+                    .onChange(of: quadraticbText) { _ in
+                        if !quadraticaText.isEmpty && !quadraticbText.isEmpty && !quadraticcText.isEmpty {
+                            calculateQuadEquation(
+                                a: Double(quadraticaText) ?? 0,
+                                b: Double(quadraticbText) ?? 0,
+                                c: Double(quadraticcText) ?? 0
+                            )
+                        }
+                    }
+                    .onChange(of: quadraticcText) { _ in
+                        if !quadraticaText.isEmpty && !quadraticbText.isEmpty && !quadraticcText.isEmpty {
+                            calculateQuadEquation(
+                                a: Double(quadraticaText) ?? 0,
+                                b: Double(quadraticbText) ?? 0,
+                                c: Double(quadraticcText) ?? 0
+                            )
+                        }
+                    }
                 }
-                
-                Spacer()
             }
-            .padding(.horizontal)
             .navigationTitle("Quadratic Calculator")
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    HStack {
+                        Button {
+                            if quadraticaTextFocused {
+                                if !quadraticaText.isEmpty {
+                                    guard let quadadouble = Double(quadraticaText) else { return }
+                                    quadraticaText = String((quadadouble * -1).formatted()).replacingOccurrences(of: ",", with: "")
+                                }
+                            } else if quadraticbTextFocused {
+                                if !quadraticbText.isEmpty {
+                                    guard let quadbdouble = Double(quadraticbText) else { return }
+                                    quadraticbText = String((quadbdouble * -1).formatted()).replacingOccurrences(of: ",", with: "")
+                                }
+                            } else if quadraticcTextFocused {
+                                if !quadraticcText.isEmpty {
+                                    guard let quadcdouble = Double(quadraticcText) else { return }
+                                    quadraticcText = String((quadcdouble * -1).formatted()).replacingOccurrences(of: ",", with: "")
+                                }
+                            }
+                        } label: {
+                            Text("Negative")
+                        }
+                        Spacer()
+                    }
+                }
+            }
         }
     }
     
