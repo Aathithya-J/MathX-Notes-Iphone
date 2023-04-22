@@ -267,46 +267,26 @@ struct OldHCF_LCM_CalculatorView: View {
                     number2Focused = false
                 }
             VStack {
-                //            Picker("", selection: $isHCFSelected) {
-                //                Text("HCF").tag(0)
-                //                Text("LCM").tag(1)
-                //            }
-                //            .pickerStyle(SegmentedPickerStyle())
-                //            .padding()
-                //            .padding(.top, 20)
-                //            .onChange(of: isHCFSelected) { _ in
-                //                self.calculate()
-                //            }
-                
-                VStack {
-                    TextField("First number", text: $number1)
-                        .textFieldStyle(.plain)
-                        .keyboardType(.decimalPad)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                        .focused($number1Focused)
+                Form {
+                    Section {
+                        TextField("First number", text: $number1)
+                            .keyboardType(.decimalPad)
+                            .focused($number1Focused)
+                        
+                        TextField("Second number", text: $number2)
+                            .keyboardType(.decimalPad)
+                            .focused($number2Focused)
+                    }
                     
-                    TextField("Second number", text: $number2)
-                        .textFieldStyle(.plain)
-                        .keyboardType(.decimalPad)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                        .focused($number2Focused)
+                    Section {
+                        HStack {
+                            Text("LCM:")
+                            Spacer()
+                            Text("\(result)")
+                        }
+                    }
                 }
-                .padding(.top, 30)
-                
-                if !number1.isEmpty && !number2.isEmpty {
-                    Text("LCM: \(result)")
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                }
-                
-                Spacer()
+                .scrollDismissesKeyboard(.interactively)
             }
             .onChange(of: number1) { _ in
                 self.calculate()
@@ -314,7 +294,6 @@ struct OldHCF_LCM_CalculatorView: View {
             .onChange(of: number2) { _ in
                 self.calculate()
             }
-            //        .navigationTitle("HCF & LCM Calculator")
             .onAppear {
                 self.calculate()
             }
