@@ -380,10 +380,7 @@ struct CalculatorView: View {
             if !returnValue.contains("×10") && returnValue.count > 5 {
                 resultsText = returnValue
                 saveToHistory(equationText: equationText, resultsText: returnValue)
-                print("nan")
             } else {
-                print(returnValue)
-                print("nil")
                 var numberOfDigitsInPower = Int()
                 var positionOfStartingOfPower = Int()
                 
@@ -400,7 +397,6 @@ struct CalculatorView: View {
                 }
                 
                 if numberOfDigitsInPower > 0 {
-                    print("1")
                     resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
                     resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
                     
@@ -408,7 +404,6 @@ struct CalculatorView: View {
                     saveToHistory(equationText: equationText, resultsText: String(resultsTextArray))
                     
                 } else {
-                    print("2")
                     resultsText = returnValue
                     saveToHistory(equationText: equationText, resultsText: returnValue)
                 }
