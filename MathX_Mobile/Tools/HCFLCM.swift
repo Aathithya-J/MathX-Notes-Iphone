@@ -46,18 +46,17 @@ struct HCF_LCM_CalculatorView: View  {
     
     var body: some View {
         VStack {
-            Picker("", selection: $HCFLCMSelection) {
-                Text("HCF")
-                    .tag(0)
-                Text("LCM")
-                    .tag(1)
-            }
-            .pickerStyle(.segmented)
-            .padding(.top)
-            .padding(.horizontal)
-            
-            if HCFLCMSelection == 0 {
-                Form {
+            Form {
+                Picker("", selection: $HCFLCMSelection) {
+                    Text("HCF")
+                        .tag(0)
+                    Text("LCM")
+                        .tag(1)
+                }
+                .pickerStyle(.segmented)
+                
+                if HCFLCMSelection == 0 {
+                    
                     //            Text("""
                     //                minX: \(position.minX)
                     //                maxX: \(position.maxX)
@@ -129,12 +128,12 @@ struct HCF_LCM_CalculatorView: View  {
                             }
                         }
                     }
+                } else {
+                    OldHCF_LCM_CalculatorView(isHCFSelected: $HCFLCMSelection)
                 }
-                .scrollDismissesKeyboard(.interactively)
-                .coordinateSpace(name: "listCoordinate")
-            } else {
-                OldHCF_LCM_CalculatorView(isHCFSelected: $HCFLCMSelection)
             }
+            .scrollDismissesKeyboard(.interactively)
+            .coordinateSpace(name: "listCoordinate")
         }
         .navigationTitle("HCF & LCM Calculator")
     }
@@ -287,75 +286,61 @@ struct OldHCF_LCM_CalculatorView: View {
     
     @FocusState var number1Focused: Bool
     @FocusState var number2Focused: Bool
-
+    
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color(uiColor: .systemBackground))
-                .ignoresSafeArea()
-                .onTapGesture {
-                    number1Focused = false
-                    number2Focused = false
-                }
-            VStack {
-                Form {
-                    Section {
-                        TextField("First number", text: $number1)
-                            .keyboardType(.decimalPad)
-                            .focused($number1Focused)
-                        
-                        TextField("Second number", text: $number2)
-                            .keyboardType(.decimalPad)
-                            .focused($number2Focused)
-                    }
-                    
-                    Section {
-                        HStack {
-                            Text("LCM:")
-                            Spacer()
-                            Text("\(result)")
-                                .multilineTextAlignment(.trailing)
-                        }
-                    }
-                }
-                .scrollDismissesKeyboard(.interactively)
+        Section {
+            TextField("First number", text: $number1)
+                .keyboardType(.decimalPad)
+                .focused($number1Focused)
+            
+            TextField("Second number", text: $number2)
+                .keyboardType(.decimalPad)
+                .focused($number2Focused)
+        }
+        
+        Section {
+            HStack {
+                Text("LCM:")
+                Spacer()
+                Text("\(result)")
+                    .multilineTextAlignment(.trailing)
             }
-            .onChange(of: number1) { _ in
-                if number1.count > 7 {
-                    number1.removeLast()
-                } else {
-                    self.calculate()
-                }
-            }
-            .onChange(of: number2) { _ in
-                if number2.count > 7 {
-                    number2.removeLast()
-                } else {
-                    self.calculate()
-                }
-            }
-            .onAppear {
+        }
+        .onChange(of: number1) { _ in
+            if number1.count > 7 {
+                number1.removeLast()
+            } else {
                 self.calculate()
             }
         }
+        .onChange(of: number2) { _ in
+            if number2.count > 7 {
+                number2.removeLast()
+            } else {
+                self.calculate()
+            }
+        }
+        .onAppear {
+            self.calculate()
+        }
     }
-
+    
     func calculate() {
         guard let num1 = Double(number1), let num2 = Double(number2) else {
             self.result = ""
             return
         }
-
+        
         let gcd = findGCD(Int(num1 * 100), Int(num2 * 100))
         let lcm = Int(num1 * 100 * num2 * 100) / gcd
-
+        
         if isHCFSelected == 0  {
             self.result = String((Double(gcd) / 100).formatted())
         } else {
             self.result = String((Double(lcm) / 100).formatted())
         }
     }
-
+    
     func findGCD(_ num1: Int, _ num2: Int) -> Int {
         if num2 == 0 {
             return num1
