@@ -79,7 +79,7 @@ struct CalculatorView: View {
                     equalsButtonPressed()
                 }
                 .onChange(of: sqrtPressed) { value in
-                    if !equationText.contains("sqrt(") {
+                    if !equationText.contains("sqrt(") && equationText != "" && !equationText.contains("Ans") {
                         sqrtButtonPressed()
                     }
                 }
@@ -302,9 +302,21 @@ struct CalculatorView: View {
                 errorType = error.localizedDescription
             }
             
-            returnValue = String(value.formatted())
+            returnValue = String(sqrt(value).formatted())
+            lastAns = String(sqrt(value))
+                        
+            if returnValue.count > 15 {
+                let val = sqrt(value)
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .scientific
+                formatter.usesSignificantDigits = true
+                formatter.positiveFormat = "0.###########E1"
+                formatter.exponentSymbol = "×10"
+                if let scientificFormatted = formatter.string(for: val) {
+                    returnValue = scientificFormatted
+                }
+            }
             
-            lastAns = String(value)
         }
         
         return thereWasAnError ? "ERROR: \(errorType)" : returnValue
@@ -355,9 +367,53 @@ struct CalculatorView: View {
     }
     
     func sqrtButtonPressed() {
-        guard let sqrted = Double(sqrtcalculate(equation: equationText)) else { return }
+        lastEquation = equationText
+        let returnValue: String = sqrtcalculate(equation: equationText)
         equationText = "sqrt(\(equationText))"
-        resultsText = String(sqrt(sqrted).formatted())
+        
+        if returnValue.contains("ERROR:") {
+            errorOccurred = true
+            
+            equationText = returnValue
+            resultsText = ""
+        } else {
+            if !returnValue.contains("×10") && returnValue.count > 5 {
+                resultsText = returnValue
+                saveToHistory(equationText: equationText, resultsText: returnValue)
+                print("nan")
+            } else {
+                print(returnValue)
+                print("nil")
+                var numberOfDigitsInPower = Int()
+                var positionOfStartingOfPower = Int()
+                
+                var resultsTextArray = Array(returnValue)
+                resultsTextArray.indices.forEach { indices in
+                    if resultsTextArray[indices] == "×" {
+                        if resultsTextArray[indices + 1] == "1" {
+                            if resultsTextArray[indices + 2] == "0" {
+                                numberOfDigitsInPower = (returnValue.count - 1) - (indices + 2)
+                                positionOfStartingOfPower = indices + 2
+                            }
+                        }
+                    }
+                }
+                
+                if numberOfDigitsInPower > 0 {
+                    print("1")
+                    resultsTextArray.insert(contentsOf: "}", at: (positionOfStartingOfPower + numberOfDigitsInPower) + 1)
+                    resultsTextArray.insert(contentsOf: "^{", at: (positionOfStartingOfPower) + 1)
+                    
+                    resultsText = String(resultsTextArray)
+                    saveToHistory(equationText: equationText, resultsText: String(resultsTextArray))
+                    
+                } else {
+                    print("2")
+                    resultsText = returnValue
+                    saveToHistory(equationText: equationText, resultsText: returnValue)
+                }
+            }
+        }
     }
     
     func generateEquationQRandLink() -> String {
