@@ -17,6 +17,8 @@ struct TrigoCalc: View {
     @State var results = ""
     @State var equation = ""
     
+    @State var angleUnitSelection = 0
+    
     @FocusState var sideAFocused: Bool
     @FocusState var sideBFocused: Bool
     @FocusState var sideCFocused: Bool
@@ -64,15 +66,9 @@ struct TrigoCalc: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
-                                if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) < 3 {
                                     LaTeX("\\[x\\]° = \\[\(equation)\\]")
                                         .parsingMode(.onlyEquations)
                                         .blockMode(.alwaysInline)
-                                } else {
-                                    LaTeX("\\[x\\]° =")
-                                        .parsingMode(.onlyEquations)
-                                        .blockMode(.alwaysInline)
-                                }
                             } else {
                                 LaTeX("\\[x\\]° =")
                                     .parsingMode(.onlyEquations)
@@ -81,7 +77,15 @@ struct TrigoCalc: View {
                         }
                     }
                     
-                    Section {
+                    Section(footer: Text("If all 3 sides are filled up, MathX will default to whichever operation first returns a value, following the order: Sine, Cosine, then Tangent.")) {
+                        Picker("", selection: $angleUnitSelection) {
+                            Text("Degrees")
+                                .tag(0)
+                            Text("Radians")
+                                .tag(1)
+                        }
+                        .pickerStyle(.segmented)
+                        
                         TextField("Side A (Opposite)", text: $sideA)
                             .keyboardType(.decimalPad)
                             .focused($sideAFocused)
@@ -97,24 +101,19 @@ struct TrigoCalc: View {
                     
                     Section {
                         HStack {
-                            if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) < 3 {
-                                LaTeX("\\[x\\]° =")
-                                    .parsingMode(.onlyEquations)
-                                    .blockMode(.alwaysInline)
-                                Spacer()
-                                
-                                if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
-                                    if results != "NaN" {
-                                        Text("\(results)°")
-                                            .multilineTextAlignment(.trailing)
-                                    } else {
-                                        Text("-")
-                                            .multilineTextAlignment(.trailing)
-                                    }
+                            LaTeX("\\[x\\]° =")
+                                .parsingMode(.onlyEquations)
+                                .blockMode(.alwaysInline)
+                            Spacer()
+                            
+                            if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
+                                if results != "NaN" {
+                                    Text("\(results)°")
+                                        .multilineTextAlignment(.trailing)
+                                } else {
+                                    Text("-")
+                                        .multilineTextAlignment(.trailing)
                                 }
-                            } else {
-                                Text("\(results)")
-                                    .multilineTextAlignment(.trailing)
                             }
                         }
                     }
@@ -129,6 +128,9 @@ struct TrigoCalc: View {
                 results = findAngleX()
             }
             .onChange(of: sideC) { _ in
+                results = findAngleX()
+            }
+            .onChange(of: angleUnitSelection) { _ in
                 results = findAngleX()
             }
         }
@@ -169,10 +171,7 @@ struct TrigoCalc: View {
             filledFields += 1
         }
         
-        if filledFields > 2 {
-            equation = ""
-            returnValue = "Leave at least 1 text field empty."
-        } else if filledFields < 2 {
+        if filledFields < 2 {
             equation = ""
             returnValue = ""
         } else {
@@ -180,18 +179,60 @@ struct TrigoCalc: View {
             a = Double(sideB) ?? 0
             o = Double(sideA) ?? 0
             
-            if sideC.isEmpty {
-                // TOA
-                equation = "tan^-1\\frac{\(o.formatted())}{\(a.formatted())}"
-                returnValue = "\(String(atan(o/a).formatted()))"
-            } else if sideB.isEmpty {
-                // SOH
-                equation = "sin^-1\\frac{\(o.formatted())}{\(h.formatted())}"
-                returnValue = "\(String(asin(o/h).formatted()))"
+            if filledFields < 3 {
+                // 2 textfields filled up
+                if sideC.isEmpty {
+                    // TOA
+                    equation = "tan^-1\\frac{\(o.formatted())}{\(a.formatted())}"
+                    if angleUnitSelection == 0 {
+                        returnValue = "\(String((atan(o/a) * 180 / .pi).formatted()))"
+                    } else {
+                        returnValue = "\(String((atan(o/a)).formatted()))"
+                    }
+                } else if sideA.isEmpty {
+                    // CAH
+                    equation = "cos^-1\\frac{\(a.formatted())}{\(h.formatted())}"
+                    if angleUnitSelection == 0 {
+                        returnValue = "\(String((acos(a/h) * 180 / .pi).formatted()))"
+                    } else {
+                        returnValue = "\(String((acos(a/h)).formatted()))"
+                    }
+                } else {
+                    // SOH
+                    equation = "sin^-1\\frac{\(o.formatted())}{\(h.formatted())}"
+                    if angleUnitSelection == 0 {
+                        returnValue = "\(String((asin(o/h) * 180 / .pi).formatted()))"
+                    } else {
+                        returnValue = "\(String((asin(o/h)).formatted()))"
+                    }
+                }
             } else {
-                // CAH
-                equation = "cos^-1\\frac{\(a.formatted())}{\(h.formatted())}"
-                returnValue = "\(String(acos(a/h).formatted()))"
+                // all 3 textfields filled up
+                if "\(String(asin(o/h).formatted()))" != "NaN" {
+                    // SOH
+                    equation = "sin^-1\\frac{\(o.formatted())}{\(h.formatted())}"
+                    if angleUnitSelection == 0 {
+                        returnValue = "\(String((asin(o/h) * 180 / .pi).formatted()))"
+                    } else {
+                        returnValue = "\(String((asin(o/h)).formatted()))"
+                    }
+                } else if "\(String(acos(a/h).formatted()))" != "NaN" {
+                    // CAH
+                    equation = "cos^-1\\frac{\(a.formatted())}{\(h.formatted())}"
+                    if angleUnitSelection == 0 {
+                        returnValue = "\(String((acos(a/h) * 180 / .pi).formatted()))"
+                    } else {
+                        returnValue = "\(String((acos(a/h)).formatted()))"
+                    }
+                } else if "\(String(atan(o/a).formatted()))" != "NaN" {
+                    // TOA
+                    equation = "tan^-1\\frac{\(o.formatted())}{\(a.formatted())}"
+                    if angleUnitSelection == 0 {
+                        returnValue = "\(String((atan(o/a) * 180 / .pi).formatted()))"
+                    } else {
+                        returnValue = "\(String((atan(o/a)).formatted()))"
+                    }
+                }
             }
         }
         
