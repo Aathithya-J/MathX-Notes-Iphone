@@ -64,7 +64,7 @@ struct TrigoCalc: View {
                     }
                 }
                 
-                Section(footer: Text("If all 3 sides are filled up, MathX will default to whichever operation first returns a value, following the order: Sine, Cosine, then Tangent.")) {
+                Section(footer: Text("If all three values are filled up, MathX will utilise the operation that returns a value first, with the priority order being Sine, followed by Cosine, and then Tangent.")) {
                     Picker("", selection: $angleUnitSelection) {
                         Text("Degrees")
                             .tag(0)
