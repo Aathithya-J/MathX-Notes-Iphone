@@ -33,18 +33,8 @@ struct LinearQuadEquationCalc: View {
     @FocusState var quadraticaTextFocused: Bool
     @FocusState var quadraticbTextFocused: Bool
     @FocusState var quadraticcTextFocused: Bool
-    
 
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color(uiColor: .systemBackground))
-                .ignoresSafeArea()
-                .onTapGesture {
-                    quadraticaTextFocused = false
-                    quadraticbTextFocused = false
-                    quadraticcTextFocused = false
-                }
             VStack {
                 //            Picker("", selection: $equationSelected) {
                 //                Text("Linear Equation")
@@ -215,7 +205,7 @@ struct LinearQuadEquationCalc: View {
                     }
                 }
             }
-        }
+        
     }
     
     func calculateQuadEquation(a: Double, b: Double, c: Double) {

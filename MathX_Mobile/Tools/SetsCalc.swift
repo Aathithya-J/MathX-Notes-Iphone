@@ -15,75 +15,62 @@ struct SetsCalc: View {
     @State var result = ""
     @State var setCalculationSelected = 0
     
-    @FocusState var set1Focused: Bool
-    @FocusState var set2Focused: Bool
-    
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color(uiColor: .systemBackground))
-                .ignoresSafeArea()
-                .onTapGesture {
-                    set1Focused = false
-                    set2Focused = false
-                }
-            VStack {
-                Form {
-                    Section {
-                        Picker("", selection: $setCalculationSelected) {
-                            Text("Union")
-                                .tag(0)
-                            Text("Intersection")
-                                .tag(1)
-                        }
-                        .pickerStyle(.segmented)
+        VStack {
+            Form {
+                Section {
+                    Picker("", selection: $setCalculationSelected) {
+                        Text("Union")
+                            .tag(0)
+                        Text("Intersection")
+                            .tag(1)
                     }
+                    .pickerStyle(.segmented)
+                }
+                
+                Section(footer: Text("Do not leave a space between commas and elements.")) {
+                    TextField("First Set (separate elements with \",\")", text: $set1)
+                        .keyboardType(.numbersAndPunctuation)
                     
-                    Section(footer: Text("Do not leave a space between commas and elements.")) {
-                        TextField("First Set (separate elements with \",\")", text: $set1)
-                            .keyboardType(.numbersAndPunctuation)
-                            .focused($set1Focused)
-                        
-                        TextField("Second Set (separate elements with \",\")", text: $set2)
-                            .keyboardType(.numbersAndPunctuation)
-                            .focused($set2Focused)
-                    }
-                    
-                    Section {
-                        Text("{\(result)}")
-                    }
+                    TextField("Second Set (separate elements with \",\")", text: $set2)
+                        .keyboardType(.numbersAndPunctuation)
                 }
-                .scrollDismissesKeyboard(.interactively)
-                .onChange(of: set1) { _ in
-                    if !set1.isEmpty && !set2.isEmpty {
-                        if setCalculationSelected == 0 {
-                            result = calculateUnion(setString1: set1, setString2: set2)
-                        } else if setCalculationSelected == 1 {
-                            result = calculateIntersection(setString1: set1, setString2: set2)
-                        }
-                    }
+                
+                Section {
+                    Text("{\(result)}")
                 }
-                .onChange(of: set2) { _ in
-                    if !set1.isEmpty && !set2.isEmpty {
-                        if setCalculationSelected == 0 {
-                            result = calculateUnion(setString1: set1, setString2: set2)
-                        } else if setCalculationSelected == 1 {
-                            result = calculateIntersection(setString1: set1, setString2: set2)
-                        }
-                    }
-                }
-                .onChange(of: setCalculationSelected) { _ in
-                    if !set1.isEmpty && !set2.isEmpty {
-                        if setCalculationSelected == 0 {
-                            result = calculateUnion(setString1: set1, setString2: set2)
-                        } else if setCalculationSelected == 1 {
-                            result = calculateIntersection(setString1: set1, setString2: set2)
-                        }
+            }
+            .scrollDismissesKeyboard(.interactively)
+            .onChange(of: set1) { _ in
+                if !set1.isEmpty && !set2.isEmpty {
+                    if setCalculationSelected == 0 {
+                        result = calculateUnion(setString1: set1, setString2: set2)
+                    } else if setCalculationSelected == 1 {
+                        result = calculateIntersection(setString1: set1, setString2: set2)
                     }
                 }
             }
-            .navigationTitle("Set Calculator")
+            .onChange(of: set2) { _ in
+                if !set1.isEmpty && !set2.isEmpty {
+                    if setCalculationSelected == 0 {
+                        result = calculateUnion(setString1: set1, setString2: set2)
+                    } else if setCalculationSelected == 1 {
+                        result = calculateIntersection(setString1: set1, setString2: set2)
+                    }
+                }
+            }
+            .onChange(of: setCalculationSelected) { _ in
+                if !set1.isEmpty && !set2.isEmpty {
+                    if setCalculationSelected == 0 {
+                        result = calculateUnion(setString1: set1, setString2: set2)
+                    } else if setCalculationSelected == 1 {
+                        result = calculateIntersection(setString1: set1, setString2: set2)
+                    }
+                }
+            }
         }
+        .navigationTitle("Set Calculator")
+        
     }
     
     func calculateUnion(setString1: String, setString2: String) -> String {
@@ -99,7 +86,7 @@ struct SetsCalc: View {
             
             var tempDoubleArray: [Double] = []
             var tempOthersArray: [String] = []
-
+            
             unionUnsortedSet.forEach { element in
                 guard let elementNumber = Double(element) else {
                     //isnt double
@@ -117,7 +104,7 @@ struct SetsCalc: View {
             }
             
             unionSortedSet += tempOthersArray
-                                    
+            
             unionSortedSet.indices.forEach { i in
                 if i > 0 {
                     if unionSortedSet[i] == unionSortedSet[i - 1] {

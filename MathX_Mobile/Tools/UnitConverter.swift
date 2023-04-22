@@ -7,7 +7,7 @@ struct UnitConverterView: View {
     @State var unitConvertedToSelection = "Metres"
     
     @State private var input = ""
-        
+    
     let units = ["Length", "Area", "Volume", "Mass", "Speed", "Temperature"]
     let length = ["Metres", "Kilometres", "Inches", "Feet", "Yards", "Miles"]
     let area = ["Acres", "Hectares", "Square Metres", "Square Kilometres", "Square Inches", "Square Feet"]
@@ -15,8 +15,6 @@ struct UnitConverterView: View {
     let mass = ["Grams", "Kilograms", "Ounces", "Pounds", "Metric Tons", "Carats"]
     let speed = ["m/s", "km/h", "mi/h", "knots"]
     let temperature = ["Celsius", "Fahrenheit", "Kelvin"]
-
-    @FocusState var textfieldFocused: Bool
     
     var unitConverter: String {
         var returnValue = ""
@@ -45,89 +43,80 @@ struct UnitConverterView: View {
     }
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color(uiColor: .systemBackground))
-                .ignoresSafeArea()
-                .onTapGesture {
-                    textfieldFocused = false
+        VStack {
+            Form {
+                Section {
+                    Picker("", selection: $selection) {
+                        ForEach(units, id: \.self) { unit in
+                            Text(unit)
+                                .tag(unit)
+                        }
+                    }
+                    .pickerStyle(.segmented)
                 }
-            
-            VStack {
-                Form {
-                    Section {
-                        Picker("", selection: $selection) {
-                            ForEach(units, id: \.self) { unit in
+                
+                Section {
+                    HStack {
+                        TextField("Enter value", text: $input)
+                            .keyboardType(.decimalPad)
+                        
+                        Spacer()
+                        
+                        Picker("", selection: $unitSelection) {
+                            ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
                                 Text(unit)
                                     .tag(unit)
                             }
                         }
-                        .pickerStyle(.segmented)
+                        .fixedSize()
+                        .pickerStyle(.menu)
                     }
                     
-                    Section {
-                        HStack {
-                            TextField("Enter value", text: $input)
-                                .keyboardType(.decimalPad)
-                                .focused($textfieldFocused)
-                            
-                            Spacer()
-                            
-                            Picker("", selection: $unitSelection) {
-                                ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
-                                    Text(unit)
-                                        .tag(unit)
-                                }
-                            }
-                            .fixedSize()
-                            .pickerStyle(.menu)
+                    HStack {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            Text(input.isEmpty ? "" : unitConverter)
+                                .lineLimit(1)
+                                .multilineTextAlignment(.leading)
                         }
                         
-                        HStack {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                Text(input.isEmpty ? "" : unitConverter)
-                                    .lineLimit(1)
-                                    .multilineTextAlignment(.leading)
+                        Spacer()
+                        
+                        Picker("", selection: $unitConvertedToSelection) {
+                            ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                                Text(unit)
+                                    .tag(unit)
                             }
-                            
-                            Spacer()
-                            
-                            Picker("", selection: $unitConvertedToSelection) {
-                                ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
-                                    Text(unit)
-                                        .tag(unit)
-                                }
-                            }
-                            .fixedSize()
-                            .pickerStyle(.menu)
                         }
+                        .fixedSize()
+                        .pickerStyle(.menu)
                     }
                 }
-                .scrollDismissesKeyboard(.interactively)
             }
-            .navigationTitle("Unit Converter")
-            .onChange(of: selection) { _ in
-                if selection == "Length" {
-                    unitSelection = "Metres"
-                    unitConvertedToSelection = "Metres"
-                } else if selection == "Area" {
-                    unitSelection = "Acres"
-                    unitConvertedToSelection = "Acres"
-                } else if selection == "Volume" {
-                    unitSelection = "Cubic Centimetres"
-                    unitConvertedToSelection = "Cubic Centimetres"
-                } else if selection == "Mass" {
-                    unitSelection = "Grams"
-                    unitConvertedToSelection = "Grams"
-                } else if selection == "Speed" {
-                    unitSelection = "m/s"
-                    unitConvertedToSelection = "m/s"
-                } else if selection == "Temperature" {
-                    unitSelection = "Celsius"
-                    unitConvertedToSelection = "Celsius"
-                }
+            .scrollDismissesKeyboard(.interactively)
+        }
+        .navigationTitle("Unit Converter")
+        .onChange(of: selection) { _ in
+            if selection == "Length" {
+                unitSelection = "Metres"
+                unitConvertedToSelection = "Metres"
+            } else if selection == "Area" {
+                unitSelection = "Acres"
+                unitConvertedToSelection = "Acres"
+            } else if selection == "Volume" {
+                unitSelection = "Cubic Centimetres"
+                unitConvertedToSelection = "Cubic Centimetres"
+            } else if selection == "Mass" {
+                unitSelection = "Grams"
+                unitConvertedToSelection = "Grams"
+            } else if selection == "Speed" {
+                unitSelection = "m/s"
+                unitConvertedToSelection = "m/s"
+            } else if selection == "Temperature" {
+                unitSelection = "Celsius"
+                unitConvertedToSelection = "Celsius"
             }
         }
+        
     }
     
     func getUnitSubUnits(unit: String) -> [String] {

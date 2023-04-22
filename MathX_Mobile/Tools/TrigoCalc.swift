@@ -13,132 +13,116 @@ struct TrigoCalc: View {
     @State var sideA = ""
     @State var sideB = ""
     @State var sideC = ""
-
+    
     @State var results = ""
     @State var equation = ""
     
     @State var angleUnitSelection = 0
     
-    @FocusState var sideAFocused: Bool
-    @FocusState var sideBFocused: Bool
-    @FocusState var sideCFocused: Bool
-
     var body: some View {
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color(uiColor: .systemBackground))
-                .ignoresSafeArea()
-                .onTapGesture {
-                    sideAFocused = false
-                    sideBFocused = false
-                    sideCFocused = false
-                }
-            VStack {
-                Form {
-                    Section {
-                        HStack {
-                            Spacer()
-                            Triangle()
-                                .foregroundColor(.blue.opacity(0.7))
-                                .frame(width: 128, height: 128)
-                                .overlay(
-                                    Text("A (O)")
-                                        .offset(y: 80)
-                                )
-                                .overlay(
-                                    Text("B (A)")
-                                        .offset(x: 90)
-                                )
-                                .overlay(
-                                    Text("C (H)")
-                                        .offset(x: -18, y: -15)
-                                )
-                                .overlay(
-                                    LaTeX("\\[x\\]°")
-                                        .offset(x: 50, y: -30)
-                                        .parsingMode(.onlyEquations)
-                                        .blockMode(.alwaysInline)
-                                )
-                                .padding()
-                                .padding(.bottom)
-                            Spacer()
-                        }
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
-                                    LaTeX("\\[x\\]° = \\[\(equation)\\]")
-                                        .parsingMode(.onlyEquations)
-                                        .blockMode(.alwaysInline)
-                            } else {
-                                LaTeX("\\[x\\]° =")
+        VStack {
+            Form {
+                Section {
+                    HStack {
+                        Spacer()
+                        Triangle()
+                            .foregroundColor(.blue.opacity(0.7))
+                            .frame(width: 128, height: 128)
+                            .overlay(
+                                Text("A (O)")
+                                    .offset(y: 80)
+                            )
+                            .overlay(
+                                Text("B (A)")
+                                    .offset(x: 90)
+                            )
+                            .overlay(
+                                Text("C (H)")
+                                    .offset(x: -18, y: -15)
+                            )
+                            .overlay(
+                                LaTeX("\\[x\\]°")
+                                    .offset(x: 50, y: -30)
                                     .parsingMode(.onlyEquations)
                                     .blockMode(.alwaysInline)
-                            }
-                        }
+                            )
+                            .padding()
+                            .padding(.bottom)
+                        Spacer()
                     }
                     
-                    Section(footer: Text("If all 3 sides are filled up, MathX will default to whichever operation first returns a value, following the order: Sine, Cosine, then Tangent.")) {
-                        Picker("", selection: $angleUnitSelection) {
-                            Text("Degrees")
-                                .tag(0)
-                            Text("Radians")
-                                .tag(1)
-                        }
-                        .pickerStyle(.segmented)
-                        
-                        TextField("Side A (Opposite)", text: $sideA)
-                            .keyboardType(.decimalPad)
-                            .focused($sideAFocused)
-                        
-                        TextField("Side B (Adjacent)", text: $sideB)
-                            .keyboardType(.decimalPad)
-                            .focused($sideBFocused)
-                        
-                        TextField("Side C (Hypotenuse)", text: $sideC)
-                            .keyboardType(.decimalPad)
-                            .focused($sideCFocused)
-                    }
-                    
-                    Section {
-                        HStack {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
+                            LaTeX("\\[x\\]° = \\[\(equation)\\]")
+                                .parsingMode(.onlyEquations)
+                                .blockMode(.alwaysInline)
+                        } else {
                             LaTeX("\\[x\\]° =")
                                 .parsingMode(.onlyEquations)
                                 .blockMode(.alwaysInline)
-                            Spacer()
-                            
-                            if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
-                                if results != "NaN" {
-                                    Text("\(results)°")
-                                        .multilineTextAlignment(.trailing)
-                                } else {
-                                    Text("-")
-                                        .multilineTextAlignment(.trailing)
-                                }
+                        }
+                    }
+                }
+                
+                Section(footer: Text("If all 3 sides are filled up, MathX will default to whichever operation first returns a value, following the order: Sine, Cosine, then Tangent.")) {
+                    Picker("", selection: $angleUnitSelection) {
+                        Text("Degrees")
+                            .tag(0)
+                        Text("Radians")
+                            .tag(1)
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    TextField("Side A (Opposite)", text: $sideA)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField("Side B (Adjacent)", text: $sideB)
+                        .keyboardType(.decimalPad)
+                    
+                    TextField("Side C (Hypotenuse)", text: $sideC)
+                        .keyboardType(.decimalPad)
+                }
+                
+                Section {
+                    HStack {
+                        LaTeX("\\[x\\]° =")
+                            .parsingMode(.onlyEquations)
+                            .blockMode(.alwaysInline)
+                        Spacer()
+                        
+                        if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
+                            if results != "NaN" {
+                                Text("\(results)°")
+                                    .multilineTextAlignment(.trailing)
+                            } else {
+                                Text("-")
+                                    .multilineTextAlignment(.trailing)
                             }
                         }
                     }
                 }
-                .scrollDismissesKeyboard(.interactively)
             }
-            .navigationTitle("Trigonometry Calculator")
-            .onChange(of: sideA) { _ in
-                results = findAngleX()
-            }
-            .onChange(of: sideB) { _ in
-                results = findAngleX()
-            }
-            .onChange(of: sideC) { _ in
-                results = findAngleX()
-            }
-            .onChange(of: angleUnitSelection) { _ in
-                results = findAngleX()
-            }
+            .scrollDismissesKeyboard(.interactively)
         }
+        .navigationTitle("Trigonometry Calculator")
+        .onChange(of: sideA) { _ in
+            results = findAngleX()
+        }
+        .onChange(of: sideB) { _ in
+            results = findAngleX()
+        }
+        .onChange(of: sideC) { _ in
+            results = findAngleX()
+        }
+        .onChange(of: angleUnitSelection) { _ in
+            results = findAngleX()
+        }
+        
     }
     
     func fillCount(num1: Double, num2: Double, num3: Double) -> Int {
         var fillCount = 0
-      
+        
         if num1 > 0 {
             fillCount += 1
         }
