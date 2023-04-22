@@ -54,53 +54,57 @@ struct UnitConverterView: View {
                 }
             
             VStack {
-                Spacer()
-                
-                Picker("", selection: $selection) {
-                    ForEach(units, id: \.self) { unit in
-                        Text(unit)
-                            .tag(unit)
+                Form {
+                    Section {
+                        Picker("", selection: $selection) {
+                            ForEach(units, id: \.self) { unit in
+                                Text(unit)
+                                    .tag(unit)
+                            }
+                        }
+                        .pickerStyle(.segmented)
                     }
-                }
-                .pickerStyle(.segmented)
-                .padding(.bottom)
-                
-                HStack {
-                    TextField("Enter value", text: $input)
-                        .keyboardType(.decimalPad)
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                        .focused($textfieldFocused)
                     
-                    Picker("", selection: $unitSelection) {
-                        ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
-                            Text(unit)
-                                .tag(unit)
+                    Section {
+                        HStack {
+                            TextField("Enter value", text: $input)
+                                .keyboardType(.decimalPad)
+                                .focused($textfieldFocused)
+                            
+                            Spacer()
+                            
+                            Picker("", selection: $unitSelection) {
+                                ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                                    Text(unit)
+                                        .tag(unit)
+                                }
+                            }
+                            .fixedSize()
+                            .pickerStyle(.menu)
+                        }
+                        
+                        HStack {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                Text(input.isEmpty ? "" : unitConverter)
+                                    .lineLimit(1)
+                                    .multilineTextAlignment(.leading)
+                            }
+                            
+                            Spacer()
+                            
+                            Picker("", selection: $unitConvertedToSelection) {
+                                ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                                    Text(unit)
+                                        .tag(unit)
+                                }
+                            }
+                            .fixedSize()
+                            .pickerStyle(.menu)
                         }
                     }
-                    .pickerStyle(.menu)
                 }
-                
-                HStack {
-                    Text(unitConverter)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                    
-                    Picker("", selection: $unitConvertedToSelection) {
-                        ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
-                            Text(unit)
-                                .tag(unit)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                }
-                
-                Spacer()
+                .scrollDismissesKeyboard(.interactively)
             }
-            .padding(.horizontal)
             .navigationTitle("Unit Converter")
             .onChange(of: selection) { _ in
                 if selection == "Length" {
