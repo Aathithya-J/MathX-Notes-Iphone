@@ -82,19 +82,21 @@ struct HCF_LCM_CalculatorView: View  {
                         }))
                     }
                     
-                    Section {
-                        HStack(alignment: .top) {
-                            ribbonComponent
-                        }
-                        .background {
-                            GeometryReader { geom in
-                                Color.clear
-                                    .onAppear {
-                                        position = geom.frame(in: .named("listCoordinate"))
-                                    }
-                                    .onChange(of: geom.frame(in: .named("listCoordinate"))) { newValue in
-                                        position = newValue
-                                    }
+                    if lhsNumber > 0 || rhsNumber > 0 {
+                        Section {
+                            HStack(alignment: .top) {
+                                ribbonComponent
+                            }
+                            .background {
+                                GeometryReader { geom in
+                                    Color.clear
+                                        .onAppear {
+                                            position = geom.frame(in: .named("listCoordinate"))
+                                        }
+                                        .onChange(of: geom.frame(in: .named("listCoordinate"))) { newValue in
+                                            position = newValue
+                                        }
+                                }
                             }
                         }
                     }
@@ -283,16 +285,25 @@ struct OldHCF_LCM_CalculatorView: View {
                             Text("LCM:")
                             Spacer()
                             Text("\(result)")
+                                .multilineTextAlignment(.trailing)
                         }
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)
             }
             .onChange(of: number1) { _ in
-                self.calculate()
+                if number1.count > 7 {
+                    number1.removeLast()
+                } else {
+                    self.calculate()
+                }
             }
             .onChange(of: number2) { _ in
-                self.calculate()
+                if number2.count > 7 {
+                    number2.removeLast()
+                } else {
+                    self.calculate()
+                }
             }
             .onAppear {
                 self.calculate()

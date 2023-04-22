@@ -60,9 +60,11 @@ struct LinearQuadEquationCalc: View {
                 } else {
                     Form {
                         Section {
-                            LaTeX("\(quadraticaText.isEmpty ? "a" : quadraticaText)x^2 \(quadraticbText.isEmpty ? "+" : Double(quadraticbText) ?? 0 < 0 ? "-": "+") \(quadraticbText.isEmpty ? "b" : String(abs(Double(quadraticbText) ?? 0).formatted()))x \(quadraticcText.isEmpty ? "+" : Double(quadraticcText) ?? 0 < 0 ? "-": "+") \(quadraticcText.isEmpty ? "c" : String(abs(Double(quadraticcText) ?? 0).formatted())) = 0")
-                                .parsingMode(.all)
-                                .blockMode(.alwaysInline)
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LaTeX("\(quadraticaText.isEmpty ? "a" : quadraticaText)x^2 \(quadraticbText.isEmpty ? "+" : Double(quadraticbText) ?? 0 < 0 ? "-": "+") \(quadraticbText.isEmpty ? "b" : String(abs(Double(quadraticbText) ?? 0).formatted()))x \(quadraticcText.isEmpty ? "+" : Double(quadraticcText) ?? 0 < 0 ? "-": "+") \(quadraticcText.isEmpty ? "c" : String(abs(Double(quadraticcText) ?? 0).formatted())) = 0")
+                                    .parsingMode(.all)
+                                    .blockMode(.alwaysInline)
+                            }
                         }
                         
                         Section {
@@ -85,6 +87,7 @@ struct LinearQuadEquationCalc: View {
                                 Spacer()
                                 if quadcalculated {
                                     Text("(0, \(yintercept))")
+                                        .multilineTextAlignment(.trailing)
                                 }
                             }
                             
@@ -93,6 +96,7 @@ struct LinearQuadEquationCalc: View {
                                     Text("x-intercept:")
                                     Spacer()
                                     Text(quadcalculated ? "-" : "")
+                                        .multilineTextAlignment(.trailing)
                                 }
                             } else if Double(discriminant.replacingOccurrences(of: ",", with: "")) ?? 0 == 0 {
                                 HStack {
@@ -100,6 +104,7 @@ struct LinearQuadEquationCalc: View {
                                     Spacer()
                                     if quadcalculated {
                                         Text("(\(quadxintercept1), 0)")
+                                            .multilineTextAlignment(.trailing)
                                     }
                                 }
                             } else {
@@ -108,6 +113,7 @@ struct LinearQuadEquationCalc: View {
                                     Spacer()
                                     if quadcalculated {
                                         Text("(\(quadxintercept1), 0)")
+                                            .multilineTextAlignment(.trailing)
                                     }
                                 }
                                 
@@ -116,6 +122,7 @@ struct LinearQuadEquationCalc: View {
                                     Spacer()
                                     if quadcalculated {
                                         Text("(\(quadxintercept2), 0)")
+                                            .multilineTextAlignment(.trailing)
                                     }
                                 }
                             }
@@ -124,24 +131,28 @@ struct LinearQuadEquationCalc: View {
                                 Text("Line of symmetry:")
                                 Spacer()
                                 Text("\(quadcalculated ? lineofsymmetry : "")")
+                                    .multilineTextAlignment(.trailing)
                             }
                             
                             HStack {
                                 Text("Turning point:")
                                 Spacer()
                                 Text("\(quadcalculated ? turningpoint : "")")
+                                    .multilineTextAlignment(.trailing)
                             }
                             
                             HStack {
                                 Text("Discriminant:")
                                 Spacer()
                                 Text("\(quadcalculated ? discriminant : "")")
+                                    .multilineTextAlignment(.trailing)
                             }
                             
                             HStack {
                                 Text("Number of roots:")
                                 Spacer()
                                 Text("\(quadcalculated ? roots : "")")
+                                    .multilineTextAlignment(.trailing)
                             }
                         }
                     }
