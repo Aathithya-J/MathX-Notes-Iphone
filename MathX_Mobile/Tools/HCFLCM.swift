@@ -10,7 +10,8 @@ struct HCF_LCM_CalculatorView: View  {
     @State var showOnlyPrime: Bool = false
     
     @State var HCFLCMSelection = 0
-    
+    @State var stateHCFLCMSelection = 0
+
     var lhsFactors: [Int] { factors(of: lhsNumber) }
     var rhsFactors: [Int] { factors(of: rhsNumber) }
     
@@ -54,6 +55,11 @@ struct HCF_LCM_CalculatorView: View  {
                         .tag(1)
                 }
                 .pickerStyle(.segmented)
+                .onChange(of: HCFLCMSelection) { _ in
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        stateHCFLCMSelection = HCFLCMSelection
+                    }
+                }
                 
                 if HCFLCMSelection == 0 {
                     
