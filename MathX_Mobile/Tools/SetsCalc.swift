@@ -592,7 +592,6 @@ struct SetsCalc: View {
         
         let set1Separated = separateSet(setString: set1)
         let set2Separated = separateSet(setString: set2)
-        let set1SeparatedCount = set1Separated.count
         
         var elementMatchCount = 0
         

@@ -102,7 +102,7 @@ struct PythagorasCalc: View {
     
     func calculatePythagoras(num1: Double, num2: Double, num3: Double) -> String {
         var returnValue = ""
-        var fillCount = fillCount(num1: num1, num2: num2, num3: num3)
+        let fillCount = fillCount(num1: num1, num2: num2, num3: num3)
         
         if fillCount > 2 {
             returnValue = "Leave at least 1 text field empty."
