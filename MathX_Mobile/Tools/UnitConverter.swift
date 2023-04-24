@@ -3,6 +3,7 @@ import SwiftUI
 struct UnitConverterView: View {
     
     @State var selection = "Length"
+    @State var stateselection = "Length"
     @State var unitSelection = "Metres"
     @State var unitConvertedToSelection = "Metres"
     
@@ -53,9 +54,14 @@ struct UnitConverterView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .onChange(of: selection) { _ in
+                        withAnimation {
+                            stateselection = selection
+                        }
+                    }
                 }
                 
-                Section(header: Text(selection)) {
+                Section(header: Text(stateselection)) {
                     HStack {
                         TextField("Enter value", text: $input)
                             .keyboardType(.decimalPad)
@@ -63,7 +69,7 @@ struct UnitConverterView: View {
                         Spacer()
                         
                         Picker("", selection: $unitSelection) {
-                            ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                            ForEach(getUnitSubUnits(unit: stateselection), id: \.self) { unit in
                                 Text(unit)
                                     .tag(unit)
                             }
@@ -84,7 +90,7 @@ struct UnitConverterView: View {
                         Spacer()
                         
                         Picker("", selection: $unitConvertedToSelection) {
-                            ForEach(getUnitSubUnits(unit: selection), id: \.self) { unit in
+                            ForEach(getUnitSubUnits(unit: stateselection), id: \.self) { unit in
                                 Text(unit)
                                     .tag(unit)
                             }
