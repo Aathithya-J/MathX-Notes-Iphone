@@ -319,45 +319,45 @@ struct ShapesCalc: View {
         case "Square":
             switch sideNumber {
             case 1:
-                return "Length"
+                return "Length (l)"
             case 2:
-                return "Breadth"
+                return "Breadth (b)"
             default:
                 return ""
             }
         case "Triangle":
             switch sideNumber {
             case 1:
-                return "Base"
+                return "Base (b)"
             case 2:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
         case "Circle":
             switch sideNumber {
             case 1:
-                return "Radius"
+                return "Radius (r)"
             default:
                 return ""
             }
         case "Trapezium":
             switch sideNumber {
             case 1:
-                return "Base A"
+                return "Base A (a)"
             case 2:
-                return "Base B"
+                return "Base B (b)"
             case 3:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
         case "Parallelogram":
             switch sideNumber {
             case 1:
-                return "Base"
+                return "Base (b)"
             case 2:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
