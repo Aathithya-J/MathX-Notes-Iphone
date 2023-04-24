@@ -1,2 +1,2 @@
 # MathX
-This app was made in SST for students to help them in math and we have reupdated it since its last update since 2019
+MathX is a currently existing app on the app store, and we are redesigning it from the ground up. We started by switching from UIKit to SwiftUI, which allows the app to adopt a lot more new features and have a more modern appearance. Next, we added more tools and features, such as full LaTeX integration into the note-taking section of our app, and we also fully implemented online pdf notes for our cheatsheets section.
