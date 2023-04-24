@@ -71,12 +71,18 @@ struct ToolsView: View {
         case cal:
             return AnyView(
                 List {
-                    NavigationLink("Calculator", destination: CalculatorView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
-                    NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView(lhsNumber: 0, rhsNumber: 0))
-                    NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
-                    NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
-                    NavigationLink("Set Calculator", destination: SetsCalc())
-                    NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
+                    Section {
+                        NavigationLink("Calculator", destination: CalculatorView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
+                    }
+                    
+                    Section {
+                        NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView(lhsNumber: 0, rhsNumber: 0))
+                        NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
+                        NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
+                        NavigationLink("Set Calculator", destination: SetsCalc())
+                        NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
+                        NavigationLink("Volume Calculator", destination: EmptyView())
+                    }
                 }
                 .navigationTitle("Calculators")
             )

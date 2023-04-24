@@ -10,7 +10,7 @@ struct WelcomeView: View {
             TabView {
                 welcomeTextPage() // stationary "welcome to mathx" view
 
-                aboutPage(sfSymbol: "square.on.square.dashed", title: "New UI", description: "MathX has been completely redesigned by a team of developers from SST Inc!\n\nDevelopers: Aathithya Jegatheesan, Kavin Jayakumar, Sairam Suresh, and Tristan Chay (SST Batch 12)")
+                aboutPage(sfSymbol: "square.on.square.dashed", title: "New UI", description: "MathX has been completely redesigned by a team of developers from SST Inc!\n\nDevelopers: Aathithya Jegatheesan, Harish Baghavath, Kavin Jayakumar, Sairam Suresh, and Tristan Chay (SST Batch 12)")
                 
                 aboutPage(sfSymbol: "list.clipboard", title: "Notes and Cheatsheets", description: "Notes and Cheatsheets allows you to take down and refer to revision materials later on.")
 
