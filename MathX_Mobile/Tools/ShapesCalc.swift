@@ -438,7 +438,7 @@ struct ShapesCalc: View {
             if statethreeDCalculation == "Volume" {
                 return "\(results.isEmpty ? "V" : results) = \\frac{\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2) * \(side3.isEmpty ? "h" : side3)}{3}"
             } else {
-                return "\(results.isEmpty ? "A" : results) = (\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) * (\(side1.isEmpty ? "l" : side1) * \\sqrt{(\\frac{\(side2.isEmpty ? "b" : side2)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2) * (\(side2.isEmpty ? "b" : side2) * \\sqrt{(\\frac{\(side1.isEmpty ? "l" : side1)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2)"
+                return "\(results.isEmpty ? "A" : results) = (\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) * (\(side1.isEmpty ? "l" : side1) * \\sqrt{(\\frac{\(side2.isEmpty ? "b" : side2)}{2})^2 + \(side3.isEmpty ? "h" : side3)^2}) * (\(side2.isEmpty ? "b" : side2) * \\sqrt{(\\frac{\(side1.isEmpty ? "l" : side1)}{2})^2 + \(side3.isEmpty ? "h" : side3)^2})"
             }
         case "Cone":
             if statethreeDCalculation == "Volume" {
