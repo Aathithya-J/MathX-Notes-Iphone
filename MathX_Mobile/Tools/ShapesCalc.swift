@@ -12,7 +12,7 @@ struct ShapesCalc: View {
     
     let dimensions = ["2D", "3D"]
     let TwoDShapes = ["Square", "Triangle", "Circle", "Trapezium", "Parallelogram"]
-    let ThreeDShapes = ["Cuboid", "Sphere", "Cylinder", "Pyramid", "Cone"]
+    let ThreeDShapes = ["Cuboid", "Pyramid", "Sphere", "Cylinder", "Cone"]
     let threeDCalculationType = ["Volume", "Surface Area"]
 
     @State var side1 = ""
