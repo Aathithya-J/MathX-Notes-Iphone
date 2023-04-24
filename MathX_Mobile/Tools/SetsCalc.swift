@@ -26,6 +26,8 @@ struct SetsCalc: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    @Namespace var animation
+    
     var body: some View {
         VStack {
             Form {
@@ -129,6 +131,7 @@ struct SetsCalc: View {
                     }
                     .frame(width: 128, height: 128)
                     .offset(x: 20)
+//                    .matchedGeometryEffect(id: "set1", in: animation)
                     
                     ZStack { // set 2
                         Circle()
@@ -140,6 +143,7 @@ struct SetsCalc: View {
                     }
                     .frame(width: 128, height: 128)
                     .offset(x: -20)
+//                    .matchedGeometryEffect(id: "set2", in: animation)
                 } else { // no textfields focused
                     if statesetCalculationSelected == 0 { // union
                         ZStack { // set 1
@@ -152,6 +156,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 20)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                         
                         ZStack { // set 2
                             Circle()
@@ -163,6 +168,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: -20)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                     } else { // intersection
                         ZStack { // set 1
                             Circle()
@@ -174,6 +180,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 20)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                         
                         ZStack { // set 2 // fix intersection
                             Circle()
@@ -185,6 +192,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: -20)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                     }
                 }
             } else if setType == 1 { // set 2 is a proper subset of set 1 (set 2 in set 1)
@@ -199,6 +207,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 50)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                         
                         ZStack { // set 2
                             Circle()
@@ -210,6 +219,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 80, height: 80)
                         .offset(x: -50)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                 } else { // no textfields focused
                     if statesetCalculationSelected == 0 { // union
                         ZStack { // set 1
@@ -222,6 +232,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 50)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                         
                         ZStack { // set 2
                             Circle()
@@ -233,6 +244,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 80, height: 80)
                         .offset(x: -50)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                     } else { // intersection
                         ZStack { // set 1
                             Circle()
@@ -244,6 +256,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 50)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                         
                         ZStack { // set 2
                             Circle()
@@ -255,6 +268,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 80, height: 80)
                         .offset(x: -50)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                     }
                 }
             } else if setType == 2 { // set 1 is a proper subset of set 2 (set 1 in set 2)
@@ -269,6 +283,7 @@ struct SetsCalc: View {
                     }
                     .frame(width: 128, height: 128)
                     .offset(x: 40)
+//                    .matchedGeometryEffect(id: "set2", in: animation)
                     
                     ZStack { // set 1
                         Circle()
@@ -280,6 +295,7 @@ struct SetsCalc: View {
                     }
                     .frame(width: 80, height: 80)
                     .offset(x: -80)
+//                    .matchedGeometryEffect(id: "set1", in: animation)
                 } else {
                     if statesetCalculationSelected == 0 { // union
                         ZStack { // set 2
@@ -292,6 +308,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 40)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                         
                         ZStack { // set 1
                             Circle()
@@ -303,6 +320,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 80, height: 80)
                         .offset(x: -80)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                     } else { // intersection
                         ZStack { // set 2
                             Circle()
@@ -314,6 +332,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 128, height: 128)
                         .offset(x: 40)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                         
                         ZStack { // set 1
                             Circle()
@@ -325,6 +344,7 @@ struct SetsCalc: View {
                         }
                         .frame(width: 80, height: 80)
                         .offset(x: -80)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                     }
                 }
             } else if setType == 3 { // no common elements
@@ -338,6 +358,7 @@ struct SetsCalc: View {
                             .strokeBorder(.gray, lineWidth: 2)
                     }
                     .frame(width: 128, height: 128)
+//                    .matchedGeometryEffect(id: "set2", in: animation)
                     
                     ZStack { // set 1
                         Circle()
@@ -348,6 +369,7 @@ struct SetsCalc: View {
                             .strokeBorder(.gray, lineWidth: 2)
                     }
                     .frame(width: 128, height: 128)
+//                    .matchedGeometryEffect(id: "set1", in: animation)
                 } else {
                     if statesetCalculationSelected == 0 { // union
                         ZStack { // set 2
@@ -359,6 +381,7 @@ struct SetsCalc: View {
                                 .strokeBorder(.gray, lineWidth: 2)
                         }
                         .frame(width: 128, height: 128)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                         
                         ZStack { // set 1
                             Circle()
@@ -369,6 +392,7 @@ struct SetsCalc: View {
                                 .strokeBorder(.gray, lineWidth: 2)
                         }
                         .frame(width: 128, height: 128)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                     } else { // intersection
                         ZStack { // set 2
                             Circle()
@@ -379,6 +403,7 @@ struct SetsCalc: View {
                                 .strokeBorder(.gray, lineWidth: 2)
                         }
                         .frame(width: 128, height: 128)
+//                        .matchedGeometryEffect(id: "set2", in: animation)
                         
                         ZStack { // set 1
                             Circle()
@@ -389,6 +414,7 @@ struct SetsCalc: View {
                                 .strokeBorder(.gray, lineWidth: 2)
                         }
                         .frame(width: 128, height: 128)
+//                        .matchedGeometryEffect(id: "set1", in: animation)
                     }
                 }
             } else if setType == 4 { // sets are the same
@@ -401,33 +427,34 @@ struct SetsCalc: View {
                         .strokeBorder(.gray, lineWidth: 2)
                 }
                 .frame(width: 128, height: 128)
+//                .matchedGeometryEffect(id: "set1", in: animation)
             }
         }
         .onChange(of: set1) { _ in
             if !set1.isEmpty && !set2.isEmpty {
                 if doNotHaveAnyCommonElements() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 3
                     }
                 } else if setsAreTheSame() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 4
                     }
                 } else if set2IsAProperSubsetOfSet1() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 1
                     }
                 } else if set1IsAProperSubsetOfSet2() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 2
                     }
                 } else {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 0
                     }
                 }
             } else {
-                withAnimation {
+                withAnimation(.spring()) {
                     setType = 0
                 }
             }
@@ -435,28 +462,28 @@ struct SetsCalc: View {
         .onChange(of: set2) { _ in
             if !set1.isEmpty && !set2.isEmpty {
                 if doNotHaveAnyCommonElements() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 3
                     }
                 } else if setsAreTheSame() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 4
                     }
                 } else if set2IsAProperSubsetOfSet1() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 1
                     }
                 } else if set1IsAProperSubsetOfSet2() {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 2
                     }
                 } else {
-                    withAnimation {
+                    withAnimation(.spring()) {
                         setType = 0
                     }
                 }
             } else {
-                withAnimation {
+                withAnimation(.spring()) {
                     setType = 0
                 }
             }

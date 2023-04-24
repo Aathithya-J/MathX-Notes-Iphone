@@ -20,7 +20,6 @@ struct RandView: View {
     
     var body: some View {
         VStack {
-            
             Form {
                 Section(footer: Text("Tap the anywhere in the number section to generate a new number!")) {
                     HStack {
