@@ -13,6 +13,7 @@ struct ShapesCalc: View {
     let dimensions = ["2D", "3D"]
     let TwoDShapes = ["Square", "Triangle", "Circle", "Trapezium", "Parallelogram"]
     let ThreeDShapes = ["Cuboid", "Sphere", "Cylinder", "Pyramid", "Cone"]
+    let threeDCalculationType = ["Volume", "Surface Area"]
 
     @State var side1 = ""
     @State var side2 = ""
@@ -25,6 +26,9 @@ struct ShapesCalc: View {
 
     @State var shapeSelection = "Square"
     @State var stateshapeSelection = "Square"
+    
+    @State var threeDCalculation = "Volume"
+    @State var statethreeDCalculation = "Volume"
 
     var body: some View {
         Form {
@@ -79,9 +83,17 @@ struct ShapesCalc: View {
             }
             
             Section(header: Text(stateshapeSelection)) {
-                LaTeX(getFormulaForShape(shape: stateshapeSelection))
-                    .parsingMode(.all)
-                    .blockMode(.alwaysInline)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    if statedimensionSelection == "3D" && statethreeDCalculation == "Surface Area" {
+                        LaTeX("\(results.isEmpty ? "Surface Area" : "\\[\(results)\\]") = \\[\(getFormulaForShape(shape: stateshapeSelection))\\]")
+                            .parsingMode(.onlyEquations)
+                            .blockMode(.alwaysInline)
+                    } else {
+                        LaTeX(getFormulaForShape(shape: stateshapeSelection))
+                            .parsingMode(.all)
+                            .blockMode(.alwaysInline)
+                    }
+                }
                 
                 TextField("\(getSidesNames(sideNumber: 1, shape: stateshapeSelection))", text: $side1)
                     .keyboardType(.decimalPad)
@@ -98,8 +110,23 @@ struct ShapesCalc: View {
             }
             
             Section(header: Text("Results")) {
+                if statedimensionSelection == "3D" {
+                    Picker("", selection: $threeDCalculation) {
+                        ForEach(threeDCalculationType, id: \.description) { calculationType in
+                            Text(calculationType)
+                                .tag(calculationType)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: threeDCalculation) { _ in
+                        withAnimation {
+                            statethreeDCalculation = threeDCalculation
+                        }
+                    }
+                }
+                
                 HStack {
-                    Text(statedimensionSelection == "2D" ? "Area:" : "Volume:")
+                    Text(statedimensionSelection == "2D" ? "Area:" : statethreeDCalculation == "Volume" ? "Volume:" : "")
                     Spacer()
                     Text(results)
                         .multilineTextAlignment(.trailing)
@@ -145,6 +172,13 @@ struct ShapesCalc: View {
             side2 = ""
             side3 = ""
             
+            if getNumberOfTextfieldsFilled() == numberOfInputsRequired(shape: stateshapeSelection) {
+                results = calculate(shape: stateshapeSelection)
+            } else {
+                results = ""
+            }
+        }
+        .onChange(of: statethreeDCalculation) { _ in
             if getNumberOfTextfieldsFilled() == numberOfInputsRequired(shape: stateshapeSelection) {
                 results = calculate(shape: stateshapeSelection)
             } else {
@@ -206,47 +240,47 @@ struct ShapesCalc: View {
         case "Cuboid":
             switch sideNumber {
             case 1:
-                return "Length"
+                return "Length (l)"
             case 2:
-                return "Breadth"
+                return "Breadth (b)"
             case 3:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
         case "Sphere":
             switch sideNumber {
             case 1:
-                return "Radius"
+                return "Radius (r)"
             default:
                 return ""
             }
         case "Cylinder":
             switch sideNumber {
             case 1:
-                return "Radius"
+                return "Radius (r)"
             case 2:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
         case "Pyramid":
             switch sideNumber {
             case 1:
-                return "Base length"
+                return "Base length (l)"
             case 2:
-                return "Base breadth"
+                return "Base breadth (b)"
             case 3:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
         case "Cone":
             switch sideNumber {
             case 1:
-                return "Radius"
+                return "Radius (r)"
             case 2:
-                return "Height"
+                return "Height (h)"
             default:
                 return ""
             }
@@ -311,27 +345,47 @@ struct ShapesCalc: View {
             guard let b = Double(side2) else { return "" }
             guard let h = Double(side3) else { return "" }
 
-            return (l * b * h).formatted()
+            if statethreeDCalculation == "Volume" {
+                return (l * b * h).formatted()
+            } else {
+                return (2 * (l * h + l * b + h * b)).formatted()
+            }
         case "Sphere":
             guard let r = Double(side1) else { return "" }
 
-            return (4/3 * .pi * pow(r, 3)).formatted()
+            if statethreeDCalculation == "Volume" {
+                return (4/3 * .pi * pow(r, 3)).formatted()
+            } else {
+                return (4 * .pi * pow(r, 2)).formatted()
+            }
         case "Cylinder":
             guard let r = Double(side1) else { return "" }
             guard let h = Double(side2) else { return "" }
             
-            return (.pi * pow(r, 2) * h).formatted()
+            if statethreeDCalculation == "Volume" {
+                return (.pi * pow(r, 2) * h).formatted()
+            } else {
+                return ((2 * .pi * r * h) + (2 * .pi * pow(r, 2))).formatted()
+            }
         case "Pyramid":
             guard let l = Double(side1) else { return "" }
             guard let w = Double(side2) else { return "" }
             guard let h = Double(side3) else { return "" }
             
-            return ((l * w * h) / 3).formatted()
+            if statethreeDCalculation == "Volume" {
+                return ((l * w * h) / 3).formatted()
+            } else {
+                return (l * w + (l * (sqrt(pow(w / 2, 2) + pow(h, 2)))) + (w * (sqrt(pow(l / 2, 2) + pow(h, 2))))).formatted()
+            }
         case "Cone":
             guard let r = Double(side1) else { return "" }
             guard let h = Double(side2) else { return "" }
             
-            return (.pi * pow(r, 2) * (h / 3)).formatted()
+            if statethreeDCalculation == "Volume" {
+                return (.pi * pow(r, 2) * (h / 3)).formatted()
+            } else {
+                return ((.pi * r) * (r + (sqrt(pow(h, 2) + pow(r, 2))))).formatted()
+            }
             
             // 2D Shapes
         case "Square":
@@ -369,15 +423,35 @@ struct ShapesCalc: View {
         switch shape {
             // 3D Shaoes
         case "Cuboid":
-            return "\(results.isEmpty ? "V" : results) = \(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2) * \(side3.isEmpty ? "h" : side3)"
+            if statethreeDCalculation == "Volume" {
+                return "\(results.isEmpty ? "V" : results) = \(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2) * \(side3.isEmpty ? "h" : side3)"
+            } else {
+                return "2 * ((\(side1.isEmpty ? "l" : side1) * \(side3.isEmpty ? "h" : side3)) + (\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) + (\(side3.isEmpty ? "h" : side3) * \(side2.isEmpty ? "b" : side2)))"
+            }
         case "Sphere":
-            return "\(results.isEmpty ? "V" : results) = \\frac{4}{3} * \\pi * \(side1.isEmpty ? "r" : side1)^3"
+            if statethreeDCalculation == "Volume" {
+                return "\(results.isEmpty ? "V" : results) = \\frac{4}{3} * \\pi * \(side1.isEmpty ? "r" : side1)^3"
+            } else {
+                return "4 * \\pi * \(side1.isEmpty ? "r" : side1)^2"
+            }
         case "Cylinder":
-            return "\(results.isEmpty ? "V" : results) = \\pi * \(side1.isEmpty ? "r" : side1)^2 * \(side2.isEmpty ? "h" : side2)"
+            if statethreeDCalculation == "Volume" {
+                return "\(results.isEmpty ? "V" : results) = \\pi * \(side1.isEmpty ? "r" : side1)^2 * \(side2.isEmpty ? "h" : side2)"
+            } else {
+                return "(2 * \\pi * \(side1.isEmpty ? "r" : side1) * \(side2.isEmpty ? "h" : side2)) + (2 * \\pi * \(side1.isEmpty ? "r" : side1)^2)"
+            }
         case "Pyramid":
-            return "\(results.isEmpty ? "V" : results) = \\frac{\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "w" : side2) * \(side3.isEmpty ? "h" : side3)}{3}"
+            if statethreeDCalculation == "Volume" {
+                return "\(results.isEmpty ? "V" : results) = \\frac{\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2) * \(side3.isEmpty ? "h" : side3)}{3}"
+            } else {
+                return "(\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) * (\(side1.isEmpty ? "l" : side1) * \\sqrt{(\\frac{\(side2.isEmpty ? "b" : side2)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2) * (\(side2.isEmpty ? "b" : side2) * \\sqrt{(\\frac{\(side1.isEmpty ? "l" : side1)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2)"
+            }
         case "Cone":
-            return "\(results.isEmpty ? "V" : results) = \\pi * \(side1.isEmpty ? "r" : side1)^2 * \\frac{\(side2.isEmpty ? "h" : side2)}{3}"
+            if statethreeDCalculation == "Volume" {
+                return "\(results.isEmpty ? "V" : results) = \\pi * \(side1.isEmpty ? "r" : side1)^2 * \\frac{\(side2.isEmpty ? "h" : side2)}{3}"
+            } else {
+                return "(\\pi * \(side1.isEmpty ? "r" : side1)) * (\(side1.isEmpty ? "r" : side1) + \\sqrt{\(side2.isEmpty ? "h" : side2)^2 + \(side1.isEmpty ? "r" : side1)^2})"
+            }
             
             // 2D Shapes
         case "Square":
