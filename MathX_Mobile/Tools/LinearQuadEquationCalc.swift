@@ -71,7 +71,7 @@ struct LinearQuadEquationCalc: View {
                                 .focused($quadraticcTextFocused)
                         }
                         
-                        Section {
+                        Section(header: Text("Results")) {
                             HStack {
                                 Text("y-intercept:")
                                 Spacer()

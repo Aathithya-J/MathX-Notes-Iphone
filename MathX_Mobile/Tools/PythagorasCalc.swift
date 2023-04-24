@@ -58,7 +58,7 @@ struct PythagorasCalc: View {
                         .keyboardType(.decimalPad)
                 }
                 
-                Section {
+                Section(header: Text("Results")) {
                     if calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0) == "Leave at least 1 text field empty." {
                         Text("\(calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0))")
                     } else {

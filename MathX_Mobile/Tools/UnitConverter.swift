@@ -55,7 +55,7 @@ struct UnitConverterView: View {
                     .pickerStyle(.segmented)
                 }
                 
-                Section {
+                Section(header: Text(selection)) {
                     HStack {
                         TextField("Enter value", text: $input)
                             .keyboardType(.decimalPad)
@@ -71,7 +71,9 @@ struct UnitConverterView: View {
                         .fixedSize()
                         .pickerStyle(.menu)
                     }
-                    
+                }
+                
+                Section(header: Text("Results")) {
                     HStack {
                         ScrollView(.horizontal, showsIndicators: false) {
                             Text(input.isEmpty ? "" : unitConverter)

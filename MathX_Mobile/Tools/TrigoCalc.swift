@@ -83,7 +83,7 @@ struct TrigoCalc: View {
                         .keyboardType(.decimalPad)
                 }
                 
-                Section {
+                Section(header: Text("Results")) {
                     HStack {
                         LaTeX("\\[x\\]° =")
                             .parsingMode(.onlyEquations)

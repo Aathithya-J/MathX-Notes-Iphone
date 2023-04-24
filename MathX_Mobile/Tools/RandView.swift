@@ -108,6 +108,7 @@ struct RandView: View {
             }
             .frame(height: (UIScreen.main.bounds.height - 120) * 2/5)
         }
+        .scrollDismissesKeyboard(.interactively)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle("Randomise")
         .toolbar {

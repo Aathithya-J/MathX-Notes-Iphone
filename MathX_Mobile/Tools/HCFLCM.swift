@@ -100,7 +100,7 @@ struct HCF_LCM_CalculatorView: View  {
                     }
                     
                     if lhsNumber > 0 || rhsNumber > 0 {
-                        Section {
+                        Section(header: Text("Results")) {
                             HStack(alignment: .top) {
                                 ribbonComponent
                             }
@@ -117,7 +117,7 @@ struct HCF_LCM_CalculatorView: View  {
                             }
                         }
                     } else {
-                        Section {
+                        Section(header: Text("Results")) {
                             HStack(alignment: .top) {
                                 VStack {
                                     Text("0")
@@ -304,7 +304,7 @@ struct OldHCF_LCM_CalculatorView: View {
                 .focused($number2Focused)
         }
         
-        Section {
+        Section(header: Text("Results")) {
             HStack {
                 Text("LCM:")
                 Spacer()

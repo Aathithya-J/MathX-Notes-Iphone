@@ -71,7 +71,7 @@ struct SetsCalc: View {
                         .focused($secondSetFocused)
                 }
                 
-                Section {
+                Section(header: Text("Results")) {
                     Text("{\(result)}")
                 }
             }
