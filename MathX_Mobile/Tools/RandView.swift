@@ -17,84 +17,52 @@ struct RandView: View {
     
     @State var dataSummarySelection = 0
     
-    @FocusState var textfieldFocused: Bool
     
     var body: some View {
         VStack {
-            ZStack {
-                Rectangle()
-                    .foregroundColor(Color(uiColor: .systemBackground))
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        textfieldFocused = false
-                        generateNumber()
+            
+            Form {
+                Section(footer: Text("Tap the anywhere in the number section to generate a new number!")) {
+                    HStack {
+                        Spacer()
+                        Button {
+                            generateNumber()
+                        } label: {
+                            Text("\(generatedNumber)")
+                                .foregroundColor(ceilingNumber.isEmpty ? .gray : .primary)
+                                .padding([.all, .vertical])
+                                .font(.system(size: 64))
+                                .fontWeight(.bold)
+                        }
+                        .disabled(ceilingNumber.isEmpty)
+                        Spacer()
                     }
-                
-                VStack {
-                    Spacer()
-                    Text("\(generatedNumber)")
-                        .font(.system(size: 64))
-                        .fontWeight(.bold)
                     
                     TextField("Max Number (Inclusive)", text: $ceilingNumber)
-                        .focused($textfieldFocused)
                         .keyboardType(.numberPad)
-                        .padding()
-                        .background(.ultraThickMaterial)
-                        .cornerRadius(16)
-                        .frame(width: UIScreen.main.bounds.width / 2)
-                    Spacer()
                 }
-                .padding(.horizontal)
-                .onTapGesture {
-                    textfieldFocused = false
-                    generateNumber()
-                }
-                .frame(height: (UIScreen.main.bounds.height - 120) * 3/5)
-            }
-            
-            Spacer()
-            
-            Divider()
-                .padding(.bottom, 7.5)
-            
-            VStack {
-                Picker("", selection: $dataSummarySelection) {
-                    Text("Recent")
-                        .tag(0)
-                    Text("Occurences")
-                        .tag(1)
-                }
-                .padding(.horizontal)
-                .pickerStyle(.segmented)
                 
-                if dataSummarySelection == 0 {
-                    if numGenerated.isEmpty {
-                        Spacer()
-                        Text("No data yet, try tapping anywhere in the top half to generate a random number!")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                        Spacer()
-                    } else {
-                        List {
+                Section {
+                    Picker("", selection: $dataSummarySelection) {
+                        Text("Recent")
+                            .tag(0)
+                        Text("Occurences")
+                            .tag(1)
+                    }
+                    .pickerStyle(.segmented)
+                    
+                    if dataSummarySelection == 0 {
+                        if numGenerated.isEmpty {
+                            Text("")
+                        } else {
                             ForEach(numGenerated, id: \.self) { num in
                                 Text(num)
                             }
                         }
-                    }
-                } else {
-                    if numGenerated.isEmpty {
-                        Spacer()
-                        Text("No data yet, try tapping anywhere in the top half to generate a random number!")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                        Spacer()
                     } else {
-                        List {
+                        if numGenerated.isEmpty {
+                            Text("")
+                        } else {
                             ForEach(numUnique, id: \.description) { num in
                                 HStack {
                                     Text(String(num))
@@ -106,9 +74,8 @@ struct RandView: View {
                     }
                 }
             }
-            .frame(height: (UIScreen.main.bounds.height - 120) * 2/5)
+            .scrollDismissesKeyboard(.interactively)
         }
-        .scrollDismissesKeyboard(.interactively)
         .toolbar(.hidden, for: .tabBar)
         .navigationTitle("Randomise")
         .toolbar {
