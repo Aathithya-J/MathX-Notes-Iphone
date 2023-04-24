@@ -18,10 +18,6 @@ struct MathX_MobileApp: App {
     
     @AppStorage("tabSelection", store: .standard) var tabSelection = 1
     @AppStorage("isShowingWelcomeScreen", store: .standard) var isShowingWelcomeScreen = true
-    
-//    init() {
-//        UITabBar.appearance().backgroundColor = UIColor.systemBackground
-//    }
 
     var body: some Scene {
         WindowGroup {

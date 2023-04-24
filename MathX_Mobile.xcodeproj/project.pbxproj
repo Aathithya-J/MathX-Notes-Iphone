@@ -17,6 +17,10 @@
 		49E6CAA029BC845700DD2E02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */; };
 		49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC229BC84BC00DD2E02 /* HomeView.swift */; };
 		49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */; };
+		6A52CB8529F6795600647A6E /* DarkCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8429F6795600647A6E /* DarkCuboid.scn */; };
+		6A52CB8929F6806000647A6E /* LightCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8829F6806000647A6E /* LightCuboid.scn */; };
+		6A52CB8C29F683E000647A6E /* DarkPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8A29F683E000647A6E /* DarkPyramid.scn */; };
+		6A52CB8D29F683E000647A6E /* LightPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8B29F683E000647A6E /* LightPyramid.scn */; };
 		6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A54B94729CF150D0083909A /* LaTeXSwiftUI */; };
 		6A54B94A29CF42510083909A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A54B94929CF42510083909A /* extensions.swift */; };
 		6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */; };
@@ -101,6 +105,10 @@
 		49E6CAAF29BC845700DD2E02 /* MathX_MobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathX_MobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E6CAC229BC84BC00DD2E02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
+		6A52CB8429F6795600647A6E /* DarkCuboid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DarkCuboid.scn; sourceTree = "<group>"; };
+		6A52CB8829F6806000647A6E /* LightCuboid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LightCuboid.scn; sourceTree = "<group>"; };
+		6A52CB8A29F683E000647A6E /* DarkPyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DarkPyramid.scn; sourceTree = "<group>"; };
+		6A52CB8B29F683E000647A6E /* LightPyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LightPyramid.scn; sourceTree = "<group>"; };
 		6A54B94929CF42510083909A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstButtonGroup.swift; sourceTree = "<group>"; };
 		6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondButtonGroup.swift; sourceTree = "<group>"; };
@@ -235,6 +243,10 @@
 		49E6CA9E29BC845700DD2E02 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				6A52CB8829F6806000647A6E /* LightCuboid.scn */,
+				6A52CB8429F6795600647A6E /* DarkCuboid.scn */,
+				6A52CB8B29F683E000647A6E /* LightPyramid.scn */,
+				6A52CB8A29F683E000647A6E /* DarkPyramid.scn */,
 				6ABC06AE29F143E800FE97A3 /* Basic Algebra and Algebraic Manipulation.pdf */,
 				6ABC06C829F1440B00FE97A3 /* Coordinate Geometry.pdf */,
 				6ABC06CA29F1440B00FE97A3 /* Exponentials and Logarithms.pdf */,
@@ -436,6 +448,8 @@
 				6ABC06D129F1440C00FE97A3 /* Quadratic Funcations, Equations, and Inequalities.pdf in Resources */,
 				6ABC06CF29F1440C00FE97A3 /* Futher Coordinate Geometry.pdf in Resources */,
 				6ABC06CE29F1440C00FE97A3 /* Functions and Graphs.pdf in Resources */,
+				6A52CB8C29F683E000647A6E /* DarkPyramid.scn in Resources */,
+				6A52CB8D29F683E000647A6E /* LightPyramid.scn in Resources */,
 				6ABC06D029F1440C00FE97A3 /* Coordinate Geometry.pdf in Resources */,
 				6ABC06D529F1440C00FE97A3 /* Indices.pdf in Resources */,
 				6ABC06C529F1440000FE97A3 /* Similarity and Congruence Part 2.pdf in Resources */,
@@ -444,6 +458,7 @@
 				6ABC06B629F143E800FE97A3 /* Geometrical Construction.pdf in Resources */,
 				6ABC06C029F1440000FE97A3 /* Ratio and Prorortion.pdf in Resources */,
 				6ABC06B929F143E800FE97A3 /* Numbers and Their Operations Part 1.pdf in Resources */,
+				6A52CB8929F6806000647A6E /* LightCuboid.scn in Resources */,
 				6ABC06B329F143E800FE97A3 /* Percentages.pdf in Resources */,
 				49E6CAA029BC845700DD2E02 /* Preview Assets.xcassets in Resources */,
 				6ABC06B029F143E800FE97A3 /* Number Sequences.pdf in Resources */,
@@ -458,6 +473,7 @@
 				6ABC06B129F143E800FE97A3 /* Polygons.pdf in Resources */,
 				6ABC06D329F1440C00FE97A3 /* Linear Law.pdf in Resources */,
 				6ABC06B829F143E800FE97A3 /* Basic Algebra and Algebraic Manipulation.pdf in Resources */,
+				6A52CB8529F6795600647A6E /* DarkCuboid.scn in Resources */,
 				6ABC06C329F1440000FE97A3 /* Direct and Inverse Proportions.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

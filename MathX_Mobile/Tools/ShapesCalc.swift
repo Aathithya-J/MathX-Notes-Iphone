@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SceneKit
 import LaTeXSwiftUI
 
 struct ShapesCalc: View {
@@ -29,10 +30,33 @@ struct ShapesCalc: View {
     
     @State var threeDCalculation = "Volume"
     @State var statethreeDCalculation = "Volume"
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    @State var scene = SCNScene(named: "")
+
+    var cameraNode: SCNNode? {
+        scene?.rootNode.childNode(withName: "camera", recursively: false)
+    }
 
     var body: some View {
         Form {
             Section {
+                // 3D shape rendering (cant implement since it makes everything super laggy)
+//                if statedimensionSelection == "3D" {
+//                    SceneView (
+//                        scene: scene,
+//                        pointOfView: cameraNode,
+//                        options: [.allowsCameraControl]
+//                    )
+//                    .frame(height: UIScreen.main.bounds.height * 1/5)
+//                    .onChange(of: colorScheme) { _ in
+//                        if statedimensionSelection == "3D" {
+//                            scene = SCNScene(named: getSceneNameColorScheme(shape: stateshapeSelection))
+//                        }
+//                    }
+//                }
+                
                 Picker("", selection: $dimensionSelection) {
                     ForEach(dimensions, id: \.description) { dimension in
                         Text(dimension)
@@ -41,7 +65,6 @@ struct ShapesCalc: View {
                 }
                 .pickerStyle(.segmented)
                 .onChange(of: dimensionSelection) { _ in
-                    
                     if dimensionSelection == "2D" {
                         shapeSelection = "Square"
                     } else if dimensionSelection == "3D" {
@@ -129,6 +152,11 @@ struct ShapesCalc: View {
         }
         .scrollDismissesKeyboard(.interactively)
         .navigationTitle("Shapes Calculator")
+        .onAppear {
+            if statedimensionSelection == "3D" {
+                scene = SCNScene(named: getSceneName(shape: stateshapeSelection))
+            }
+        }
         .onChange(of: side1) { _ in
             if getNumberOfTextfieldsFilled() == numberOfInputsRequired(shape: stateshapeSelection) {
                 results = calculate(shape: stateshapeSelection)
@@ -160,6 +188,10 @@ struct ShapesCalc: View {
             } else {
                 results = ""
             }
+            
+            if statedimensionSelection == "3D" {
+                scene = SCNScene(named: getSceneName(shape: stateshapeSelection))
+            }
         }
         .onChange(of: statedimensionSelection) { _ in
             side1 = ""
@@ -170,6 +202,10 @@ struct ShapesCalc: View {
                 results = calculate(shape: stateshapeSelection)
             } else {
                 results = ""
+            }
+            
+            if statedimensionSelection == "3D" {
+                scene = SCNScene(named: getSceneName(shape: stateshapeSelection))
             }
         }
         .onChange(of: statethreeDCalculation) { _ in
@@ -459,6 +495,80 @@ struct ShapesCalc: View {
         case "Parallelogram":
             return "\(results.isEmpty ? "A" : results) = \(side1.isEmpty ? "b" : side1) * \(side2.isEmpty ? "h" : side2)"
 
+        default:
+            return ""
+        }
+    }
+    
+    func getSceneName(shape: String) -> String {
+        switch shape {
+        case "Cuboid":
+            if colorScheme == .light {
+                return "LightCuboid.scn"
+            } else {
+                return "DarkCuboid.scn"
+            }
+        case "Sphere":
+            if colorScheme == .light {
+                return "LightSphere.scn"
+            } else {
+                return "DarkSphere.scn"
+            }
+        case "Cylinder":
+            if colorScheme == .light {
+                return "LightCylinder.scn"
+            } else {
+                return "DarkCylinder.scn"
+            }
+        case "Pyramid":
+            if colorScheme == .light {
+                return "LightPyramid.scn"
+            } else {
+                return "DarkPyramid.scn"
+            }
+        case "Cone":
+            if colorScheme == .light {
+                return "LightCone.scn"
+            } else {
+                return "DarkCone.scn"
+            }
+        default:
+            return ""
+        }
+    }
+    
+    func getSceneNameColorScheme(shape: String) -> String {
+        switch shape {
+        case "Cuboid":
+            if colorScheme == .dark {
+                return "LightCuboid.scn"
+            } else {
+                return "DarkCuboid.scn"
+            }
+        case "Sphere":
+            if colorScheme == .dark {
+                return "LightSphere.scn"
+            } else {
+                return "DarkSphere.scn"
+            }
+        case "Cylinder":
+            if colorScheme == .dark {
+                return "LightCylinder.scn"
+            } else {
+                return "DarkCylinder.scn"
+            }
+        case "Pyramid":
+            if colorScheme == .dark {
+                return "LightPyramid.scn"
+            } else {
+                return "DarkPyramid.scn"
+            }
+        case "Cone":
+            if colorScheme == .dark {
+                return "LightCone.scn"
+            } else {
+                return "DarkCone.scn"
+            }
         default:
             return ""
         }
