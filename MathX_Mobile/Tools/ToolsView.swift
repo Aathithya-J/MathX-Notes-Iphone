@@ -81,7 +81,7 @@ struct ToolsView: View {
                         NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
                         NavigationLink("Set Calculator", destination: SetsCalc())
                         NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
-                        NavigationLink("Volume Calculator", destination: ShapesCalc())
+                        NavigationLink("Shapes Calculator", destination: ShapesCalc())
                     }
                 }
                 .navigationTitle("Calculators")
