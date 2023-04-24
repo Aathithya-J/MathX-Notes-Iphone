@@ -126,7 +126,7 @@ struct ShapesCalc: View {
                 }
                 
                 HStack {
-                    Text(statedimensionSelection == "2D" ? "Area:" : statethreeDCalculation == "Volume" ? "Volume:" : "")
+                    Text(statedimensionSelection == "2D" ? "Area:" : statethreeDCalculation == "Volume" ? "Volume:" : "Surface Area:")
                     Spacer()
                     Text(results)
                         .multilineTextAlignment(.trailing)
