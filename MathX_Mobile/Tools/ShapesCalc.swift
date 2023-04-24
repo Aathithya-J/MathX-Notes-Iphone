@@ -84,15 +84,9 @@ struct ShapesCalc: View {
             
             Section(header: Text(stateshapeSelection)) {
                 ScrollView(.horizontal, showsIndicators: false) {
-                    if statedimensionSelection == "3D" && statethreeDCalculation == "Surface Area" {
-                        LaTeX("\(results.isEmpty ? "Surface Area" : "\\[\(results)\\]") = \\[\(getFormulaForShape(shape: stateshapeSelection))\\]")
-                            .parsingMode(.onlyEquations)
-                            .blockMode(.alwaysInline)
-                    } else {
-                        LaTeX(getFormulaForShape(shape: stateshapeSelection))
-                            .parsingMode(.all)
-                            .blockMode(.alwaysInline)
-                    }
+                    LaTeX(getFormulaForShape(shape: stateshapeSelection))
+                        .parsingMode(.all)
+                        .blockMode(.alwaysInline)
                 }
                 
                 TextField("\(getSidesNames(sideNumber: 1, shape: stateshapeSelection))", text: $side1)
@@ -426,31 +420,31 @@ struct ShapesCalc: View {
             if statethreeDCalculation == "Volume" {
                 return "\(results.isEmpty ? "V" : results) = \(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2) * \(side3.isEmpty ? "h" : side3)"
             } else {
-                return "2 * ((\(side1.isEmpty ? "l" : side1) * \(side3.isEmpty ? "h" : side3)) + (\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) + (\(side3.isEmpty ? "h" : side3) * \(side2.isEmpty ? "b" : side2)))"
+                return "\(results.isEmpty ? "A" : results) = 2 * ((\(side1.isEmpty ? "l" : side1) * \(side3.isEmpty ? "h" : side3)) + (\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) + (\(side3.isEmpty ? "h" : side3) * \(side2.isEmpty ? "b" : side2)))"
             }
         case "Sphere":
             if statethreeDCalculation == "Volume" {
                 return "\(results.isEmpty ? "V" : results) = \\frac{4}{3} * \\pi * \(side1.isEmpty ? "r" : side1)^3"
             } else {
-                return "4 * \\pi * \(side1.isEmpty ? "r" : side1)^2"
+                return "\(results.isEmpty ? "A" : results) = 4 * \\pi * \(side1.isEmpty ? "r" : side1)^2"
             }
         case "Cylinder":
             if statethreeDCalculation == "Volume" {
                 return "\(results.isEmpty ? "V" : results) = \\pi * \(side1.isEmpty ? "r" : side1)^2 * \(side2.isEmpty ? "h" : side2)"
             } else {
-                return "(2 * \\pi * \(side1.isEmpty ? "r" : side1) * \(side2.isEmpty ? "h" : side2)) + (2 * \\pi * \(side1.isEmpty ? "r" : side1)^2)"
+                return "\(results.isEmpty ? "A" : results) = (2 * \\pi * \(side1.isEmpty ? "r" : side1) * \(side2.isEmpty ? "h" : side2)) + (2 * \\pi * \(side1.isEmpty ? "r" : side1)^2)"
             }
         case "Pyramid":
             if statethreeDCalculation == "Volume" {
                 return "\(results.isEmpty ? "V" : results) = \\frac{\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2) * \(side3.isEmpty ? "h" : side3)}{3}"
             } else {
-                return "(\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) * (\(side1.isEmpty ? "l" : side1) * \\sqrt{(\\frac{\(side2.isEmpty ? "b" : side2)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2) * (\(side2.isEmpty ? "b" : side2) * \\sqrt{(\\frac{\(side1.isEmpty ? "l" : side1)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2)"
+                return "\(results.isEmpty ? "A" : results) = (\(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)) * (\(side1.isEmpty ? "l" : side1) * \\sqrt{(\\frac{\(side2.isEmpty ? "b" : side2)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2) * (\(side2.isEmpty ? "b" : side2) * \\sqrt{(\\frac{\(side1.isEmpty ? "l" : side1)}{2}})^2 + \(side3.isEmpty ? "h" : side3)^2)"
             }
         case "Cone":
             if statethreeDCalculation == "Volume" {
                 return "\(results.isEmpty ? "V" : results) = \\pi * \(side1.isEmpty ? "r" : side1)^2 * \\frac{\(side2.isEmpty ? "h" : side2)}{3}"
             } else {
-                return "(\\pi * \(side1.isEmpty ? "r" : side1)) * (\(side1.isEmpty ? "r" : side1) + \\sqrt{\(side2.isEmpty ? "h" : side2)^2 + \(side1.isEmpty ? "r" : side1)^2})"
+                return "\(results.isEmpty ? "A" : results) = (\\pi * \(side1.isEmpty ? "r" : side1)) * (\(side1.isEmpty ? "r" : side1) + \\sqrt{\(side2.isEmpty ? "h" : side2)^2 + \(side1.isEmpty ? "r" : side1)^2})"
             }
             
             // 2D Shapes
