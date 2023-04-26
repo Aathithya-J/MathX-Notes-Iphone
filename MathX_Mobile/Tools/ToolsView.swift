@@ -76,6 +76,7 @@ struct ToolsView: View {
                     }
                     
                     Section(header: Text("Other Calculators")) {
+                        NavigationLink("Average Calculator", destination: AverageCalc())
                         NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView(lhsNumber: 0, rhsNumber: 0))
                         NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
                         NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())

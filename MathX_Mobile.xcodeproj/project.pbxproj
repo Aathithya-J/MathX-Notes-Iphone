@@ -72,6 +72,7 @@
 		6ABC06D529F1440C00FE97A3 /* Indices.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06CD29F1440B00FE97A3 /* Indices.pdf */; };
 		6ABC06D729F18E4E00FE97A3 /* CalculationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC06D629F18E4E00FE97A3 /* CalculationManager.swift */; };
 		6ABC06D929F1912800FE97A3 /* CalculationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */; };
+		6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF54D2D29F9173E00722548 /* AverageCalc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		6ABC06D629F18E4E00FE97A3 /* CalculationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationManager.swift; sourceTree = "<group>"; };
 		6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryView.swift; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
+		6AF54D2D29F9173E00722548 /* AverageCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
+				6AF54D2D29F9173E00722548 /* AverageCalc.swift */,
 				6A78917029F64FC4006D1F26 /* ShapesCalc.swift */,
 				6ABC063E29F126A500FE97A3 /* RandView.swift */,
 				6A6D3F2E29F017AE00265124 /* PythagorasCalc.swift */,
@@ -526,6 +529,7 @@
 				6A6D3F1B29EECA4500265124 /* thirdButtonGroupModified.swift in Sources */,
 				6A6D3F2F29F017AE00265124 /* PythagorasCalc.swift in Sources */,
 				6A6D3F3129F025E300265124 /* LinearQuadEquationCalc.swift in Sources */,
+				6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */,
 				6ABC063F29F126A500FE97A3 /* RandView.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,
 				6A6D3F2029EF75B300265124 /* addNewNoteView.swift in Sources */,
