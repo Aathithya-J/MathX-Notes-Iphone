@@ -6,8 +6,8 @@ import CoreImage.CIFilterBuiltins
 struct CalculatorView: View {
     
     @State private var orientation = UIDeviceOrientation.unknown
-    @Binding var isCalShowing: Bool
-    
+    @Binding var path: NavigationPath
+
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     
@@ -103,7 +103,7 @@ struct CalculatorView: View {
                     dismiss.callAsFunction()
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                        isCalShowing = true
+                        path.append(MathXCalculatorTools[0])
                     }
                 }
             }
@@ -161,9 +161,14 @@ struct CalculatorView: View {
             .toolbar(.hidden, for: .tabBar)
             .statusBar(hidden: true)
             .onRotate { newOrientation in
-                orientation = newOrientation
-                dismiss.callAsFunction()
-                isCalShowing = true
+                if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
+                    orientation = newOrientation
+                    dismiss.callAsFunction()
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+                        path.append(MathXCalculatorTools[0])
+                    }
+                }
             }
         }
     }

@@ -1,47 +1,59 @@
 import SwiftUI
 
+let MathXTools: [Tool] = [
+    .init(name: "Calculators", color: .orange),
+    .init(name: "Grapher (Desmos)", color: .green),
+//        .init(name: "Measurements", color: .purple), // likely to come as a future update as ruler and protractor still dont work
+    .init(name: "Randomise", color: .red),
+    .init(name: "Unit Converter", color: .blue)
+]
+
+let MathXCalculatorTools: [CalculatorTool] = [
+    .init(name: "Calculator"),
+    .init(name: "Average Calculator"),
+    .init(name: "HCF/LCM Calculator"),
+    .init(name: "Pythagoras Calculator"),
+    .init(name: "Quadratic Calculator"),
+    .init(name: "Set Calculator"),
+    .init(name: "Shapes Calculator"),
+    .init(name: "Trigonometry Calculator")
+]
+
+struct Tool: Identifiable, Hashable {
+    var id = UUID()
+    var name: String
+    var color: Color
+}
+
+struct CalculatorTool: Identifiable, Hashable {
+    var id = UUID()
+    var name: String
+}
+
 struct ToolsView: View {
-    var algebra = "Algebra"
-    var cal = "Calculators"
-    var measure = "Measurements"
-    var grapher = "Grapher (Desmos)"
-    var rand = "Randomise"
-    var unit = "Unit Converter"
-    let tools = [
-        "Calculators",
-        "Grapher (Desmos)",
-//        "Measurements", // likely to come as a future update as ruler and protractor still dont work
-        "Randomise",
-        "Unit Converter"
-    ]
+    
+    let tools: [Tool] = MathXTools
+    
     @State var searchText = ""
     
-    @State var defaultReturn = false
-    @State var isInsShowing = false
-    @State var isAlgebraShowing = false
-    @State var isGrapherShowing = false
-    @State var isRandShowing = false
-    @State var isUnitShowing = false
-    @Binding var isCalListShowing: Bool
-    @Binding var isCalShowing: Bool
-
     @Binding var deepLinkSource: String
+    @Binding var path: NavigationPath
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 VStack {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), spacing: 30) {
-                        ForEach(searchResults, id: \.self) { tools in
-                            NavigationLink(destination: getDestination(tools: tools), isActive: getIsActiveBool(tools: tools)) {
+                        ForEach(searchResults, id: \.self) { tool in
+                            NavigationLink(value: tool) {
                                 VStack {
-                                    Text(tools)
+                                    Text(tool.name)
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .foregroundColor(.primary)
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                                         .padding()
-                                        .background(getCardColor(for: tools).opacity(0.7))
+                                        .background(tool.color.opacity(0.7))
                                         .cornerRadius(16)
                                 }
                                 .shadow(color: .black.opacity(0.4), radius: 2, x: 3, y: 3)
@@ -55,39 +67,51 @@ struct ToolsView: View {
             }
             .navigationTitle("Tools")
             .searchable(text: $searchText)
+            .navigationDestination(for: Tool.self) { tool in
+                getDestination(for: tool.name)
+            }
+            .navigationDestination(for: CalculatorTool.self) { tool in
+                getCalculatorDestination(for: tool.name)
+            }
+        }
+    }
+    
+    func getCalculatorDestination(for tool: String) -> AnyView {
+        switch tool {
+        case "Calculator":
+            return AnyView(CalculatorView(path: $path, deepLinkSource: $deepLinkSource))
+        case "Average Calculator":
+            return AnyView(AverageCalc())
+        case "HCF/LCM Calculator":
+            return AnyView(HCF_LCM_CalculatorView(lhsNumber: 0, rhsNumber: 0))
+        case "Pythagoras Calculator":
+            return AnyView(PythagorasCalc())
+        case "Quadratic Calculator":
+            return AnyView(LinearQuadEquationCalc())
+        case "Set Calculator":
+            return AnyView(SetsCalc())
+        case "Shapes Calculator":
+            return AnyView(ShapesCalc())
+        case "Trigonometry Calculator":
+            return AnyView(TrigoCalc())
+        default:
+            return AnyView(EmptyView())
         }
     }
 
-    func getDestination(tools: String) -> AnyView {
+    func getDestination(for tools: String) -> AnyView {
         switch tools {
-        case unit:
+        case "Unit Converter":
             return AnyView(UnitConverterView())
-        case rand:
+        case "Randomis":
             return AnyView(RandView())
-        case grapher:
+        case "Grapher (Desmos)":
             return AnyView(GrapherView())
-        case algebra:
+        case "Algebra":
             return AnyView(OCRView())
-        case cal:
-            return AnyView(
-                List {
-                    Section(header: Text("Calculator")) {
-                        NavigationLink("Calculator", destination: CalculatorView(isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource), isActive: $isCalShowing)
-                    }
-                    
-                    Section(header: Text("Other Calculators")) {
-                        NavigationLink("Average Calculator", destination: AverageCalc())
-                        NavigationLink("HCF/LCM Calculator", destination: HCF_LCM_CalculatorView(lhsNumber: 0, rhsNumber: 0))
-                        NavigationLink("Pythagoras Calculator", destination: PythagorasCalc())
-                        NavigationLink("Quadratic Calculator", destination: LinearQuadEquationCalc())
-                        NavigationLink("Set Calculator", destination: SetsCalc())
-                        NavigationLink("Shapes Calculator", destination: ShapesCalc())
-                        NavigationLink("Trigonometry Calculator", destination: TrigoCalc())
-                    }
-                }
-                .navigationTitle("Calculators")
-            )
-        case measure:
+        case "Calculators":
+            return AnyView(CalculatorSelectionView())
+        case "Measurements":
             return AnyView(
                 List {
                     NavigationLink("Protractor", destination: EmptyView())
@@ -100,49 +124,53 @@ struct ToolsView: View {
         }
     }
 
-    func getCardColor(for tools: String) -> Color {
-        switch tools {
-        case rand:
-            return Color.red
-        case grapher:
-            return Color.green
-        case algebra:
-            return Color.blue
-        case measure:
-            return Color.purple
-        case cal:
-            return Color.orange
-        case unit:
-            return Color.blue
-        default:
-            return Color("CardBackground")
-        }
-    }
-    
-    func getIsActiveBool(tools: String) -> Binding<Bool> {
-        switch tools {
-        case rand:
-            return $isRandShowing
-        case grapher:
-            return $isGrapherShowing
-        case algebra:
-            return $isAlgebraShowing
-        case measure:
-            return $isInsShowing
-        case unit:
-            return $isUnitShowing
-        case cal:
-            return $isCalListShowing
-        default:
-            return $defaultReturn
-        }
-    }
-
-    var searchResults: [String] {
+    var searchResults: [Tool] {
         if searchText.isEmpty {
             return tools
         } else {
-            return tools.filter { $0.lowercased().contains(searchText.lowercased()) }
+            return tools.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
+    }
+}
+
+struct CalculatorSelectionView: View {
+    
+    let tools: [CalculatorTool] = MathXCalculatorTools
+    
+    @State var searchText = String()
+    
+    var body: some View {
+        VStack {
+            List {
+                Section(header: Text("Calculator")) {
+                    ForEach(searchResults) { tool in
+                        if tool.name == "Calculator" {
+                            NavigationLink(value: tool) {
+                                Text(tool.name)
+                            }
+                        }
+                    }
+                }
+                Section(header: Text("Other Calculators")) {
+                    ForEach(searchResults) { tool in
+                        if tool.name != "Calculator" {
+                            NavigationLink(value: tool) {
+                                Text(tool.name)
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Calculators")
+        }
+        .searchable(text: $searchText)
+    }
+    
+    var searchResults: [CalculatorTool] {
+        if searchText.isEmpty {
+            return tools
+        } else {
+            return tools.filter { $0.name.lowercased().contains(searchText.lowercased()) }
         }
     }
 }

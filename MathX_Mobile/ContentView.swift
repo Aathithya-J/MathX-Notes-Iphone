@@ -3,8 +3,7 @@ import SwiftUI
 struct ContentView: View {
     
     @Binding var tabSelection: Int
-    @Binding var isCalShowing: Bool
-    @Binding var isCalListShowing: Bool
+    @Binding var path: NavigationPath
     @Binding var deepLinkSource: String
     
     @State var isAnimationOver = false
@@ -25,7 +24,7 @@ struct ContentView: View {
                             Label("Cheatsheets", systemImage: "list.bullet.clipboard")
                         }
                         .tag(1)
-                    ToolsView(isCalListShowing: $isCalListShowing, isCalShowing: $isCalShowing, deepLinkSource: $deepLinkSource)
+                    ToolsView(deepLinkSource: $deepLinkSource, path: $path)
                         .tabItem {
                             Label("Tools", systemImage: "wrench.and.screwdriver")
                         }

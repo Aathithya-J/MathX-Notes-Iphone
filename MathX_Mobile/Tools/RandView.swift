@@ -75,7 +75,6 @@ struct RandView: View {
             }
             .scrollDismissesKeyboard(.interactively)
         }
-        .toolbar(.hidden, for: .tabBar)
         .navigationTitle("Randomise")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
