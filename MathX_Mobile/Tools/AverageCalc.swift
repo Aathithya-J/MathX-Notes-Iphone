@@ -8,68 +8,108 @@
 import SwiftUI
 
 struct AverageCalc: View {
+        
+    @State var mean = "-"
+    @State var median = "-"
+    @State var mode = "-"
+    @State var stdev = "-"
     
-    @State var textfieldString = ""
+    @State var textfieldCount = 1
     
-    @State var results = ""
-    @State var averageSelection = 0
+    @State var textfieldArray: [String] = [""]
     
     var body: some View {
         VStack {
             Form {
-                Section(footer: Text("Separate numbers with a comma, do not leave a space between commas and numbers. Characters and numbers with characters will not be counted.")) {
-                    TextField("Enter values", text: $textfieldString)
-                        .keyboardType(.numbersAndPunctuation)
-                        .onChange(of: textfieldString) { _ in
-                            calculate()
-                        }
+                Section(footer: Text("Swipe left to delete a value.")) {
+                    ForEach(1...textfieldCount, id: \.self) { position in
+                        TextField("Enter values", text: $textfieldArray[position - 1])
+                            .submitLabel(position == textfieldCount ? .done : .return)
+                            .keyboardType(.asciiCapableNumberPad)
+                            .swipeActions {
+                                if textfieldCount > 1 {
+                                    Button {
+                                        textfieldArray.remove(at: position - 1)
+                                        textfieldCount -= 1
+                                    } label: {
+                                        Text("Delete")
+                                    }
+                                    .tint(.red)
+                                }
+                            }
+                    }
+                    
+                    Button {
+                        textfieldCount += 1
+                        textfieldArray.append("")
+                    } label: {
+                        Text("Add value")
+                    }
                 }
                 
                 Section(header: Text("Results")) {
-                    Picker("", selection: $averageSelection) {
-                        Text("Mean")
-                            .tag(0)
-                        Text("Median")
-                            .tag(1)
-                        Text("Mode")
-                            .tag(2)
-                        Text("STDEV")
-                            .tag(3)
+                    HStack {
+                        Text("Mean:")
+                        Spacer()
+                        Text(mean == "NaN" ? "-" : mean)
+                            .multilineTextAlignment(.trailing)
                     }
-                    .pickerStyle(.segmented)
                     
                     HStack {
-                        Text(averageSelection == 0 ? "Mean:" : averageSelection == 1 ? "Median:" : averageSelection == 2 ? "Mode:" : "Standard Deviation:")
+                        Text("Median:")
                         Spacer()
-                        Text(results == "NaN" ? "-" : results)
+                        Text(median == "NaN" ? "-" : median)
+                            .multilineTextAlignment(.trailing)
+                    }
+                    
+                    HStack {
+                        Text("Mode:")
+                        Spacer()
+                        Text(mode == "NaN" ? "-" : mode)
+                            .multilineTextAlignment(.trailing)
+                    }
+                    
+                    HStack {
+                        Text("Standard Deviation:")
+                        Spacer()
+                        Text(stdev == "NaN" ? "-" : stdev)
                             .multilineTextAlignment(.trailing)
                     }
                 }
             }
         }
         .navigationTitle("Average Calculator")
-        .onChange(of: averageSelection) { _ in
+        .onChange(of: textfieldArray) { _ in
             calculate()
         }
     }
     
     func calculate() {
-        if !textfieldString.isEmpty {
-            if averageSelection == 0 {
-                results = calculateMean(meanString: textfieldString)
-            } else if averageSelection == 1 {
-                results = calculateMedian(medianString: textfieldString)
-            } else if averageSelection == 2 {
-                results = calculateMode(modeString: textfieldString)
-            } else if averageSelection == 3 {
-                results = calculateStandardDeviation(stdevString: textfieldString)
+        var emptyCount = 0
+        
+        textfieldArray.forEach { string in
+            if string.isEmpty {
+                emptyCount += 1
             }
+        }
+        
+        
+        if emptyCount < 1 {
+            mean = calculateMean(meanString: textfieldArray)
+            median = calculateMedian(medianString: textfieldArray)
+            mode = calculateMode(modeString: textfieldArray)
+            stdev = calculateStandardDeviation(stdevString: textfieldArray)
+        } else {
+            mean = "-"
+            median = "-"
+            mode = "-"
+            stdev = "-"
         }
     }
     
-    func calculateMean(meanString: String) -> String {
+    func calculateMean(meanString: [String]) -> String {
         var returnResults = ""
-        let separatedString = separateArray(string: meanString)
+        let separatedString = meanString
         
         if !separatedString.isEmpty {
             var meanAdded: Double = 0
@@ -90,9 +130,9 @@ struct AverageCalc: View {
         return returnResults
     }
     
-    func calculateMedian(medianString: String) -> String {
+    func calculateMedian(medianString: [String]) -> String {
         var returnResults = ""
-        let separatedString = separateArray(string: medianString)
+        let separatedString = medianString
         let sortedString = sortArray(array: separatedString)
         
         if !sortedString.isEmpty {
@@ -117,8 +157,8 @@ struct AverageCalc: View {
         return returnResults
     }
     
-    func calculateMode(modeString: String) -> String {
-        let separatedString = separateArray(string: modeString)
+    func calculateMode(modeString: [String]) -> String {
+        let separatedString = modeString
         let sortedString = sortArray(array: separatedString)
         
         if let mostFrequent = sortedString.mostFrequent {
@@ -128,15 +168,15 @@ struct AverageCalc: View {
         return ""
     }
     
-    func calculateStandardDeviation(stdevString: String) -> String {
+    func calculateStandardDeviation(stdevString: [String]) -> String {
         var returnResults = ""
         var deviationScoreArray: [Double] = []
         var squaredDeviationScoreArray: [Double] = []
-        let separatedString = separateArray(string: stdevString)
+        let separatedString = stdevString
         let sortedString = sortArray(array: separatedString)
 
         // get mean
-        let mean = calculateMean(meanString: stdevString)
+        let mean = calculateMean(meanString: textfieldArray)
         
         // find score deviation from mean
         sortedString.forEach { value in
