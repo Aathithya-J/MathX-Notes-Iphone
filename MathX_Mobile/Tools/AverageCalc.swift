@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum avFocusable: Hashable {
+    case none
+    case identifier(id: Int)
+}
+
 struct AverageCalc: View {
         
     @State var mean = "-"
@@ -18,25 +23,27 @@ struct AverageCalc: View {
     
     @State var textfieldArray: [String] = [""]
     
+    @FocusState var focused: avFocusable?
+
     var body: some View {
         VStack {
             Form {
                 Section(footer: Text("Swipe left to delete a value.")) {
                     ForEach(1...textfieldCount, id: \.self) { position in
                         TextField("Enter values", text: $textfieldArray[position - 1])
+                            .focused($focused, equals: .identifier(id: position - 1))
                             .submitLabel(position == textfieldCount ? .done : .return)
-                            .keyboardType(.asciiCapableNumberPad)
-                            .swipeActions {
-                                if textfieldCount > 1 {
-                                    Button {
-                                        textfieldArray.remove(at: position - 1)
-                                        textfieldCount -= 1
-                                    } label: {
-                                        Text("Delete")
-                                    }
-                                    .tint(.red)
-                                }
-                            }
+                            .keyboardType(.decimalPad)
+//                            .swipeActions {
+//                                if textfieldCount > 1 {
+//                                    Button {
+//                                        textfieldArray.remove(at: position - 1)
+//                                    } label: {
+//                                        Text("Delete")
+//                                    }
+//                                    .tint(.red)
+//                                }
+//                            }
                     }
                     
                     Button {
@@ -75,6 +82,25 @@ struct AverageCalc: View {
                         Text(stdev == "NaN" ? "-" : stdev)
                             .multilineTextAlignment(.trailing)
                     }
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                HStack {
+                    Button {
+                        var textrepresentation = String(focused.debugDescription.description)
+                        
+                        textrepresentation = textrepresentation.replacingOccurrences(of: "Optional(MathX_Mobile.avFocusable.identifier(id: ", with: "")
+                        textrepresentation = textrepresentation.replacingOccurrences(of: "))", with: "")
+                        
+                        if !textfieldArray[Int(textrepresentation)!].isEmpty {
+                            textfieldArray[Int(textrepresentation)!] = (Double(textfieldArray[Int(textrepresentation)!])! * -1).formatted()
+                        }
+                    } label: {
+                        Text("Negative")
+                    }
+                    Spacer()
                 }
             }
         }
