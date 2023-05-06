@@ -117,6 +117,7 @@ struct mathEquationFAQ: View {
                 }
             }
         }
+        .tint(.purple)
     }
 }
 

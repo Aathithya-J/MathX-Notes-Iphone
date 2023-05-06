@@ -28,7 +28,7 @@ struct AverageCalc: View {
     var body: some View {
         VStack {
             Form {
-                Section(footer: Text("Swipe left to delete a value.")) {
+                Section {
                     ForEach(1...textfieldCount, id: \.self) { position in
                         TextField("Enter values", text: $textfieldArray[position - 1])
                             .focused($focused, equals: .identifier(id: position - 1))
