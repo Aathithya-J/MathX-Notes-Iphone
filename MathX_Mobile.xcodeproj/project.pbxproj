@@ -72,6 +72,9 @@
 		6ABC06D529F1440C00FE97A3 /* Indices.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06CD29F1440B00FE97A3 /* Indices.pdf */; };
 		6ABC06D729F18E4E00FE97A3 /* CalculationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC06D629F18E4E00FE97A3 /* CalculationManager.swift */; };
 		6ABC06D929F1912800FE97A3 /* CalculationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */; };
+		6AD2F9CA2A0644CA001D6C64 /* Equation in Frameworks */ = {isa = PBXBuildFile; productRef = 6AD2F9C92A0644CA001D6C64 /* Equation */; };
+		6AD2F9CC2A0644E1001D6C64 /* BinaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */; };
+		6AD2F9CE2A064656001D6C64 /* FormulasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CD2A064656001D6C64 /* FormulasView.swift */; };
 		6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF54D2D29F9173E00722548 /* AverageCalc.swift */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +162,8 @@
 		6ABC06CD29F1440B00FE97A3 /* Indices.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Indices.pdf; sourceTree = "<group>"; };
 		6ABC06D629F18E4E00FE97A3 /* CalculationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationManager.swift; sourceTree = "<group>"; };
 		6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryView.swift; sourceTree = "<group>"; };
+		6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryConverter.swift; sourceTree = "<group>"; };
+		6AD2F9CD2A064656001D6C64 /* FormulasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulasView.swift; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6AF54D2D29F9173E00722548 /* AverageCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +175,7 @@
 			files = (
 				6A60E56829CB2E6B00F9C038 /* MathExpression in Frameworks */,
 				6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */,
+				6AD2F9CA2A0644CA001D6C64 /* Equation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +211,8 @@
 				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
 				498C0FD329BEF7E50079503C /* OCRView.swift */,
 				496462C529F14B1700FAB096 /* UnitConverter.swift */,
+				6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */,
+				6AD2F9CD2A064656001D6C64 /* FormulasView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -355,6 +363,7 @@
 			packageProductDependencies = (
 				6A60E56729CB2E6B00F9C038 /* MathExpression */,
 				6A54B94729CF150D0083909A /* LaTeXSwiftUI */,
+				6AD2F9C92A0644CA001D6C64 /* Equation */,
 			);
 			productName = MathX_Mobile;
 			productReference = 49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */;
@@ -431,6 +440,7 @@
 			packageReferences = (
 				6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */,
 				6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
+				6AD2F9C82A0644CA001D6C64 /* XCRemoteSwiftPackageReference "Equation" */,
 			);
 			productRefGroup = 49E6CA9629BC845400DD2E02 /* Products */;
 			projectDirPath = "";
@@ -531,8 +541,10 @@
 				6A6D3F3129F025E300265124 /* LinearQuadEquationCalc.swift in Sources */,
 				6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */,
 				6ABC063F29F126A500FE97A3 /* RandView.swift in Sources */,
+				6AD2F9CE2A064656001D6C64 /* FormulasView.swift in Sources */,
 				495674C129BD5EEB00EB37DA /* HCFLCM.swift in Sources */,
 				6A6D3F2029EF75B300265124 /* addNewNoteView.swift in Sources */,
+				6AD2F9CC2A0644E1001D6C64 /* BinaryConverter.swift in Sources */,
 				6A6D3F1929EEBA4500265124 /* FavouritesView.swift in Sources */,
 				6A6D3F1329EEA87200265124 /* CheatsheetsView.swift in Sources */,
 				49E6CA9929BC845400DD2E02 /* MathX_MobileApp.swift in Sources */,
@@ -696,6 +708,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MathX-Mobile-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MathX;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -730,6 +743,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MathX-Mobile-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MathX;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -885,6 +899,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		6AD2F9C82A0644CA001D6C64 /* XCRemoteSwiftPackageReference "Equation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/KaiTheRedNinja/Equation";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -897,6 +919,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */;
 			productName = MathExpression;
+		};
+		6AD2F9C92A0644CA001D6C64 /* Equation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AD2F9C82A0644CA001D6C64 /* XCRemoteSwiftPackageReference "Equation" */;
+			productName = Equation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -5,10 +5,11 @@ let MathXTools: [Tool] = [
     .init(name: "Grapher (Desmos)", color: .green),
 //        .init(name: "Measurements", color: .purple), // likely to come as a future update as ruler and protractor still dont work
     .init(name: "Randomise", color: .red),
-    .init(name: "Unit Converter", color: .blue)
+    .init(name: "Converters", color: .blue),
+    .init(name: "Formulas", color: .yellow)
 ]
 
-let MathXCalculatorTools: [CalculatorTool] = [
+let MathXCalculatorTools: [SubTool] = [
     .init(name: "Calculator"),
     .init(name: "Average Calculator"),
     .init(name: "HCF/LCM Calculator"),
@@ -16,7 +17,12 @@ let MathXCalculatorTools: [CalculatorTool] = [
     .init(name: "Quadratic Calculator"),
     .init(name: "Set Calculator"),
     .init(name: "Shapes Calculator"),
-    .init(name: "Trigonometry Calculator")
+    .init(name: "Trigonometry Calculator"),
+]
+
+let MathXConverterTools: [SubTool] = [
+    .init(name: "Unit Converter"),
+    .init(name: "Binary Converter")
 ]
 
 struct Tool: Identifiable, Hashable {
@@ -25,7 +31,7 @@ struct Tool: Identifiable, Hashable {
     var color: Color
 }
 
-struct CalculatorTool: Identifiable, Hashable {
+struct SubTool: Identifiable, Hashable {
     var id = UUID()
     var name: String
 }
@@ -70,13 +76,13 @@ struct ToolsView: View {
             .navigationDestination(for: Tool.self) { tool in
                 getDestination(for: tool.name)
             }
-            .navigationDestination(for: CalculatorTool.self) { tool in
-                getCalculatorDestination(for: tool.name)
+            .navigationDestination(for: SubTool.self) { tool in
+                getSubToolsDestination(for: tool.name)
             }
         }
     }
     
-    func getCalculatorDestination(for tool: String) -> AnyView {
+    func getSubToolsDestination(for tool: String) -> AnyView {
         switch tool {
         case "Calculator":
             return AnyView(CalculatorView(path: $path, deepLinkSource: $deepLinkSource))
@@ -94,6 +100,11 @@ struct ToolsView: View {
             return AnyView(ShapesCalc())
         case "Trigonometry Calculator":
             return AnyView(TrigoCalc())
+            
+        case "Unit Converter":
+            return AnyView(UnitConverterView())
+        case "Binary Converter":
+            return AnyView(BinaryConverter())
         default:
             return AnyView(EmptyView())
         }
@@ -101,9 +112,9 @@ struct ToolsView: View {
 
     func getDestination(for tools: String) -> AnyView {
         switch tools {
-        case "Unit Converter":
-            return AnyView(UnitConverterView())
-        case "Randomis":
+        case "Converters":
+            return AnyView(ConverterSelectionView())
+        case "Randomise":
             return AnyView(RandView())
         case "Grapher (Desmos)":
             return AnyView(GrapherView())
@@ -119,6 +130,8 @@ struct ToolsView: View {
                 }
                     .navigationTitle("Measurements")
             )
+        case "Formulas":
+            return AnyView(FormulasView())
         default:
             return AnyView(EmptyView())
         }
@@ -135,13 +148,13 @@ struct ToolsView: View {
 
 struct CalculatorSelectionView: View {
     
-    let tools: [CalculatorTool] = MathXCalculatorTools
+    let tools: [SubTool] = MathXCalculatorTools
     
     @State var searchText = String()
     
     var body: some View {
         VStack {
-            List {
+            Form {
                 Section(header: Text("Calculator")) {
                     ForEach(searchResults) { tool in
                         if tool.name == "Calculator" {
@@ -166,7 +179,36 @@ struct CalculatorSelectionView: View {
         .searchable(text: $searchText)
     }
     
-    var searchResults: [CalculatorTool] {
+    var searchResults: [SubTool] {
+        if searchText.isEmpty {
+            return tools
+        } else {
+            return tools.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
+    }
+}
+
+struct ConverterSelectionView: View {
+    
+    let tools: [SubTool] = MathXConverterTools
+    
+    @State var searchText = String()
+    
+    var body: some View {
+        VStack {
+            Form {
+                ForEach(searchResults) { tool in
+                    NavigationLink(value: tool) {
+                        Text(tool.name)
+                    }
+                }
+            }
+            .navigationTitle("Converters")
+        }
+        .searchable(text: $searchText)
+    }
+    
+    var searchResults: [SubTool] {
         if searchText.isEmpty {
             return tools
         } else {
