@@ -176,7 +176,7 @@ struct CalculatorSelectionView: View {
             }
             .navigationTitle("Calculators")
         }
-        .searchable(text: $searchText)
+//        .searchable(text: $searchText)
     }
     
     var searchResults: [SubTool] {
@@ -205,7 +205,7 @@ struct ConverterSelectionView: View {
             }
             .navigationTitle("Converters")
         }
-        .searchable(text: $searchText)
+//        .searchable(text: $searchText)
     }
     
     var searchResults: [SubTool] {
