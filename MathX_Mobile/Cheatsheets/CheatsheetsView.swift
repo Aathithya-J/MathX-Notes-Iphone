@@ -8,6 +8,44 @@
 import SwiftUI
 import PDFKit
 
+let sec1NoteNames = [
+    "Numbers and Their Operations Part 1",
+    "Numbers and Their Operations Part 2",
+    "Percentages",
+    "Basic Algebra and Algebraic Manipulation",
+    "Linear Equations and Inequalities",
+    "Functions and Linear Graphs",
+    "Basic Geometry",
+    "Polygons",
+    "Geometrical Construction",
+    "Number Sequences",
+]
+
+let sec2NoteNames = [
+    "Similarity and Congruence Part 1",
+    "Similarity and Congruence Part 2",
+    "Ratio and Prorortion",
+    "Direct and Inverse Proportions",
+    "Pythagoras Theorem",
+    "Trigonometric Ratios",
+]
+
+let sec3NoteNames = [
+    "Indices",
+    "Surds",
+    "Functions and Graphs",
+    "Quadratic Funcations, Equations, and Inequalities",
+    "Coordinate Geometry",
+    "Exponentials and Logarithms",
+    "Futher Coordinate Geometry",
+    "Linear Law",
+    "Geometrical Properties of Circles"
+]
+
+let sec4NoteNames = [
+    "Coming Soon...",
+]
+
 struct CheatsheetsView: View {
     
     enum SidebarItem: String, CaseIterable, Identifiable, Hashable {
@@ -120,42 +158,13 @@ struct CheatsheetsView: View {
     func getLevelNotes(for level: Int) -> [String] {
         switch level {
         case 1:
-            return [
-                "Numbers and Their Operations Part 1",
-                "Numbers and Their Operations Part 2",
-                "Percentages",
-                "Basic Algebra and Algebraic Manipulation",
-                "Linear Equations and Inequalities",
-                "Functions and Linear Graphs",
-                "Basic Geometry",
-                "Polygons",
-                "Geometrical Construction",
-                "Number Sequences",
-            ]
+            return sec1NoteNames
         case 2:
-            return [
-                "Similarity and Congruence Part 1",
-                "Similarity and Congruence Part 2",
-                "Ratio and Prorortion",
-                "Direct and Inverse Proportions",
-                "Pythagoras Theorem",
-                "Trigonometric Ratios",
-            ]
+            return sec2NoteNames
         case 3:
-            return [
-                "Indices",
-                "Surds",
-                "Functions and Graphs",
-                "Quadratic Funcations, Equations, and Inequalities",
-                "Coordinate Geometry",
-                "Exponentials and Logarithms",
-                "Futher Coordinate Geometry",
-                "Linear Law",
-            ]
+            return sec3NoteNames
         case 4:
-            return [
-                "Coming Soon...",
-            ]
+            return sec4NoteNames
         default:
             return [String]()
         }
@@ -259,42 +268,13 @@ struct iPadDetailView: View {
     func getLevelNotes(for level: Int) -> [String] {
         switch level {
         case 1:
-            return [
-                "Numbers and Their Operations Part 1",
-                "Numbers and Their Operations Part 2",
-                "Percentages",
-                "Basic Algebra and Algebraic Manipulation",
-                "Linear Equations and Inequalities",
-                "Functions and Linear Graphs",
-                "Basic Geometry",
-                "Polygons",
-                "Geometrical Construction",
-                "Number Sequences",
-            ]
+            return sec1NoteNames
         case 2:
-            return [
-                "Similarity and Congruence Part 1",
-                "Similarity and Congruence Part 2",
-                "Ratio and Prorortion",
-                "Direct and Inverse Proportions",
-                "Pythagoras Theorem",
-                "Trigonometric Ratios",
-            ]
+            return sec2NoteNames
         case 3:
-            return [
-                "Indices",
-                "Surds",
-                "Functions and Graphs",
-                "Quadratic Funcations, Equations, and Inequalities",
-                "Coordinate Geometry",
-                "Exponentials and Logarithms",
-                "Futher Coordinate Geometry",
-                "Linear Law",
-            ]
+            return sec3NoteNames
         case 4:
-            return [
-                "Coming Soon...",
-            ]
+            return sec4NoteNames
         default:
             return [String]()
         }

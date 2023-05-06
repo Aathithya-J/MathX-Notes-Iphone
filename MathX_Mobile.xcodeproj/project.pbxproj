@@ -75,6 +75,7 @@
 		6AD2F9CA2A0644CA001D6C64 /* Equation in Frameworks */ = {isa = PBXBuildFile; productRef = 6AD2F9C92A0644CA001D6C64 /* Equation */; };
 		6AD2F9CC2A0644E1001D6C64 /* BinaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */; };
 		6AD2F9CE2A064656001D6C64 /* FormulasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CD2A064656001D6C64 /* FormulasView.swift */; };
+		6AD2F9D02A064960001D6C64 /* Geometrical Properties of Circles.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */; };
 		6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF54D2D29F9173E00722548 /* AverageCalc.swift */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +165,7 @@
 		6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryView.swift; sourceTree = "<group>"; };
 		6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryConverter.swift; sourceTree = "<group>"; };
 		6AD2F9CD2A064656001D6C64 /* FormulasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulasView.swift; sourceTree = "<group>"; };
+		6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Geometrical Properties of Circles.pdf"; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6AF54D2D29F9173E00722548 /* AverageCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +256,7 @@
 		49E6CA9E29BC845700DD2E02 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */,
 				6A52CB8829F6806000647A6E /* LightCuboid.scn */,
 				6A52CB8429F6795600647A6E /* DarkCuboid.scn */,
 				6A52CB8B29F683E000647A6E /* LightPyramid.scn */,
@@ -478,6 +481,7 @@
 				6ABC06D429F1440C00FE97A3 /* Surds.pdf in Resources */,
 				6ABC06D229F1440C00FE97A3 /* Exponentials and Logarithms.pdf in Resources */,
 				6ABC06B229F143E800FE97A3 /* Numbers and Their Operations Part 2.pdf in Resources */,
+				6AD2F9D02A064960001D6C64 /* Geometrical Properties of Circles.pdf in Resources */,
 				6ABC06B429F143E800FE97A3 /* Functions and Linear Graphs.pdf in Resources */,
 				6ABC06C429F1440000FE97A3 /* Similarity and Congruence Part 1.pdf in Resources */,
 				6ABC06B729F143E800FE97A3 /* Linear Equations and Inequalities.pdf in Resources */,
