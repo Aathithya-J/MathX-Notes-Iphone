@@ -59,7 +59,7 @@ struct ToolsView: View {
                                         .foregroundColor(.primary)
                                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                                         .padding()
-                                        .background(tool.color.opacity(0.7))
+                                        .background(tool.color.opacity(0.7).gradient)
                                         .cornerRadius(16)
                                 }
                                 .shadow(color: .black.opacity(0.4), radius: 2, x: 3, y: 3)
