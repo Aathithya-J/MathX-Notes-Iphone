@@ -21,8 +21,8 @@ let MathXCalculatorTools: [SubTool] = [
 ]
 
 let MathXConverterTools: [SubTool] = [
-    .init(name: "Binary Converter")
-    .init(name: "Unit Converter"),
+    .init(name: "Binary Converter"),
+    .init(name: "Unit Converter")
 ]
 
 struct Tool: Identifiable, Hashable {
