@@ -108,6 +108,7 @@ struct addNewNoteView: View {
                 noteTitle = "Untitled Note"
             }
         }
+        .tint(.purple)
     }
 }
 
