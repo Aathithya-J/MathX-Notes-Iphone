@@ -240,14 +240,10 @@
 		49E6CA9729BC845400DD2E02 /* MathX_Mobile */ = {
 			isa = PBXGroup;
 			children = (
-				49E6CA9829BC845400DD2E02 /* MathX_MobileApp.swift */,
-				6A89A13629C996F90007D0C1 /* WelcomeView.swift */,
-				49E6CA9A29BC845400DD2E02 /* ContentView.swift */,
-				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
-				6A60E55B29CAEFE000F9C038 /* Scientific Calculator */,
-				6A6D3F1C29EF741600265124 /* Cheatsheets */,
-				6A6D3F1129EEA86200265124 /* Notes */,
-				49DD1A4329CB41E10040BA0D /* Tools */,
+				6A1941152A2B7B5B001B3A29 /* Application */,
+				6A60E56329CB1F0300F9C038 /* Extensions */,
+				6A1941172A2B7BA0001B3A29 /* Managers */,
+				6A1941162A2B7B70001B3A29 /* UI */,
 				49E6CA9E29BC845700DD2E02 /* Preview Content */,
 			);
 			path = MathX_Mobile;
@@ -287,9 +283,48 @@
 				6ABC06A729F143E600FE97A3 /* Polygons.pdf */,
 				6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */,
 				49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */,
-				49E6CA9C29BC845700DD2E02 /* Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6A1941152A2B7B5B001B3A29 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				49E6CA9829BC845400DD2E02 /* MathX_MobileApp.swift */,
+				49E6CA9A29BC845400DD2E02 /* ContentView.swift */,
+				49E6CA9C29BC845700DD2E02 /* Assets.xcassets */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		6A1941162A2B7B70001B3A29 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6A1941182A2B7BD1001B3A29 /* Main */,
+				6A60E55B29CAEFE000F9C038 /* Scientific Calculator */,
+				6A6D3F1C29EF741600265124 /* Cheatsheets */,
+				6A6D3F1129EEA86200265124 /* Notes */,
+				49DD1A4329CB41E10040BA0D /* Tools */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6A1941172A2B7BA0001B3A29 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6A6D3F1429EEAE2A00265124 /* NoteManager.swift */,
+				6A6D3F1629EEB5BA00265124 /* FavouritesManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		6A1941182A2B7BD1001B3A29 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6A89A13629C996F90007D0C1 /* WelcomeView.swift */,
+				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		6A60E55B29CAEFE000F9C038 /* Scientific Calculator */ = {
@@ -299,7 +334,6 @@
 				4942F0AE29CAA49E00F85389 /* CalculatorView.swift */,
 				6A6D3F1A29EECA4500265124 /* thirdButtonGroupModified.swift */,
 				6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */,
-				6A60E56329CB1F0300F9C038 /* Modifiers */,
 				6A60E55C29CAEFF200F9C038 /* Button Groups */,
 			);
 			path = "Scientific Calculator";
@@ -315,19 +349,18 @@
 			path = "Button Groups";
 			sourceTree = "<group>";
 		};
-		6A60E56329CB1F0300F9C038 /* Modifiers */ = {
+		6A60E56329CB1F0300F9C038 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				6A54B94929CF42510083909A /* extensions.swift */,
 				6A60E56129CB1EF700F9C038 /* subSuperScriptText.swift */,
 			);
-			path = Modifiers;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		6A6D3F1129EEA86200265124 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				6A6D3F1429EEAE2A00265124 /* NoteManager.swift */,
 				6A6D3F1D29EF748D00265124 /* NotesView.swift */,
 				6A6D3F1F29EF75B300265124 /* addNewNoteView.swift */,
 				6A6D3F2129EF75E200265124 /* noteContentView.swift */,
@@ -339,7 +372,6 @@
 		6A6D3F1C29EF741600265124 /* Cheatsheets */ = {
 			isa = PBXGroup;
 			children = (
-				6A6D3F1629EEB5BA00265124 /* FavouritesManager.swift */,
 				6A6D3F1229EEA87200265124 /* CheatsheetsView.swift */,
 				6A6D3F1829EEBA4500265124 /* FavouritesView.swift */,
 				6A6D3F2329EF94F700265124 /* PDFView.swift */,
