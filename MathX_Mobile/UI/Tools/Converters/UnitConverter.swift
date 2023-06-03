@@ -49,7 +49,7 @@ struct UnitConverterView: View {
                 Section {
                     Picker("", selection: $selection) {
                         ForEach(units, id: \.self) { unit in
-                            Text(unit)
+                            Image(systemName: getSymbolForUnit(for: unit))
                                 .tag(unit)
                         }
                     }
@@ -259,6 +259,18 @@ struct UnitConverterView: View {
             return UnitTemperature.kelvin
         default:
             return UnitTemperature.baseUnit()
+        }
+    }
+    
+    func getSymbolForUnit(for unit: String) -> String {
+        switch unit {
+        case "Length": return "ruler.fill"
+        case "Area": return "square.dashed.inset.filled"
+        case "Volume": return "cube.fill"
+        case "Mass": return "scalemass.fill"
+        case "Speed": return "speedometer"
+        case "Temperature": return "medical.thermometer.fill"
+        default: return ""
         }
     }
 }
