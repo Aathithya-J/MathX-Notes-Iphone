@@ -202,19 +202,12 @@
 			isa = PBXGroup;
 			children = (
 				49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */,
-				6AF54D2D29F9173E00722548 /* AverageCalc.swift */,
-				6A78917029F64FC4006D1F26 /* ShapesCalc.swift */,
-				6ABC063E29F126A500FE97A3 /* RandView.swift */,
-				6A6D3F2E29F017AE00265124 /* PythagorasCalc.swift */,
-				6ABC063C29F1166300FE97A3 /* TrigoCalc.swift */,
-				6ABC063A29F0D97100FE97A3 /* SetsCalc.swift */,
-				6A6D3F3229F0388300265124 /* GrapherView.swift */,
-				6A6D3F3029F025E300265124 /* LinearQuadEquationCalc.swift */,
-				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
+				6A1941192A2B7F3E001B3A29 /* Calculators */,
+				6A19411A2A2B7F49001B3A29 /* Grapher */,
+				6A19411B2A2B7F53001B3A29 /* Randomise */,
+				6A19411D2A2B7F84001B3A29 /* Converters */,
+				6A19411E2A2B7F8E001B3A29 /* Formulas */,
 				498C0FD329BEF7E50079503C /* OCRView.swift */,
-				496462C529F14B1700FAB096 /* UnitConverter.swift */,
-				6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */,
-				6AD2F9CD2A064656001D6C64 /* FormulasView.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -325,6 +318,53 @@
 				49E6CAC229BC84BC00DD2E02 /* HomeView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		6A1941192A2B7F3E001B3A29 /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				6AF54D2D29F9173E00722548 /* AverageCalc.swift */,
+				6A78917029F64FC4006D1F26 /* ShapesCalc.swift */,
+				6A6D3F2E29F017AE00265124 /* PythagorasCalc.swift */,
+				6ABC063C29F1166300FE97A3 /* TrigoCalc.swift */,
+				6ABC063A29F0D97100FE97A3 /* SetsCalc.swift */,
+				6A6D3F3029F025E300265124 /* LinearQuadEquationCalc.swift */,
+				495674C029BD5EEB00EB37DA /* HCFLCM.swift */,
+			);
+			path = Calculators;
+			sourceTree = "<group>";
+		};
+		6A19411A2A2B7F49001B3A29 /* Grapher */ = {
+			isa = PBXGroup;
+			children = (
+				6A6D3F3229F0388300265124 /* GrapherView.swift */,
+			);
+			path = Grapher;
+			sourceTree = "<group>";
+		};
+		6A19411B2A2B7F53001B3A29 /* Randomise */ = {
+			isa = PBXGroup;
+			children = (
+				6ABC063E29F126A500FE97A3 /* RandView.swift */,
+			);
+			path = Randomise;
+			sourceTree = "<group>";
+		};
+		6A19411D2A2B7F84001B3A29 /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				496462C529F14B1700FAB096 /* UnitConverter.swift */,
+				6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */,
+			);
+			path = Converters;
+			sourceTree = "<group>";
+		};
+		6A19411E2A2B7F8E001B3A29 /* Formulas */ = {
+			isa = PBXGroup;
+			children = (
+				6AD2F9CD2A064656001D6C64 /* FormulasView.swift */,
+			);
+			path = Formulas;
 			sourceTree = "<group>";
 		};
 		6A60E55B29CAEFE000F9C038 /* Scientific Calculator */ = {
