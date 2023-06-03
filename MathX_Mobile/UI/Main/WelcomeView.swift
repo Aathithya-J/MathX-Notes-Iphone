@@ -38,7 +38,7 @@ struct welcomeTextPage: View {
             HStack {
                 VStack(alignment: .leading) {
 //                    Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
-                    Image(systemName: "x.squareroot")
+                    Image("MathX Symbol")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32)
@@ -93,7 +93,7 @@ struct animatingWelcomeTextPage: View {
                     VStack(alignment: .leading) {
                         /// App Icon
 //                        Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
-                        Image(systemName: "x.squareroot")
+                        Image("MathX Symbol")
                             .resizable()
                             .scaledToFit()
                             .frame(width: titleExpandAnimation ? 32 : 64)
@@ -205,7 +205,7 @@ struct finalPage: View {
         VStack {
             
 //            Image(uiImage: UIImage(named: "AppIcon") ?? UIImage())
-            Image(systemName: "x.squareroot")
+            Image("MathX Symbol")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 64)

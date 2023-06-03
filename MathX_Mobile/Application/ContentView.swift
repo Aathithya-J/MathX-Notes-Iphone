@@ -54,7 +54,7 @@ struct animationView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Image(systemName: "x.squareroot")
+                Image("MathX Symbol")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 96)

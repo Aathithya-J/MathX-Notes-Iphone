@@ -24,6 +24,8 @@ struct SetsCalc: View {
     
     @State var setType = 0
     
+    @State var showingVennDiagram = false
+    
     @Environment(\.colorScheme) var colorScheme
     
     @Namespace var animation
@@ -31,39 +33,56 @@ struct SetsCalc: View {
     var body: some View {
         VStack {
             Form {
-                Section {
-                    
-                    HStack {
-                        Spacer()
-                        vennDiagramView()
-                            .onChange(of: firstSetFocused) { _ in
-                                withAnimation {
-                                    statefirstSetFocused = firstSetFocused
+                if showingVennDiagram {
+                    Section {
+                        HStack {
+                            Spacer()
+                            vennDiagramView()
+                                .onChange(of: firstSetFocused) { _ in
+                                    withAnimation {
+                                        statefirstSetFocused = firstSetFocused
+                                    }
                                 }
-                            }
-                            .onChange(of: secondSetFocused) { _ in
-                                withAnimation {
-                                    statesecondSetFocused = secondSetFocused
+                                .onChange(of: secondSetFocused) { _ in
+                                    withAnimation {
+                                        statesecondSetFocused = secondSetFocused
+                                    }
                                 }
+                            Spacer()
+                        }
+                        
+                        Picker("", selection: $setCalculationSelected) {
+                            Text("Union")
+                                .tag(0)
+                            Text("Intersection")
+                                .tag(1)
+                        }
+                        .pickerStyle(.segmented)
+                        .onChange(of: setCalculationSelected) { _ in
+                            withAnimation {
+                                statesetCalculationSelected = setCalculationSelected
                             }
-                        Spacer()
-                    }
-                    
-                    Picker("", selection: $setCalculationSelected) {
-                        Text("Union")
-                            .tag(0)
-                        Text("Intersection")
-                            .tag(1)
-                    }
-                    .pickerStyle(.segmented)
-                    .onChange(of: setCalculationSelected) { _ in
-                        withAnimation {
-                            statesetCalculationSelected = setCalculationSelected
                         }
                     }
                 }
                 
                 Section(footer: Text("Do not leave a space between commas and elements.")) {
+                    
+                    if !showingVennDiagram {
+                        Picker("", selection: $setCalculationSelected) {
+                            Text("Union")
+                                .tag(0)
+                            Text("Intersection")
+                                .tag(1)
+                        }
+                        .pickerStyle(.segmented)
+                        .onChange(of: setCalculationSelected) { _ in
+                            withAnimation {
+                                statesetCalculationSelected = setCalculationSelected
+                            }
+                        }
+                    }
+                    
                     TextField("First Set (separate elements with \",\")", text: $set1)
                         .keyboardType(.numbersAndPunctuation)
                         .focused($firstSetFocused)
