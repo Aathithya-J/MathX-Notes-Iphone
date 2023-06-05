@@ -24,7 +24,7 @@ let sec1NoteNames = [
 let sec2NoteNames = [
     "Similarity and Congruence Part 1",
     "Similarity and Congruence Part 2",
-    "Ratio and Prorortion",
+    "Ratio and Proportion",
     "Direct and Inverse Proportions",
     "Pythagoras Theorem",
     "Trigonometric Ratios",
@@ -39,11 +39,12 @@ let sec3NoteNames = [
     "Exponentials and Logarithms",
     "Futher Coordinate Geometry",
     "Linear Law",
-    "Geometrical Properties of Circles"
+    "Geometrical Properties of Circles",
+    "Polynomials and Partial Fractions"
 ]
 
 let sec4NoteNames = [
-    "Coming Soon...",
+    "Coming soon...",
 ]
 
 struct CheatsheetsView: View {
@@ -89,21 +90,26 @@ struct CheatsheetsView: View {
                             if !searchResults(for: level).isEmpty {
                                 Section(header: Text("Secondary \(level)")) {
                                     ForEach(searchResults(for: level), id: \.self) { topic in
-                                        NavigationLink(destination: PDFViewer(topicName: topic, pdfName: topic)) {
+                                        if topic != "Coming soon..." {
+                                            NavigationLink(destination: PDFViewer(topicName: topic, pdfName: topic)) {
+                                                Text(topic)
+                                                    .padding(.vertical, 5)
+                                            }
+                                            .swipeActions(allowsFullSwipe: true) {
+                                                Button {
+                                                    if favouritesManager.favourites.description.contains(topic) {
+                                                        removeFavourite(topicName: topic)
+                                                    } else {
+                                                        favouritesManager.favourites.insert(Favourite(topicName: topic), at: 0)
+                                                    }
+                                                } label: {
+                                                    Image(systemName: favouritesManager.favourites.description.contains(topic) ? "star.slash" : "star")
+                                                }
+                                                .tint(.yellow)
+                                            }
+                                        } else {
                                             Text(topic)
                                                 .padding(.vertical, 5)
-                                        }
-                                        .swipeActions(allowsFullSwipe: true) {
-                                            Button {
-                                                if favouritesManager.favourites.description.contains(topic) {
-                                                    removeFavourite(topicName: topic)
-                                                } else {
-                                                    favouritesManager.favourites.insert(Favourite(topicName: topic), at: 0)
-                                                }
-                                            } label: {
-                                                Image(systemName: favouritesManager.favourites.description.contains(topic) ? "star.slash" : "star")
-                                            }
-                                            .tint(.yellow)
                                         }
                                     }
                                 }
