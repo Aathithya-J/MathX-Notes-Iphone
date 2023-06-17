@@ -25,14 +25,17 @@ struct PythagorasCalc: View {
                             .frame(width: 128, height: 128)
                             .overlay(
                                 Text("A")
+                                    .font(.system(size: 17))
                                     .offset(y: 80)
                             )
                             .overlay(
                                 Text("B")
+                                    .font(.system(size: 17))
                                     .offset(x: 80)
                             )
                             .overlay(
                                 Text("C")
+                                    .font(.system(size: 17))
                                     .offset(x: -18, y: -15)
                             )
                             .padding()

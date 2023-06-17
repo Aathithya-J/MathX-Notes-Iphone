@@ -54,6 +54,7 @@ struct ToolsView: View {
                             NavigationLink(value: tool) {
                                 VStack {
                                     Text(tool.name)
+                                        .minimumScaleFactor(0.1)
                                         .font(.title2)
                                         .fontWeight(.bold)
                                         .foregroundColor(.primary)

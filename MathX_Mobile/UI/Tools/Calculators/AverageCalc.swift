@@ -85,6 +85,7 @@ struct AverageCalc: View {
                 }
             }
         }
+        .scrollDismissesKeyboard(.interactively)
         .toolbar {
             ToolbarItem(placement: .keyboard) {
                 HStack {
@@ -206,7 +207,7 @@ struct AverageCalc: View {
         
         // find score deviation from mean
         sortedString.forEach { value in
-            let deviationScore = Double(value)! - Double(mean)!
+            let deviationScore = Double(value)! - Double(mean.replacingOccurrences(of: ",", with: ""))!
             deviationScoreArray.append(deviationScore)
         }
         
@@ -271,6 +272,13 @@ struct AverageCalc: View {
         }
         
         sortedArray += tempOthersArray
+        
+        sortedArray.indices.forEach { i in
+            let string = sortedArray[i]
+            sortedArray[i] = string.replacingOccurrences(of: ",", with: "")
+        }
+        
+        print("sorted array: \(sortedArray)")
         
         return sortedArray
     }

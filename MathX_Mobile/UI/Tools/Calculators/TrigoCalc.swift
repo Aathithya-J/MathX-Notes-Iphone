@@ -30,21 +30,23 @@ struct TrigoCalc: View {
                             .frame(width: 128, height: 128)
                             .overlay(
                                 Text("A (O)")
+                                    .font(.system(size: 17))
                                     .offset(y: 80)
                             )
                             .overlay(
                                 Text("B (A)")
+                                    .font(.system(size: 17))
                                     .offset(x: 90)
                             )
                             .overlay(
                                 Text("C (H)")
+                                    .font(.system(size: 17))
                                     .offset(x: -18, y: -15)
                             )
                             .overlay(
-                                LaTeX("\\[x\\]°")
+                                Text("θ°")
+                                    .font(.system(size: 17))
                                     .offset(x: 50, y: -30)
-                                    .parsingMode(.onlyEquations)
-                                    .blockMode(.alwaysInline)
                             )
                             .padding()
                             .padding(.bottom)
@@ -53,13 +55,11 @@ struct TrigoCalc: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {
-                            LaTeX("\\[x\\]° = \\[\(equation)\\]")
+                            LaTeX("θ° = \\[\(equation)\\]")
                                 .parsingMode(.onlyEquations)
                                 .blockMode(.alwaysInline)
                         } else {
-                            LaTeX("\\[x\\]° =")
-                                .parsingMode(.onlyEquations)
-                                .blockMode(.alwaysInline)
+                            Text("θ° =")
                         }
                     }
                 }
@@ -85,9 +85,8 @@ struct TrigoCalc: View {
                 
                 Section(header: Text("Results")) {
                     HStack {
-                        LaTeX("\\[x\\]° =")
-                            .parsingMode(.onlyEquations)
-                            .blockMode(.alwaysInline)
+                        Text("θ° =")
+                        
                         Spacer()
                         
                         if fillCount(num1: Double(sideA) ?? 0, num2: Double(sideB) ?? 0, num3: Double(sideC) ?? 0) > 1 {

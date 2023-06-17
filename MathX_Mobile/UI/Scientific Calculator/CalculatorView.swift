@@ -55,6 +55,7 @@ struct CalculatorView: View {
                     HStack {
                         Spacer()
                         Text("MathX-97SG XS")
+                            .minimumScaleFactor(0.1)
                             .foregroundColor(.white)
                             .font(.headline)
                             .fontWeight(.bold)
