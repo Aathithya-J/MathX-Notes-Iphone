@@ -6,7 +6,6 @@ let MathXTools: [Tool] = [
 //        .init(name: "Measurements", color: .purple), // likely to come as a future update as ruler and protractor still dont work
     .init(name: "Randomise", color: .red),
     .init(name: "Converters", color: .blue),
-    .init(name: "Formulas", color: .yellow)
 ]
 
 let MathXCalculatorTools: [SubTool] = [
@@ -131,8 +130,6 @@ struct ToolsView: View {
                 }
                     .navigationTitle("Measurements")
             )
-        case "Formulas":
-            return AnyView(FormulasView())
         default:
             return AnyView(EmptyView())
         }
