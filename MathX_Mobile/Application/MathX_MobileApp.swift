@@ -25,13 +25,15 @@ struct MathX_MobileApp: App {
             ContentView(tabSelection: $tabSelection, path: $path, deepLinkSource: $deepLinkSource)
                 .onOpenURL { url in
                     if !isShowingWelcomeScreen {
-                        handleCalculatorDeepLink(url: url)
+                        handleCalculatorDeepLink(urlString: url.description.replacingOccurrences(of: "mathx:///", with: "mathx://"))
                     }
                 }
         }
     }
     
-    func handleCalculatorDeepLink(url: URL) {
+    func handleCalculatorDeepLink(urlString: String) {
+        let url = URL(string: urlString)!
+        
         print("Asked to open URL: \(url.description)")
 
         guard let scheme = url.scheme,
