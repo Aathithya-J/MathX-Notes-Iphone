@@ -21,13 +21,11 @@
 		6A52CB8929F6806000647A6E /* LightCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8829F6806000647A6E /* LightCuboid.scn */; };
 		6A52CB8C29F683E000647A6E /* DarkPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8A29F683E000647A6E /* DarkPyramid.scn */; };
 		6A52CB8D29F683E000647A6E /* LightPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8B29F683E000647A6E /* LightPyramid.scn */; };
-		6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6A54B94729CF150D0083909A /* LaTeXSwiftUI */; };
 		6A54B94A29CF42510083909A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A54B94929CF42510083909A /* extensions.swift */; };
 		6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */; };
 		6A60E55E29CB17B700F9C038 /* secondButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */; };
 		6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55F29CB1B5600F9C038 /* thirdButtonGroup.swift */; };
 		6A60E56229CB1EF700F9C038 /* subSuperScriptText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E56129CB1EF700F9C038 /* subSuperScriptText.swift */; };
-		6A60E56829CB2E6B00F9C038 /* MathExpression in Frameworks */ = {isa = PBXBuildFile; productRef = 6A60E56729CB2E6B00F9C038 /* MathExpression */; };
 		6A6196AC2A3EF661000150F6 /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6196AB2A3EF661000150F6 /* ScreenView.swift */; };
 		6A6196AE2A3EF68A000150F6 /* SharingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6196AD2A3EF68A000150F6 /* SharingScreenView.swift */; };
 		6A6196B02A3EF6C4000150F6 /* CalculatorModeIndicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6196AF2A3EF6C4000150F6 /* CalculatorModeIndicators.swift */; };
@@ -72,6 +70,8 @@
 		6AD2F9D02A064960001D6C64 /* Geometrical Properties of Circles.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */; };
 		6AEE93212A2D69850067A53B /* Polynomials and Partial Fractions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6AEE93202A2D69850067A53B /* Polynomials and Partial Fractions.pdf */; };
 		6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF54D2D29F9173E00722548 /* AverageCalc.swift */; };
+		6AFEDBD12A3F01780070A5F1 /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFEDBD02A3F01780070A5F1 /* LaTeXSwiftUI */; };
+		6AFEDBD42A3F01840070A5F1 /* MathExpression in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFEDBD32A3F01840070A5F1 /* MathExpression */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,8 +166,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A60E56829CB2E6B00F9C038 /* MathExpression in Frameworks */,
-				6A54B94829CF150D0083909A /* LaTeXSwiftUI in Frameworks */,
+				6AFEDBD42A3F01840070A5F1 /* MathExpression in Frameworks */,
+				6AFEDBD12A3F01780070A5F1 /* LaTeXSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,8 +446,8 @@
 			);
 			name = MathX_Mobile;
 			packageProductDependencies = (
-				6A60E56729CB2E6B00F9C038 /* MathExpression */,
-				6A54B94729CF150D0083909A /* LaTeXSwiftUI */,
+				6AFEDBD02A3F01780070A5F1 /* LaTeXSwiftUI */,
+				6AFEDBD32A3F01840070A5F1 /* MathExpression */,
 			);
 			productName = MathX_Mobile;
 			productReference = 49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */;
@@ -522,8 +522,8 @@
 			);
 			mainGroup = 49E6CA8C29BC845400DD2E02;
 			packageReferences = (
-				6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */,
-				6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
+				6AFEDBCF2A3F01780070A5F1 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
+				6AFEDBD22A3F01840070A5F1 /* XCRemoteSwiftPackageReference "MathExpression" */,
 			);
 			productRefGroup = 49E6CA9629BC845400DD2E02 /* Products */;
 			projectDirPath = "";
@@ -965,33 +965,33 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */ = {
+		6AFEDBCF2A3F01780070A5F1 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/colinc86/LaTeXSwiftUI";
-			requirement = {
-				kind = exactVersion;
-				version = 1.0.0;
-			};
-		};
-		6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/peredaniel/MathExpression";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
 			};
 		};
+		6AFEDBD22A3F01840070A5F1 /* XCRemoteSwiftPackageReference "MathExpression" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/peredaniel/MathExpression";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6A54B94729CF150D0083909A /* LaTeXSwiftUI */ = {
+		6AFEDBD02A3F01780070A5F1 /* LaTeXSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6A54B94629CF150D0083909A /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */;
+			package = 6AFEDBCF2A3F01780070A5F1 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */;
 			productName = LaTeXSwiftUI;
 		};
-		6A60E56729CB2E6B00F9C038 /* MathExpression */ = {
+		6AFEDBD32A3F01840070A5F1 /* MathExpression */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6A60E56629CB2E6B00F9C038 /* XCRemoteSwiftPackageReference "MathExpression" */;
+			package = 6AFEDBD22A3F01840070A5F1 /* XCRemoteSwiftPackageReference "MathExpression" */;
 			productName = MathExpression;
 		};
 /* End XCSwiftPackageProductDependency section */

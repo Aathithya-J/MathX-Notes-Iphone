@@ -1,21 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "equation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/KaiTheRedNinja/Equation",
-      "state" : {
-        "branch" : "main",
-        "revision" : "1ff8e0a09efabac637602bd8076d6131fb2075ca"
-      }
-    },
-    {
       "identity" : "latexswiftui",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/colinc86/LaTeXSwiftUI",
       "state" : {
-        "revision" : "edc4c2df645c2f07901ed06bb4a5c3d73a6d67b9",
-        "version" : "1.0.4"
+        "revision" : "3d1888a8ffcd62a39e2ce82c0dc1700871a473da",
+        "version" : "1.2.2"
       }
     },
     {
@@ -32,17 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/colinc86/MathJaxSwift",
       "state" : {
-        "revision" : "f3c72939260f36aa90cdec84a978b32f2211e608",
-        "version" : "3.2.3"
-      }
-    },
-    {
-      "identity" : "nuke",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kean/Nuke",
-      "state" : {
-        "revision" : "33f7e93be5d4ec027d42af77a8ec4680d1862ad2",
-        "version" : "11.6.4"
+        "revision" : "01797ab2738a8852d70fb81479bcf76768716220",
+        "version" : "3.3.0"
       }
     },
     {
@@ -61,15 +43,6 @@
       "state" : {
         "revision" : "d8ca73197f59ce260c71bd6d7f6eb8bbdccf508b",
         "version" : "4.0.1"
-      }
-    },
-    {
-      "identity" : "updating",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/KaiTheRedNinja/Updating.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "bc50d033e3916b8a245cf7c8e3e3d64cd0f41b28"
       }
     }
   ],
