@@ -290,7 +290,7 @@ struct thirdButtonGroupModified: View {
             alphaIndicator = false
         } label: {
             VStack {
-                SubSuperScriptText(inputString: "AC", bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
+                Text("AC")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -299,6 +299,7 @@ struct thirdButtonGroupModified: View {
                     .frame(height: UIScreen.main.bounds.height / 10)
                     .background(.orange)
                     .cornerRadius(8)
+                    .minimumScaleFactor(0.1)
             }
         }
         .buttonStyle(.plain)
@@ -335,7 +336,7 @@ struct thirdButtonGroupModified: View {
             alphaIndicator = false
         } label: {
             VStack {
-                SubSuperScriptText(inputString: "DEL", bodyFont: .title2, subScriptFont: .callout, baseLine: 6.0)
+                Text("DEL")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.black)
@@ -344,6 +345,7 @@ struct thirdButtonGroupModified: View {
                     .frame(height: UIScreen.main.bounds.height / 10)
                     .background(.orange)
                     .cornerRadius(8)
+                    .minimumScaleFactor(0.1)
             }
         }
         .buttonStyle(.plain)
