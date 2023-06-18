@@ -337,19 +337,19 @@
 				4942F0AE29CAA49E00F85389 /* CalculatorView.swift */,
 				6A6D3F1A29EECA4500265124 /* thirdButtonGroupModified.swift */,
 				6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */,
-				6A60E55C29CAEFF200F9C038 /* Button Groups */,
+				6A60E55C29CAEFF200F9C038 /* Scientific Button Groups */,
 			);
 			path = "Scientific Calculator";
 			sourceTree = "<group>";
 		};
-		6A60E55C29CAEFF200F9C038 /* Button Groups */ = {
+		6A60E55C29CAEFF200F9C038 /* Scientific Button Groups */ = {
 			isa = PBXGroup;
 			children = (
 				6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */,
 				6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */,
 				6A60E55F29CB1B5600F9C038 /* thirdButtonGroup.swift */,
 			);
-			path = "Button Groups";
+			path = "Scientific Button Groups";
 			sourceTree = "<group>";
 		};
 		6A60E56329CB1F0300F9C038 /* Extensions */ = {

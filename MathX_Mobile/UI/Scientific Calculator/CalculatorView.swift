@@ -52,15 +52,12 @@ struct CalculatorView: View {
                 }
                 
                 VStack {
-                    HStack {
-                        Spacer()
-                        Text("MathX-97SG XS")
-                            .minimumScaleFactor(0.1)
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .padding(.trailing)
-                    }
+                    Text("MathX-97SG XS")
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .padding(.trailing)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                     //                    .padding(.top)
                     if !showingQRScreen {
                         screenView(equationText: $equationText, resultsText: $resultsText, errorOccurred: $errorOccurred)
@@ -389,6 +386,7 @@ struct CalculatorView: View {
     
     func receivedDeepLinkSource() {
         if !deepLinkSource.isEmpty {
+            errorOccurred = false
             showingQRScreen = false
             
             var sourceConvertedArray = [String]()
