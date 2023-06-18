@@ -19,29 +19,7 @@ struct CalculationHistoryView: View {
         NavigationStack {
             VStack {
                 List {
-                    Section(header:
-                                HStack {
-                        Label("History", systemImage: "clock.arrow.2.circlepath")
-                        
-                        Spacer()
-                        
-                       
-                            Menu {
-                                Button(role: .destructive) {
-                                    calculationManager.calculations = []
-                                } label: {
-                                    Label("Confirm Delete", systemImage: "trash")
-                                        .foregroundColor(.red)
-                                }
-                            } label: {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                            }
-
-                        .textCase(nil)
-                    }
-                    
-                    ) {
+                    Section {
                         ForEach(calculationManager.calculations, id: \.id) { calculation in
                             NavigationLink(destination: shareCalculationSubview(calculation: calculation)) {
                                 HStack {
@@ -61,6 +39,27 @@ struct CalculationHistoryView: View {
                         }
                         .onDelete { indexOffset in
                             calculationManager.calculations.remove(atOffsets: indexOffset)
+                        }
+                    } header: {
+                        HStack {
+                            Label("History", systemImage: "clock.arrow.2.circlepath")
+                            
+                            Spacer()
+                            
+                            
+                            Menu {
+                                Button(role: .destructive) {
+                                    calculationManager.calculations = []
+                                } label: {
+                                    Label("Confirm Delete", systemImage: "trash")
+                                        .foregroundColor(.red)
+                                }
+                            } label: {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                            }
+                            
+                            .textCase(nil)
                         }
                     }
                 }
