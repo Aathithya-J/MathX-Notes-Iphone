@@ -26,7 +26,7 @@ struct SimplifiedCalculatorButtonGroup: View {
     @Binding var sqrtPressed: Bool
     @Binding var errorOccurred: Bool
     
-    @Binding var showingQRScreen: Bool
+    @Binding var showingSharingScreen: Bool
     @Binding var encodedDeepLink: String
     
     let generator = UIImpactFeedbackGenerator()
@@ -86,7 +86,7 @@ struct SimplifiedCalculatorButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
                
-            if !showingQRScreen {
+            if !showingSharingScreen {
                 if equationText != "" && resultsText != "" {
                     if inputWhenPressed == "+" || inputWhenPressed == "-" || inputWhenPressed == "×" || inputWhenPressed == "÷" {
                         equationText = "Ans" + "\(shiftIndicator ? shiftInputWhenPressed : alphaIndicator ? alphaInputWhenPressed : inputWhenPressed)"
@@ -128,7 +128,7 @@ struct SimplifiedCalculatorButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
                
-            if !showingQRScreen {
+            if !showingSharingScreen {
                 if equationText.contains("ERROR:") {
                     errorOccurred = false
                     
@@ -161,15 +161,15 @@ struct SimplifiedCalculatorButtonGroup: View {
     @ViewBuilder
     func shareButton(buttonSymbol: String, inputWhenPressed: String, shiftButtonSymbol: String, shiftInputWhenPressed: String, alphaButtonSymbol: String, alphaInputWhenPressed: String) -> some View {
         VStack {
-            if !showingQRScreen {
+            if !showingSharingScreen {
                 Button {
                     generator.impactOccurred(intensity: 0.7)
                     
-                    if !showingQRScreen {
+                    if !showingSharingScreen {
                         if equationText != "" && resultsText != "" {
                             if buttonSymbol == "SHARE" {
                                 generateEquationQRandLink()
-                                showingQRScreen = true
+                                showingSharingScreen = true
                             }
                         } else if equationText.contains("ERROR:") {
                             errorOccurred = false
@@ -224,7 +224,7 @@ struct SimplifiedCalculatorButtonGroup: View {
             Button {
                 generator.impactOccurred(intensity: 0.7)
                 
-                if !showingQRScreen {
+                if !showingSharingScreen {
                     if equationText != "" && resultsText != "" {
                         if buttonSymbol == "HIST" {
                             showingHistoryView = true
@@ -269,8 +269,8 @@ struct SimplifiedCalculatorButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
             
-            if showingQRScreen {
-                showingQRScreen = false
+            if showingSharingScreen {
+                showingSharingScreen = false
             } else {
                 if errorOccurred {
                     if equationText.contains("SQRT") {
@@ -312,7 +312,7 @@ struct SimplifiedCalculatorButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
             
-            if showingQRScreen {
+            if showingSharingScreen {
                 UIPasteboard.general.string = encodedDeepLink
             } else {
                 if equationText.contains("ERROR:") {
@@ -358,7 +358,7 @@ struct SimplifiedCalculatorButtonGroup: View {
         Button {
             generator.impactOccurred(intensity: 0.7)
             
-            if !showingQRScreen {
+            if !showingSharingScreen {
                 if equationText.contains("ERROR:") {
                     errorOccurred = false
                     

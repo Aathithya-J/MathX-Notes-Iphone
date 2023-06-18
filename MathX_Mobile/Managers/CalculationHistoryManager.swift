@@ -1,5 +1,5 @@
 //
-//  CalculationManager.swift
+//  CalculationHistoryManager.swift
 //  MathX_Mobile
 //
 //  Created by Tristan on 20/04/2023.
@@ -14,8 +14,8 @@ struct Calculation: Codable, Identifiable {
     var base64encoded: String
 }
 
-class CalculationManager: ObservableObject {
-    static let shared: CalculationManager = .init()
+class CalculationHistoryManager: ObservableObject {
+    static let shared: CalculationHistoryManager = .init()
     
     @Published var calculations: [Calculation] = [] {
         didSet {

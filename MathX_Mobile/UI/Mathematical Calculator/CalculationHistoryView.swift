@@ -13,7 +13,7 @@ struct CalculationHistoryView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var calculationManager: CalculationManager = .shared
+    @ObservedObject var calculationManager: CalculationHistoryManager = .shared
         
     var body: some View {
         NavigationStack {
