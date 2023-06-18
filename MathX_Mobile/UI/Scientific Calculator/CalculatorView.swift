@@ -30,6 +30,7 @@ struct CalculatorView: View {
     @State var encodedDeepLink = String()
     @Binding var deepLinkSource: String
     
+    @AppStorage("secondLastAns", store: .standard) var secondLastAns = ""
     @AppStorage("lastAns", store: .standard) var lastAns = ""
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
     
@@ -69,7 +70,7 @@ struct CalculatorView: View {
                     
                     Spacer()
                     
-                    thirdButtonGroupModified(qrCodeImage: $qrCodeImage, shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, sqrtPressed: $sqrtPressed, errorOccurred: $errorOccurred, showingQRScreen: $showingQRScreen, encodedDeepLink: $encodedDeepLink)
+                    SimplifiedCalculatorButtonGroup(qrCodeImage: $qrCodeImage, shiftIndicator: $shiftIndicator, alphaIndicator: $alphaIndicator, equationText: $equationText, resultsText: $resultsText, equalsPressed: $equalsPressed, sqrtPressed: $sqrtPressed, errorOccurred: $errorOccurred, showingQRScreen: $showingQRScreen, encodedDeepLink: $encodedDeepLink)
                         .padding(.bottom, 30)
                 }
                 .padding(.horizontal)
@@ -93,7 +94,6 @@ struct CalculatorView: View {
                 }
             }
             .statusBar(hidden: true)
-            //            .toolbar(.hididen, for: .navigationBar)
             .toolbar(.hidden, for: .tabBar)
             .onRotate { newOrientation in
                 if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
@@ -224,6 +224,7 @@ struct CalculatorView: View {
             do {
                 let expression = try MathExpression(equationConverted)
                 value = expression.evaluate()
+                secondLastAns = lastAns
                 lastAns = String(value) // sets Ans to String of calculated value
             } catch {
                 print(error)
@@ -253,6 +254,7 @@ struct CalculatorView: View {
             do {
                 let expression = try MathExpression(equationConverted)
                 value = expression.evaluate()
+                secondLastAns = lastAns
                 lastAns = String(sqrt(value))
             } catch {
                 print(error)
@@ -364,7 +366,7 @@ struct CalculatorView: View {
     
     // MARK: - QR and DeepLinks Generation
     func generateEquationQRandLink() -> String {
-        let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
+        let textToBeEncoded = "ET:\(equationText.replacingOccurrences(of: "Ans", with: "\(String(describing: Double(secondLastAns)!.formatted()))")) -,- RT:\(resultsText)"
         
         let textEncoded = textToBeEncoded.toBase64()
         let encodedDeepLink = "mathx:///calculator?source=\(textEncoded)"

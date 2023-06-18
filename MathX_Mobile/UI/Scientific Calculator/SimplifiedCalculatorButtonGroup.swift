@@ -1,5 +1,5 @@
 //
-//  thirdButtonGroupModified.swift
+//  SimplifiedCalculatorButtonGroup.swift
 //  MathX_Mobile
 //
 //  Created by Tristan on 18/04/2023.
@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 
-struct thirdButtonGroupModified: View {
+struct SimplifiedCalculatorButtonGroup: View {
     
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
@@ -31,6 +31,8 @@ struct thirdButtonGroupModified: View {
     
     let generator = UIImpactFeedbackGenerator()
     
+    @AppStorage("secondLastAns", store: .standard) var secondLastAns = ""
+    @AppStorage("lastAns", store: .standard) var lastAns = ""
     @AppStorage("lastEquation", store: .standard) var lastEquation = ""
     
     var body: some View {
@@ -393,7 +395,7 @@ struct thirdButtonGroupModified: View {
     }
     
     func generateEquationQRandLink() {
-        let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
+        let textToBeEncoded = "ET:\(equationText.replacingOccurrences(of: "Ans", with: "\(String(describing: Double(secondLastAns)!.formatted()))")) -,- RT:\(resultsText)"
         
         let textEncoded = textToBeEncoded.toBase64()
         let encodedDeepLink = "mathx:///calculator?source=\(textEncoded)"

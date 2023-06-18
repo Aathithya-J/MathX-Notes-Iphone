@@ -26,6 +26,10 @@ struct secondButtonGroup: View {
     @Binding var encodedDeepLink: String
     @Binding var showingQRScreen: Bool
     
+    @AppStorage("secondLastAns", store: .standard) var secondLastAns = ""
+    @AppStorage("lastAns", store: .standard) var lastAns = ""
+    @AppStorage("lastEquation", store: .standard) var lastEquation = ""
+    
     let generator = UIImpactFeedbackGenerator()
         
     var body: some View {
@@ -128,7 +132,7 @@ struct secondButtonGroup: View {
     }
     
     func generateEquationQRandLink() {
-        let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
+        let textToBeEncoded = "ET:\(equationText.replacingOccurrences(of: "Ans", with: "\(String(describing: Double(secondLastAns)!.formatted()))")) -,- RT:\(resultsText)"
         
         let textEncoded = textToBeEncoded.toBase64()
         let encodedDeepLink = "mathx:///calculator?source=\(textEncoded)"
