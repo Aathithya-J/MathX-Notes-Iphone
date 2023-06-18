@@ -367,7 +367,7 @@ struct CalculatorView: View {
         let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
         
         let textEncoded = textToBeEncoded.toBase64()
-        let encodedDeepLink = "mathx://calculator?source=\(textEncoded)"
+        let encodedDeepLink = "mathx:///calculator?source=\(textEncoded)"
         return encodedDeepLink
         //        qrCodeImage = generateQRCode(from: encodedDeepLink)
     }

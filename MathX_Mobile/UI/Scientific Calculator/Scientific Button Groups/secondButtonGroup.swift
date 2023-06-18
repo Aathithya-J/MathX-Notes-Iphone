@@ -131,7 +131,7 @@ struct secondButtonGroup: View {
         let textToBeEncoded = "ET:\(equationText) -,- RT:\(resultsText)"
         
         let textEncoded = textToBeEncoded.toBase64()
-        let encodedDeepLink = "mathx://calculator?source=\(textEncoded)"
+        let encodedDeepLink = "mathx:///calculator?source=\(textEncoded)"
         self.encodedDeepLink = encodedDeepLink
         qrCodeImage = generateQRCode(from: encodedDeepLink)
     }
