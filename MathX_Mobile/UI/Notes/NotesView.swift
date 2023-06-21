@@ -74,10 +74,6 @@ struct NotesView: View {
                     .searchable(text: $searchText)
                 } else {
                     VStack {
-                        Image(systemName: "square.and.pencil")
-                            .resizable()
-                            .frame(width: 128, height: 128)
-                        
                         Text("You have no Notes. Create one by tapping the + icon in the top right hand corner!")
                             .padding(.top)
                             .font(.headline)

@@ -308,7 +308,14 @@ struct SimplifiedCalculatorView: View {
     
     // MARK: - QR and DeepLinks Generation
     func generateEquationQRandLink() -> String {
-        let textToBeEncoded = "ET:\(equationText.replacingOccurrences(of: "Ans", with: "\(String(describing: Double(secondLastAns)!.formatted()))")) -,- RT:\(resultsText)"
+        
+        var textToBeEncoded = ""
+        
+        if !secondLastAns.isEmpty {
+            textToBeEncoded = "ET:\(equationText.replacingOccurrences(of: "Ans", with: "\(String(describing: Double(secondLastAns)!.formatted()))")) -,- RT:\(resultsText)"
+        } else {
+            textToBeEncoded = "ET:\(equationText.replacingOccurrences(of: "Ans", with: " ")) -,- RT:\(resultsText)"
+        }
         
         let textEncoded = textToBeEncoded.toBase64()
         let encodedDeepLink = "mathx:///calculator?source=\(textEncoded)"
