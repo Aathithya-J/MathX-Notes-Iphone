@@ -125,6 +125,7 @@ struct noteContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.bottom, editMode?.wrappedValue.isEditing == false ? 15 : 0)
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         HStack {
@@ -134,6 +135,7 @@ struct noteContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.bottom, editMode?.wrappedValue.isEditing == false ? 15 : 0)
 //                    TextView(text: $noteContent, coordinator: textViewCoordinator)
                 }
             }
