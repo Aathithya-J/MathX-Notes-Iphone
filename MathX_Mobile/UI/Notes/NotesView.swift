@@ -100,11 +100,11 @@ struct NotesView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-                    .sheet(isPresented: $showingAddNewNoteView) {
-                        addNewNoteView()
-                    }
                 }
             }
+        }
+        .sheet(isPresented: $showingAddNewNoteView) {
+            addNewNoteView()
         }
     }
     

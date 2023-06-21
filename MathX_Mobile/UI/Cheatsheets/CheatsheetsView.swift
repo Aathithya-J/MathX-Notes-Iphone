@@ -126,10 +126,10 @@ struct CheatsheetsView: View {
                     } label: {
                         Image(systemName: "star.circle")
                     }
-                    .sheet(isPresented: $showingFavouritesView) {
-                        FavouritesView()
-                    }
                 }
+            }
+            .sheet(isPresented: $showingFavouritesView) {
+                FavouritesView()
             }
         } else if UIScreen.main.traitCollection.userInterfaceIdiom == .pad {
             NavigationView {
