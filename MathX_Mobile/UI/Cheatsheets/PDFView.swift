@@ -63,6 +63,8 @@ struct PDFViewer: View {
                 }
             }
         }
+        .toolbar(.hidden, for: .tabBar)
+        .ignoresSafeArea(edges: .bottom)
         .navigationTitle(topicName)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

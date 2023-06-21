@@ -18,6 +18,14 @@ struct mathEquationFAQ: View {
             VStack {
                 List {
                     DisclosureGroup {
+                        Text("Math Rendering disables markdown texts, which is why headers, lists, and other markdown features will not appear properly.")
+                            .padding(.vertical, 7.5)
+                    } label: {
+                        Text("Why cant I add headers and things when Math Rendering is on?")
+                            .padding(.vertical, 7.5)
+                    }
+                    
+                    DisclosureGroup {
                         LaTeX("Math Rendering allows you to input mathematical equations using LaTeX. Example: \\[x=\\frac{1}{2}\\]")
                             .parsingMode(.onlyEquations)
                             .blockMode(.alwaysInline)
@@ -83,18 +91,10 @@ struct mathEquationFAQ: View {
                     }
                     
                     DisclosureGroup {
-                        Text("Your texts will be rendered in plain text, and appear as normal characters. You can always choose to enable/disable Math Rendering later on.")
+                        Text("Math equations will not show properly. You can always choose to enable/disable Math Rendering later on.")
                             .padding(.vertical, 7.5)
                     } label: {
                         Text("What if I don't want to use Math Rendering?")
-                            .padding(.vertical, 7.5)
-                    }
-                    
-                    DisclosureGroup {
-                        Text("To edit your notes when Math Rendering is enabled, press the \"Edit\" button in the top right hand corner of your note. Non-Math Rendering notes can be edited without needing to click on the \"Edit\" button.")
-                            .padding(.vertical, 7.5)
-                    } label: {
-                        Text("Why can't I edit my notes when Math Rendering is enabled?")
                             .padding(.vertical, 7.5)
                     }
                     

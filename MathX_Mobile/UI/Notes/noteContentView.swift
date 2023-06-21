@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarkdownUI
 import LaTeXSwiftUI
 
 struct noteContentView: View {
@@ -31,6 +32,7 @@ struct noteContentView: View {
     var body: some View {
         VStack {
             if editMode?.wrappedValue.isEditing == true {
+//                ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     VStack {
                         HStack {
@@ -107,6 +109,7 @@ struct noteContentView: View {
                     
                     TextEditor(text: $noteContent)
                         .scrollIndicators(.hidden)
+//                        .scrollDisabled(true)
 //                    TextView(text: $noteContent, coordinator: textViewCoordinator)
                 }
             } else {
@@ -123,13 +126,23 @@ struct noteContentView: View {
                         Spacer()
                     }
                 } else {
-                    TextEditor(text: $noteContent)
-                        .scrollIndicators(.hidden)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        HStack {
+                            Markdown(noteContent)
+                                .markdownTheme(.mathx)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
 //                    TextView(text: $noteContent, coordinator: textViewCoordinator)
                 }
             }
             
         }
+        .toolbar(.hidden, for: .tabBar)
+        .toolbar(.hidden, for: .bottomBar)
+        .ignoresSafeArea(edges: .bottom)
+        .ignoresSafeArea(.keyboard)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
@@ -140,6 +153,12 @@ struct noteContentView: View {
                 if noteTitle.isEmpty {
                     noteTitle = note.title
                 }
+            }
+        }
+        .onChange(of: editMode?.wrappedValue.isEditing) { newValue in
+            if newValue == false {
+                updateNote()
+                print("updated")
             }
         }
         .onDisappear {
@@ -155,7 +174,8 @@ struct noteContentView: View {
         .onAppear {
             textViewCoordinator.text = $noteContent
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.top, editMode?.wrappedValue.isEditing == true ? 15 : 0)
         .navigationTitle(editMode?.wrappedValue.isEditing == true ? "" : noteTitle)
         .navigationBarTitleDisplayMode(.inline)
     }

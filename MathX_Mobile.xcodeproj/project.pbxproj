@@ -17,10 +17,6 @@
 		49E6CAA029BC845700DD2E02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */; };
 		49E6CAC329BC84BC00DD2E02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC229BC84BC00DD2E02 /* HomeView.swift */; };
 		49E6CAC529BC84CD00DD2E02 /* ToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */; };
-		6A52CB8529F6795600647A6E /* DarkCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8429F6795600647A6E /* DarkCuboid.scn */; };
-		6A52CB8929F6806000647A6E /* LightCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8829F6806000647A6E /* LightCuboid.scn */; };
-		6A52CB8C29F683E000647A6E /* DarkPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8A29F683E000647A6E /* DarkPyramid.scn */; };
-		6A52CB8D29F683E000647A6E /* LightPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = 6A52CB8B29F683E000647A6E /* LightPyramid.scn */; };
 		6A54B94A29CF42510083909A /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A54B94929CF42510083909A /* extensions.swift */; };
 		6A60E55A29CAEF7500F9C038 /* firstButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */; };
 		6A60E55E29CB17B700F9C038 /* secondButtonGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */; };
@@ -49,29 +45,43 @@
 		6ABC063B29F0D97100FE97A3 /* SetsCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC063A29F0D97100FE97A3 /* SetsCalc.swift */; };
 		6ABC063D29F1166300FE97A3 /* TrigoCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC063C29F1166300FE97A3 /* TrigoCalc.swift */; };
 		6ABC063F29F126A500FE97A3 /* RandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC063E29F126A500FE97A3 /* RandView.swift */; };
-		6ABC06B029F143E800FE97A3 /* Number Sequences.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06A629F143E600FE97A3 /* Number Sequences.pdf */; };
-		6ABC06B229F143E800FE97A3 /* Numbers and Their Operations Part 2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06A829F143E600FE97A3 /* Numbers and Their Operations Part 2.pdf */; };
-		6ABC06B429F143E800FE97A3 /* Functions and Linear Graphs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06AA29F143E700FE97A3 /* Functions and Linear Graphs.pdf */; };
-		6ABC06B629F143E800FE97A3 /* Geometrical Construction.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06AC29F143E700FE97A3 /* Geometrical Construction.pdf */; };
-		6ABC06B929F143E800FE97A3 /* Numbers and Their Operations Part 1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06AF29F143E800FE97A3 /* Numbers and Their Operations Part 1.pdf */; };
-		6ABC06C029F1440000FE97A3 /* Ratio and Proportion.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06BA29F143FF00FE97A3 /* Ratio and Proportion.pdf */; };
-		6ABC06C129F1440000FE97A3 /* Pythagoras Theorem.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06BB29F143FF00FE97A3 /* Pythagoras Theorem.pdf */; };
-		6ABC06C229F1440000FE97A3 /* Trigonometric Ratios.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06BC29F143FF00FE97A3 /* Trigonometric Ratios.pdf */; };
-		6ABC06CE29F1440C00FE97A3 /* Functions and Graphs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06C629F1440B00FE97A3 /* Functions and Graphs.pdf */; };
-		6ABC06CF29F1440C00FE97A3 /* Futher Coordinate Geometry.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06C729F1440B00FE97A3 /* Futher Coordinate Geometry.pdf */; };
-		6ABC06D029F1440C00FE97A3 /* Coordinate Geometry.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06C829F1440B00FE97A3 /* Coordinate Geometry.pdf */; };
-		6ABC06D129F1440C00FE97A3 /* Quadratic Funcations, Equations, and Inequalities.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06C929F1440B00FE97A3 /* Quadratic Funcations, Equations, and Inequalities.pdf */; };
-		6ABC06D229F1440C00FE97A3 /* Exponentials and Logarithms.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06CA29F1440B00FE97A3 /* Exponentials and Logarithms.pdf */; };
-		6ABC06D429F1440C00FE97A3 /* Surds.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06CC29F1440B00FE97A3 /* Surds.pdf */; };
-		6ABC06D529F1440C00FE97A3 /* Indices.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC06CD29F1440B00FE97A3 /* Indices.pdf */; };
 		6ABC06D729F18E4E00FE97A3 /* CalculationHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC06D629F18E4E00FE97A3 /* CalculationHistoryManager.swift */; };
 		6ABC06D929F1912800FE97A3 /* CalculationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */; };
 		6AD2F9CC2A0644E1001D6C64 /* BinaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */; };
-		6AD2F9D02A064960001D6C64 /* Geometrical Properties of Circles.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */; };
-		6AEE93212A2D69850067A53B /* Polynomials and Partial Fractions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6AEE93202A2D69850067A53B /* Polynomials and Partial Fractions.pdf */; };
 		6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF54D2D29F9173E00722548 /* AverageCalc.swift */; };
 		6AFEDBD12A3F01780070A5F1 /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFEDBD02A3F01780070A5F1 /* LaTeXSwiftUI */; };
 		6AFEDBD42A3F01840070A5F1 /* MathExpression in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFEDBD32A3F01840070A5F1 /* MathExpression */; };
+		F39565092A4331DE00A901C0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = F39565082A4331DE00A901C0 /* MarkdownUI */; };
+		F39565282A43558C00A901C0 /* Number Sequences.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650A2A43558B00A901C0 /* Number Sequences.pdf */; };
+		F39565292A43558C00A901C0 /* Indices.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650B2A43558B00A901C0 /* Indices.pdf */; };
+		F395652A2A43558C00A901C0 /* Polygons.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650C2A43558B00A901C0 /* Polygons.pdf */; };
+		F395652B2A43558C00A901C0 /* Functions and Graphs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650D2A43558B00A901C0 /* Functions and Graphs.pdf */; };
+		F395652C2A43558C00A901C0 /* Basic Geometry.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650E2A43558B00A901C0 /* Basic Geometry.pdf */; };
+		F395652D2A43558C00A901C0 /* Similarity and Congruence Part 1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650F2A43558B00A901C0 /* Similarity and Congruence Part 1.pdf */; };
+		F395652E2A43558C00A901C0 /* Polynomials and Partial Fractions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565102A43558B00A901C0 /* Polynomials and Partial Fractions.pdf */; };
+		F395652F2A43558C00A901C0 /* Direct and Inverse Proportions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565112A43558B00A901C0 /* Direct and Inverse Proportions.pdf */; };
+		F39565302A43558C00A901C0 /* LightCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = F39565122A43558B00A901C0 /* LightCuboid.scn */; };
+		F39565312A43558C00A901C0 /* Surds.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565132A43558C00A901C0 /* Surds.pdf */; };
+		F39565322A43558C00A901C0 /* Percentages.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565142A43558C00A901C0 /* Percentages.pdf */; };
+		F39565332A43558C00A901C0 /* Pythagoras Theorem.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565152A43558C00A901C0 /* Pythagoras Theorem.pdf */; };
+		F39565342A43558C00A901C0 /* DarkCuboid.scn in Resources */ = {isa = PBXBuildFile; fileRef = F39565162A43558C00A901C0 /* DarkCuboid.scn */; };
+		F39565352A43558C00A901C0 /* Trigonometric Ratios.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565172A43558C00A901C0 /* Trigonometric Ratios.pdf */; };
+		F39565362A43558C00A901C0 /* Futher Coordinate Geometry.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565182A43558C00A901C0 /* Futher Coordinate Geometry.pdf */; };
+		F39565372A43558C00A901C0 /* Ratio and Proportion.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565192A43558C00A901C0 /* Ratio and Proportion.pdf */; };
+		F39565382A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395651A2A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf */; };
+		F39565392A43558C00A901C0 /* Geometrical Properties of Circles.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395651B2A43558C00A901C0 /* Geometrical Properties of Circles.pdf */; };
+		F395653A2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395651C2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf */; };
+		F395653B2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395651D2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf */; };
+		F395653C2A43558C00A901C0 /* Functions and Linear Graphs.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395651E2A43558C00A901C0 /* Functions and Linear Graphs.pdf */; };
+		F395653D2A43558C00A901C0 /* Linear Law.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395651F2A43558C00A901C0 /* Linear Law.pdf */; };
+		F395653E2A43558C00A901C0 /* Exponentials and Logarithms.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565202A43558C00A901C0 /* Exponentials and Logarithms.pdf */; };
+		F395653F2A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565212A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf */; };
+		F39565402A43558C00A901C0 /* DarkPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = F39565222A43558C00A901C0 /* DarkPyramid.scn */; };
+		F39565412A43558C00A901C0 /* Linear Equations and Inequalities.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565232A43558C00A901C0 /* Linear Equations and Inequalities.pdf */; };
+		F39565422A43558C00A901C0 /* LightPyramid.scn in Resources */ = {isa = PBXBuildFile; fileRef = F39565242A43558C00A901C0 /* LightPyramid.scn */; };
+		F39565432A43558C00A901C0 /* Similarity and Congruence Part 2.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565252A43558C00A901C0 /* Similarity and Congruence Part 2.pdf */; };
+		F39565442A43558C00A901C0 /* Coordinate Geometry.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565262A43558C00A901C0 /* Coordinate Geometry.pdf */; };
+		F39565452A43558C00A901C0 /* Geometrical Construction.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565272A43558C00A901C0 /* Geometrical Construction.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,10 +115,6 @@
 		49E6CAAF29BC845700DD2E02 /* MathX_MobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathX_MobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E6CAC229BC84BC00DD2E02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
-		6A52CB8429F6795600647A6E /* DarkCuboid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DarkCuboid.scn; sourceTree = "<group>"; };
-		6A52CB8829F6806000647A6E /* LightCuboid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LightCuboid.scn; sourceTree = "<group>"; };
-		6A52CB8A29F683E000647A6E /* DarkPyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DarkPyramid.scn; sourceTree = "<group>"; };
-		6A52CB8B29F683E000647A6E /* LightPyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LightPyramid.scn; sourceTree = "<group>"; };
 		6A54B94929CF42510083909A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		6A60E55929CAEF7500F9C038 /* firstButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstButtonGroup.swift; sourceTree = "<group>"; };
 		6A60E55D29CB17B700F9C038 /* secondButtonGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = secondButtonGroup.swift; sourceTree = "<group>"; };
@@ -137,28 +143,41 @@
 		6ABC063A29F0D97100FE97A3 /* SetsCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsCalc.swift; sourceTree = "<group>"; };
 		6ABC063C29F1166300FE97A3 /* TrigoCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigoCalc.swift; sourceTree = "<group>"; };
 		6ABC063E29F126A500FE97A3 /* RandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandView.swift; sourceTree = "<group>"; };
-		6ABC06A629F143E600FE97A3 /* Number Sequences.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Number Sequences.pdf"; sourceTree = "<group>"; };
-		6ABC06A829F143E600FE97A3 /* Numbers and Their Operations Part 2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Numbers and Their Operations Part 2.pdf"; sourceTree = "<group>"; };
-		6ABC06AA29F143E700FE97A3 /* Functions and Linear Graphs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Functions and Linear Graphs.pdf"; sourceTree = "<group>"; };
-		6ABC06AC29F143E700FE97A3 /* Geometrical Construction.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Geometrical Construction.pdf"; sourceTree = "<group>"; };
-		6ABC06AF29F143E800FE97A3 /* Numbers and Their Operations Part 1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Numbers and Their Operations Part 1.pdf"; sourceTree = "<group>"; };
-		6ABC06BA29F143FF00FE97A3 /* Ratio and Proportion.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Ratio and Proportion.pdf"; sourceTree = "<group>"; };
-		6ABC06BB29F143FF00FE97A3 /* Pythagoras Theorem.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Pythagoras Theorem.pdf"; sourceTree = "<group>"; };
-		6ABC06BC29F143FF00FE97A3 /* Trigonometric Ratios.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Trigonometric Ratios.pdf"; sourceTree = "<group>"; };
-		6ABC06C629F1440B00FE97A3 /* Functions and Graphs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Functions and Graphs.pdf"; sourceTree = "<group>"; };
-		6ABC06C729F1440B00FE97A3 /* Futher Coordinate Geometry.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Futher Coordinate Geometry.pdf"; sourceTree = "<group>"; };
-		6ABC06C829F1440B00FE97A3 /* Coordinate Geometry.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Coordinate Geometry.pdf"; sourceTree = "<group>"; };
-		6ABC06C929F1440B00FE97A3 /* Quadratic Funcations, Equations, and Inequalities.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Quadratic Funcations, Equations, and Inequalities.pdf"; sourceTree = "<group>"; };
-		6ABC06CA29F1440B00FE97A3 /* Exponentials and Logarithms.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Exponentials and Logarithms.pdf"; sourceTree = "<group>"; };
-		6ABC06CC29F1440B00FE97A3 /* Surds.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Surds.pdf; sourceTree = "<group>"; };
-		6ABC06CD29F1440B00FE97A3 /* Indices.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Indices.pdf; sourceTree = "<group>"; };
 		6ABC06D629F18E4E00FE97A3 /* CalculationHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryManager.swift; sourceTree = "<group>"; };
 		6ABC06D829F1912800FE97A3 /* CalculationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryView.swift; sourceTree = "<group>"; };
 		6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryConverter.swift; sourceTree = "<group>"; };
-		6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Geometrical Properties of Circles.pdf"; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
-		6AEE93202A2D69850067A53B /* Polynomials and Partial Fractions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Polynomials and Partial Fractions.pdf"; sourceTree = "<group>"; };
 		6AF54D2D29F9173E00722548 /* AverageCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalc.swift; sourceTree = "<group>"; };
+		F395650A2A43558B00A901C0 /* Number Sequences.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Number Sequences.pdf"; sourceTree = "<group>"; };
+		F395650B2A43558B00A901C0 /* Indices.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Indices.pdf; sourceTree = "<group>"; };
+		F395650C2A43558B00A901C0 /* Polygons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Polygons.pdf; sourceTree = "<group>"; };
+		F395650D2A43558B00A901C0 /* Functions and Graphs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Functions and Graphs.pdf"; sourceTree = "<group>"; };
+		F395650E2A43558B00A901C0 /* Basic Geometry.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Basic Geometry.pdf"; sourceTree = "<group>"; };
+		F395650F2A43558B00A901C0 /* Similarity and Congruence Part 1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Similarity and Congruence Part 1.pdf"; sourceTree = "<group>"; };
+		F39565102A43558B00A901C0 /* Polynomials and Partial Fractions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Polynomials and Partial Fractions.pdf"; sourceTree = "<group>"; };
+		F39565112A43558B00A901C0 /* Direct and Inverse Proportions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Direct and Inverse Proportions.pdf"; sourceTree = "<group>"; };
+		F39565122A43558B00A901C0 /* LightCuboid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LightCuboid.scn; sourceTree = "<group>"; };
+		F39565132A43558C00A901C0 /* Surds.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Surds.pdf; sourceTree = "<group>"; };
+		F39565142A43558C00A901C0 /* Percentages.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Percentages.pdf; sourceTree = "<group>"; };
+		F39565152A43558C00A901C0 /* Pythagoras Theorem.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Pythagoras Theorem.pdf"; sourceTree = "<group>"; };
+		F39565162A43558C00A901C0 /* DarkCuboid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DarkCuboid.scn; sourceTree = "<group>"; };
+		F39565172A43558C00A901C0 /* Trigonometric Ratios.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Trigonometric Ratios.pdf"; sourceTree = "<group>"; };
+		F39565182A43558C00A901C0 /* Futher Coordinate Geometry.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Futher Coordinate Geometry.pdf"; sourceTree = "<group>"; };
+		F39565192A43558C00A901C0 /* Ratio and Proportion.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Ratio and Proportion.pdf"; sourceTree = "<group>"; };
+		F395651A2A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Quadratic Funcations, Equations, and Inequalities.pdf"; sourceTree = "<group>"; };
+		F395651B2A43558C00A901C0 /* Geometrical Properties of Circles.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Geometrical Properties of Circles.pdf"; sourceTree = "<group>"; };
+		F395651C2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Basic Algebra and Algebraic Manipulation.pdf"; sourceTree = "<group>"; };
+		F395651D2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Numbers and Their Operations Part 2.pdf"; sourceTree = "<group>"; };
+		F395651E2A43558C00A901C0 /* Functions and Linear Graphs.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Functions and Linear Graphs.pdf"; sourceTree = "<group>"; };
+		F395651F2A43558C00A901C0 /* Linear Law.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Linear Law.pdf"; sourceTree = "<group>"; };
+		F39565202A43558C00A901C0 /* Exponentials and Logarithms.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Exponentials and Logarithms.pdf"; sourceTree = "<group>"; };
+		F39565212A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Numbers and Their Operations Part 1.pdf"; sourceTree = "<group>"; };
+		F39565222A43558C00A901C0 /* DarkPyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = DarkPyramid.scn; sourceTree = "<group>"; };
+		F39565232A43558C00A901C0 /* Linear Equations and Inequalities.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Linear Equations and Inequalities.pdf"; sourceTree = "<group>"; };
+		F39565242A43558C00A901C0 /* LightPyramid.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LightPyramid.scn; sourceTree = "<group>"; };
+		F39565252A43558C00A901C0 /* Similarity and Congruence Part 2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Similarity and Congruence Part 2.pdf"; sourceTree = "<group>"; };
+		F39565262A43558C00A901C0 /* Coordinate Geometry.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Coordinate Geometry.pdf"; sourceTree = "<group>"; };
+		F39565272A43558C00A901C0 /* Geometrical Construction.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Geometrical Construction.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F39565092A4331DE00A901C0 /* MarkdownUI in Frameworks */,
 				6AFEDBD42A3F01840070A5F1 /* MathExpression in Frameworks */,
 				6AFEDBD12A3F01780070A5F1 /* LaTeXSwiftUI in Frameworks */,
 			);
@@ -234,27 +254,36 @@
 		49E6CA9E29BC845700DD2E02 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				6AEE93202A2D69850067A53B /* Polynomials and Partial Fractions.pdf */,
-				6AD2F9CF2A064960001D6C64 /* Geometrical Properties of Circles.pdf */,
-				6A52CB8829F6806000647A6E /* LightCuboid.scn */,
-				6A52CB8429F6795600647A6E /* DarkCuboid.scn */,
-				6A52CB8B29F683E000647A6E /* LightPyramid.scn */,
-				6A52CB8A29F683E000647A6E /* DarkPyramid.scn */,
-				6ABC06C829F1440B00FE97A3 /* Coordinate Geometry.pdf */,
-				6ABC06CA29F1440B00FE97A3 /* Exponentials and Logarithms.pdf */,
-				6ABC06C629F1440B00FE97A3 /* Functions and Graphs.pdf */,
-				6ABC06C729F1440B00FE97A3 /* Futher Coordinate Geometry.pdf */,
-				6ABC06CD29F1440B00FE97A3 /* Indices.pdf */,
-				6ABC06C929F1440B00FE97A3 /* Quadratic Funcations, Equations, and Inequalities.pdf */,
-				6ABC06CC29F1440B00FE97A3 /* Surds.pdf */,
-				6ABC06AA29F143E700FE97A3 /* Functions and Linear Graphs.pdf */,
-				6ABC06BB29F143FF00FE97A3 /* Pythagoras Theorem.pdf */,
-				6ABC06BA29F143FF00FE97A3 /* Ratio and Proportion.pdf */,
-				6ABC06BC29F143FF00FE97A3 /* Trigonometric Ratios.pdf */,
-				6ABC06AC29F143E700FE97A3 /* Geometrical Construction.pdf */,
-				6ABC06A629F143E600FE97A3 /* Number Sequences.pdf */,
-				6ABC06AF29F143E800FE97A3 /* Numbers and Their Operations Part 1.pdf */,
-				6ABC06A829F143E600FE97A3 /* Numbers and Their Operations Part 2.pdf */,
+				F395651C2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf */,
+				F395650E2A43558B00A901C0 /* Basic Geometry.pdf */,
+				F39565262A43558C00A901C0 /* Coordinate Geometry.pdf */,
+				F39565162A43558C00A901C0 /* DarkCuboid.scn */,
+				F39565222A43558C00A901C0 /* DarkPyramid.scn */,
+				F39565112A43558B00A901C0 /* Direct and Inverse Proportions.pdf */,
+				F39565202A43558C00A901C0 /* Exponentials and Logarithms.pdf */,
+				F395650D2A43558B00A901C0 /* Functions and Graphs.pdf */,
+				F395651E2A43558C00A901C0 /* Functions and Linear Graphs.pdf */,
+				F39565182A43558C00A901C0 /* Futher Coordinate Geometry.pdf */,
+				F39565272A43558C00A901C0 /* Geometrical Construction.pdf */,
+				F395651B2A43558C00A901C0 /* Geometrical Properties of Circles.pdf */,
+				F395650B2A43558B00A901C0 /* Indices.pdf */,
+				F39565122A43558B00A901C0 /* LightCuboid.scn */,
+				F39565242A43558C00A901C0 /* LightPyramid.scn */,
+				F39565232A43558C00A901C0 /* Linear Equations and Inequalities.pdf */,
+				F395651F2A43558C00A901C0 /* Linear Law.pdf */,
+				F395650A2A43558B00A901C0 /* Number Sequences.pdf */,
+				F39565212A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf */,
+				F395651D2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf */,
+				F39565142A43558C00A901C0 /* Percentages.pdf */,
+				F395650C2A43558B00A901C0 /* Polygons.pdf */,
+				F39565102A43558B00A901C0 /* Polynomials and Partial Fractions.pdf */,
+				F39565152A43558C00A901C0 /* Pythagoras Theorem.pdf */,
+				F395651A2A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf */,
+				F39565192A43558C00A901C0 /* Ratio and Proportion.pdf */,
+				F395650F2A43558B00A901C0 /* Similarity and Congruence Part 1.pdf */,
+				F39565252A43558C00A901C0 /* Similarity and Congruence Part 2.pdf */,
+				F39565132A43558C00A901C0 /* Surds.pdf */,
+				F39565172A43558C00A901C0 /* Trigonometric Ratios.pdf */,
 				6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */,
 				49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */,
 			);
@@ -448,6 +477,7 @@
 			packageProductDependencies = (
 				6AFEDBD02A3F01780070A5F1 /* LaTeXSwiftUI */,
 				6AFEDBD32A3F01840070A5F1 /* MathExpression */,
+				F39565082A4331DE00A901C0 /* MarkdownUI */,
 			);
 			productName = MathX_Mobile;
 			productReference = 49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */;
@@ -524,6 +554,7 @@
 			packageReferences = (
 				6AFEDBCF2A3F01780070A5F1 /* XCRemoteSwiftPackageReference "LaTeXSwiftUI" */,
 				6AFEDBD22A3F01840070A5F1 /* XCRemoteSwiftPackageReference "MathExpression" */,
+				F39565072A4331DD00A901C0 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = 49E6CA9629BC845400DD2E02 /* Products */;
 			projectDirPath = "";
@@ -541,29 +572,38 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABC06D129F1440C00FE97A3 /* Quadratic Funcations, Equations, and Inequalities.pdf in Resources */,
-				6ABC06CF29F1440C00FE97A3 /* Futher Coordinate Geometry.pdf in Resources */,
-				6ABC06CE29F1440C00FE97A3 /* Functions and Graphs.pdf in Resources */,
-				6A52CB8C29F683E000647A6E /* DarkPyramid.scn in Resources */,
-				6A52CB8D29F683E000647A6E /* LightPyramid.scn in Resources */,
-				6ABC06D029F1440C00FE97A3 /* Coordinate Geometry.pdf in Resources */,
-				6ABC06D529F1440C00FE97A3 /* Indices.pdf in Resources */,
-				6ABC06C129F1440000FE97A3 /* Pythagoras Theorem.pdf in Resources */,
-				6ABC06B629F143E800FE97A3 /* Geometrical Construction.pdf in Resources */,
-				6ABC06C029F1440000FE97A3 /* Ratio and Proportion.pdf in Resources */,
-				6ABC06B929F143E800FE97A3 /* Numbers and Their Operations Part 1.pdf in Resources */,
-				6AEE93212A2D69850067A53B /* Polynomials and Partial Fractions.pdf in Resources */,
-				6A52CB8929F6806000647A6E /* LightCuboid.scn in Resources */,
+				F39565342A43558C00A901C0 /* DarkCuboid.scn in Resources */,
+				F395653E2A43558C00A901C0 /* Exponentials and Logarithms.pdf in Resources */,
+				F39565332A43558C00A901C0 /* Pythagoras Theorem.pdf in Resources */,
+				F39565402A43558C00A901C0 /* DarkPyramid.scn in Resources */,
 				49E6CAA029BC845700DD2E02 /* Preview Assets.xcassets in Resources */,
-				6ABC06B029F143E800FE97A3 /* Number Sequences.pdf in Resources */,
-				6ABC06D429F1440C00FE97A3 /* Surds.pdf in Resources */,
-				6ABC06D229F1440C00FE97A3 /* Exponentials and Logarithms.pdf in Resources */,
-				6ABC06B229F143E800FE97A3 /* Numbers and Their Operations Part 2.pdf in Resources */,
-				6AD2F9D02A064960001D6C64 /* Geometrical Properties of Circles.pdf in Resources */,
-				6ABC06B429F143E800FE97A3 /* Functions and Linear Graphs.pdf in Resources */,
+				F395652B2A43558C00A901C0 /* Functions and Graphs.pdf in Resources */,
+				F395653C2A43558C00A901C0 /* Functions and Linear Graphs.pdf in Resources */,
+				F39565392A43558C00A901C0 /* Geometrical Properties of Circles.pdf in Resources */,
+				F395653A2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf in Resources */,
+				F39565362A43558C00A901C0 /* Futher Coordinate Geometry.pdf in Resources */,
+				F39565312A43558C00A901C0 /* Surds.pdf in Resources */,
+				F39565442A43558C00A901C0 /* Coordinate Geometry.pdf in Resources */,
+				F39565282A43558C00A901C0 /* Number Sequences.pdf in Resources */,
+				F39565432A43558C00A901C0 /* Similarity and Congruence Part 2.pdf in Resources */,
+				F395653B2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf in Resources */,
+				F39565322A43558C00A901C0 /* Percentages.pdf in Resources */,
+				F39565302A43558C00A901C0 /* LightCuboid.scn in Resources */,
+				F39565352A43558C00A901C0 /* Trigonometric Ratios.pdf in Resources */,
+				F39565372A43558C00A901C0 /* Ratio and Proportion.pdf in Resources */,
+				F395652E2A43558C00A901C0 /* Polynomials and Partial Fractions.pdf in Resources */,
+				F395652A2A43558C00A901C0 /* Polygons.pdf in Resources */,
+				F395652F2A43558C00A901C0 /* Direct and Inverse Proportions.pdf in Resources */,
+				F39565292A43558C00A901C0 /* Indices.pdf in Resources */,
+				F39565382A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf in Resources */,
 				49E6CA9D29BC845700DD2E02 /* Assets.xcassets in Resources */,
-				6ABC06C229F1440000FE97A3 /* Trigonometric Ratios.pdf in Resources */,
-				6A52CB8529F6795600647A6E /* DarkCuboid.scn in Resources */,
+				F395653F2A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf in Resources */,
+				F395653D2A43558C00A901C0 /* Linear Law.pdf in Resources */,
+				F39565452A43558C00A901C0 /* Geometrical Construction.pdf in Resources */,
+				F39565412A43558C00A901C0 /* Linear Equations and Inequalities.pdf in Resources */,
+				F395652C2A43558C00A901C0 /* Basic Geometry.pdf in Resources */,
+				F395652D2A43558C00A901C0 /* Similarity and Congruence Part 1.pdf in Resources */,
+				F39565422A43558C00A901C0 /* LightPyramid.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,6 +1021,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		F39565072A4331DD00A901C0 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -993,6 +1041,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6AFEDBD22A3F01840070A5F1 /* XCRemoteSwiftPackageReference "MathExpression" */;
 			productName = MathExpression;
+		};
+		F39565082A4331DE00A901C0 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F39565072A4331DD00A901C0 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
