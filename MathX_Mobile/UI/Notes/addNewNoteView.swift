@@ -96,11 +96,11 @@ struct addNewNoteView: View {
                         } label: {
                             Image(systemName: "xmark")
                         }
+                        .tint(.purple)
                     }
                 }
             }
         }
-        .navigationViewStyle(.stack)
         .onAppear {
             if notesCreated > 0 {
                 noteTitle = "Untitled Note \(notesCreated + 1)"
@@ -108,7 +108,6 @@ struct addNewNoteView: View {
                 noteTitle = "Untitled Note"
             }
         }
-        .tint(.purple)
     }
 }
 
