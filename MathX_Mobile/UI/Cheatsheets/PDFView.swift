@@ -63,7 +63,7 @@ struct PDFViewer: View {
                 }
             }
         }
-        .toolbar(.hidden, for: .tabBar)
+        .toolbar(UIScreen.main.traitCollection.userInterfaceIdiom == .phone ? .hidden : .visible, for: .tabBar)
         .ignoresSafeArea(edges: .bottom)
         .navigationTitle(topicName)
         .navigationBarTitleDisplayMode(.inline)

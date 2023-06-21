@@ -144,7 +144,7 @@ struct CheatsheetsView: View {
                     }
                 }
                 .listStyle(.sidebar)
-                .navigationTitle("Sidebar")
+                .navigationTitle("Cheatsheets")
                 
                 if let selection = selection {
                     selection.destination
@@ -210,21 +210,26 @@ struct iPadDetailView: View {
             if !searchResults(for: level).isEmpty {
                 Section {
                     ForEach(searchResults(for: level), id: \.self) { topic in
-                        NavigationLink(destination: PDFViewer(topicName: topic, pdfName: topic)) {
+                        if topic != "Coming soon..." {
+                            NavigationLink(destination: PDFViewer(topicName: topic, pdfName: topic)) {
+                                Text(topic)
+                                    .padding(.vertical, 5)
+                            }
+                            .swipeActions(allowsFullSwipe: true) {
+                                Button {
+                                    if favouritesManager.favourites.description.contains(topic) {
+                                        removeFavourite(topicName: topic)
+                                    } else {
+                                        favouritesManager.favourites.insert(Favourite(topicName: topic), at: 0)
+                                    }
+                                } label: {
+                                    Image(systemName: favouritesManager.favourites.description.contains(topic) ? "star.slash" : "star")
+                                }
+                                .tint(.yellow)
+                            }
+                        } else {
                             Text(topic)
                                 .padding(.vertical, 5)
-                        }
-                        .swipeActions(allowsFullSwipe: true) {
-                            Button {
-                                if favouritesManager.favourites.description.contains(topic) {
-                                    removeFavourite(topicName: topic)
-                                } else {
-                                    favouritesManager.favourites.insert(Favourite(topicName: topic), at: 0)
-                                }
-                            } label: {
-                                Image(systemName: favouritesManager.favourites.description.contains(topic) ? "star.slash" : "star")
-                            }
-                            .tint(.yellow)
                         }
                     }
                 }
