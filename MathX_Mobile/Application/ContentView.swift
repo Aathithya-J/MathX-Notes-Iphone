@@ -4,7 +4,10 @@ struct ContentView: View {
     
     @Binding var tabSelection: Int
     @Binding var path: NavigationPath
-    @Binding var deepLinkSource: String
+    @Binding var calculatorDeepLinkSource: String
+    
+    @Binding var notesDeepLinkSource: String
+    @Binding var isShowingReceivedNotePopUp: Bool
     
     @State var isAnimationOver = false
             
@@ -14,7 +17,7 @@ struct ContentView: View {
         if !isShowingWelcomeScreen {
             if isAnimationOver {
                 TabView(selection: $tabSelection) {
-                    NotesView()
+                    NotesView(notesDeepLinkSource: $notesDeepLinkSource, isShowingReceivedNotePopUp: $isShowingReceivedNotePopUp)
                         .tabItem {
                             Label("Notes", systemImage: "doc.text")
                         }
@@ -24,7 +27,7 @@ struct ContentView: View {
                             Label("Cheatsheets", systemImage: "list.bullet.clipboard")
                         }
                         .tag(1)
-                    ToolsView(deepLinkSource: $deepLinkSource, path: $path)
+                    ToolsView(calculatorDeepLinkSource: $calculatorDeepLinkSource, path: $path)
                         .tabItem {
                             Label("Tools", systemImage: "wrench.and.screwdriver")
                         }

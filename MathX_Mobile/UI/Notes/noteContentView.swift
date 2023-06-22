@@ -147,6 +147,11 @@ struct noteContentView: View {
         .ignoresSafeArea(.keyboard)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
+                ShareLink(item: URL(string: noteURL(base64: convertNoteToBase64(note: note)))!)
+                    .tint(.purple)
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
                 EditButton()
             }
         }
@@ -180,6 +185,16 @@ struct noteContentView: View {
         .padding(.top, editMode?.wrappedValue.isEditing == true ? 15 : 0)
         .navigationTitle(editMode?.wrappedValue.isEditing == true ? "" : noteTitle)
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    func convertNoteToBase64(note: Note) -> String {
+        let stringToBeConverted = "\(note.title) ␢␆␝⎠⎡⍰⎀ \(note.content ?? "") ␢␆␝⎠⎡⍰⎀ \(note.latexRendering ? "true" : "false")"
+        
+        return stringToBeConverted.toBase64()
+    }
+    
+    func noteURL(base64: String) -> String {
+        return "mathx:///notes?source=\(base64)"
     }
     
     func updateNote() {

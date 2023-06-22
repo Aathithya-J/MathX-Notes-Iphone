@@ -29,7 +29,7 @@ struct ScientificCalculatorView: View {
     @State var qrCodeImage = UIImage()
     
     @State var encodedDeepLink = String()
-    @Binding var deepLinkSource: String
+    @Binding var calculatorDeepLinkSource: String
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -79,7 +79,7 @@ struct ScientificCalculatorView: View {
             .onAppear {
 //                receivedDeepLinkSource()
             }
-            .onChange(of: deepLinkSource) { newValue in
+            .onChange(of: calculatorDeepLinkSource) { newValue in
 //                receivedDeepLinkSource()
             }
         }

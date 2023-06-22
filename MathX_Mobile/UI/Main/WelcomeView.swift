@@ -213,7 +213,7 @@ Feel free to click the \"Edit\" button in the top right hand corner to look at t
     
     let markdownContent = """
 # Introduction
-Welcome to the **markdown tutorial**! This note is an *example* of how you can integrate the ~markup~ markdown function into your math notes :)
+Welcome to the **markdown tutorial**! This note is an *example* of how you can integrate the ~~markup~~ markdown function into your math notes :)
 
 Note: Markdown text is disabled when Math Rendering is enabled
 
@@ -280,9 +280,9 @@ If bulleted and numbered lists aren't enough, checklists are available too!
 ### Tables
 Who doesn't like tables?
 
-| Left Alignment | Center Alignment | Right Alignment |
-|:-|:-:|-:|
-| Text | Text | Text |
+ Left Alignment | Center Alignment | Right Alignment 
+:-|:-:|-:
+ Text | Text | Text
 
 
 # Important

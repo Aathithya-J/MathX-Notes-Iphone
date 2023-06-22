@@ -33,7 +33,7 @@ struct SimplifiedCalculatorView: View {
     @State var qrCodeImage = UIImage()
     
     @State var encodedDeepLink = String()
-    @Binding var deepLinkSource: String
+    @Binding var calculatorDeepLinkSource: String
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
@@ -91,10 +91,10 @@ struct SimplifiedCalculatorView: View {
                 }
             }
             .onAppear {
-                receivedDeepLinkSource()
+                receivedCalculatorDeepLinkSource()
             }
-            .onChange(of: deepLinkSource) { newValue in
-                receivedDeepLinkSource()
+            .onChange(of: calculatorDeepLinkSource) { newValue in
+                receivedCalculatorDeepLinkSource()
             }
         }
         .statusBar(hidden: true)
@@ -335,14 +335,14 @@ struct SimplifiedCalculatorView: View {
         return UIImage(systemName: "xmark.circle") ?? UIImage()
     }
     
-    func receivedDeepLinkSource() {
-        if !deepLinkSource.isEmpty {
+    func receivedCalculatorDeepLinkSource() {
+        if !calculatorDeepLinkSource.isEmpty {
             errorOccurred = false
             showingSharingScreen = false
             
             var sourceConvertedArray = [String]()
             
-            guard let sourceConverted = deepLinkSource.fromBase64() else { return }
+            guard let sourceConverted = calculatorDeepLinkSource.fromBase64() else { return }
 //            deepLinkSource = ""
             
             sourceConvertedArray = sourceConverted.components(separatedBy: " -,- ")

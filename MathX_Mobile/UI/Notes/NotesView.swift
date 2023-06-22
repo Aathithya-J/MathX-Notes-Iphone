@@ -16,6 +16,9 @@ struct NotesView: View {
     
     @State var searchText = String()
     
+    @Binding var notesDeepLinkSource: String
+    @Binding var isShowingReceivedNotePopUp: Bool
+    
     @State var showingAddNewNoteView = false
     @ObservedObject var noteManager: NoteManager = .shared
     
@@ -41,7 +44,15 @@ struct NotesView: View {
                                     }
                                     .padding(.vertical, 5)
                                 }
+                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                    ShareLink(item: URL(string: noteURL(base64: convertNoteToBase64(note: note)))!)
+                                        .tint(.blue)
+                                }
                                 .contextMenu {
+                                    ShareLink(item: URL(string: noteURL(base64: convertNoteToBase64(note: note)))!)
+                                    
+                                    Divider()
+                                    
                                     Menu {
                                         Button(role: .destructive) {
                                             withAnimation {
@@ -56,6 +67,7 @@ struct NotesView: View {
                                         } label: {
                                             Label("Delete", systemImage: "trash")
                                         }
+                                        .tint(.red)
                                     }
                                 } preview: {
                                     NavigationStack {
@@ -102,6 +114,20 @@ struct NotesView: View {
         .sheet(isPresented: $showingAddNewNoteView) {
             addNewNoteView()
         }
+        .sheet(isPresented: $isShowingReceivedNotePopUp) {
+            ReceivedNotePopUp(notesDeepLinkSource: $notesDeepLinkSource)
+                .presentationDetents([.medium, .large])
+        }
+    }
+    
+    func convertNoteToBase64(note: Note) -> String {
+        let stringToBeConverted = "\(note.title) ␢␆␝⎠⎡⍰⎀ \(note.content ?? "") ␢␆␝⎠⎡⍰⎀ \(note.latexRendering ? "true" : "false")"
+        
+        return stringToBeConverted.toBase64()
+    }
+    
+    func noteURL(base64: String) -> String {
+        return "mathx:///notes?source=\(base64)"
     }
     
     func removeNote(note: Note) {
@@ -130,6 +156,6 @@ struct NotesView: View {
 
 struct NotesView_Previews: PreviewProvider {
     static var previews: some View {
-        NotesView()
+        Text("NotesView()")
     }
 }

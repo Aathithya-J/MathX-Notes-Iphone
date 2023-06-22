@@ -41,7 +41,7 @@ struct ToolsView: View {
     
     @State var searchText = ""
     
-    @Binding var deepLinkSource: String
+    @Binding var calculatorDeepLinkSource: String
     @Binding var path: NavigationPath
     
     var body: some View {
@@ -85,7 +85,7 @@ struct ToolsView: View {
     func getSubToolsDestination(for tool: String) -> AnyView {
         switch tool {
         case "Calculator":
-            return AnyView(CalculatorView(path: $path, deepLinkSource: $deepLinkSource))
+            return AnyView(CalculatorView(path: $path, calculatorDeepLinkSource: $calculatorDeepLinkSource))
         case "Average Calculator":
             return AnyView(AverageCalc())
         case "HCF/LCM Calculator":

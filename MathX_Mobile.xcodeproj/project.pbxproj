@@ -51,6 +51,7 @@
 		6AF54D2E29F9173E00722548 /* AverageCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF54D2D29F9173E00722548 /* AverageCalc.swift */; };
 		6AFEDBD12A3F01780070A5F1 /* LaTeXSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFEDBD02A3F01780070A5F1 /* LaTeXSwiftUI */; };
 		6AFEDBD42A3F01840070A5F1 /* MathExpression in Frameworks */ = {isa = PBXBuildFile; productRef = 6AFEDBD32A3F01840070A5F1 /* MathExpression */; };
+		F351F73A2A440C0400F19E90 /* ReceivedNotePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F351F7392A440C0400F19E90 /* ReceivedNotePopUp.swift */; };
 		F39565092A4331DE00A901C0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = F39565082A4331DE00A901C0 /* MarkdownUI */; };
 		F39565282A43558C00A901C0 /* Number Sequences.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650A2A43558B00A901C0 /* Number Sequences.pdf */; };
 		F39565292A43558C00A901C0 /* Indices.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F395650B2A43558B00A901C0 /* Indices.pdf */; };
@@ -148,6 +149,7 @@
 		6AD2F9CB2A0644E1001D6C64 /* BinaryConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryConverter.swift; sourceTree = "<group>"; };
 		6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MathX-Mobile-Info.plist"; path = "MathX_Mobile/Preview Content/MathX-Mobile-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6AF54D2D29F9173E00722548 /* AverageCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageCalc.swift; sourceTree = "<group>"; };
+		F351F7392A440C0400F19E90 /* ReceivedNotePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedNotePopUp.swift; sourceTree = "<group>"; };
 		F395650A2A43558B00A901C0 /* Number Sequences.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Number Sequences.pdf"; sourceTree = "<group>"; };
 		F395650B2A43558B00A901C0 /* Indices.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Indices.pdf; sourceTree = "<group>"; };
 		F395650C2A43558B00A901C0 /* Polygons.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Polygons.pdf; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				6A6D3F1D29EF748D00265124 /* NotesView.swift */,
+				F351F7392A440C0400F19E90 /* ReceivedNotePopUp.swift */,
 				6A6D3F1F29EF75B300265124 /* addNewNoteView.swift */,
 				6A6D3F2129EF75E200265124 /* noteContentView.swift */,
 				6A6D3F2A29EFC9BB00265124 /* mathEquationFAQ.swift */,
@@ -649,6 +652,7 @@
 				6A60E56029CB1B5600F9C038 /* thirdButtonGroup.swift in Sources */,
 				498C0FD429BEF7E50079503C /* OCRView.swift in Sources */,
 				6ABC06D929F1912800FE97A3 /* CalculationHistoryView.swift in Sources */,
+				F351F73A2A440C0400F19E90 /* ReceivedNotePopUp.swift in Sources */,
 				496462C629F14B1700FAB096 /* UnitConverter.swift in Sources */,
 				6ABC063D29F1166300FE97A3 /* TrigoCalc.swift in Sources */,
 				6A6D3F2B29EFC9BB00265124 /* mathEquationFAQ.swift in Sources */,

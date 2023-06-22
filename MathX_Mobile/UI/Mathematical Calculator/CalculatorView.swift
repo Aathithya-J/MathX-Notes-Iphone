@@ -9,15 +9,15 @@ struct CalculatorView: View {
     @Binding var path: NavigationPath
     
     @State var encodedDeepLink = String()
-    @Binding var deepLinkSource: String
+    @Binding var calculatorDeepLinkSource: String
     
     var body: some View {
         if true {
             // simplified calculator
-            SimplifiedCalculatorView(path: $path, deepLinkSource: $deepLinkSource)
+            SimplifiedCalculatorView(path: $path, calculatorDeepLinkSource: $calculatorDeepLinkSource)
         } else {
             // advance scientific calculator - WIP - will be an update
-            ScientificCalculatorView(path: $path, deepLinkSource: $deepLinkSource)
+            ScientificCalculatorView(path: $path, calculatorDeepLinkSource: $calculatorDeepLinkSource)
         }
     }
 }
