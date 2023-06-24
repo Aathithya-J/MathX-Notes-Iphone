@@ -12,7 +12,7 @@ import LaTeXSwiftUI
 struct ShapesCalc: View {
     
     let dimensions = ["2D", "3D"]
-    let TwoDShapes = ["Square", "Triangle", "Circle", "Trapezium", "Parallelogram"]
+    let TwoDShapes = ["Rectangle", "Triangle", "Circle", "Trapezium", "Parallelogram"]
     let ThreeDShapes = ["Cuboid", "Pyramid", "Sphere", "Cylinder", "Cone"]
     let threeDCalculationType = ["Volume", "Surface Area"]
 
@@ -25,8 +25,8 @@ struct ShapesCalc: View {
     @State var dimensionSelection = "2D"
     @State var statedimensionSelection = "2D"
 
-    @State var shapeSelection = "Square"
-    @State var stateshapeSelection = "Square"
+    @State var shapeSelection = "Rectangle"
+    @State var stateshapeSelection = "Rectangle"
     
     @State var threeDCalculation = "Volume"
     @State var statethreeDCalculation = "Volume"
@@ -66,7 +66,7 @@ struct ShapesCalc: View {
                 .pickerStyle(.segmented)
                 .onChange(of: dimensionSelection) { _ in
                     if dimensionSelection == "2D" {
-                        shapeSelection = "Square"
+                        shapeSelection = "Rectangle"
                     } else if dimensionSelection == "3D" {
                         shapeSelection = "Cuboid"
                     }
@@ -248,7 +248,7 @@ struct ShapesCalc: View {
             return 2
             
             // 2D Shapes
-        case "Square":
+        case "Rectangle":
             return 2
         case "Triangle":
             return 2
@@ -316,7 +316,7 @@ struct ShapesCalc: View {
             }
             
             // 2D Shapes
-        case "Square":
+        case "Rectangle":
             switch sideNumber {
             case 1:
                 return "Length (l)"
@@ -418,7 +418,7 @@ struct ShapesCalc: View {
             }
             
             // 2D Shapes
-        case "Square":
+        case "Rectangle":
             guard let l = Double(side1) else { return "" }
             guard let b = Double(side2) else { return "" }
             
@@ -484,7 +484,7 @@ struct ShapesCalc: View {
             }
             
             // 2D Shapes
-        case "Square":
+        case "Rectangle":
             return "\(results.isEmpty ? "A" : results) = \(side1.isEmpty ? "l" : side1) * \(side2.isEmpty ? "b" : side2)"
         case "Triangle":
             return "\(results.isEmpty ? "A" : results) = \\frac{1}{2} * \(side1.isEmpty ? "b" : side1) * \(side2.isEmpty ? "h" : side2)"

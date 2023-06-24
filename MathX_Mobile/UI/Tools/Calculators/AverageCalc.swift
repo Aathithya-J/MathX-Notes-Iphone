@@ -238,7 +238,7 @@ struct AverageCalc: View {
             let separatedString = string.components(separatedBy: ",")
             
             separatedString.forEach { string in
-                guard let doubledstring = Double(string) else { return }
+                guard let _ = Double(string) else { return }
                 arrayOfPassedElements.append(string)
             }
             

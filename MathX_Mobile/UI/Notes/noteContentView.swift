@@ -27,8 +27,6 @@ struct noteContentView: View {
     
     @ObservedObject var noteManager: NoteManager = .shared
     
-    @StateObject private var textViewCoordinator = TextViewCoordinator()
-    
     var body: some View {
         VStack {
             if editMode?.wrappedValue.isEditing == true {
@@ -178,9 +176,6 @@ struct noteContentView: View {
             guard let notesContent = note.content else { return }
             noteContent = notesContent
         }
-        .onAppear {
-            textViewCoordinator.text = $noteContent
-        }
         .padding(.horizontal)
         .padding(.top, editMode?.wrappedValue.isEditing == true ? 15 : 0)
         .navigationTitle(editMode?.wrappedValue.isEditing == true ? "" : noteTitle)
@@ -243,82 +238,3 @@ struct noteContentView: View {
         noteManager.notes.remove(at: i)
     }
 }
-
-
-struct TextView: UIViewRepresentable {
-    @Binding var text: String
-    let coordinator: TextViewCoordinator
-    
-    func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
-        textView.font = UIFont.preferredFont(forTextStyle: .body)
-        textView.delegate = coordinator
-        coordinator.textView = textView
-        NotificationCenter.default.addObserver(coordinator, selector: #selector(coordinator.contentSizeCategoryDidChange), name: UIContentSizeCategory.didChangeNotification, object: nil)
-        
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textView.frame.size.width, height: 44))
-        
-        let fractionButton = UIButton(type: .custom)
-        fractionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        fractionButton.setTitle("Fraction", for: .normal)
-        fractionButton.setTitleColor(.white, for: .normal)
-        fractionButton.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.5)
-        fractionButton.layer.cornerRadius = 8
-        fractionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        fractionButton.addTarget(coordinator, action: #selector (coordinator.insertFraction), for: .touchUpInside)
-        
-        let insertFractionButton = UIBarButtonItem(customView: fractionButton)
-        
-        let squareRootButton = UIButton(type: .custom)
-        fractionButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        squareRootButton.setTitle("Square Root", for: .normal)
-        squareRootButton.setTitleColor(.white, for: .normal)
-        squareRootButton.backgroundColor = UIColor.systemYellow.withAlphaComponent(0.5)
-        squareRootButton.layer.cornerRadius = 8
-        squareRootButton.addTarget(coordinator, action: #selector (coordinator.insertSquareRoot), for: .touchUpInside)
-        
-        let insertsquareRootButton = UIBarButtonItem(customView: squareRootButton)
-        
-        toolbar.items = [insertFractionButton, insertsquareRootButton]
-        textView.inputAccessoryView = toolbar
-        
-        textView.showsVerticalScrollIndicator = false
-        textView.showsHorizontalScrollIndicator = false
-        
-        textView.alwaysBounceVertical = true
-        
-        return textView
-    }
-    
-    func updateUIView(_ uiView: UITextView, context: Context) {
-        uiView.text = text
-    }
-}
-
-class TextViewCoordinator: NSObject, UITextViewDelegate, ObservableObject {
-    weak var textView: UITextView?
-    var text: Binding<String>!
-    
-    @objc func insertFraction() {
-        textView?.replace(textView?.selectedTextRange ?? UITextRange(), withText: "\\frac{1}{2}")
-    }
-    
-    @objc func insertSquareRoot() {
-        textView?.replace(textView?.selectedTextRange ?? UITextRange(), withText: "\\sqrt[3]{b^2}")
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        text.wrappedValue = textView.text
-    }
-    
-    @objc func contentSizeCategoryDidChange() {
-        textView?.font = UIFont.preferredFont(forTextStyle: .body)
-    }
-}
-
-struct noteContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Text("noteContentView()")
-    }
-}
-
