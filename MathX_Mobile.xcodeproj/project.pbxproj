@@ -85,23 +85,6 @@
 		F39565452A43558C00A901C0 /* Geometrical Construction.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F39565272A43558C00A901C0 /* Geometrical Construction.pdf */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		49E6CAA629BC845700DD2E02 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49E6CA8D29BC845400DD2E02 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 49E6CA9429BC845400DD2E02;
-			remoteInfo = MathX_Mobile;
-		};
-		49E6CAB029BC845700DD2E02 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49E6CA8D29BC845400DD2E02 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 49E6CA9429BC845400DD2E02;
-			remoteInfo = MathX_Mobile;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		4942F0AE29CAA49E00F85389 /* CalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		495674C029BD5EEB00EB37DA /* HCFLCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCFLCM.swift; sourceTree = "<group>"; };
@@ -112,8 +95,6 @@
 		49E6CA9A29BC845400DD2E02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		49E6CA9C29BC845700DD2E02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		49E6CAA529BC845700DD2E02 /* MathX_MobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathX_MobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		49E6CAAF29BC845700DD2E02 /* MathX_MobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MathX_MobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49E6CAC229BC84BC00DD2E02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		49E6CAC429BC84CD00DD2E02 /* ToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsView.swift; sourceTree = "<group>"; };
 		6A54B94929CF42510083909A /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -193,20 +174,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49E6CAA229BC845700DD2E02 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49E6CAAC29BC845700DD2E02 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -235,8 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */,
-				49E6CAA529BC845700DD2E02 /* MathX_MobileTests.xctest */,
-				49E6CAAF29BC845700DD2E02 /* MathX_MobileUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,6 +209,7 @@
 		49E6CA9729BC845400DD2E02 /* MathX_Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				F3BE6A872A5CF355005796D9 /* PDFs */,
 				6A1941152A2B7B5B001B3A29 /* Application */,
 				6A60E56329CB1F0300F9C038 /* Extensions */,
 				6A1941172A2B7BA0001B3A29 /* Managers */,
@@ -256,36 +222,10 @@
 		49E6CA9E29BC845700DD2E02 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				F395651C2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf */,
-				F395650E2A43558B00A901C0 /* Basic Geometry.pdf */,
-				F39565262A43558C00A901C0 /* Coordinate Geometry.pdf */,
 				F39565162A43558C00A901C0 /* DarkCuboid.scn */,
 				F39565222A43558C00A901C0 /* DarkPyramid.scn */,
-				F39565112A43558B00A901C0 /* Direct and Inverse Proportions.pdf */,
-				F39565202A43558C00A901C0 /* Exponentials and Logarithms.pdf */,
-				F395650D2A43558B00A901C0 /* Functions and Graphs.pdf */,
-				F395651E2A43558C00A901C0 /* Functions and Linear Graphs.pdf */,
-				F39565182A43558C00A901C0 /* Futher Coordinate Geometry.pdf */,
-				F39565272A43558C00A901C0 /* Geometrical Construction.pdf */,
-				F395651B2A43558C00A901C0 /* Geometrical Properties of Circles.pdf */,
-				F395650B2A43558B00A901C0 /* Indices.pdf */,
 				F39565122A43558B00A901C0 /* LightCuboid.scn */,
 				F39565242A43558C00A901C0 /* LightPyramid.scn */,
-				F39565232A43558C00A901C0 /* Linear Equations and Inequalities.pdf */,
-				F395651F2A43558C00A901C0 /* Linear Law.pdf */,
-				F395650A2A43558B00A901C0 /* Number Sequences.pdf */,
-				F39565212A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf */,
-				F395651D2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf */,
-				F39565142A43558C00A901C0 /* Percentages.pdf */,
-				F395650C2A43558B00A901C0 /* Polygons.pdf */,
-				F39565102A43558B00A901C0 /* Polynomials and Partial Fractions.pdf */,
-				F39565152A43558C00A901C0 /* Pythagoras Theorem.pdf */,
-				F395651A2A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf */,
-				F39565192A43558C00A901C0 /* Ratio and Proportion.pdf */,
-				F395650F2A43558B00A901C0 /* Similarity and Congruence Part 1.pdf */,
-				F39565252A43558C00A901C0 /* Similarity and Congruence Part 2.pdf */,
-				F39565132A43558C00A901C0 /* Surds.pdf */,
-				F39565172A43558C00A901C0 /* Trigonometric Ratios.pdf */,
 				6AE20F2329D0387100709B9F /* MathX-Mobile-Info.plist */,
 				49E6CA9F29BC845700DD2E02 /* Preview Assets.xcassets */,
 			);
@@ -461,6 +401,39 @@
 			path = Cheatsheets;
 			sourceTree = "<group>";
 		};
+		F3BE6A872A5CF355005796D9 /* PDFs */ = {
+			isa = PBXGroup;
+			children = (
+				F395651C2A43558C00A901C0 /* Basic Algebra and Algebraic Manipulation.pdf */,
+				F395650E2A43558B00A901C0 /* Basic Geometry.pdf */,
+				F39565262A43558C00A901C0 /* Coordinate Geometry.pdf */,
+				F39565112A43558B00A901C0 /* Direct and Inverse Proportions.pdf */,
+				F39565202A43558C00A901C0 /* Exponentials and Logarithms.pdf */,
+				F395650D2A43558B00A901C0 /* Functions and Graphs.pdf */,
+				F395651E2A43558C00A901C0 /* Functions and Linear Graphs.pdf */,
+				F39565182A43558C00A901C0 /* Futher Coordinate Geometry.pdf */,
+				F39565272A43558C00A901C0 /* Geometrical Construction.pdf */,
+				F395651B2A43558C00A901C0 /* Geometrical Properties of Circles.pdf */,
+				F395650B2A43558B00A901C0 /* Indices.pdf */,
+				F39565232A43558C00A901C0 /* Linear Equations and Inequalities.pdf */,
+				F395651F2A43558C00A901C0 /* Linear Law.pdf */,
+				F395650A2A43558B00A901C0 /* Number Sequences.pdf */,
+				F39565212A43558C00A901C0 /* Numbers and Their Operations Part 1.pdf */,
+				F395651D2A43558C00A901C0 /* Numbers and Their Operations Part 2.pdf */,
+				F39565142A43558C00A901C0 /* Percentages.pdf */,
+				F395650C2A43558B00A901C0 /* Polygons.pdf */,
+				F39565102A43558B00A901C0 /* Polynomials and Partial Fractions.pdf */,
+				F39565152A43558C00A901C0 /* Pythagoras Theorem.pdf */,
+				F395651A2A43558C00A901C0 /* Quadratic Funcations, Equations, and Inequalities.pdf */,
+				F39565192A43558C00A901C0 /* Ratio and Proportion.pdf */,
+				F395650F2A43558B00A901C0 /* Similarity and Congruence Part 1.pdf */,
+				F39565252A43558C00A901C0 /* Similarity and Congruence Part 2.pdf */,
+				F39565132A43558C00A901C0 /* Surds.pdf */,
+				F39565172A43558C00A901C0 /* Trigonometric Ratios.pdf */,
+			);
+			path = PDFs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -486,42 +459,6 @@
 			productReference = 49E6CA9529BC845400DD2E02 /* MathX_Mobile.app */;
 			productType = "com.apple.product-type.application";
 		};
-		49E6CAA429BC845700DD2E02 /* MathX_MobileTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 49E6CABC29BC845700DD2E02 /* Build configuration list for PBXNativeTarget "MathX_MobileTests" */;
-			buildPhases = (
-				49E6CAA129BC845700DD2E02 /* Sources */,
-				49E6CAA229BC845700DD2E02 /* Frameworks */,
-				49E6CAA329BC845700DD2E02 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				49E6CAA729BC845700DD2E02 /* PBXTargetDependency */,
-			);
-			name = MathX_MobileTests;
-			productName = MathX_MobileTests;
-			productReference = 49E6CAA529BC845700DD2E02 /* MathX_MobileTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		49E6CAAE29BC845700DD2E02 /* MathX_MobileUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 49E6CABF29BC845700DD2E02 /* Build configuration list for PBXNativeTarget "MathX_MobileUITests" */;
-			buildPhases = (
-				49E6CAAB29BC845700DD2E02 /* Sources */,
-				49E6CAAC29BC845700DD2E02 /* Frameworks */,
-				49E6CAAD29BC845700DD2E02 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				49E6CAB129BC845700DD2E02 /* PBXTargetDependency */,
-			);
-			name = MathX_MobileUITests;
-			productName = MathX_MobileUITests;
-			productReference = 49E6CAAF29BC845700DD2E02 /* MathX_MobileUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -534,14 +471,6 @@
 				TargetAttributes = {
 					49E6CA9429BC845400DD2E02 = {
 						CreatedOnToolsVersion = 14.2;
-					};
-					49E6CAA429BC845700DD2E02 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 49E6CA9429BC845400DD2E02;
-					};
-					49E6CAAE29BC845700DD2E02 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 49E6CA9429BC845400DD2E02;
 					};
 				};
 			};
@@ -564,8 +493,6 @@
 			projectRoot = "";
 			targets = (
 				49E6CA9429BC845400DD2E02 /* MathX_Mobile */,
-				49E6CAA429BC845700DD2E02 /* MathX_MobileTests */,
-				49E6CAAE29BC845700DD2E02 /* MathX_MobileUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -607,20 +534,6 @@
 				F395652C2A43558C00A901C0 /* Basic Geometry.pdf in Resources */,
 				F395652D2A43558C00A901C0 /* Similarity and Congruence Part 1.pdf in Resources */,
 				F39565422A43558C00A901C0 /* LightPyramid.scn in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49E6CAA329BC845700DD2E02 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49E6CAAD29BC845700DD2E02 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,34 +588,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49E6CAA129BC845700DD2E02 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49E6CAAB29BC845700DD2E02 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		49E6CAA729BC845700DD2E02 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 49E6CA9429BC845400DD2E02 /* MathX_Mobile */;
-			targetProxy = 49E6CAA629BC845700DD2E02 /* PBXContainerItemProxy */;
-		};
-		49E6CAB129BC845700DD2E02 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 49E6CA9429BC845400DD2E02 /* MathX_Mobile */;
-			targetProxy = 49E6CAB029BC845700DD2E02 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		49E6CAB729BC845700DD2E02 /* Debug */ = {
@@ -827,12 +713,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MathX_Mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = DBBLGF84W3;
+				DEVELOPMENT_TEAM = 7K6ZTDFM48;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MathX-Mobile-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MathX;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -843,12 +729,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "AppCatalyst.MathX-Mobile";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sstinc.mathx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -863,12 +750,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MathX_Mobile/Preview Content\"";
-				DEVELOPMENT_TEAM = DBBLGF84W3;
+				DEVELOPMENT_TEAM = 7K6ZTDFM48;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MathX-Mobile-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = MathX;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -879,91 +766,16 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "AppCatalyst.MathX-Mobile";
+				MARKETING_VERSION = 2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.sstinc.mathx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		49E6CABD29BC845700DD2E02 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67PAUT5FCD;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "AppCatalyst.MathX-MobileTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathX_Mobile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathX_Mobile";
-			};
-			name = Debug;
-		};
-		49E6CABE29BC845700DD2E02 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67PAUT5FCD;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "AppCatalyst.MathX-MobileTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MathX_Mobile.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MathX_Mobile";
-			};
-			name = Release;
-		};
-		49E6CAC029BC845700DD2E02 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67PAUT5FCD;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "AppCatalyst.MathX-MobileUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MathX_Mobile;
-			};
-			name = Debug;
-		};
-		49E6CAC129BC845700DD2E02 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 67PAUT5FCD;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "AppCatalyst.MathX-MobileUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MathX_Mobile;
 			};
 			name = Release;
 		};
@@ -984,24 +796,6 @@
 			buildConfigurations = (
 				49E6CABA29BC845700DD2E02 /* Debug */,
 				49E6CABB29BC845700DD2E02 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		49E6CABC29BC845700DD2E02 /* Build configuration list for PBXNativeTarget "MathX_MobileTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				49E6CABD29BC845700DD2E02 /* Debug */,
-				49E6CABE29BC845700DD2E02 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		49E6CABF29BC845700DD2E02 /* Build configuration list for PBXNativeTarget "MathX_MobileUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				49E6CAC029BC845700DD2E02 /* Debug */,
-				49E6CAC129BC845700DD2E02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
