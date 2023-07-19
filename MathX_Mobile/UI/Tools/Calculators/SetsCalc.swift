@@ -24,7 +24,7 @@ struct SetsCalc: View {
     
     @State var setType = 0
     
-    @State var showingVennDiagram = false
+    @State var showingVennDiagram = true
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -66,8 +66,7 @@ struct SetsCalc: View {
                     }
                 }
                 
-                Section(footer: Text("Do not leave a space between commas and elements.")) {
-                    
+                Section(footer: Text("Do not leave a space between elements.")) {
                     if !showingVennDiagram {
                         Picker("", selection: $setCalculationSelected) {
                             Text("Union")
@@ -83,11 +82,11 @@ struct SetsCalc: View {
                         }
                     }
                     
-                    TextField("First Set (separate elements with \",\")", text: $set1)
+                    TextField("First Set (separate elements with a comma)", text: $set1)
                         .keyboardType(.numbersAndPunctuation)
                         .focused($firstSetFocused)
                     
-                    TextField("Second Set (separate elements with \",\")", text: $set2)
+                    TextField("Second Set (separate elements with a comma)", text: $set2)
                         .keyboardType(.numbersAndPunctuation)
                         .focused($secondSetFocused)
                 }
@@ -501,7 +500,7 @@ struct SetsCalc: View {
             
             unionUnsortedSet.forEach { element in
                 guard let elementNumber = Double(element) else {
-                    //isnt double
+                    // isnt double
                     tempOthersArray.append(element)
                     tempOthersArray.sort()
                     return
@@ -558,11 +557,12 @@ struct SetsCalc: View {
     }
     
     func separateSet(setString: String) -> [String] {
-        if !setString.contains(" ") {
-            return setString.components(separatedBy: ",")
+        let nonSpacedSet = setString.replacingOccurrences(of: ", ", with: ",")
+        if !nonSpacedSet.contains(" ") {
+            return nonSpacedSet.components(separatedBy: ",")
+        } else {
+            return []
         }
-        
-        return []
     }
     
     func set2IsAProperSubsetOfSet1() -> Bool {

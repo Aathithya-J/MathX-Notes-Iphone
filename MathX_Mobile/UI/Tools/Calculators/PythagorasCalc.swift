@@ -43,10 +43,19 @@ struct PythagorasCalc: View {
                         Spacer()
                     }
                     ScrollView(.horizontal, showsIndicators: false) {
-                        LaTeX("\(pythagorasNumber1.isEmpty ? "a" : pythagorasNumber1)^2 \(pythagorasNumber2.isEmpty ? "+" : Double(pythagorasNumber2) ?? 0 < 0 ? "-": "+") \(pythagorasNumber2.isEmpty ? "b" : String(abs(Double(pythagorasNumber2) ?? 0).formatted()))^2 = \(pythagorasNumber3.isEmpty ? "c" : String(abs(Double(pythagorasNumber3) ?? 0).formatted()))^2")
-                            .parsingMode(.all)
-                            .blockMode(.alwaysInline)
-                            .lineLimit(1)
+                        let calculatedPyth = calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0)
+                        
+                        if calculatedPyth == "Leave at least 1 text field empty." || calculatedPyth == "The hypotenuse (Side C) has to be the largest number." {
+                            LaTeX("a^2 + b^2 = c^2")
+                                .parsingMode(.all)
+                                .blockMode(.alwaysInline)
+                                .lineLimit(1)
+                        } else {
+                            LaTeX("\(pythagorasNumber1.isEmpty ? "a" : pythagorasNumber1)^2 \(pythagorasNumber2.isEmpty ? "+" : Double(pythagorasNumber2) ?? 0 < 0 ? "-": "+") \(pythagorasNumber2.isEmpty ? "b" : String(abs(Double(pythagorasNumber2) ?? 0).formatted()))^2 = \(pythagorasNumber3.isEmpty ? "c" : String(abs(Double(pythagorasNumber3) ?? 0).formatted()))^2")
+                                .parsingMode(.all)
+                                .blockMode(.alwaysInline)
+                                .lineLimit(1)
+                        }
                     }
                 }
                 
@@ -62,7 +71,9 @@ struct PythagorasCalc: View {
                 }
                 
                 Section(header: Text("Results")) {
-                    if calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0) == "Leave at least 1 text field empty." {
+                    let calculatedPyth = calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0)
+                    
+                    if calculatedPyth == "Leave at least 1 text field empty." || calculatedPyth == "The hypotenuse (Side C) has to be the largest number." {
                         Text("\(calculatePythagoras(num1: Double(pythagorasNumber1) ?? 0, num2: Double(pythagorasNumber2) ?? 0, num3: Double(pythagorasNumber3) ?? 0))")
                     } else {
                         HStack {
@@ -113,10 +124,14 @@ struct PythagorasCalc: View {
             returnValue = ""
         } else {
             if num3 > 0 {
-                if num1 > 0 {
-                    returnValue = "\(String(sqrt(pow(num3, 2) - pow(num1, 2)).formatted()))"
+                if num3 <= num1 || num3 <= num2 {
+                    returnValue = "The hypotenuse (Side C) has to be the largest number."
                 } else {
-                    returnValue = "\(String(sqrt(pow(num3, 2) - pow(num2, 2)).formatted()))"
+                    if num1 > 0 {
+                        returnValue = "\(String(sqrt(pow(num3, 2) - pow(num1, 2)).formatted()))"
+                    } else {
+                        returnValue = "\(String(sqrt(pow(num3, 2) - pow(num2, 2)).formatted()))"
+                    }
                 }
             } else {
                 returnValue = "\(String(sqrt(pow(num1, 2) + pow(num2, 2)).formatted()))"
