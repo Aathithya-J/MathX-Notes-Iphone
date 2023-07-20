@@ -72,7 +72,7 @@ struct ReceivedNotePopUp: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation {
                             var currentNotesList = noteManager.notes
