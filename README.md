@@ -1,2 +1,13 @@
-# MathX
-MathX is a currently existing app on the app store, and we are redesigning it from the ground up. We started by switching from UIKit to SwiftUI, which allows the app to adopt a lot more new features and have a more modern appearance. Next, we added more tools and features, such as full LaTeX integration into the note-taking section of our app, and we also fully implemented online pdf notes for our cheatsheets section.
+## MathX Redesign
+MathX is a cutting-edge app that's being redesigned from the ground up. We've migrated from UIKit to SwiftUI, unlocking a world of new possibilities. Here's a glimpse of what's new:
+
+Features:
+Modern Look: SwiftUI brings a fresh, modern appearance to MathX.
+LaTeX Integration: Fully integrated LaTeX into the note-taking section for seamless mathematical expressions.
+Online PDF Notes: Added functionality for creating and storing PDF notes online, enhancing the cheatsheets section.
+Stay tuned for more updates as we continue to enhance MathX!
+
+
+
+
+
